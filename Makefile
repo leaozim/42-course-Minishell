@@ -15,7 +15,8 @@ CFLAGS 			+= -g -I ${LIBFTDIR} -I ${INCDIR}
 LIBFLAGS 		= -lft
 CC 				= cc
 
-FILES   		=	main.c
+FILES   		=	main.c				\
+					error_handling.c
 
 SRC 			= ${addprefix ${SRCDIR}, ${FILES}}
 OBJ 			= ${addprefix ${OBJDIR}, ${FILES:.c=.o}}
