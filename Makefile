@@ -9,15 +9,17 @@ INCDIR  		= include/
 
 BIN				= bin/minishell
 
-LIBFLAGS 		= -lft -lreadline
+LIBFLAGS 		= -lft
+LIBREADLINE		= -lreadline
 # CFLAGS			= -Wall -Werror -Wextra
 CFLAGS 			+= -g -I ${LIBFTDIR} -I ${INCDIR}
-LIBFLAGS 		= -lft
+
 CC 				= cc
 
 
 FILES   		=	main.c				\
-					error_handling.c
+					error_handling.c	\
+					prompt.c
 
 SRC 			= ${addprefix ${SRCDIR}, ${FILES}}
 OBJ 			= ${addprefix ${OBJDIR}, ${FILES:.c=.o}}
@@ -37,7 +39,7 @@ ${OBJDIR}%.o: ${SRCDIR}%.c
 	@${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}: ${LIBFT} ${REQUIRED_DIRS} ${OBJ}
-	@${CC} ${CFLAGS} ${OBJ} -L ${LIBFTDIR} ${LIBFLAGS} -o ${BIN}
+	@${CC} ${CFLAGS} ${OBJ} -L ${LIBFTDIR} ${LIBFLAGS} -o ${BIN} ${LIBREADLINE}
 	@cp ${BIN} ${NAME}
 	@echo "$(COLOR_GREEN)Compiled Successfully$(COLOR_WHITE)"
 
