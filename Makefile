@@ -15,6 +15,7 @@ CFLAGS 			+= -g -I ${LIBFTDIR} -I ${INCDIR}
 LIBFLAGS 		= -lft
 CC 				= cc
 
+
 FILES   		=	main.c				\
 					error_handling.c
 
