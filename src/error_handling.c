@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:31:51 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/11/17 14:56:32 by etomiyos         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:09:29 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_program_name(int argc)
+void	check_program(int argc)
 {
 	if (argc > 1)
 	{

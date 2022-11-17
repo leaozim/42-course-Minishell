@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:37:51 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/11/17 14:56:14 by etomiyos         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:21:05 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "printf_colors.h"
 
-void	check_program_name(int argc);
+void	check_program(int argc);
+void	check_prompt(char *line);
+void	creat_prompt(void);
 
 #endif
