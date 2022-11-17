@@ -6,7 +6,7 @@
 /*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:37:51 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/11/17 13:39:46 by etomiyos         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:56:14 by etomiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-void    check_program_name(char **argv);
+void	check_program_name(int argc);
 
 #endif
