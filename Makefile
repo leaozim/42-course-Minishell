@@ -1,72 +1,65 @@
-NAME 			= minishell
 
-LIBFT        	= libft/libft.a
-LIBFTDIR     	= libft/
+NAME	= minishell
 
-SRCDIR  		= src/
-OBJDIR  		= obj/
-INCDIR  		= include/
+LIBFT_PATH	= ./libft
+LIBFT 	= $(LIBFT_PATH)/libft.a
 
-BIN				= bin/minishell
+# MINISHELL_PATH	= ./libs/minilibx
+# MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 
-LIBFLAGS 		= -lft
-LIBREADLINE		= -lreadline
-# CFLAGS			= -Wall -Werror -Wextra
-CFLAGS 			+= -g -I ${LIBFTDIR} -I ${INCDIR}
+OBJ_DIR	= ./obj
+OBJS	= $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-CC 				= cc
+HEADER_PATH		= ./include
+HEADER_FILES	= defines.h minishell.h printf_colors.h
 
+SRC		= main.c error_handling.c prompt.c
 
-FILES   		=	main.c				\
-					error_handling.c	\
-					prompt.c
+DIRS	= . src include libft 
+IFLAGS	= -I $(HEADER_PATH)
+LDFLAGS	= -L$(LIBFT_PATH) -lft
+CFLAGS	= -Wall -Wextra -Werror
 
-SRC 			= ${addprefix ${SRCDIR}, ${FILES}}
-OBJ 			= ${addprefix ${OBJDIR}, ${FILES:.c=.o}}
+VPATH	=  $(DIRS)
+VPATH	+= $(HEADER_PATH)
 
-REQUIRED_DIRS	= ${sort ${dir ${OBJ}}} bin/
+CFLAGS += -g3
 
-all: ${NAME}
-
-print:
-	echo ${REQUIRED_DIRS}
-
-${REQUIRED_DIRS}:
-	@mkdir -p $@
-
-${OBJDIR}%.o: ${SRCDIR}%.c
-	@echo "$(COLOR_GREEN)Compiling $(COLOR_WHITE)$(<:.c=)"
-	@${CC} ${CFLAGS} -c $< -o $@
-
-${NAME}: ${LIBFT} ${REQUIRED_DIRS} ${OBJ}
-	@${CC} ${CFLAGS} ${OBJ} -L ${LIBFTDIR} ${LIBFLAGS} -o ${BIN} ${LIBREADLINE}
-	@cp ${BIN} ${NAME}
-	@echo "$(COLOR_GREEN)Compiled Successfully$(COLOR_WHITE)"
-
-${LIBFT}:
-	make -C ${LIBFTDIR}
-	make bonus -C ${LIBFTDIR}
+all: $(NAME)
 
 clean:
-	@echo "$(COLOR_RED)Removing $(COLOR_WHITE)all objects"
-	@rm -rf ${OBJDIR}
-	cd $(LIBFTDIR) && make clean
+	rm -rf obj
+	make clean -C $(LIBFT_PATH)
+	make clean -C test
 
 fclean: clean
-	@echo "$(COLOR_RED)Removing $(COLOR_WHITE)$(NAME)"
-	rm -rf ${NAME}
-	rm -rf ${BIN}
-	rm -rf ${LIBFT}
+	rm -rf $(NAME)
+	make fclean -C $(LIBFT_PATH)
+	make fclean -C test
 
-re: fclean all
+re:  fclean all
 
-norm:
-	@clear
-	@norminette ${SRC} ${INCDIR}* | grep Error || true
+$(LIBFT):
+	make -C $(LIBFT_PATH)
 
-.PHONY: re fclean clean all norm
+$(NAME): $(LIBFT)  $(OBJ_DIR) $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) -lreadline
 
-COLOR_WHITE		= \e[00m
-COLOR_GREEN		= \e[32m
-COLOR_RED		= \e[91m
-COLOR_BLUE		= \e[34m
+$(OBJ_DIR)/%.o: %.c $(HEADER_FILES) Makefile | $(OBJ_DIR) 
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@ 
+
+$(OBJ_DIR):
+	mkdir -p $@
+
+git:
+	git add .
+	git commit -m "$(m)"
+	git push
+
+test: all
+	make run -C test
+
+test_vall: all
+	make val -C test
+
+.PHONY:	all clean fclean re git test
