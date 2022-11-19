@@ -38,13 +38,13 @@ void	handle_quoting(char *list, int original_value, int replaced_value)
 /*1) Adicionar espaços antes e depois de cada operador encontrado, porque, em caso
 de aspas não fechadas, a split precisa funcionar na divisão dos espaços encontrados.*/
 
-int	token_count()
+// int	token_count()
 
-void	add_spaces()
-{
-	token_count(); //retorna número de tokens
+// void	add_spaces()
+// {
+// 	token_count(); //retorna número de tokens
 
-}
+// }
 
 void    tokens(int argc, char **argv)
 {
@@ -55,7 +55,7 @@ void    tokens(int argc, char **argv)
     arguments = ft_strdup(".gitignore < tr ex ' X | tr pi 'P ' > outfile");
     i = 0;
 
-	add_spaces(arguments);
+	// add_spaces(arguments);
 	handle_quoting(arguments, SPACE, TEMP);
     tokens = ft_split(arguments, TEMP);
     while (tokens[i])
