@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 11:37:51 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/11/17 17:21:05 by lade-lim         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -23,5 +11,6 @@
 void	check_program(int argc);
 void	check_prompt(char *line);
 void	creat_prompt(void);
+void    tokens(int argc, char **argv);
 
 #endif

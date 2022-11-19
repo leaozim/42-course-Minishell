@@ -11,7 +11,7 @@ BIN				= bin/minishell
 
 LIBFLAGS 		= -lft
 LIBREADLINE		= -lreadline
-# CFLAGS			= -Wall -Werror -Wextra
+#CFLAGS			= -Wall -Werror -Wextra
 CFLAGS 			+= -g -I ${LIBFTDIR} -I ${INCDIR}
 
 CC 				= cc
@@ -19,7 +19,8 @@ CC 				= cc
 
 FILES   		=	main.c				\
 					error_handling.c	\
-					prompt.c
+					prompt.c			\
+					tokens.c
 
 SRC 			= ${addprefix ${SRCDIR}, ${FILES}}
 OBJ 			= ${addprefix ${OBJDIR}, ${FILES:.c=.o}}
@@ -44,8 +45,8 @@ ${NAME}: ${LIBFT} ${REQUIRED_DIRS} ${OBJ}
 	@echo "$(COLOR_GREEN)Compiled Successfully$(COLOR_WHITE)"
 
 ${LIBFT}:
-	make -C ${LIBFTDIR}
-	make bonus -C ${LIBFTDIR}
+	@make -C ${LIBFTDIR}
+	@make bonus -C ${LIBFTDIR}
 
 clean:
 	@echo "$(COLOR_RED)Removing $(COLOR_WHITE)all objects"
@@ -59,6 +60,11 @@ fclean: clean
 	rm -rf ${LIBFT}
 
 re: fclean all
+
+test:
+	@clear
+	@make
+	@./minishell
 
 norm:
 	@clear
