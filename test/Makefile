@@ -10,6 +10,9 @@ SRCS	= $(shell ls . unity | grep .c$)
 LIBFT_PATH	= ../libft
 LIBFT 	= $(LIBFT_PATH)/libft.a
 
+MINISHELL_PATH = ../
+MINISHELL = $(MINISHELL_PATH)/minishell.a
+
 # MINILIBX_PATH	= ../libs/minilibx
 # MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 
@@ -19,10 +22,9 @@ OBJ_DIR	= ./obj
 OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MINISHELL_OBJS)
 
 CFLAGS	= -Wall -Wextra -g3
-IFLAGS	= -I. -Iunity -I../include
-# LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
-
+IFLAGS	= -I. -Iunity -I../include -I../libft
 VPATH	= unity
+LDFLAGS	= -L$(LIBFT_PATH) -lft
 
 all: $(NAME)
 
@@ -34,8 +36,14 @@ fclean: clean
 
 re:  fclean all
 
-$(NAME): $(OBJS) $(OBJ_DIR)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) -lreadline
+$(LIBFT):
+	make -C $(LIBFT_PATH)
+
+$(MINISHEL):
+	make -C $(MINISHEL_PATH)
+
+$(NAME): $(LIBFT) $(MINISHEL) $(OBJS) $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $(OBJS) $(LDFLAGS) -lreadline
 
 $(OBJ_DIR)/%.o: %.c $(HEADER) Makefile | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@

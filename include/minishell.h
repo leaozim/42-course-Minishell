@@ -12,5 +12,6 @@ void	check_program(int argc);
 void	check_prompt(char *line);
 void	creat_prompt(void);
 void    tokens(int argc, char **argv);
+void	handle_quoting(char *list, int original_value, int replaced_value);
 
 #endif

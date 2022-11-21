@@ -18,7 +18,7 @@ SRC		= main.c error_handling.c prompt.c tokens.c
 DIRS	= . src include libft 
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft
-# CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror
 
 VPATH	=  $(DIRS)
 VPATH	+= $(HEADER_PATH)
@@ -43,7 +43,7 @@ $(LIBFT):
 	make -C $(LIBFT_PATH)
 
 $(NAME): $(LIBFT)  $(OBJ_DIR) $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) -lreadline
+	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $(OBJS) $(LDFLAGS) -lreadline
 
 $(OBJ_DIR)/%.o: %.c $(HEADER_FILES) Makefile | $(OBJ_DIR) 
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@ 

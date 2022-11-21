@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        ".sequelizerc": "javascript",
-        ".stylelintrc": "json",
-        ".prettierrc": "json",
-        "minishell.h": "c",
-        "history.h": "c"
-    }
-}

@@ -20,16 +20,27 @@ void	handle_quoting(char *list, int original_value, int replaced_value)
 	char	*aux;
     int     quotes;
 
-	i = 0;
+    i = 0;
 	aux = list;
-    quotes = 0;
+    quotes = 0; 
 	while (aux[i])
 	{
-        if (aux[i] == SQUOTE)
-            quotes = !quotes;
-		if (aux[i] == original_value && !quotes)
-			aux[i] = replaced_value;
-		i++;
+        if (aux[i] == SQUOTE || aux[i] == DQUOTES)
+        {
+            quotes = aux[i];
+            i++;
+            while (aux[i] && aux[i] != quotes)
+            {
+                if (aux[i] == original_value)
+                    aux[i] = replaced_value;
+                i++;
+            }
+            i++;
+        }
+        while (aux[i] && aux[i] != SQUOTE && aux[i] != DQUOTES)
+        {
+            i++;
+        }
 	}
 }
 
@@ -49,21 +60,24 @@ de aspas não fechadas, a split precisa funcionar na divisão dos espaços encon
 void    tokens(int argc, char **argv)
 {
     char    *arguments;
-    char    **tokens;
-    int     i;
+    // char    **tokens;
+    // int     i;
 
-    arguments = ft_strdup(".gitignore < tr ex ' X | tr pi 'P ' > outfile");
-    i = 0;
+    (void)argc;
+    (void)argv;
+    arguments = ft_strdup(" \"ou \" ");
+    // i = 0;
 
 	// add_spaces(arguments);
-	handle_quoting(arguments, SPACE, TEMP);
-    tokens = ft_split(arguments, TEMP);
-    while (tokens[i])
-    {
-        printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
-        i++;
-    }
-    free_ptrs(tokens);
+	handle_quoting(arguments, SPACE, 48);
+    printf("STR = %s", arguments);
+    // tokens = ft_split(arguments, TEMP);
+    // while (tokens[i])
+    // {
+    //     printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
+    //     i++;
+    // }
+    // free_ptrs(tokens);
     free(arguments);
 }
 

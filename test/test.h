@@ -6,8 +6,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-// # include "../../include/minishell.h"
+# include "../include/minishell.h"
 # include "minishell.h"
+# include <minishell.h>
 
 /*
 Functions to be tested
@@ -15,5 +16,6 @@ Functions to be tested
 
 void    test_lexer(void);
 void    test_check_program(void);
+void    test_check_spaces(void);
 
 #endif
