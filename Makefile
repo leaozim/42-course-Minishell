@@ -1,11 +1,7 @@
-
 NAME	= minishell
 
 LIBFT_PATH	= ./libft
 LIBFT 	= $(LIBFT_PATH)/libft.a
-
-# MINISHELL_PATH	= ./libs/minilibx
-# MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 
 OBJ_DIR	= ./obj
 OBJS	= $(SRC:%.c=$(OBJ_DIR)/%.o)
@@ -56,10 +52,10 @@ git:
 	git commit -m "$(m)"
 	git push
 
-test: all
+test:	all
 	make run -C test
 
-test_vall: all
+test_vall:	all
 	make val -C test
 
 .PHONY:	all clean fclean re git test

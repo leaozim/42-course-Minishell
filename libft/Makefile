@@ -48,11 +48,11 @@ bonus: $(NAME) $(OBJ_B)
 	$(LIB) $(NAME) $(OBJ_B)
 
 clean:
-	@echo "$(COLOR_RED)Removing $(COLOR_WHITE)all objects"
+	@echo "$(COLOR_BLUE)Removing $(COLOR_WHITE)all objects"
 	@${RM} $(OBJ) $(OBJ_B)
 
 fclean: clean
-	@echo "$(COLOR_RED)Removing $(COLOR_WHITE)$(NAME)"
+	@echo "$(COLOR_BLUE)Removing $(COLOR_WHITE)$(NAME)"
 	@${RM} $(NAME)
 
 re: fclean all

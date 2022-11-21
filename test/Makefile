@@ -1,20 +1,14 @@
 NAME	= minishell_test
 
 HEADER	= $(shell ls . unity | grep .h$)
-# HEADER	+= ./src/test.h
 
 SRCS	= $(shell ls . unity | grep .c$)
-
-# MINISHELL_OBJS		= $(shell find ../obj -type f | grep .o$ | grep -v main)
 
 LIBFT_PATH	= ../libft
 LIBFT 	= $(LIBFT_PATH)/libft.a
 
 MINISHELL_PATH = ../
 MINISHELL = $(MINISHELL_PATH)/minishell.a
-
-# MINILIBX_PATH	= ../libs/minilibx
-# MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 
 MINISHELL_OBJS = $(shell find ../obj -type f | grep .o$ | grep -v main)
 
@@ -39,10 +33,10 @@ re:  fclean all
 $(LIBFT):
 	make -C $(LIBFT_PATH)
 
-$(MINISHEL):
-	make -C $(MINISHEL_PATH)
+$(MINISHELL):
+	make -C $(MINISHELL_PATH)
 
-$(NAME): $(LIBFT) $(MINISHEL) $(OBJS) $(OBJ_DIR)
+$(NAME): $(LIBFT) $(MINISHELL) $(OBJS) $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $(OBJS) $(LDFLAGS) -lreadline
 
 $(OBJ_DIR)/%.o: %.c $(HEADER) Makefile | $(OBJ_DIR)

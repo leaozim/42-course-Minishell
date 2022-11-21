@@ -23,10 +23,10 @@ enum e_tokens
     QUERY = '?',
 };
 
-typedef enum e_boolean
+typedef enum e_bool
 {
     FALSE,
     TRUE,
-}    t_boolean;
+}    t_bool;
 
 #endif
