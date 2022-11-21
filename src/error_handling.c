@@ -13,20 +13,20 @@ t_bool   is_valid_quoting(char **list)
 {
 	int		i;
 	int		value;
-	char	*aux;
+	char	*str;
 
 	i = 0;
-	aux = *list;
+	str = *list;
 	value = 0;
-	while (aux[i])
+	while (str[i])
 	{
-		if (aux[i] == SQUOTE || aux[i] == DQUOTES)
+		if (str[i] == SQUOTE || str[i] == DQUOTES)
 		{
-			value = aux[i];
+			value = str[i];
 			i++;
-			while (aux[i] && aux[i] != value)
+			while (str[i] && str[i] != value)
 				i++;
-			if (aux[i] == '\0')
+			if (str[i] == '\0')
 				return (FALSE);
 		}
 		i++;

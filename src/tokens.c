@@ -17,52 +17,52 @@ void	free_ptrs(char **str)
 void	handle_quoting(char *list, int original_value, int replaced_value)
 {
 	size_t	i;
-	char	*aux;
+	char	*str;
 	int		quotes;
 
 	i = 0;
-	aux = list;
+	str = list;
 	quotes = 0; 
-	while (aux[i])
+	while (str[i])
 	{
-		if (aux[i] == SQUOTE || aux[i] == DQUOTES)
+		if (str[i] == SQUOTE || str[i] == DQUOTES)
 		{
-			quotes = aux[i];
+			quotes = str[i];
 			i++;
-			while (aux[i] && aux[i] != quotes)
+			while (str[i] && str[i] != quotes)
 			{
-				if (aux[i] == original_value)
-					aux[i] = replaced_value;
+				if (str[i] == original_value)
+					str[i] = replaced_value;
 				i++;
 			}
 			i++;
 		}
-		while (aux[i] && aux[i] != SQUOTE && aux[i] != DQUOTES)
-		{
+		while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
 			i++;
-		}
 	}
 }
 
 void	tokens(int argc, char **argv)
 {
 	char	*arguments;
-	// char    **tokens;
-	// int     i;
+	char    **tokens;
+	int     i;
 
 	(void)argc;
 	(void)argv;
-	arguments = ft_strdup(" \"ou \" ");
-	// i = 0;
+	arguments = ft_strdup("echo ' oi ' p' humano  '");
+	i = 0;
 	// add_spaces(arguments);
 	handle_quoting(arguments, SPACE, 48);
-	// tokens = ft_split(arguments, TEMP);
-	// while (tokens[i])
-	// {
-	//     printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
-	//     i++;
-	// }
-	// free_ptrs(tokens);
+
+	tokens = ft_split(arguments, ' ');
+	while (tokens[i])
+	{
+		handle_quoting(tokens[i], 48, SPACE);
+	    printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
+	    i++;
+	}
+	free_ptrs(tokens);
 	free(arguments);
 }
 

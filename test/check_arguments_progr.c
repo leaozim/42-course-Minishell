@@ -1,6 +1,6 @@
 #include "test.h"
 
-void    check_arg_erro(void)
+void	check_arg_erro(void)
 {
 	int status;
 
