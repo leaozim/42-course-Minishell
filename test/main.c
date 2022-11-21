@@ -10,9 +10,9 @@ void tearDown(void)
 
 int main(void)
 {
-    UNITY_BEGIN();
-    RUN_TEST(test_check_spaces);
-    RUN_TEST(test_check_valid_quoting);
-     RUN_TEST(test_check_program);
-    return UNITY_END();
+	UNITY_BEGIN();
+	RUN_TEST(test_check_spaces);
+	RUN_TEST(test_check_valid_quoting);
+	 RUN_TEST(test_check_program);
+	return UNITY_END();
 }

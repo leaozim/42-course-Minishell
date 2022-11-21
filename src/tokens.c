@@ -1,8 +1,8 @@
 #include "../include/minishell.h"
 
-void    free_ptrs(char **str)
+void	free_ptrs(char **str)
 {
-	int    i;
+	int	i;
 
 	i = 0;
 	while (str[i] != NULL)
@@ -44,9 +44,9 @@ void	handle_quoting(char *list, int original_value, int replaced_value)
 	}
 }
 
-void    tokens(int argc, char **argv)
+void	tokens(int argc, char **argv)
 {
-	char    *arguments;
+	char	*arguments;
 	// char    **tokens;
 	// int     i;
 

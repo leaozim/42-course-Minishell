@@ -13,7 +13,7 @@
 Functions to be tested
 */
 
-void    test_check_spaces(void);
-void    test_check_valid_quoting(void);
-void    test_check_program(void);
+void	test_check_spaces(void);
+void	test_check_valid_quoting(void);
+void	test_check_program(void);
 #endif
