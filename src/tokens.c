@@ -104,7 +104,7 @@ void	tokens(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	arguments = ft_strdup("echo>>>' oi  '? $ p ' humano  | '|");
+	arguments = ft_strdup("echo >> > ' oi  ' ? $ p  ' humano  | '  | ");
 	i = 0;
 	handle_quoting(arguments, SPACE, 48);
 	// count_tokens(arguments);
