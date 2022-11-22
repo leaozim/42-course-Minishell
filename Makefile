@@ -58,4 +58,8 @@ test:	all
 test_vall:	all
 	make val -C test
 
+mc:	all
+	clear
+	./minishell
+
 .PHONY:	all clean fclean re git test
