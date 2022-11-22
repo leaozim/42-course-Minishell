@@ -12,21 +12,21 @@
 
 enum e_tokens
 {
-    COMMAND = 1,
-    DQUOTES = '"',
-    DOLLAR_SIGN = '$',
-    SQUOTE = '\'',
-    SEMICOLON = ';',
-    LESSTHAN = '<',
-    GREATERTHAN = '>',
-    PIPE = '|',
-    QUERY = '?',
+	COMMAND = 1,
+	DQUOTES = '"',
+	DOLLAR_SIGN = '$',
+	SQUOTE = '\'',
+	SEMICOLON = ';',
+	LESSTHAN = '<',
+	GREATERTHAN = '>',
+	PIPE = '|',
+	QUERY = '?',
 };
 
 typedef enum e_bool
 {
-    FALSE,
-    TRUE,
-}    t_bool;
+	FALSE,
+	TRUE,
+}	t_bool;
 
 #endif

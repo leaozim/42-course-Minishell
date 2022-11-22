@@ -2,9 +2,9 @@
 
 void	checar_se_a_qtd_de_tokem_esta_correta(void)
 {
-	char *str;
+	// char *str;
 
-	str = ft_strdup("ls -la ..");
+	// str = ft_strdup("ls -la ..");
 	TEST_ASSERT_EQUAL(3, 3);
 }
 

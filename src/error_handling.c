@@ -9,14 +9,14 @@ void	check_arguments(int argc)
 	}
 }
 
-t_bool   is_valid_quoting(char **list)
+t_bool	is_valid_quoting(char *list)
 {
 	int		i;
 	int		value;
 	char	*str;
 
 	i = 0;
-	str = *list;
+	str = list;
 	value = 0;
 	while (str[i])
 	{
@@ -33,5 +33,3 @@ t_bool   is_valid_quoting(char **list)
 	}
 	return (TRUE);
 }
-
-

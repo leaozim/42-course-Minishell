@@ -10,9 +10,11 @@
 
 void	check_arguments(int argc);
 void	check_prompt(char *line);
-void	creat_prompt(void);
-void    tokens(int argc, char **argv);
+char	*creat_prompt(void);
+void	tokens(int argc, char **argv);
 void	handle_quoting(char *list, int original_value, int replaced_value);
-t_bool  is_valid_quoting(char **list);
+t_bool	is_valid_quoting(char *list);
+void	free_ptrs(char **str);
+void	is_erro_sintaxy_quotes(char *line_terminal);
 
 #endif
