@@ -59,7 +59,6 @@ int	count_tokens(char *str)
 	int	i;
 
 	int		quotes;
-	int		qtt_tokens;
 	while (str[i])
 	{
 		if (str[i] == SQUOTE || str[i] == DQUOTES)
