@@ -1,4 +1,4 @@
-#include "test.h"
+#include "h_test.h"
 
 void	check_arg_erro(void)
 {
