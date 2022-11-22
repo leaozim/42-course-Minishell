@@ -1,27 +1,20 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 11:37:51 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/11/17 17:21:05 by lade-lim         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "defines.h"
-# include "libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "printf_colors.h"
 
-void	check_program(int argc);
+void	check_arguments(int argc);
 void	check_prompt(char *line);
-void	creat_prompt(void);
+char	*creat_prompt(void);
+void	tokens(int argc, char **argv);
+void	handle_quoting(char *list, int original_value, int replaced_value);
+t_bool	is_valid_quoting(char *list);
+void	free_ptrs(char **str);
+void	is_erro_sintaxy_quotes(char *line_terminal);
 
 #endif

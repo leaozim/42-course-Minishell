@@ -1,23 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 11:41:54 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/11/17 17:14:02 by lade-lim         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../include/minishell.h"
 
-#include "minishell.h"
-
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv)
 {
-	check_program(argc);
-	while (1)
+	char	*line_terminal;
+
+	(void)argv;
+	check_arguments(argc);
+	while (TRUE)
 	{
-		creat_prompt();
+		line_terminal = creat_prompt();
+		is_erro_sintaxy_quotes(line_terminal);
+		// tokens(argc, argv);
+		free(line_terminal);
 	}
 	return (EXIT_SUCCESS);
 }
