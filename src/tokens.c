@@ -96,24 +96,104 @@ int	count_tokens(char *str)
 	return (qtt_tokens);
 }
 
+//< > | ' " >> <<
+//< > |
+//' " >> <<
+
+t_bool	check_for_specific_char(char c)
+{
+	if (c == LESSTHAN ||
+		c == GREATERTHAN ||
+		c == PIPE ||
+		c == SQUOTE ||
+		c == DQUOTES)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	check_for_specific_char2(char *arg)
+{
+	int value;
+	int i;
+
+	value = 0;
+	i = 0;
+	if (arg[i] == SQUOTE || arg[i] == DQUOTES)
+	{
+		value = arg[i];
+		i++;
+		while (arg[i] && arg[i] != value)
+			i++;
+		i++;
+	}
+	else if (arg[i] == LESSTHAN && arg[i + 1] == LESSTHAN)
+		i += 2;
+	else if (arg[i] == GREATERTHAN && arg[i + 1] == GREATERTHAN)
+		i += 2;
+	else
+		i++;
+	return(i);
+}
+
+void	add_spaces_at_specific_char(char *arg, int count)
+{
+	char *str;
+	int i;
+	int j;
+	int value;
+
+	str = ft_calloc(1, ft_strlen(arg) + (count * 2) + 1);
+	i = 0;
+	j = 0;
+	printf("arg = %s\n", arg);
+	while (arg[i])
+	{
+		if (check_for_specific_char(arg[i]) == TRUE)
+		{
+			str[j] = SPACE;
+			j++;
+			value = check_for_specific_char2(&arg[i]);
+			while (value--)
+			{
+				str[j] = arg[i];
+				i++;
+				j++;
+			}
+			str[j] = SPACE;
+			j++;
+		}
+		else
+		{
+			str[j] = arg[i];
+			i++;
+			j++;
+		}
+	}
+	printf("str = %s\n", str);
+}
+// "echo<' oi  '?$p' humano  | '|>>"
+
 void	tokens(int argc, char **argv)
 {
 	char	*arguments;
 	char	**tokens;
+	int		specific_char_count;
 	int		i;
 
 	(void)argc;
 	(void)argv;
-	arguments = ft_strdup("echo >> > ' oi  ' ? $ p  ' humano  | '  | ");
+	arguments = ft_strdup("echo<' oi  '?$p' humano  | '|>>");
 	i = 0;
 	handle_quoting(arguments, SPACE, 48);
-	// count_tokens(arguments);
-	printf("%d\n", count_tokens(arguments));
+
+	specific_char_count = count_tokens(arguments);
+	add_spaces_at_specific_char(arguments, specific_char_count);
+
 	tokens = ft_split(arguments, ' ');
 	while (tokens[i])
 	{
 		handle_quoting(tokens[i], 48, SPACE);
-		printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
+		// printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
 		i++;
 	}
 	free_ptrs(tokens);

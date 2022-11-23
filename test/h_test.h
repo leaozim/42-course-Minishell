@@ -19,6 +19,7 @@ void	test_check_program(void);
 
 //The specific characters: < > | ' " >> <<
 void	check_token_qtt(void);
+void	test_save_spaces(void);
 void	check_token_count(void);
 void	check_token_count_quotes(void);
 void	check_token_count_redirection(void);

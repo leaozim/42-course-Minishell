@@ -8,6 +8,7 @@
 # define TOKENS_GENERAL_3 "export MAKE_PATH=./libs/libft ; cd .. ; ls && make -C $MAKE_PATH ; ./minishell"
 # define TOKENS_SQUOTE_1 "infile   < tr a '   ' |   tr ' ' x > outfile"
 # define TOKENS_SQUOTE_2 ".gitignore < tr ex ' X' | tr pi 'P ' > outfile"
+# define TOKENS_SQUOTE_3 "echo<' oi  '?$p' humano  | '|>>"
 # define TOKENS_DQUOTES "infile   < tr a \"   \" |   tr \" \" x > outfile"
 # define TOKENS_MIXED_QUOTES "infile   < tr a \"   \" |   tr \' \' x > outfile"
 # define TOKENS_PARALLEL_QUOTES_1 "infile   < tr a \"   \' |   tr \' \" x > outfile"

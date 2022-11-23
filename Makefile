@@ -58,6 +58,9 @@ test:	all
 test_vall:	all
 	make val -C test
 
+val: all
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+
 mc:	all
 	clear
 	./minishell
