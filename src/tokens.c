@@ -48,7 +48,7 @@ void	handle_quoting(char *list, int original_value, int replaced_value)
 			}
 			i++;
 		}
-	while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
+		while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
 			i++;
 	}
 }
@@ -135,14 +135,14 @@ int	check_for_specific_char2(char *arg)
 	return(i);
 }
 
-void	add_spaces_at_specific_char(char *arg, int count)
+char *add_spaces_at_specific_char(char *arg, int token_count)
 {
 	char *str;
 	int i;
 	int j;
 	int value;
 
-	str = ft_calloc(1, ft_strlen(arg) + (count * 2) + 1);
+	str = ft_calloc(1, ft_strlen(arg) + (token_count * 2) + 1);
 	i = 0;
 	j = 0;
 	printf("arg = %s\n", arg);
@@ -169,33 +169,32 @@ void	add_spaces_at_specific_char(char *arg, int count)
 			j++;
 		}
 	}
-	printf("str = %s\n", str);
+	return (str);
 }
-// "echo<' oi  '?$p' humano  | '|>>"
 
-void	tokens(int argc, char **argv)
+void    tokens(int argc, char **argv)
 {
-	char	*arguments;
-	char	**tokens;
-	int		specific_char_count;
-	int		i;
+    char    *arguments;
+    char    **tokens;
+    int        specific_char_count;
+    int        i;
+    char    *str;
 
-	(void)argc;
-	(void)argv;
-	arguments = ft_strdup("echo<' oi  '?$p' humano  | '|>>");
-	i = 0;
-	handle_quoting(arguments, SPACE, 48);
-
-	specific_char_count = count_tokens(arguments);
-	add_spaces_at_specific_char(arguments, specific_char_count);
-
-	tokens = ft_split(arguments, ' ');
-	while (tokens[i])
-	{
-		handle_quoting(tokens[i], 48, SPACE);
-		// printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
-		i++;
-	}
-	free_ptrs(tokens);
-	free(arguments);
+    (void)argc;
+    (void)argv;
+    arguments = ft_strdup("in\'file");
+    i = 0;
+    handle_quoting(arguments, SPACE, REPLACE_VALUE);
+    specific_char_count = count_tokens(arguments);
+    str = add_spaces_at_specific_char(arguments, specific_char_count);
+    tokens = ft_split(str, ' ');
+    while (tokens[i])
+    {
+        handle_quoting(tokens[i], REPLACE_VALUE, SPACE);
+        printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
+        i++;
+    }
+    free(arguments);
+    free_ptrs(tokens);
+    free(str);
 }

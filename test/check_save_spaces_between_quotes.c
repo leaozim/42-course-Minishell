@@ -78,7 +78,7 @@ void	checar_espacos_que_serao_salvos_mix(void)
 	free(str2);
 }
 
-void	test_check_spaces(void)
+void	test_save_spaces_between_quotes(void)
 {
 	RUN_TEST(checar_espacos_que_nao_serao_salvos);
 	RUN_TEST(checar_espacos_que_serao_salvos_aspas_simples);

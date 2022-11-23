@@ -7,7 +7,7 @@
 # define PROMPT "MiniHELL $"
 # define TOKEN_COUNT 17
 # define TEMP 2
-# define TEMP_VALUE 3
+# define REPLACE_VALUE 3
 # define SPACE ' '
 
 enum e_tokens

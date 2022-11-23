@@ -1,8 +1,6 @@
 #ifndef H_DEFINES_H
 # define H_DEFINES_H
 
-#include "h_test.h"
-
 # define TOKENS_GENERAL_1 "ls -la .."
 # define TOKENS_GENERAL_2 "ls -la .. | cat -e | wc -l"
 # define TOKENS_GENERAL_3 "export MAKE_PATH=./libs/libft ; cd .. ; ls && make -C $MAKE_PATH ; ./minishell"
