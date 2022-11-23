@@ -9,6 +9,7 @@ void	check_arguments(int argc)
 	}
 }
 
+
 void	is_erro_sintaxy_quotes(char *line)
 {
 	if (!is_valid_quoting(&line))
