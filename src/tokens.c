@@ -25,11 +25,11 @@ t_bool	is_valid_quoting(char **list)
 	return (TRUE);
 }
 
-void	handle_quoting(char *list, int original_value, int replaced_value)
+void	replace_value_inside_quotes(char *list, int old_value, int new_value)
 {
-	size_t	i;
 	char	*str;
 	int		quotes;
+	int		i;
 
 	i = 0;
 	str = list;
@@ -42,26 +42,24 @@ void	handle_quoting(char *list, int original_value, int replaced_value)
 			i++;
 			while (str[i] && str[i] != quotes)
 			{
-				if (str[i] == original_value)
-					str[i] = replaced_value;
+				if (str[i] == old_value)
+					str[i] = new_value;
 				i++;
 			}
 			i++;
 		}
-	while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
+		while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
 			i++;
 	}
 }
 
-int	count_tokens(char *str)
+void	count_tokens_specific(char *str, int qtt_tokens)
 {
 	int	i;
 	int	value;
-	int	qtt_tokens;
 
 	i = 0;
 	value = 0;
-	qtt_tokens = 0;
 	while (str[i])
 	{
 		if (str[i] == SQUOTE || str[i] == DQUOTES)
@@ -71,9 +69,9 @@ int	count_tokens(char *str)
 			while (str[i] && str[i] != value)
 				i++;
 			if (str[i] == value)
-				qtt_tokens += 1; 
+				qtt_tokens += 1;
 		}
-		else if (str[i] == PIPE)
+		else if (str[i] == PIPE  || str[i] == GREATERTHAN || str[i] == LESSTHAN)
 			qtt_tokens += 1;
 		else if (str[i] == LESSTHAN && str[i + 1] == LESSTHAN)
 		{
@@ -85,39 +83,28 @@ int	count_tokens(char *str)
 			qtt_tokens += 1;
 			i++;
 		}
-		else if (str[i] == GREATERTHAN)
-			qtt_tokens += 1;
-		else if (str[i] == LESSTHAN)
-		{
-			qtt_tokens += 1;
-		}
 		i++;
 	}
-	return (qtt_tokens);
 }
 
-//< > | ' " >> <<
-//< > |
-//' " >> <<
-
-t_bool	check_for_specific_char(char c)
+t_bool	check_for_specific_token(char c)
 {
-	if (c == LESSTHAN ||
-		c == GREATERTHAN ||
-		c == PIPE ||
-		c == SQUOTE ||
+	if (c == LESSTHAN || \
+		c == GREATERTHAN || \
+		c == PIPE || \
+		c == SQUOTE || \
 		c == DQUOTES)
 		return (TRUE);
 	return (FALSE);
 }
 
-int	check_for_specific_char2(char *arg)
+int	check_qtt_to_be_incremented(char *arg)
 {
-	int value;
-	int i;
+	int	value;
+	int	i;
 
-	value = 0;
 	i = 0;
+	value = 0;
 	if (arg[i] == SQUOTE || arg[i] == DQUOTES)
 	{
 		value = arg[i];
@@ -132,70 +119,55 @@ int	check_for_specific_char2(char *arg)
 		i += 2;
 	else
 		i++;
-	return(i);
+	return (i);
 }
 
-void	add_spaces_at_specific_char(char *arg, int count)
+char	*add_spaces_at_specific_tokens(char *arg, int count)
 {
-	char *str;
-	int i;
-	int j;
-	int value;
+	char	*str;
+	int		value;
+	int		i;
+	int		j;
 
-	str = ft_calloc(1, ft_strlen(arg) + (count * 2) + 1);
 	i = 0;
 	j = 0;
-	printf("arg = %s\n", arg);
+	str = ft_calloc(1, ft_strlen(arg) + (count * 2) + 1);
 	while (arg[i])
 	{
-		if (check_for_specific_char(arg[i]) == TRUE)
+		if (check_for_specific_token(arg[i]) == TRUE)
 		{
 			str[j] = SPACE;
 			j++;
-			value = check_for_specific_char2(&arg[i]);
+			value = check_qtt_to_be_incremented(&arg[i]);
 			while (value--)
-			{
-				str[j] = arg[i];
-				i++;
-				j++;
-			}
+				str[j++] = arg[i++];
 			str[j] = SPACE;
 			j++;
 		}
 		else
-		{
-			str[j] = arg[i];
-			i++;
-			j++;
-		}
+			str[j++] = arg[i++];
 	}
-	printf("str = %s\n", str);
+	return (str);
 }
-// "echo<' oi  '?$p' humano  | '|>>"
 
-void	tokens(int argc, char **argv)
+void	tokens(t_minishell *ms)
 {
-	char	*arguments;
 	char	**tokens;
-	int		specific_char_count;
+	char	*str_with_spaces;
 	int		i;
 
-	(void)argc;
-	(void)argv;
-	arguments = ft_strdup("echo<' oi  '?$p' humano  | '|>>");
+	// echo<' oi  '?$p' humano  | '|>>
 	i = 0;
-	handle_quoting(arguments, SPACE, 48);
-
-	specific_char_count = count_tokens(arguments);
-	add_spaces_at_specific_char(arguments, specific_char_count);
-
-	tokens = ft_split(arguments, ' ');
+	replace_value_inside_quotes(ms->prompt_line, SPACE, 48);
+	count_tokens_specific(ms->prompt_line, ms->qtt_tokens);
+	str_with_spaces = add_spaces_at_specific_tokens(ms->prompt_line, ms->qtt_tokens);
+	tokens = ft_split(str_with_spaces, ' ');
 	while (tokens[i])
 	{
-		handle_quoting(tokens[i], 48, SPACE);
-		// printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
+		replace_value_inside_quotes(tokens[i], 48, SPACE);
+		printf("%d) tokens[%d] = %s\n", i, i, tokens[i]);
 		i++;
 	}
 	free_ptrs(tokens);
-	free(arguments);
+	free(str_with_spaces);
 }
