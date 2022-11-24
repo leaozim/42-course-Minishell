@@ -9,7 +9,8 @@ OBJS	= $(SRC:%.c=$(OBJ_DIR)/%.o)
 HEADER_PATH		= ./include
 HEADER_FILES	= defines.h minishell.h printf_colors.h
 
-SRC		= main.c error_handling.c prompt.c tokens.c utils.c
+SRC		= main.c error_handling.c prompt.c tokens.c utils.c \
+		init_minishell.c
 
 DIRS	= . src include libft 
 IFLAGS	= -I $(HEADER_PATH)

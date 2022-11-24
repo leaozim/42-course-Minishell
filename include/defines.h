@@ -11,6 +11,15 @@
 # define REPLACE_VALUE 3
 # define SPACE ' '
 
+typedef struct s_minishell
+{
+	char	*prompt_line;
+	char	**tokens;
+	int		qtt_tokens;
+	char	*str_with_spaces;
+
+} t_minishell;
+
 enum e_tokens
 {
 	COMMAND = 1,
