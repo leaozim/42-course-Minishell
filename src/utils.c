@@ -14,3 +14,8 @@ void	free_ptrs(char **str)
 	str = NULL;
 }
 
+void	is_erro_sintaxy_quotes(char *line)
+{
+	if (!is_valid_quoting(line))
+		exit(1);
+}
