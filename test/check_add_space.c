@@ -65,9 +65,6 @@ void	test_valid_add_spaces()
 
 	TEST_ASSERT_EQUAL_STRING("cat << .",
 	add_spaces_at_specific_char(TOKENS_DOUBLE_LESSTHAN_2, 1));
-
-
-
 }
 
 void	test_add_spaces()
