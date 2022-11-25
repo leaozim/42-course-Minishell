@@ -17,7 +17,7 @@ int main(void)
 	RUN_TEST(test_check_valid_quoting);
 	RUN_TEST(test_check_program);
 	RUN_TEST(check_token_qtt);
-	RUN_TEST(test_add_spaces);
+	// RUN_TEST(test_add_spaces);
 	RUN_TEST(check_identify_tokens);
   
 	return UNITY_END();

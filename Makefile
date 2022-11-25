@@ -9,15 +9,17 @@ OBJS	= $(SRC:%.c=$(OBJ_DIR)/%.o)
 HEADER_PATH		= ./include
 HEADER_FILES	= defines.h minishell.h printf_colors.h
 
-SRC		= main.c error_handling.c prompt.c tokens.c utils.c \
-		init_minishell.c 
+SRC		= main.c error_handling.c  utils.c  $(PROMPT) $(LEXER) \
+		init_minishell.c
+PROMPT  =  prompt.c
+LEXER	=  tokens.c handle_spaces.c
 
-DIRS	= . src include libft 
+DIRS	= . lexer prompt
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft
 CFLAGS	= -Wall -Wextra -Werror
 
-VPATH	=  $(DIRS)
+VPATH	= $(addprefix ./src/, $(DIRS))
 VPATH	+= $(HEADER_PATH)
 
 CFLAGS += -g3

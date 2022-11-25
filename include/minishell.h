@@ -19,5 +19,8 @@ void	is_erro_sintaxy_quotes(char *line);
 void	init_minishell(t_minishell *ms);
 char	*add_spaces_specific_tokens(char *arg, int count);
 int		*identify_tokens(char **str, int len_tab);
+int		check_qtt_to_be_incremented(char *line);
+t_bool	check_for_specific_token(char c);
+
 
 #endif
