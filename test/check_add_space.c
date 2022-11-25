@@ -16,8 +16,9 @@ void	test_valid_add_spaces()
 	TEST_ASSERT_EQUAL_STRING("export MAKE_PATH=./libs/libft ; cd .. ; ls && make -C $MAKE_PATH ; ./minishell", str);
 	free(str);
 
-	str = add_spaces_at_specific_tokens(TOKENS_SQUOTE_1, 0);
+	str = add_spaces_at_specific_tokens(TOKENS_SQUOTE_1, 5);
 	TEST_ASSERT_EQUAL_STRING("infile    <  tr a  '   '   |    tr  ' '  x  >  outfile", str);
+	free(str);
 
 	str = add_spaces_at_specific_tokens(TOKENS_SQUOTE_2, 5);
 	TEST_ASSERT_EQUAL_STRING(".gitignore  <  tr ex  ' X'   |  tr pi  'P '   >  outfile", str);
@@ -27,19 +28,19 @@ void	test_valid_add_spaces()
 	TEST_ASSERT_EQUAL_STRING("echo <  ' oi  ' ?$p ' humano  | '  |  >> ", str);
 	free(str);
 
-	str = add_spaces_at_specific_tokens(TOKENS_DQUOTES, 1);
+	str = add_spaces_at_specific_tokens(TOKENS_DQUOTES, 5);
 	TEST_ASSERT_EQUAL_STRING("infile    <  tr a  \"   \"   |    tr  \" \"  x  >  outfile", str);
 	free(str);
 
-	str = add_spaces_at_specific_tokens(TOKENS_MIXED_QUOTES, 1);
+	str = add_spaces_at_specific_tokens(TOKENS_MIXED_QUOTES, 5);
 	TEST_ASSERT_EQUAL_STRING("infile    <  tr a  \"   \"   |    tr  \' \'  x  >  outfile", str);
 	free(str);
 
-	str = add_spaces_at_specific_tokens(TOKENS_PARALLEL_QUOTES_1, 1);
+	str = add_spaces_at_specific_tokens(TOKENS_PARALLEL_QUOTES_1, 3);
 	TEST_ASSERT_EQUAL_STRING("infile    <  tr a  \"   \' |   tr \' \"  x  >  outfile", str);
 	free(str);
 
-	str = add_spaces_at_specific_tokens(TOKENS_PARALLEL_QUOTES_2, 1);
+	str = add_spaces_at_specific_tokens(TOKENS_PARALLEL_QUOTES_2, 5);
 	TEST_ASSERT_EQUAL_STRING("infile    <  tr a    \'  \"   \'   |    tr  \' \"     \'  x  >  outfile", str);
 	free(str);
 
@@ -71,7 +72,7 @@ void	test_valid_add_spaces()
 	TEST_ASSERT_EQUAL_STRING(" < cat out", str);
 	free(str);
 
-	str = add_spaces_at_specific_tokens(TOKENS_LESSTHAN_4, 1);
+	str = add_spaces_at_specific_tokens(TOKENS_LESSTHAN_4, 2);
 	TEST_ASSERT_EQUAL_STRING(" < out rg  '.' ", str);
 	free(str);
 
