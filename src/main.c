@@ -10,7 +10,7 @@ int	main(int argc, char **argv)
 	init_minishell(&ms);
 	while (TRUE)
 	{
-		ms.prompt_line = creat_prompt();
+		ms.prompt_line = create_prompt();
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		tokens(&ms);
 		free(ms.prompt_line);

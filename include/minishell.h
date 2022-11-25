@@ -10,8 +10,8 @@
 
 void	check_arguments(int argc);
 void	check_prompt(char *line);
-// char	*creat_prompt(t_minishell ms);
-char	*creat_prompt(void);
+// char	*create_prompt(t_minishell ms);
+char	*create_prompt(void);
 // void	tokens(char *argv);
 void	tokens(t_minishell *ms);
 // void	handle_quoting(char *list, int original_value, int replaced_value);

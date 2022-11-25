@@ -53,7 +53,7 @@ void	replace_value_inside_quotes(char *list, int old_value, int new_value)
 	}
 }
 
-void	count_tokens_specific(char *str, int qtt_tokens)
+void	count_tokens_specific(char *str, int *qtt_tokens)
 {
 	int	i;
 	int	value;
@@ -69,18 +69,18 @@ void	count_tokens_specific(char *str, int qtt_tokens)
 			while (str[i] && str[i] != value)
 				i++;
 			if (str[i] == value)
-				qtt_tokens += 1;
+				*qtt_tokens += 1;
 		}
 		else if (str[i] == PIPE  || str[i] == GREATERTHAN || str[i] == LESSTHAN)
-			qtt_tokens += 1;
+			*qtt_tokens += 1;
 		else if (str[i] == LESSTHAN && str[i + 1] == LESSTHAN)
 		{
-			qtt_tokens += 1;
+			*qtt_tokens += 1;
 			i++;
 		}
 		else if (str[i] == GREATERTHAN && str[i + 1] == GREATERTHAN)
 		{
-			qtt_tokens += 1;
+			*qtt_tokens += 1;
 			i++;
 		}
 		i++;
@@ -159,7 +159,7 @@ void	tokens(t_minishell *ms)
 	// echo<' oi  '?$p' humano  | '|>>
 	i = 0;
 	replace_value_inside_quotes(ms->prompt_line, SPACE, 48);
-	count_tokens_specific(ms->prompt_line, ms->qtt_tokens);
+	count_tokens_specific(ms->prompt_line, &ms->qtt_tokens);
 	str_with_spaces = add_spaces_at_specific_tokens(ms->prompt_line, ms->qtt_tokens);
 	tokens = ft_split(str_with_spaces, ' ');
 	while (tokens[i])
