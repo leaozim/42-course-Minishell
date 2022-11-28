@@ -2,7 +2,7 @@
 
 void	ckeck_token_quoting()
 {
-	int	id_array[2] = {5, 34};
+	int	id_array[2] = {COMMAND, 34};
 	int *id_tokens;
 
 	id_tokens = identify_tokens((char *[]){"echo", "\"oi\"", NULL}, 2);
@@ -27,14 +27,14 @@ void	ckeck_token_quoting()
 
 void	ckeck_token_redirct()
 {
-	int	id_array[2] = {5, APPEND};
+	int	id_array[2] = {COMMAND, APPEND};
 	int *id_tokens;
 
 	id_tokens = identify_tokens((char *[]){"echo", ">>", NULL}, 2);
 	TEST_ASSERT_EQUAL_INT_ARRAY(id_array, id_tokens, 2);
 	free(id_tokens);
 
-	int	id_array2[2] = {5, 3};
+	int	id_array2[2] = {COMMAND, 3};
 	id_tokens = identify_tokens((char *[]){"echo", "<<", NULL}, 2);
 	TEST_ASSERT_EQUAL_INT_ARRAY(id_array2, id_tokens, 2);
 	free(id_tokens);

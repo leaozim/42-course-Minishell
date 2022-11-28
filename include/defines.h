@@ -11,33 +11,29 @@
 # define REPLACE_VALUE 3
 # define SPACE ' '
 
+# include "../libft/libft.h"
 typedef enum e_bool
 {
 	FALSE,
 	TRUE,
 }	t_bool;
 
-typedef struct s_minishell
-{
-	char	*prompt_line;
-}	t_minishell;
-
-typedef struct s_lexer
-{
-	char	**tokens;
-	int		qtt_tokens;
-	char	*str_spcs;
-	char	**tab_tokens;
-	char	*tab_id;
-	int		len_tab;
-}	t_lexer;
-
 typedef struct s_tokens
 {
 	char	*tokens;
 	int		id_tks;
-	t_bool	error;
+	// t_bool	error;
 }	t_tokens;
+
+typedef struct s_minishell
+{
+	char	*prompt_line;
+	t_list	*tks;
+	char	**tab_tokens;
+	int		*tab_id;
+	int		qtt_tokens;
+}	t_minishell;
+
 
 enum e_tokens
 {

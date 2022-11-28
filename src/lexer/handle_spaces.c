@@ -33,13 +33,7 @@ int	check_qtt_to_be_incremented(char *line)
 	i = 0;
 	value = 0;
 	if (line[i] == SQUOTE || line[i] == DQUOTES)
-	{
-		value = line[i];
-		i++;
-		while (line[i] && line[i] != value)
-			i++;
-		i++;
-	}
+		get_quotes(value, line[i], &i, NULL);
 	else if (line[i] == RDRCT_IN && line[i + 1] == RDRCT_IN)
 		i += 2;
 	else if (line[i] == RDRCT_OU && line[i + 1] == RDRCT_OU)

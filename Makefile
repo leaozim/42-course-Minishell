@@ -12,7 +12,7 @@ HEADER_FILES	= defines.h minishell.h printf_colors.h
 SRC		= main.c error_handling.c  utils.c  $(PROMPT) $(LEXER) \
 		init_minishell.c
 PROMPT  =  prompt.c
-LEXER	=  tokens.c handle_spaces.c
+LEXER	=  tokens.c handle_spaces.c create_token_list.c utils_lexer.c
 
 DIRS	= . lexer prompt
 IFLAGS	= -I $(HEADER_PATH)
@@ -40,6 +40,7 @@ re:  fclean all
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
+	make bonus -C $(LIBFT_PATH)
 
 $(NAME): $(LIBFT)  $(OBJ_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $(OBJS) $(LDFLAGS) -lreadline
