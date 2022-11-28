@@ -12,7 +12,7 @@ void		check_arguments(int argc);
 void		check_prompt(char *line);
 char		*creat_prompt(void);
 void		creat_tokens(t_minishell *ms, t_tokens *tokens);
-void		replace_value_inside_quotes(char *list, int old_value, int new_value);
+void		replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 t_bool		is_valid_quoting(char **list);
 void		free_ptrs(char **str);
 void		is_erro_sintaxy_quotes(char *line);
@@ -30,6 +30,7 @@ int			check_len_tab(char **str);
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */
-void	print_tokens(t_minishell *ms);
+
+void		print_tokens(t_minishell *ms);
 
 #endif

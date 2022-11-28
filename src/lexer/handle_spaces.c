@@ -71,7 +71,7 @@ char	*add_spaces_specific_tokens(char *line, int count)
 	return (str);
 }
 
-void	replace_value_inside_quotes(char *list, int old_value, int new_value)
+void	replace_value_inside_quotes(char *list, int old_vle, int new_vle)
 {
 	char	*str;
 	int		quotes;
@@ -88,8 +88,8 @@ void	replace_value_inside_quotes(char *list, int old_value, int new_value)
 			i++;
 			while (str[i] && str[i] != quotes)
 			{
-				if (str[i] == old_value)
-					str[i] = new_value;
+				if (str[i] == old_vle)
+					str[i] = new_vle;
 				i++;
 			}
 			i++;

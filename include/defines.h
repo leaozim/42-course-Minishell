@@ -12,6 +12,7 @@
 # define SPACE ' '
 
 # include "../libft/libft.h"
+
 typedef enum e_bool
 {
 	FALSE,
@@ -34,7 +35,6 @@ typedef struct s_minishell
 	int		qtt_tokens;
 }	t_minishell;
 
-
 enum e_tokens
 {
 	COMMAND = 1,
@@ -47,7 +47,7 @@ enum e_tokens
 	PIPE = 124,
 	QUERY = 63,
 	APPEND = 2,
-	HEREDOC  = 3,
+	HEREDOC = 3,
 };
 
 #endif
