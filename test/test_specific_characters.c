@@ -38,7 +38,7 @@ void	check_token_count_mixed_quotes()
 	str = "cat \'oi\" \' ";
 	TEST_ASSERT_EQUAL_INT(1, count_tokens_specific(str));
 
-		str = "cat \"oi\"\'\'";
+	str = "cat \"oi\"\'\'";
 	TEST_ASSERT_EQUAL_INT(2, count_tokens_specific(str));
 }
 
