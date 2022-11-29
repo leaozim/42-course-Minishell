@@ -2,7 +2,6 @@
 
 int	main(int argc, char **argv)
 {
-	// char		*line_terminal;
 	t_minishell	ms;
 
 	(void)argv;
@@ -15,7 +14,8 @@ int	main(int argc, char **argv)
 		printf(CYAN"\nTOKENS\n"RESET);
 
 		is_erro_sintaxy_quotes(ms.prompt_line);
-		tokens(&ms);
+		create_tokens(&ms);
+		print_tokens(&ms);
 
 		//EXPANDER
 		printf(CYAN"\nEXPANDER\n"RESET);
@@ -24,6 +24,22 @@ int	main(int argc, char **argv)
 			printf("%s\n", str);
 
 		free(ms.prompt_line);
+		//
 	}
 	return (EXIT_SUCCESS);
+}
+
+void	print_tokens(t_minishell *ms)
+{
+	t_list		*no;
+	t_tokens	*temp;
+
+	no = ms->tks;
+	while (no)
+	{
+		temp = (t_tokens *)no->content;
+		printf("tokens = %s\n", temp->tokens);
+		printf("id     = %d\n", temp->id_tks);
+		no = no->next;
+	}
 }

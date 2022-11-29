@@ -13,3 +13,10 @@ void	free_ptrs(char **str)
 	free(str);
 	str = NULL;
 }
+
+void	destroy_minishell(t_minishell ms)
+{
+	free(ms.prompt_line);
+	free_ptrs(ms.tab_tokens);
+	free(ms.tab_id);
+}

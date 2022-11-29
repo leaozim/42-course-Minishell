@@ -4,7 +4,7 @@
 # define ARGUMENT_LIST_TOO_LONG 7
 # define COMMAND_NOT_FOUND 127
 
-# define PROMPT "MiniHELL $"
+# define PROMPT "MiniHELL $ "
 # define TOKEN_COUNT 17
 # define TEMP 2
 
@@ -48,33 +48,44 @@
 # define TOKENS_ENVAR_LOCAL_2 "bar$foo"
 // => "bar42"
 
-
-typedef struct s_minishell
-{
-	char	*prompt_line;
-	char	**tokens;
-	int		qtt_tokens;
-	char	*str_with_spaces;
-
-} t_minishell;
-
-enum e_tokens
-{
-	COMMAND = 1,
-	DQUOTES = '"',
-	DOLLAR_SIGN = '$',
-	SQUOTE = '\'',
-	SEMICOLON = ';',
-	LESSTHAN = '<',
-	GREATERTHAN = '>',
-	PIPE = '|',
-	QUERY = '?',
-};
+# include "../libft/libft.h"
 
 typedef enum e_bool
 {
 	FALSE,
 	TRUE,
 }	t_bool;
+
+typedef struct s_tokens
+{
+	char	*tokens;
+	int		id_tks;
+	// t_bool	error;
+}	t_tokens;
+
+typedef struct s_minishell
+{
+	char	*prompt_line;
+	t_list	*tks;
+	char	**tab_tokens;
+	int		*tab_id;
+	int		qtt_tokens;
+	char	*modified_str;
+}	t_minishell;
+
+enum e_tokens
+{
+	COMMAND = 1,
+	DQUOTES = 34,
+	DOLLAR_SIGN = 36,
+	SQUOTE = 39,
+	SEMICOLON = 59,
+	RDRCT_IN = 60,
+	RDRCT_OU = 62,
+	PIPE = 124,
+	QUERY = 63,
+	APPEND = 2,
+	HEREDOC = 3,
+};
 
 #endif
