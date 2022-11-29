@@ -29,5 +29,6 @@ void	check_token_count_redirection(void);
 void	test_add_spaces(void);
 void	test_valid_add_spaces(void);
 void	check_identify_tokens(void);
+void	check_qtt_tokens(void);
 
 #endif

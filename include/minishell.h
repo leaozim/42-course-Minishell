@@ -24,8 +24,11 @@ t_bool		check_for_specific_token(char c);
 t_tokens	*creat_content(char *tks, int index);
 void		create_token_list(t_minishell *ms, char **str, int *id, int len);
 void		destroy_minishell(t_minishell ms);
-void		get_quotes(int value, char line, int *i, int *qtt_tokens);
+void		get_quotes(int value, char line, int *i, int **qtt_tokens);
+// void		count_tokens_specific(char *str, int *qtt_tokens);
+int			count_tokens_specific(char *str);
 int			check_len_tab(char **str);
+void	reverse_replace(char **table_tokens, int len_tab);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

@@ -33,6 +33,7 @@ typedef struct s_minishell
 	char	**tab_tokens;
 	int		*tab_id;
 	int		qtt_tokens;
+	char	*modified_str;
 }	t_minishell;
 
 enum e_tokens

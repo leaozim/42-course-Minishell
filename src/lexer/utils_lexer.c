@@ -21,12 +21,20 @@ int	check_len_tab(char **str)
 	return (i);
 }
 
-void	get_quotes(int value, char line, int *i, int *qtt_tokens)
+void	get_quotes(int value, char line, int *i, int **qtt_tokens)
 {
-	value = line[i];
+	(void)qtt_tokens;
+	value = line;
 		*i += 1;
-	while (line[i] && line[i] != value)
+	while (line && line != value)
 		*i += 1;
-	if (line[i] == value)
-		*qtt_tokens += 1;
+	// if (line[*i] == value)
+	// 	**qtt_tokens += 1;
+}
+
+void	reverse_replace(char **table_tokens, int len_tab)
+{
+	int i = -1;
+	while(len_tab > ++i)
+		replace_value_inside_quotes(table_tokens[i], REPLACE_VALUE, SPACE);
 }
