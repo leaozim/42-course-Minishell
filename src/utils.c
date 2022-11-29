@@ -14,8 +14,10 @@ void	free_ptrs(char **str)
 	str = NULL;
 }
 
-void	is_erro_sintaxy_quotes(char *line)
+void	destroy_minishell(t_minishell ms)
 {
-	if (!is_valid_quoting(line))
-		exit(1);
+	ft_lstclear(&ms.tks, free);
+	free(ms.prompt_line);
+	free_ptrs(ms.tab_tokens);
+	free(ms.tab_id);
 }

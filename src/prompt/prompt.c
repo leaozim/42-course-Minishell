@@ -1,4 +1,4 @@
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	check_prompt(char *line)
 {
@@ -10,7 +10,7 @@ void	check_prompt(char *line)
 	}
 }
 
-char	*creat_prompt(void)
+char	*create_prompt(void)
 {
 	char	*line;
 

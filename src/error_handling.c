@@ -4,32 +4,16 @@ void	check_arguments(int argc)
 {
 	if (argc > 1)
 	{
-		printf("Error! Argument list too long\n");
+		ft_putstr_fd("ERROR: Argument list too long\n", STDOUT_FILENO);
 		exit(ARGUMENT_LIST_TOO_LONG);
 	}
 }
 
-t_bool	is_valid_quoting(char *list)
+void	is_erro_sintaxy_quotes(char *line)
 {
-	int		i;
-	int		value;
-	char	*str;
-
-	i = 0;
-	str = list;
-	value = 0;
-	while (str[i])
+	if (!is_valid_quoting(&line))
 	{
-		if (str[i] == SQUOTE || str[i] == DQUOTES)
-		{
-			value = str[i];
-			i++;
-			while (str[i] && str[i] != value)
-				i++;
-			if (str[i] == '\0')
-				return (FALSE);
-		}
-		i++;
+		ft_putstr_fd("ERROR: Invalid quote syntax\n", STDOUT_FILENO);
+		exit(1);
 	}
-	return (TRUE);
 }
