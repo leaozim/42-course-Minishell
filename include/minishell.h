@@ -22,4 +22,6 @@ void	is_erro_sintaxy_quotes(char *line);
 void	init_minishell(t_minishell *ms);
 char	*add_spaces_at_specific_tokens(char *arg, int count);
 
+char *expander(char *token);
+
 #endif

@@ -10,7 +10,7 @@ HEADER_PATH		= ./include
 HEADER_FILES	= defines.h minishell.h printf_colors.h
 
 SRC		= main.c error_handling.c prompt.c tokens.c utils.c \
-		init_minishell.c
+		init_minishell.c expander.c
 
 DIRS	= . src include libft 
 IFLAGS	= -I $(HEADER_PATH)

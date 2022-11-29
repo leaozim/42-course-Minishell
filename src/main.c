@@ -11,8 +11,18 @@ int	main(int argc, char **argv)
 	while (TRUE)
 	{
 		ms.prompt_line = create_prompt();
+
+		printf(CYAN"\nTOKENS\n"RESET);
+
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		tokens(&ms);
+
+		//EXPANDER
+		printf(CYAN"\nEXPANDER\n"RESET);
+		char *str = expander("$DDOIDERA");
+		if (str != NULL)
+			printf("%s\n", str);
+
 		free(ms.prompt_line);
 	}
 	return (EXIT_SUCCESS);
