@@ -60,8 +60,8 @@ typedef struct s_tokens
 {
 	char	*tokens;
 	int		id_tks;
-	// t_bool	error;
 }	t_tokens;
+// t_bool	error;
 
 typedef struct s_minishell
 {

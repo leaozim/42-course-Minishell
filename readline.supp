@@ -6,6 +6,7 @@
    fun:readline
    ...
 }
+
 {
    <Readline>
    Memcheck:Leak
@@ -27,6 +28,7 @@
    match-leak-kinds: reachable
    fun:malloc
    fun:xmalloc
+   fun:rl_clear_history
    fun:add_history
    ...
 }

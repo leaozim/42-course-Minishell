@@ -37,6 +37,4 @@ APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 
 void		print_tokens(t_minishell *ms);
 
-char *expander(char *token);
-
 #endif

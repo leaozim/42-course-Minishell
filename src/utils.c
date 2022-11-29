@@ -16,6 +16,7 @@ void	free_ptrs(char **str)
 
 void	destroy_minishell(t_minishell ms)
 {
+	ft_lstclear(&ms.tks, free);
 	free(ms.prompt_line);
 	free_ptrs(ms.tab_tokens);
 	free(ms.tab_id);

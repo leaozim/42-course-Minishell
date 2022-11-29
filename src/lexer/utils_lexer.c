@@ -28,13 +28,13 @@ void	get_quotes(int value, char line, int *i, int **qtt_tokens)
 		*i += 1;
 	while (line && line != value)
 		*i += 1;
-	// if (line[*i] == value)
-	// 	**qtt_tokens += 1;
 }
 
 void	reverse_replace(char **table_tokens, int len_tab)
 {
-	int i = -1;
-	while(len_tab > ++i)
+	int	i;
+
+	i = -1;
+	while (len_tab > ++i)
 		replace_value_inside_quotes(table_tokens[i], REPLACE_VALUE, SPACE);
 }

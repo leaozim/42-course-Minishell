@@ -3,6 +3,7 @@
 int	main(int argc, char **argv)
 {
 	t_minishell	ms;
+	char		*str;
 
 	(void)argv;
 	check_arguments(argc);
@@ -10,21 +11,15 @@ int	main(int argc, char **argv)
 	while (TRUE)
 	{
 		ms.prompt_line = create_prompt();
-
 		printf(CYAN"\nTOKENS\n"RESET);
-
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens(&ms);
 		print_tokens(&ms);
-
-		//EXPANDER
 		printf(CYAN"\nEXPANDER\n"RESET);
-		char *str = expander("$DDOIDERA");
+		str = expander("$DDOIDERA");
 		if (str != NULL)
 			printf("%s\n", str);
-
-		free(ms.prompt_line);
-		//
+		destroy_minishell(ms);
 	}
 	return (EXIT_SUCCESS);
 }

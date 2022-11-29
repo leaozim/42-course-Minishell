@@ -1,45 +1,5 @@
 #include "../../include/minishell.h"
 
-// void	count_tokens_specific(char *str, int *qtt_tokens)
-// {
-// 	int	i;
-// 	int	value;
-
-// 	i = 0;
-// 	value = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == SQUOTE || str[i] == DQUOTES)
-// 		{
-// 			value = str[i];
-// 			i++;
-// 			while (str[i] && str[i] != value)
-// 				i++;
-// 			if (str[i] == value)
-// 				*qtt_tokens += 1;
-// 		}
-// 		else if (str[i] == PIPE)
-// 			*qtt_tokens += 1;
-// 		else if (str[i] == RDRCT_IN && str[i + 1] == RDRCT_IN)
-// 		{
-// 			*qtt_tokens += 1;
-// 			i++;
-// 		}
-// 		else if (str[i] == RDRCT_OU && str[i + 1] == RDRCT_OU)
-// 		{
-// 			*qtt_tokens += 1;
-// 			i++;
-// 		}
-// 		else if (str[i] == RDRCT_IN)
-// 			*qtt_tokens += 1;
-// 		else if (str[i] == RDRCT_OU)
-// 		{
-// 			*qtt_tokens += 1;
-// 		}
-// 		i++;
-// 	}
-// }
-
 int	count_tokens_specific(char *str)
 {
 	int	i;
@@ -58,7 +18,7 @@ int	count_tokens_specific(char *str)
 			while (str[i] && str[i] != value)
 				i++;
 			if (str[i] == value)
-				qtt_tokens += 1; 
+				qtt_tokens += 1;
 		}
 		else if (str[i] == PIPE)
 			qtt_tokens += 1;

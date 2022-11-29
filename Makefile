@@ -13,12 +13,15 @@ SRC				=	main.c				\
 					error_handling.c	\
 					utils.c				\
 					init_minishell.c	\
-					$(PROMPT) $(LEXER) $(EXPANDER)		
-PROMPT			=	prompt.c			\
+					$(PROMPT) $(LEXER) $(EXPANDER)
+
+PROMPT			=	prompt.c
+
 LEXER			=	tokens.c			\
 					handle_spaces.c		\
 					create_token_list.c	\
-					utils_lexer.c		\
+					utils_lexer.c
+
 EXPANDER		=	expander.c
 
 DIRS			=	. lexer prompt expander
@@ -29,7 +32,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 VPATH			=	$(addprefix ./src/, $(DIRS))
 VPATH			+=	$(HEADER_PATH)
 
-CFLAGS			+=	-g3
+CFLAGS			+=	-g3 
 
 all: $(NAME)
 
@@ -69,11 +72,16 @@ test:	all
 test_vall:	all
 	make val -C test
 
+
 val: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline.supp -s ./minishell
 
 mc:	all
 	clear
 	./minishell
+
+norm:
+	@clear
+	@norminette ${SRC} ${INCDIR}* | grep Error || true
 
 .PHONY:	all clean fclean re git test
