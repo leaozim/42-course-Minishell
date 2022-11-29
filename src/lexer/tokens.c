@@ -107,13 +107,12 @@ int	*identify_tokens(char **str, int len_tab)
 	return (id_tks);
 }
 
-void	creat_tokens(t_minishell *ms, t_tokens *tokens)
+void	create_tokens(t_minishell *ms)
 {
 	char	*str_with_spcs;
 	int		len_tab_tokens;
 	int		qtt_tokens;
 
-	(void)tokens;
 	replace_value_inside_quotes(ms->prompt_line, SPACE, REPLACE_VALUE);
 	qtt_tokens = count_tokens_specific(ms->prompt_line);
 	str_with_spcs = add_spaces_specific_tokens(ms->prompt_line, qtt_tokens);

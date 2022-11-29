@@ -1,28 +1,35 @@
-NAME	= minishell
+NAME			=	minishell
 
-LIBFT_PATH	= ./libft
-LIBFT 	= $(LIBFT_PATH)/libft.a
+LIBFT_PATH		=	./libft
+LIBFT			=	$(LIBFT_PATH)/libft.a
 
-OBJ_DIR	= ./obj
-OBJS	= $(SRC:%.c=$(OBJ_DIR)/%.o)
+OBJ_DIR			=	./obj
+OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
-HEADER_PATH		= ./include
-HEADER_FILES	= defines.h minishell.h printf_colors.h
+HEADER_PATH		=	./include
+HEADER_FILES	=	defines.h minishell.h printf_colors.h
 
-SRC		= main.c error_handling.c  utils.c  $(PROMPT) $(LEXER) \
-		init_minishell.c
-PROMPT  =  prompt.c
-LEXER	=  tokens.c handle_spaces.c create_token_list.c utils_lexer.c
+SRC				=	main.c				\
+					error_handling.c	\
+					utils.c				\
+					init_minishell.c	\
+					$(PROMPT) $(LEXER) $(EXPANDER)		
+PROMPT			=	prompt.c			\
+LEXER			=	tokens.c			\
+					handle_spaces.c		\
+					create_token_list.c	\
+					utils_lexer.c		\
+EXPANDER		=	expander.c
 
-DIRS	= . lexer prompt
-IFLAGS	= -I $(HEADER_PATH)
-LDFLAGS	= -L$(LIBFT_PATH) -lft
-CFLAGS	= -Wall -Wextra -Werror
+DIRS			=	. lexer prompt expander
+IFLAGS			=	-I $(HEADER_PATH)
+LDFLAGS			=	-L$(LIBFT_PATH) -lft
+CFLAGS			=	-Wall -Wextra -Werror
 
-VPATH	= $(addprefix ./src/, $(DIRS))
-VPATH	+= $(HEADER_PATH)
+VPATH			=	$(addprefix ./src/, $(DIRS))
+VPATH			+=	$(HEADER_PATH)
 
-CFLAGS += -g3
+CFLAGS			+=	-g3
 
 all: $(NAME)
 

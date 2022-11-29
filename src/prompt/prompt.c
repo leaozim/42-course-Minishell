@@ -10,12 +10,12 @@ void	check_prompt(char *line)
 	}
 }
 
-char	*creat_prompt(void)
+char	*create_prompt(void)
 {
 	char	*line;
 
 	line = readline(PROMPT);
 	check_prompt(line);
-	add_history(line);
+	// add_history(line);
 	return (line);
 }

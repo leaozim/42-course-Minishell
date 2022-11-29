@@ -3,17 +3,28 @@
 int	main(int argc, char **argv)
 {
 	t_minishell	ms;
-	t_tokens	tokens;
 
 	(void)argv;
 	check_arguments(argc);
 	init_minishell(&ms);
 	while (TRUE)
 	{
-		ms.prompt_line = creat_prompt();
+		ms.prompt_line = create_prompt();
+
+		printf(CYAN"\nTOKENS\n"RESET);
+
 		is_erro_sintaxy_quotes(ms.prompt_line);
-		creat_tokens(&ms, &tokens);
+		create_tokens(&ms);
 		print_tokens(&ms);
+
+		//EXPANDER
+		printf(CYAN"\nEXPANDER\n"RESET);
+		char *str = expander("$DDOIDERA");
+		if (str != NULL)
+			printf("%s\n", str);
+
+		free(ms.prompt_line);
+		//
 	}
 	return (EXIT_SUCCESS);
 }

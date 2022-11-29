@@ -10,8 +10,8 @@
 
 void		check_arguments(int argc);
 void		check_prompt(char *line);
-char		*creat_prompt(void);
-void		creat_tokens(t_minishell *ms, t_tokens *tokens);
+char		*create_prompt(void);
+void		create_tokens(t_minishell *ms);
 void		replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 t_bool		is_valid_quoting(char **list);
 void		free_ptrs(char **str);
@@ -28,12 +28,15 @@ void		get_quotes(int value, char line, int *i, int **qtt_tokens);
 // void		count_tokens_specific(char *str, int *qtt_tokens);
 int			count_tokens_specific(char *str);
 int			check_len_tab(char **str);
-void	reverse_replace(char **table_tokens, int len_tab);
+void		reverse_replace(char **table_tokens, int len_tab);
+char		*expander(char *token);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */
 
 void		print_tokens(t_minishell *ms);
+
+char *expander(char *token);
 
 #endif
