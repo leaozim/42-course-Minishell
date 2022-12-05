@@ -19,6 +19,7 @@ int main(void)
 	RUN_TEST(check_token_qtt);
 	RUN_TEST(test_add_spaces);
 	RUN_TEST(check_identify_tokens);
+	RUN_TEST(check_repl);
 	RUN_TEST(check_valid_expansion);
 	return UNITY_END();
 }

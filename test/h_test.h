@@ -30,7 +30,7 @@ void	test_add_spaces(void);
 void	test_valid_add_spaces(void);
 void	check_identify_tokens(void);
 void	check_qtt_tokens(void);
-
+void	check_repl(void);
 void	check_valid_expansion(void);
 
 #endif
