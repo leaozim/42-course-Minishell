@@ -58,7 +58,7 @@ void	check_token_count_pipe()
 	TEST_ASSERT_EQUAL_INT(1, count_tokens_specific(TOKENS_PIPE_2));
 }
 
-void	check_token_count_greaterthan()
+void	check_token_count_lessthan()
 {
 	char	*str;
 
@@ -78,7 +78,7 @@ void	check_token_count_greaterthan()
 	TEST_ASSERT_EQUAL_INT(1, count_tokens_specific(TOKENS_GREATERTHAN_2));
 }
 
-void	check_token_count_lessthan()
+void	check_token_count_greaterthan()
 {
 	char	*str;
 
