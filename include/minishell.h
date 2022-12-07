@@ -33,10 +33,11 @@ int			parser(t_minishell *ms);
 void		destroy_minishell(t_minishell *ms);
 int			qtt_tokens_heredoc_or_append(int *i, int *qtt_tokens);
 void		qtt_tokens_quotes(int value, char *line, int *i, int *qtt_tokens);
-// int			is_single_metacharacter(t_tokens *tokens, t_minishell *ms);
-int			is_single_metacharacter(t_tokens *tokens, int len_tokens);
-int			are_consecutive_metacharacters(t_tokens *tokens, t_list *no);
-t_bool		is_metacharacters(int id_tks);
+int			is_single_metachar(int id_tokens, int len_tokens);
+t_bool		is_metachars(int id_tks);
+// int			error_syntaxy_metachars(t_minishell *ms);
+int			error_syntaxy_metachars(t_list *tks, int len_tokens);
+int			consecutive_metachars(int id_tokens, int next_id_tokens);
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */

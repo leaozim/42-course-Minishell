@@ -69,7 +69,7 @@ typedef struct s_minishell
 	t_list	*tks;
 	char	**tab_tokens;
 	int		*tab_id;
-	int		len_tab_tokens;
+	int		len_tokens;
 	char	*modified_str;
 }	t_minishell;
 

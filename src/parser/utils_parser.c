@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-t_bool	is_metacharacters(int id_tks)
+t_bool	is_metachars(int id_tks)
 {
 	if (id_tks == HEREDOC || \
 		id_tks == APPEND || \
@@ -16,11 +16,11 @@ void	error_invalid_synax(void)
 	ft_putstr_fd("Invalid syntax\n", STDERR_FILENO);
 }
 
-int	are_consecutive_metacharacters(t_tokens *tokens, t_list *no)
+int	consecutive_metachars(int id_tokens, int next_id_tokens)
 {
-	if (is_metacharacters(tokens->id_tks))
+	if (is_metachars(id_tokens))
 	{
-		if (is_metacharacters(((t_tokens *)no->next->content)->id_tks))
+		if (is_metachars((next_id_tokens)))
 		{
 			error_invalid_synax();
 			return (1);
@@ -29,9 +29,9 @@ int	are_consecutive_metacharacters(t_tokens *tokens, t_list *no)
 	return (0);
 }
 
-int	is_single_metacharacter(t_tokens *tokens, int len_tokens)
+int	is_single_metachar(int id_tokens, int len_tokens)
 {
-	if (is_metacharacters(tokens->id_tks) && len_tokens == 1)
+	if (is_metachars(id_tokens) && len_tokens == 1)
 	{
 		error_invalid_synax();
 		return (1);

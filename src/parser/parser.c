@@ -10,7 +10,7 @@ void	reidentify_some_tokens(t_list *tks)
 	while (no)
 	{
 		tokens = (t_tokens *)no->content;
-		if (is_metacharacters(tokens->id_tks) && tokens->id_tks != PIPE && \
+		if (is_metachars(tokens->id_tks) && tokens->id_tks != PIPE && \
 			no->next)
 		{
 			next_tokens = (t_tokens *)no->next->content;
@@ -29,18 +29,21 @@ void	reidentify_some_tokens(t_list *tks)
 	}
 }
 
-int	error_syntaxy_metacharacter(t_minishell *ms)
+int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 {
 	t_list		*no;
 	t_tokens	*tokens;
+	t_tokens	*next;
 
-	no = ms->tks;
+	no = tks;
 	while (no)
 	{
 		tokens = (t_tokens *)no->content;
-		if (is_single_metacharacter(tokens, ms->len_tab_tokens))
+		if (is_single_metachar(tokens->id_tks, len_tokens))
 			return (1);
-		if (no->next && are_consecutive_metacharacters(tokens, no))
+		if (no->next)
+			next = (t_tokens *)no->next->content;
+		if (no->next && consecutive_metachars(tokens->id_tks, next->id_tks))
 			return (1);
 		no = no->next;
 	}
@@ -49,7 +52,7 @@ int	error_syntaxy_metacharacter(t_minishell *ms)
 
 int	parser(t_minishell *ms)
 {
-	if (error_syntaxy_metacharacter(ms))
+	if (error_syntaxy_metachars(ms->tks, ms->len_tokens))
 		return(1);
 	reidentify_some_tokens(ms->tks);
 	return (0);

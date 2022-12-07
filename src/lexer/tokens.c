@@ -63,9 +63,9 @@ void	create_tokens(t_minishell *ms)
 	qtt_tokens = count_tokens_specific(ms->prompt_line);
 	str_with_spcs = add_spaces_specific_tokens(ms->prompt_line, qtt_tokens);
 	ms->tab_tokens = ft_split(str_with_spcs, ' ');
-	ms->len_tab_tokens = check_len_tab(ms->tab_tokens);
-	reverse_replace(ms->tab_tokens, ms->len_tab_tokens);
-	ms->tab_id = identify_tokens(ms->tab_tokens, ms->len_tab_tokens);
-	create_token_list(ms, ms->tab_tokens, ms->tab_id, ms->len_tab_tokens);
+	ms->len_tokens = check_len_tab(ms->tab_tokens);
+	reverse_replace(ms->tab_tokens, ms->len_tokens);
+	ms->tab_id = identify_tokens(ms->tab_tokens, ms->len_tokens);
+	create_token_list(ms, ms->tab_tokens, ms->tab_id, ms->len_tokens);
 	free(str_with_spcs);
 }

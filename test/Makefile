@@ -51,7 +51,7 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 run: all
-	./$(NAME)
+	./$(NAME) 2> error.log
 
 val: all
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
