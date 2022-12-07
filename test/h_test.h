@@ -32,5 +32,7 @@ void	check_identify_tokens(void);
 void	check_qtt_tokens(void);
 void	check_repl(void);
 void	check_valid_expansion(void);
+void	check_expander_count_dollar_sign(void);
+void	check_case_double_quotes(void);
 
 #endif

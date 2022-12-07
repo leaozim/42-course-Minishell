@@ -33,11 +33,8 @@ void		parser(t_minishell *ms);
 void		destroy_minishell(t_minishell *ms);
 int			qtt_tokens_heredoc_or_append(int *i, int *qtt_tokens);
 void		qtt_tokens_quotes(int value, char *line, int *i, int *qtt_tokens);
-
-/*
-APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
-*/
-
+int			how_many_dollar_signs(char *token);
 void		print_tokens(t_minishell *ms);
+char		*case_double_quotes(char *token);
 
 #endif

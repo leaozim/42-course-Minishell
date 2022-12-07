@@ -21,5 +21,6 @@ int main(void)
 	RUN_TEST(check_identify_tokens);
 	RUN_TEST(check_repl);
 	RUN_TEST(check_valid_expansion);
+	RUN_TEST(check_case_double_quotes);
 	return UNITY_END();
 }

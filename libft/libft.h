@@ -25,6 +25,7 @@ typedef struct s_list
 
 int		ft_is_num(char *nbr);
 int		ft_isalpha(int c);
+int		ft_isalpha_underscore(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
