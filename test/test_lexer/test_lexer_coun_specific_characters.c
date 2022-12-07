@@ -1,6 +1,4 @@
-#include "h_defines.h"
-# include "h_test.h"
-
+#include "../h_test.h"
 
 void	check_token_count_squote()
 {

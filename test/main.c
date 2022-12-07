@@ -8,6 +8,7 @@ void setUp(void)
 
 void tearDown(void)
 {
+
 }
 
 int main(void)
@@ -21,5 +22,6 @@ int main(void)
 	RUN_TEST(check_identify_tokens);
 	RUN_TEST(check_repl);
 	RUN_TEST(check_valid_expansion);
+	// RUN_TEST(test_is_error_syntax_metachacacter);
 	return UNITY_END();
 }

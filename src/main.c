@@ -11,7 +11,7 @@ void	repl_minshell(t_minishell *ms)
 		is_erro_sintaxy_quotes(ms->prompt_line);
 		create_tokens(ms);
 		parser(ms);
-		print_tokens(ms);
+		// print_tokens(ms);
 		printf(CYAN"\nEXPANDER\n"RESET);
 		str = expander("$DDOIDERA");
 		if (str != NULL)

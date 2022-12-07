@@ -1,4 +1,4 @@
-#include "h_test.h"
+#include "../h_test.h"
 
 void	test_valid_add_spaces()
 {

@@ -32,5 +32,7 @@ void	check_identify_tokens(void);
 void	check_qtt_tokens(void);
 void	check_repl(void);
 void	check_valid_expansion(void);
+void	test_is_error_syntax_metachacacter(void);
+void	test_is_error_syntax_metachacacter(void);
 
 #endif

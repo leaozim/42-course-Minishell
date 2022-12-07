@@ -29,11 +29,14 @@ int			count_tokens_specific(char *str);
 int			check_len_tab(char **str);
 void		reverse_replace(char **table_tokens, int len_tab);
 char		*expander(char *token);
-void		parser(t_minishell *ms);
+int			parser(t_minishell *ms);
 void		destroy_minishell(t_minishell *ms);
 int			qtt_tokens_heredoc_or_append(int *i, int *qtt_tokens);
 void		qtt_tokens_quotes(int value, char *line, int *i, int *qtt_tokens);
-
+// int			is_single_metacharacter(t_tokens *tokens, t_minishell *ms);
+int			is_single_metacharacter(t_tokens *tokens, int len_tokens);
+int			are_consecutive_metacharacters(t_tokens *tokens, t_list *no);
+t_bool		is_metacharacters(int id_tks);
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */
