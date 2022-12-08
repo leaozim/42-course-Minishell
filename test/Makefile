@@ -32,6 +32,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -f error.log
 
 re:  fclean all
 
@@ -51,7 +52,7 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 run: all
-	./$(NAME) 2> error.log
+	./$(NAME) 2> error.log 
 
 val: all
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
