@@ -76,7 +76,7 @@ test_vall:	all
 
 
 val: all
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline.supp -s ./minishell
+	valgrind -q --leak-check=full --show-leak-kinds=all --trace-children=yes --suppressions=readline.supp --track-fds=yes --track-origins=yes ./minishell
 
 mc:	all
 	clear

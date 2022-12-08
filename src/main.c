@@ -32,7 +32,6 @@ int	main(int argc, char **argv)
 	check_arguments(argc);
 	init_minishell(&ms);
 	repl_minshell(&ms);
-
 	return (EXIT_SUCCESS);
 }
 

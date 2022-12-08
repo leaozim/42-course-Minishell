@@ -1,46 +1,107 @@
 # include "h_test.h"
 #include "unity/unity.h"
 
+// "$EDITOR"
+//=> "nano"
+# define TOKENS_ENVAR_GENERAL "bar$EDITOR"
+//=> "barnano"
+
+//export foo=42
+# define TOKENS_ENVAR_SQUOTE_1 "'$foo'"
+//=> "'$foo'"
+
+# define TOKENS_ENVAR_SQUOTE_2 "baz$foo'bar'"
+//=> "baz42'bar'"
+
+# define TOKENS_ENVAR_SQUOTE_3 "baz$foo'$foo'"
+//=> "baz42'$foo'"
+
+# define TOKENS_ENVAR_DQUOTES_1 "\"$foo\""
+//=> "\"42\""
+
+# define TOKENS_ENVAR_DQUOTES_2 "baz$foo\"$foo\""
+//=> "baz42\"42\""
+
+# define TOKENS_ENVAR_MIXED_QUOTES_1 "baz$foo\"$foo'\""
+//=> "baz42\"42'\""
+
+# define TOKENS_ENVAR_MIXED_QUOTES_2 "\"baz$foo'$foo'\""
+//=> "\"baz42'42'\""
+
+# define TOKENS_ENVAR_MIXED_QUOTES_3 "'baz$foo'$foo''"
+//=> "'baz$foo'42''"
+
+//foo=42
+# define TOKENS_ENVAR_LOCAL_1 "$foo"
+// => "42"
+
+# define TOKENS_ENVAR_LOCAL_2 "bar$foo"
+// => "bar42"
+
 void	check_case_double_quotes()
 {
 	char	*str;
+	char	*temp;
 
-	str = expander("$HOME");
+	str = case_double_quotes("$HOME");
 	TEST_ASSERT_EQUAL_STRING(getenv("HOME"), str);
+	free(str);
 
-	str = case_double_quotes("\"oi $HOME $*$ $ tudo $$ $OLDPWD $? ?$\"");
-	TEST_ASSERT_EQUAL_STRING("oi /home/etomiyos $*$ $ tudo $$ /home/etomiyos/42projetos $? ?$", str);
+	str = case_double_quotes("\"oi $SHELL $*$ $ tudo $$ $SHELL $? ?$\"");
+	TEST_ASSERT_EQUAL_STRING("\"oi /bin/bash $*$ $ tudo $$ /bin/bash $? ?$", str);
+	free(str);
 
 	str = case_double_quotes("$");
 	TEST_ASSERT_EQUAL_STRING("$", str);
+	free(str);
 
 	str = case_double_quotes("$!");
 	TEST_ASSERT_EQUAL_STRING("$", str);
+	free(str);
 
 	str = case_double_quotes("$ $");
 	TEST_ASSERT_EQUAL_STRING("$ $", str);
+	free(str);
 
-	// str = case_double_quotes("     ");
-	// TEST_ASSERT_EQUAL_STRING("     ", str);
+	str = case_double_quotes("    $HOME");
+	temp = ft_strjoin("    ", getenv("HOME"));
+	TEST_ASSERT_EQUAL_STRING(temp, str);
+	free(temp);
+	free(str);
 
-	// str = case_double_quotes(" ");
-	// TEST_ASSERT_EQUAL_STRING(" ", str);
+	str = case_double_quotes("     ");
+	TEST_ASSERT_EQUAL_STRING("     ", str);
+
+	str = case_double_quotes(" ");
+	TEST_ASSERT_EQUAL_STRING(" ", str);
 
 	str = case_double_quotes("");
 	TEST_ASSERT_EQUAL_STRING("", str);
-
-	// str = case_double_quotes(" $");
-	// TEST_ASSERT_EQUAL_STRING(" $", str);
-
-	// str = case_double_quotes("$SHELL$SHELL$SHELL");
-	// TEST_ASSERT_EQUAL_STRING("/bin/bash/bin/bash/bin/bash", str);
+	free(str);
 
 	str = case_double_quotes("$#$#");
 	TEST_ASSERT_EQUAL_STRING("$#$", str);
+	free(str);
 
 	str = case_double_quotes("$$$$");
 	TEST_ASSERT_EQUAL_STRING("$$$$", str);
+	free(str);
 
 	str = case_double_quotes("$$");
 	TEST_ASSERT_EQUAL_STRING("$$", str);
+	free(str);
+
+	str = case_double_quotes("$SHELL $SHELL");
+	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", str);
+	free(str);
+
+	str = case_double_quotes("$INVALID");
+	TEST_ASSERT_EQUAL_STRING("", str);
+	free(str);
+
+	//testar depois
+
+	// str = case_double_quotes("$SHELL$SHELL");
+	// TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", str);
+	// free(str);
 }
