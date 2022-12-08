@@ -71,4 +71,3 @@ void check_repl(void)
 	create_repl(creat_minishell(&ms7), "ls > > oi", expected7);
 	free_ms(&ms7);
 }
-

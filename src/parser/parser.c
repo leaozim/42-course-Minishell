@@ -53,7 +53,7 @@ int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 int	parser(t_minishell *ms)
 {
 	if (error_syntaxy_metachars(ms->tks, ms->len_tokens))
-		return(1);
+		return (1);
 	reidentify_some_tokens(ms->tks);
 	return (0);
 }

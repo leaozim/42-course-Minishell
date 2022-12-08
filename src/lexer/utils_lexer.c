@@ -40,7 +40,7 @@ void	reverse_replace(char **table_tokens, int len_tab)
 		replace_value_inside_quotes(table_tokens[i], REPLACE_VALUE, SPACE);
 }
 
-int qtt_tokens_heredoc_or_append(int *i, int *qtt_tokens)
+int	qtt_tokens_heredoc_or_append(int *i, int *qtt_tokens)
 {
 	*qtt_tokens += 1;
 	*i += 1;
