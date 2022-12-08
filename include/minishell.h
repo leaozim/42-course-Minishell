@@ -7,6 +7,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "printf_colors.h"
+# include <fcntl.h>
 
 void		check_arguments(int argc);
 void		check_prompt(char *line);
@@ -38,6 +39,8 @@ t_bool		is_metachars(int id_tks);
 // int			error_syntaxy_metachars(t_minishell *ms);
 int			error_syntaxy_metachars(t_list *tks, int len_tokens);
 int			consecutive_metachars(int id_tokens, int next_id_tokens);
+void		open_infile(char *file_tks, int flags, int *outfd, t_bool *error);
+void		open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */

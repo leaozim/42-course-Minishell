@@ -37,5 +37,6 @@ void		test_error_syntax_consecutive_metachacacter(void);
 void		free_ms(t_minishell *ms);
 t_minishell	*creat_minishell(t_minishell *ms);
 void		test_is_error_syntax_metachacacter(void);
+void		test_open_files(void);
 
 #endif

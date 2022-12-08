@@ -25,5 +25,6 @@ int main(void)
 	RUN_TEST(test_error_syntax_single_metachacacter);
 	RUN_TEST(test_error_syntax_consecutive_metachacacter);
 	RUN_TEST(test_is_error_syntax_metachacacter);
+	RUN_TEST(test_open_files);
 	return UNITY_END();
 }
