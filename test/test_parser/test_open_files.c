@@ -53,20 +53,20 @@ void	check_open_outfile(void)
 		perror("1");
 	close(infd);
 	infd = 10;
-	open_infile("files/file2", O_CREAT | O_RDWR | O_TRUNC, &infd, &error);
+	open_infile("files/file3", O_CREAT | O_RDWR | O_TRUNC, &infd, &error);
 	if (infd == -1)
 		perror("2");
 	write(infd, "a", 9);
-	infd = open("files/file2", O_RDONLY);
+	infd = open("files/file3", O_RDONLY);
 	read(infd, &buff, 1);
 	TEST_ASSERT_EQUAL_STRING("a", buff);
 	close(infd);
-	open_infile("files/file2", O_CREAT | O_RDWR | O_TRUNC, &infd, &error);
+	open_infile("files/file3", O_CREAT | O_RDWR | O_TRUNC, &infd, &error);
 	if (infd == -1)
 		perror("3");
 	write(infd, "b", 5);
 	close(infd);
-	infd = open("files/file2", O_RDONLY);
+	infd = open("files/file3", O_RDONLY);
 	read(infd, &buff, 1);
 	TEST_ASSERT_EQUAL_STRING("b", buff);
 	TEST_ASSERT_NOT_EQUAL_INT(-1, infd);

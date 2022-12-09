@@ -24,7 +24,7 @@ LEXER			=	tokens.c			\
 
 EXPANDER		=	expander.c
 
-PARSER 			=	parser.c utils_parser.c
+PARSER 			=	parser.c utils_parser.c open_files.c
 
 DIRS			=	. lexer prompt expander parser
 IFLAGS			=	-I $(HEADER_PATH)
