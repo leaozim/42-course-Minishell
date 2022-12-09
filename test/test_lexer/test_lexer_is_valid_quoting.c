@@ -1,4 +1,4 @@
-# include "h_test.h"
+#include "../h_test.h"
 
 void	checar_se_as_aspas_sao_validas(void)
 {

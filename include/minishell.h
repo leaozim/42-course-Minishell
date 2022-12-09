@@ -23,14 +23,21 @@ int			check_qtt_to_be_incremented(char *line);
 t_bool		check_for_specific_token(char c);
 t_tokens	*creat_content(char *tks, int index);
 void		create_token_list(t_minishell *ms, char **str, int *id, int len);
-void		destroy_minishell(t_minishell ms);
 void		get_quotes(int value, char line, int *i, int **qtt_tokens);
 // void		count_tokens_specific(char *str, int *qtt_tokens);
 int			count_tokens_specific(char *str);
 int			check_len_tab(char **str);
 void		reverse_replace(char **table_tokens, int len_tab);
 char		*expander(char *token);
-
+int			parser(t_minishell *ms);
+void		destroy_minishell(t_minishell *ms);
+int			qtt_tokens_heredoc_or_append(int *i, int *qtt_tokens);
+void		qtt_tokens_quotes(int value, char *line, int *i, int *qtt_tokens);
+int			is_single_metachar(int id_tokens, int len_tokens);
+t_bool		is_metachars(int id_tks);
+// int			error_syntaxy_metachars(t_minishell *ms);
+int			error_syntaxy_metachars(t_list *tks, int len_tokens);
+int			consecutive_metachars(int id_tokens, int next_id_tokens);
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */

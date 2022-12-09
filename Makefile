@@ -13,7 +13,7 @@ SRC				=	main.c				\
 					error_handling.c	\
 					utils.c				\
 					init_minishell.c	\
-					$(PROMPT) $(LEXER) $(EXPANDER)
+					$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)
 
 PROMPT			=	prompt.c
 
@@ -24,7 +24,9 @@ LEXER			=	tokens.c			\
 
 EXPANDER		=	expander.c
 
-DIRS			=	. lexer prompt expander
+PARSER 			=	parser.c utils_parser.c
+
+DIRS			=	. lexer prompt expander parser
 IFLAGS			=	-I $(HEADER_PATH)
 LDFLAGS			=	-L$(LIBFT_PATH) -lft
 CFLAGS			=	-Wall -Wextra -Werror

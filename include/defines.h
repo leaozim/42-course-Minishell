@@ -69,7 +69,7 @@ typedef struct s_minishell
 	t_list	*tks;
 	char	**tab_tokens;
 	int		*tab_id;
-	int		qtt_tokens;
+	int		len_tokens;
 	char	*modified_str;
 }	t_minishell;
 
@@ -86,6 +86,10 @@ enum e_tokens
 	QUERY = 63,
 	APPEND = 2,
 	HEREDOC = 3,
+	DELIMITER = 4,
+	FILE_APPEND = 5,
+	FILE_OUT = 600,
+	FILE_IN = 601,
 };
 
 #endif
