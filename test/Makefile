@@ -1,8 +1,8 @@
 NAME	= minishell_test
 
-HEADER	= $(shell ls . unity | grep .h$)
+HEADER	= $(shell ls . unity includes | grep .h$)
 
-SRCS	= $(shell ls . unity | grep .c$)
+SRCS	= $(shell ls . unity test_lexer test_expander test_parser test_integrated test_arguments | grep .c$)
 
 LIBFT_PATH	= ../libft
 LIBFT 	= $(LIBFT_PATH)/libft.a
@@ -16,8 +16,13 @@ OBJ_DIR	= ./obj
 OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MINISHELL_OBJS)
 
 CFLAGS	= -Wall -Wextra -g3
-IFLAGS	= -I. -Iunity -I../include -I../libft
-VPATH	= unity
+IFLAGS	= -I. -Iunity -I../include -I../libft -Iincludes
+VPATH	=  unity 
+VPATH	+= test_lexer 
+VPATH	+= test_expander 
+VPATH	+= test_integrated 
+VPATH	+= test_arguments 
+VPATH	+= test_parser
 LDFLAGS	= -L$(LIBFT_PATH) -lft
 
 all: $(NAME)
@@ -27,6 +32,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -f error.log
 
 re:  fclean all
 
@@ -46,9 +52,10 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 run: all
-	./$(NAME)
+	./$(NAME) 2> error.log
 
 val: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all \
+	./$(NAME) 2> error.log
 
 .PHONY:	all clean fclean re run

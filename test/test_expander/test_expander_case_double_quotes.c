@@ -1,5 +1,4 @@
-# include "h_test.h"
-#include "unity/unity.h"
+# include "../h_test.h"
 
 // "$EDITOR"
 //=> "nano"
@@ -98,10 +97,8 @@ void	check_case_double_quotes()
 	str = case_double_quotes("$INVALID");
 	TEST_ASSERT_EQUAL_STRING("", str);
 	free(str);
-
-	//testar depois
-
-	// str = case_double_quotes("$SHELL$SHELL");
-	// TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", str);
-	// free(str);
+	
+	str = case_double_quotes("$SHELL$SHELL");
+	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", str);
+	free(str);
 }

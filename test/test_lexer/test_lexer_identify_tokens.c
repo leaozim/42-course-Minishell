@@ -1,4 +1,4 @@
-#include "h_test.h"
+#include "../h_test.h"
 
 void	ckeck_token_quoting()
 {
@@ -34,12 +34,12 @@ void	ckeck_token_redirct()
 	TEST_ASSERT_EQUAL_INT_ARRAY(id_array, id_tokens, 2);
 	free(id_tokens);
 
-	int	id_array2[2] = {COMMAND, 3};
+	int	id_array2[2] = {COMMAND, HEREDOC};
 	id_tokens = identify_tokens((char *[]){"echo", "<<", NULL}, 2);
 	TEST_ASSERT_EQUAL_INT_ARRAY(id_array2, id_tokens, 2);
 	free(id_tokens);
 
-	int	id_array3[2] = {2, 3};
+	int	id_array3[2] = {APPEND, HEREDOC};
 	id_tokens = identify_tokens((char *[]){">>", "<<", NULL}, 2);
 	TEST_ASSERT_EQUAL_INT_ARRAY(id_array3, id_tokens, 2);
 	free(id_tokens);

@@ -13,12 +13,9 @@ void	repl_minshell(t_minishell *ms)
 		parser(ms);
 		print_tokens(ms);
 		printf(CYAN"\nEXPANDER\n"RESET);
-		str = expander("\"oi $HOME $*$ $ tudo $$ $OLDPWD $? ?$\"");
+		str = expander("$DDOIDERA");
 		if (str != NULL)
-		{
 			printf("%s\n", str);
-			free(str);
-		}
 		destroy_minishell(ms);
 	}
 	free(ms->prompt_line);

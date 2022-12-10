@@ -29,10 +29,7 @@ char	*case_double_quotes(char *token)
 	while (token[i])
 	{
 		if (ft_strchr(token, DOLLAR_SIGN) == NULL)
-		{
-			free(final_str);
-			return (token);
-		}
+			return (free(final_str), token);
 		if (token[i] == DOLLAR_SIGN)
 		{
 			end = i;

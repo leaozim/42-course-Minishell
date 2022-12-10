@@ -57,16 +57,15 @@ int	*identify_tokens(char **str, int len_tab)
 void	create_tokens(t_minishell *ms)
 {
 	char	*str_with_spcs;
-	int		len_tab_tokens;
 	int		qtt_tokens;
 
 	replace_value_inside_quotes(ms->prompt_line, SPACE, REPLACE_VALUE);
 	qtt_tokens = count_tokens_specific(ms->prompt_line);
 	str_with_spcs = add_spaces_specific_tokens(ms->prompt_line, qtt_tokens);
 	ms->tab_tokens = ft_split(str_with_spcs, ' ');
-	len_tab_tokens = check_len_tab(ms->tab_tokens);
-	reverse_replace(ms->tab_tokens, len_tab_tokens);
-	ms->tab_id = identify_tokens(ms->tab_tokens, len_tab_tokens);
-	create_token_list(ms, ms->tab_tokens, ms->tab_id, len_tab_tokens);
+	ms->len_tokens = check_len_tab(ms->tab_tokens);
+	reverse_replace(ms->tab_tokens, ms->len_tokens);
+	ms->tab_id = identify_tokens(ms->tab_tokens, ms->len_tokens);
+	create_token_list(ms, ms->tab_tokens, ms->tab_id, ms->len_tokens);
 	free(str_with_spcs);
 }

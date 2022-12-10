@@ -1,47 +1,59 @@
 #include "../../include/minishell.h"
 
-t_bool    is_metacharacters(int id_tks)
-{
-	if (id_tks == HEREDOC ||
-		id_tks == APPEND ||
-		id_tks == RDRCT_IN ||
-		id_tks == RDRCT_OU ||
-		id_tks == PIPE)
-		return (TRUE);
-	return (FALSE);
-}
-
-void    parser(t_minishell *ms)
+void	reidentify_some_tokens(t_list *tks)
 {
 	t_list		*no;
 	t_tokens	*tokens;
-	t_tokens    *next_tokens;
+	t_tokens	*next_tokens;
 
-	no = ms->tks;
+	no = tks;
 	while (no)
 	{
 		tokens = (t_tokens *)no->content;
-		if (is_metacharacters(tokens->id_tks) && tokens->id_tks != PIPE)
+		if (is_metachars(tokens->id_tks) && tokens->id_tks != PIPE && \
+			no->next)
 		{
-			if (no->next && is_metacharacters(((t_tokens *)no->next->content)->id_tks))
-			{
-				ft_putstr_fd("Invalid syntax\n", STDERR_FILENO);
-				return ;
-			}
 			next_tokens = (t_tokens *)no->next->content;
 			if (tokens->id_tks == HEREDOC)
 				next_tokens->id_tks = DELIMITER;
-			if (tokens->id_tks == APPEND)
+			else if (tokens->id_tks == APPEND)
 				next_tokens->id_tks = FILE_APPEND;
-			if (tokens->id_tks == RDRCT_IN)
+			else if (tokens->id_tks == RDRCT_IN)
 				next_tokens->id_tks = FILE_IN;
-			if (tokens->id_tks == RDRCT_OU)
+			else if (tokens->id_tks == RDRCT_OU)
 				next_tokens->id_tks = FILE_OUT;
 			else
-				next_tokens->id_tks = COMMAND;		
-		}			   
+				next_tokens->id_tks = COMMAND;
+		}
 		no = no->next;
 	}
 }
 
+int	error_syntaxy_metachars(t_list *tks, int len_tokens)
+{
+	t_list		*no;
+	t_tokens	*tokens;
+	t_tokens	*next;
 
+	no = tks;
+	while (no)
+	{
+		tokens = (t_tokens *)no->content;
+		if (is_single_metachar(tokens->id_tks, len_tokens))
+			return (1);
+		if (no->next)
+			next = (t_tokens *)no->next->content;
+		if (no->next && consecutive_metachars(tokens->id_tks, next->id_tks))
+			return (1);
+		no = no->next;
+	}
+	return (0);
+}
+
+int	parser(t_minishell *ms)
+{
+	if (error_syntaxy_metachars(ms->tks, ms->len_tokens))
+		return (1);
+	reidentify_some_tokens(ms->tks);
+	return (0);
+}

@@ -24,7 +24,7 @@ LEXER			=	tokens.c			\
 
 EXPANDER		=	expander.c
 
-PARSER 			=	parser.c
+PARSER 			=	parser.c utils_parser.c
 
 DIRS			=	. lexer prompt expander parser
 IFLAGS			=	-I $(HEADER_PATH)
@@ -73,7 +73,6 @@ test:	all
 
 test_vall:	all
 	make val -C test
-
 
 val: all
 	valgrind -q --leak-check=full --show-leak-kinds=all --trace-children=yes --suppressions=readline.supp --track-fds=yes --track-origins=yes ./minishell
