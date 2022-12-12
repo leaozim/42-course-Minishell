@@ -36,7 +36,7 @@ int			is_single_metachar(int id_tokens, int len_tokens);
 t_bool		is_metachars(int id_tks);
 int			error_syntaxy_metachars(t_list *tks, int len_tokens);
 int			consecutive_metachars(int id_tokens, int next_id_tokens);
-char		*case_double_quotes(char *token);
+char		*expand_variables(char *token);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

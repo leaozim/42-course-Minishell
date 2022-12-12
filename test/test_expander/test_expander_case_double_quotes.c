@@ -37,68 +37,71 @@
 # define TOKENS_ENVAR_LOCAL_2 "bar$foo"
 // => "bar42"
 
-void	check_case_double_quotes()
+void	check_expander()
 {
 	char	*str;
 	char	*temp;
 
-	str = case_double_quotes("$HOME");
+	str = expand_variables("$HOME");
 	TEST_ASSERT_EQUAL_STRING(getenv("HOME"), str);
 	free(str);
 
-	str = case_double_quotes("\"oi $SHELL $*$ $ tudo $$ $SHELL $? ?$\"");
-	TEST_ASSERT_EQUAL_STRING("\"oi /bin/bash $*$ $ tudo $$ /bin/bash $? ?$", str);
+	str = expand_variables("oi $SHELL $*$ $ tudo $$ $SHELL $? ?$");
+	TEST_ASSERT_EQUAL_STRING("oi /bin/bash $*$ $ tudo $$ /bin/bash $? ?$", str);
 	free(str);
 
-	str = case_double_quotes("$");
+	str = expand_variables("$");
 	TEST_ASSERT_EQUAL_STRING("$", str);
 	free(str);
 
-	str = case_double_quotes("$!");
+	str = expand_variables("$!");
 	TEST_ASSERT_EQUAL_STRING("$", str);
 	free(str);
 
-	str = case_double_quotes("$ $");
+	str = expand_variables("$ $");
 	TEST_ASSERT_EQUAL_STRING("$ $", str);
 	free(str);
 
-	str = case_double_quotes("    $HOME");
+	str = expand_variables("    $HOME");
 	temp = ft_strjoin("    ", getenv("HOME"));
 	TEST_ASSERT_EQUAL_STRING(temp, str);
 	free(temp);
 	free(str);
 
-	str = case_double_quotes("     ");
+	str = expand_variables("     ");
 	TEST_ASSERT_EQUAL_STRING("     ", str);
 
-	str = case_double_quotes(" ");
+	str = expand_variables(" ");
 	TEST_ASSERT_EQUAL_STRING(" ", str);
 
-	str = case_double_quotes("");
+	str = expand_variables("");
 	TEST_ASSERT_EQUAL_STRING("", str);
 	free(str);
 
-	str = case_double_quotes("$#$#");
+	str = expand_variables("$#$#");
 	TEST_ASSERT_EQUAL_STRING("$#$", str);
 	free(str);
 
-	str = case_double_quotes("$$$$");
+	str = expand_variables("$$$$");
 	TEST_ASSERT_EQUAL_STRING("$$$$", str);
 	free(str);
 
-	str = case_double_quotes("$$");
+	str = expand_variables("$$");
 	TEST_ASSERT_EQUAL_STRING("$$", str);
 	free(str);
 
-	str = case_double_quotes("$SHELL $SHELL");
+	str = expand_variables("$SHELL $SHELL");
 	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", str);
 	free(str);
 
-	str = case_double_quotes("$INVALID");
+	str = expand_variables("$INVALID");
 	TEST_ASSERT_EQUAL_STRING("", str);
 	free(str);
+
+	str = expand_variables("uname echo uname");
+	TEST_ASSERT_EQUAL_STRING("uname echo uname", str);
 	
-	str = case_double_quotes("$SHELL$SHELL");
-	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", str);
+	str = expand_variables("$SHELL$SHELL");
+	TEST_ASSERT_EQUAL_STRING("/bin/bash/bin/bash", str);
 	free(str);
 }

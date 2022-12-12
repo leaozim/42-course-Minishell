@@ -13,15 +13,40 @@ void ft_strupdate(char **str, char *newstr)
 	free(temp);
 }
 
-char	*case_double_quotes(char *token)
+int	expand_check_next_character(char *token, int i, char **final_str)
+{
+	int isdigit;
+	int start;
+	int end;
+	char *aux;
+	char *expanded_var;
+
+	isdigit = ft_isalpha_underscore(token[i + 1]);
+	if (isdigit == TRUE) //colocar opcao "|| token[i + 1] == QUERY" quando tiver executor pronto
+	{
+		start = i;
+		while ((token[i + 1] != SPACE) && (token[i + 1] != '\0') && (token[i + 1] != '\"') && (token[i + 1] != '$'))
+			i++;
+		end = i;
+		aux = ft_substr(token, (start + 1), (end - start));
+		expanded_var = getenv(aux);
+		if (expanded_var == NULL)
+			expanded_var = "";
+		ft_strupdate(final_str, ft_strjoin(*final_str, expanded_var));
+		free(aux);
+	}
+	else
+		ft_strupdate(final_str, ft_strjoin(*final_str, "$"));
+	return (i);
+}
+
+char	*expand_variables(char *token)
 {
 	int		i;
 	int		start;
 	int		end;
-	int		isdigit;
 	char	*aux;
 	char	*final_str;
-	char	*expanded_var;
 
 	i = 0;
 	start = i;
@@ -36,27 +61,11 @@ char	*case_double_quotes(char *token)
 			aux = ft_substr(token, start, (end - start));
 			ft_strupdate(&final_str, ft_strjoin(final_str, aux));
 			free(aux);
-			isdigit = ft_isalpha_underscore(token[i + 1]);
-			if (isdigit == TRUE) //colocar opcao "|| token[i + 1] == QUERY" quando tiver executor pronto
-			{
-				start = i;
-				while ((token[i + 1] != SPACE) && (token[i + 1] != '\0') && (token[i + 1] != '\"'))
-					i++;
-				end = i;
-				aux = ft_substr(token, (start + 1), (end - start));
-				if ((expanded_var = getenv(aux)) == NULL)
-					expanded_var = "";
-				ft_strupdate(&final_str, ft_strjoin(final_str, expanded_var));
-				free(aux);
-			}
-			else
-				ft_strupdate(&final_str, ft_strjoin(final_str, "$"));
+			i = expand_check_next_character(token, i, &final_str);
 			start = i + 1;
 		}
 		i++;
 	}
-	// printf("ANTES:  "BLUE"|"RESET"\"oi $HOME $*$ $ tudo $$ $OLDPWD $? ?$\""BLUE"|\n"RESET);
-	// printf("DEPOIS: "GREEN"|"RESET"%s"GREEN"|\n"RESET, final_str);
 	return (final_str);
 }
 
@@ -67,29 +76,18 @@ char	*expander(char *token)
 {
 	char	*envar;
 	char	*ptr;
-	char	*aux;
+	char	*str;
 
-	if (!token)
-		return (NULL); //checagem de erros (fazer mais)
-
+	str = expand_variables(token);
 	if (*token == DQUOTES)
 	{
-		aux = case_double_quotes(token);
-		free(aux);
+		str = ft_strtrim(str, "\"");
+		return(str);
 	}
-
-	//1) checar quantos $ tem
-	//2) expandir e pegar o resultado para saber o tamanho da
-	//string total que vou retornar
-
-
-	//echo "oi $HOME   tudo  $OLDPWD $$ ?$"
-
-	//FAZER POR ÚLTIMO. se for aspas simples, basta remover as aspas
-	if (*token == SQUOTE)
+	else if (*token == SQUOTE)
 	{
-		aux = ft_strtrim(token, "'");
-		return (aux);
+		str = ft_strtrim(token, "'");
+		return (str);
 	}
 
 	envar = token;
@@ -97,7 +95,5 @@ char	*expander(char *token)
 	ptr = getenv(envar);
 	if (ptr == NULL)
 		return (NULL);
-	return (ptr);
-
-	//caso das aspas duplas
+	return (str);
 }

@@ -22,7 +22,7 @@ int main(void)
 	RUN_TEST(check_identify_tokens);
 	RUN_TEST(check_repl);
 	RUN_TEST(check_valid_expansion);
-	RUN_TEST(check_case_double_quotes);
+	RUN_TEST(check_expander);
 	RUN_TEST(test_error_syntax_single_metachacacter);
 	RUN_TEST(test_error_syntax_consecutive_metachacacter);
 	RUN_TEST(test_is_error_syntax_metachacacter);

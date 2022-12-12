@@ -33,7 +33,7 @@ void		check_qtt_tokens(void);
 void		check_repl(void);
 void		check_valid_expansion(void);
 void		check_expander_count_dollar_sign(void);
-void		check_case_double_quotes(void);
+void		check_expander(void);
 void		test_error_syntax_single_metachacacter(void);
 void		test_error_syntax_consecutive_metachacacter(void);
 void		free_ms(t_minishell *ms);

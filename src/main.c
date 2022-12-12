@@ -13,7 +13,7 @@ void	repl_minshell(t_minishell *ms)
 		parser(ms);
 		print_tokens(ms);
 		printf(CYAN"\nEXPANDER\n"RESET);
-		str = expander("$DDOIDERA");
+		str = expander("\"$SHELL\"");
 		if (str != NULL)
 			printf("%s\n", str);
 		destroy_minishell(ms);
