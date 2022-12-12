@@ -25,7 +25,7 @@ int	expand_check_next_character(char *token, int i, char **final_str)
 	if (isdigit == TRUE) //colocar opcao "|| token[i + 1] == QUERY" quando tiver executor pronto
 	{
 		start = i;
-		while ((token[i + 1] != SPACE) && (token[i + 1] != '\0') && (token[i + 1] != '\"') && (token[i + 1] != '$'))
+		while ((token[i + 1] != SPACE) && (token[i + 1] != '\0') && (token[i + 1] != '\"') && (token[i + 1] != '$') && (token [i + 1] != '\''))
 			i++;
 		end = i;
 		aux = ft_substr(token, (start + 1), (end - start));
@@ -64,18 +64,20 @@ char	*expand_variables(char *token)
 			i = expand_check_next_character(token, i, &final_str);
 			start = i + 1;
 		}
+		if (token[i + 1] == '\0')
+		{
+			end = i;
+			aux = ft_substr(token, start, (end - start));
+			ft_strupdate(&final_str, ft_strjoin(final_str, aux));
+			free(aux);
+		}
 		i++;
 	}
 	return (final_str);
 }
 
-//"\"oi $HOME $*$ $ tudo $$ $OLDPWD $? ?$\""
-//oi /home/etomiyos $ $ tudo $$ /home/etomiyos/42projetos $? ?$
-
 char	*expander(char *token)
 {
-	char	*envar;
-	char	*ptr;
 	char	*str;
 
 	str = expand_variables(token);
@@ -90,10 +92,10 @@ char	*expander(char *token)
 		return (str);
 	}
 
-	envar = token;
-	envar++;
-	ptr = getenv(envar);
-	if (ptr == NULL)
-		return (NULL);
 	return (str);
+	// envar = token;
+	// envar++;
+	// ptr = getenv(envar);
+	// if (ptr == NULL)
+	// 	return (NULL);
 }

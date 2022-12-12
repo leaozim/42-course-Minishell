@@ -3,14 +3,16 @@
 void check_valid_expansion(void)
 {
 	char *str;
+	char *aux;
 
 	str = expander("$HOME");
 	TEST_ASSERT_EQUAL_STRING(getenv("HOME"), str);
 
-	str = expander("$IS_NOT_HOME");
-	TEST_ASSERT_EQUAL_STRING(getenv("IS_NOT_HOME"), str);
+	str = expander("$HOME$HOME");
+	aux = ft_strjoin(getenv("HOME"), getenv("HOME"));
+	TEST_ASSERT_EQUAL_STRING(aux, str);
+	free(aux);
 
-	//export DOIDERA="oi"
-	str = expander("$DOIDERA");
-	TEST_ASSERT_EQUAL_STRING(getenv("DOIDERA"), str);
+	str = expander("$IS_NOT_HOME");
+	TEST_ASSERT_EQUAL_STRING("", str);
 }
