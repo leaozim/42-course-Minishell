@@ -43,7 +43,7 @@ void		check_open_files(t_list *tks, int *infd, int *outfd);
 void		open_files(t_tokens *tks, int *infd, int *outfd);
 void		open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
 void		open_infile(char *file_tks, int flags, int *infd, t_bool *error);
-
+void		creat_heredoc(int delimiter, int *in_fd, t_bool *error);
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */

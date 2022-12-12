@@ -2,20 +2,20 @@
 
 void	repl_minshell(t_minishell *ms)
 {
-	char		*str;
+	// char		*str;
 
 	while (TRUE)
 	{
 		ms->prompt_line = create_prompt();
-		printf(CYAN"\nTOKENS\n"RESET);
+		// printf(CYAN"\nTOKENS\n"RESET);
 		is_erro_sintaxy_quotes(ms->prompt_line);
 		create_tokens(ms);
 		parser(ms);
-		print_tokens(ms);
-		printf(CYAN"\nEXPANDER\n"RESET);
-		str = expander("$DDOIDERA");
-		if (str != NULL)
-			printf("%s\n", str);
+		// print_tokens(ms);
+		// printf(CYAN"\nEXPANDER\n"RESET);
+		// str = expander("$DDOIDERA");
+		// if (str != NULL)
+		// 	printf("%s\n", str);
 		destroy_minishell(ms);
 	}
 	free(ms->prompt_line);
