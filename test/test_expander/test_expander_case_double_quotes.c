@@ -84,11 +84,11 @@ void	check_expander()
 	TEST_ASSERT_EQUAL_STRING("uname", str);
 	free(str);
 
-	str = expander("'$SHELL'");
+	str = expander("'$SHELL'"); //
 	TEST_ASSERT_EQUAL_STRING("$SHELL", str);
 	free(str);
 
-	str = expander("\"uname$SHELL $SHELL'sim'\"");
+	str = expander("\"uname$SHELL $SHELL'sim'\""); //
 	TEST_ASSERT_EQUAL_STRING("uname/bin/bash /bin/bash'sim'", str);
 	free(str);
 
@@ -100,7 +100,7 @@ void	check_expander()
 	TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash'\"", str);
 	free(str);
 
-	str = expander("\"uname$SHELL'$SHELL'\"");
+	str = expander("\"uname$SHELL'$SHELL'\""); //
 	TEST_ASSERT_EQUAL_STRING("uname/bin/bash'/bin/bash'", str);
 	free(str);
 

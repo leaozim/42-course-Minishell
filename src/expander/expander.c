@@ -65,14 +65,17 @@ char	*expand_variables(char *token)
 	last_dollar_occurence = check_last_position(token);
 	while (token[i])
 	{
-		if (ft_strchr(token, DOLLAR_SIGN) == NULL)
+		if (ft_strchr(token, DOLLAR_SIGN) == NULL) //tá passando várias vezes
 			return (free(final_str), token);
 		if (token[i] == DOLLAR_SIGN)
 		{
-			end = i;
-			aux = ft_substr(token, start, (end - start));
-			ft_strupdate(&final_str, ft_strjoin(final_str, aux));
-			free(aux);
+			// if (token[0] != DOLLAR_SIGN)
+			// {
+				end = i;
+				aux = ft_substr(token, start, (end - start));
+				ft_strupdate(&final_str, ft_strjoin(final_str, aux));
+				free(aux);
+			// }
 			i = expand_check_next_character(token, i, &final_str);
 			start = i + 1;
 		}
@@ -88,7 +91,6 @@ char	*expand_variables(char *token)
 	}
 	return (final_str);
 }
-// o problema desse código é a grande quantidade de alocação de memória
 
 char	*expander(char *token)
 {
@@ -107,4 +109,3 @@ char	*expander(char *token)
 	}
 	return(str);
 }
-
