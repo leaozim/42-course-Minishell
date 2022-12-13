@@ -25,7 +25,7 @@ int	expand_check_next_character(char *token, int i, char **final_str)
 	if (isdigit == TRUE) //colocar opcao "|| token[i + 1] == QUERY" quando tiver executor pronto
 	{
 		start = i;
-		while ((token[i + 1] != SPACE) && (token[i + 1] != '\0') && (token[i + 1] != '\"') && (token[i + 1] != '$') && (token [i + 1] != '\''))
+		while (ft_isalpha_underscore(token[i + 1]))
 			i++;
 		end = i;
 		aux = ft_substr(token, (start + 1), (end - start));
@@ -40,9 +40,20 @@ int	expand_check_next_character(char *token, int i, char **final_str)
 	return (i);
 }
 
+int	check_last_position(char *token)
+{
+	int	i;
+
+	i = ft_strrchr_pos(token, DOLLAR_SIGN);
+	while (ft_isalpha_underscore(token[i + 1]))
+		i++;
+	return (i);
+}
+
 char	*expand_variables(char *token)
 {
 	int		i;
+	int		last_dollar_occurence;
 	int		start;
 	int		end;
 	char	*aux;
@@ -51,6 +62,7 @@ char	*expand_variables(char *token)
 	i = 0;
 	start = i;
 	final_str = ft_strdup("");
+	last_dollar_occurence = check_last_position(token);
 	while (token[i])
 	{
 		if (ft_strchr(token, DOLLAR_SIGN) == NULL)
@@ -64,17 +76,19 @@ char	*expand_variables(char *token)
 			i = expand_check_next_character(token, i, &final_str);
 			start = i + 1;
 		}
-		if (token[i + 1] == '\0')
+		if (i == last_dollar_occurence)
 		{
-			end = i;
-			aux = ft_substr(token, start, (end - start));
+			start = i + 1;
+			aux = ft_substr(token, start, (ft_strlen(token) - start));
 			ft_strupdate(&final_str, ft_strjoin(final_str, aux));
 			free(aux);
+			break ;
 		}
 		i++;
 	}
 	return (final_str);
 }
+// o problema desse código é a grande quantidade de alocação de memória
 
 char	*expander(char *token)
 {
@@ -91,11 +105,6 @@ char	*expander(char *token)
 		str = ft_strtrim(token, "'");
 		return (str);
 	}
-
-	return (str);
-	// envar = token;
-	// envar++;
-	// ptr = getenv(envar);
-	// if (ptr == NULL)
-	// 	return (NULL);
+	return(str);
 }
+
