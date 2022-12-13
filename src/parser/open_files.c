@@ -37,7 +37,7 @@ void	open_files(t_tokens *tks, int *ifd, int *ofd)
 	}
 	if (tks->id_tks == DELIMITER && !tks->err)
 	{
-		creat_heredoc(tks->id_tks, ifd, &tks->err); 
+		creat_heredoc(tks->tokens, ifd, &tks->err);
 	}
 }
 

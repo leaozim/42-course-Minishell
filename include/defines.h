@@ -7,7 +7,7 @@
 # define PROMPT "MiniHELL $ "
 # define TOKEN_COUNT 17
 # define TEMP 2
-# define TMP_FILE	"/minishell_temp_file"
+# define TMP_FILE	"./minishell_temp_file"
 
 # define REPLACE_VALUE 3
 # define SPACE ' '

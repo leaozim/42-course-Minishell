@@ -8,6 +8,8 @@
 # include <readline/history.h>
 # include "printf_colors.h"
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 void		check_arguments(int argc);
 void		check_prompt(char *line);
@@ -43,7 +45,10 @@ void		check_open_files(t_list *tks, int *infd, int *outfd);
 void		open_files(t_tokens *tks, int *infd, int *outfd);
 void		open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
 void		open_infile(char *file_tks, int flags, int *infd, t_bool *error);
-void		creat_heredoc(int delimiter, int *in_fd, t_bool *error);
+void		creat_heredoc(char *delimiter, int *fd, t_bool *error);
+// void		creat_heredoc(char *delimiter, t_bool *error);
+
+
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */
