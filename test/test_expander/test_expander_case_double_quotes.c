@@ -116,7 +116,7 @@ void	check_expander()
 	free(str);
 
 	str = expander("\"'$SHELL'\"");
-	TEST_ASSERT_EQUAL_STRING("'SHELL'", str);
+	TEST_ASSERT_EQUAL_STRING("'/bin/bash'", str);
 	free(str);
 
 	// str = expander("\"uname$SHELL $SHELL'sim'\"");
