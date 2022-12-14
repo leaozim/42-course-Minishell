@@ -1,9 +1,12 @@
 #include "../include/minishell.h"
 
+void	handle_sigint(int sig);
+
 void	repl_minshell(t_minishell *ms)
 {
 	// char		*str;
 
+	
 	while (TRUE)
 	{
 		ms->prompt_line = create_prompt();
@@ -18,7 +21,6 @@ void	repl_minshell(t_minishell *ms)
 		// 	printf("%s\n", str);
 		destroy_minishell(ms);
 	}
-	free(ms->prompt_line);
 }
 
 int	main(int argc, char **argv)
@@ -28,6 +30,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	check_arguments(argc);
 	init_minishell(&ms);
+	signal(2, handle_sigint);
 	repl_minshell(&ms);
 	return (EXIT_SUCCESS);
 }
