@@ -13,7 +13,7 @@ void ft_strupdate(char **str, char *newstr)
 	free(temp);
 }
 
-int	expand_check_next_character(char *token, int i, char **final_str)
+void	expand_check_next_character(char *token, int *i, char **final_str)
 {
 	int isdigit;
 	int start;
@@ -21,23 +21,22 @@ int	expand_check_next_character(char *token, int i, char **final_str)
 	char *aux;
 	char *expanded_var;
 
-	isdigit = ft_isalpha_underscore(token[i + 1]);
+	isdigit = ft_isalpha_underscore(token[*i + 1]);
 	if (isdigit == TRUE) //colocar opcao "|| token[i + 1] == QUERY" quando tiver executor pronto
 	{
-		start = i;
-		while (ft_isalpha_underscore(token[i + 1]))
-			i++;
-		end = i;
+		start = *i;
+		while (ft_isalpha_underscore(token[*i + 1]))
+			*i += 1;
+		end = *i;
 		aux = ft_substr(token, (start + 1), (end - start));
 		expanded_var = getenv(aux);
+		free(aux);
 		if (expanded_var == NULL)
 			expanded_var = "";
 		ft_strupdate(final_str, ft_strjoin(*final_str, expanded_var));
-		free(aux);
 	}
 	else
 		ft_strupdate(final_str, ft_strjoin(*final_str, "$"));
-	return (i);
 }
 
 int	check_last_position(char *token)
@@ -48,6 +47,13 @@ int	check_last_position(char *token)
 	while (ft_isalpha_underscore(token[i + 1]))
 		i++;
 	return (i);
+}
+
+t_bool is_envar_expansible(char *token)
+{
+	if (token[0] == SQUOTE)
+		return (FALSE);
+	return (TRUE);
 }
 
 char	*expand_variables(char *token)
@@ -61,12 +67,20 @@ char	*expand_variables(char *token)
 
 	i = 0;
 	start = i;
+
+	if (token[0] == SQUOTE)
+	{
+		final_str = ft_strtrim(token, "\'");
+		return(final_str);
+	}
+
 	final_str = ft_strdup("");
 	last_dollar_occurence = check_last_position(token);
+
+	if (ft_strchr(token, DOLLAR_SIGN) == NULL)
+		return (free(final_str), token);
 	while (token[i])
 	{
-		if (ft_strchr(token, DOLLAR_SIGN) == NULL) //tá passando várias vezes
-			return (free(final_str), token);
 		if (token[i] == DOLLAR_SIGN)
 		{
 			if (check_last_position(token) != 0)
@@ -76,7 +90,17 @@ char	*expand_variables(char *token)
 				ft_strupdate(&final_str, ft_strjoin(final_str, aux));
 				free(aux);
 			}
-			i = expand_check_next_character(token, i, &final_str);
+			if (is_envar_expansible(final_str) == TRUE)
+				expand_check_next_character(token, &i, &final_str);
+			else
+			{
+				start = i;
+				while (ft_isalpha_underscore(token[i + 1]))
+					i++;
+				end = i;
+				aux = ft_substr(token, start, (end - start + 1));
+				return (aux);
+			}
 			start = i + 1;
 		}
 		if (i == last_dollar_occurence)
@@ -102,10 +126,6 @@ char	*expander(char *token)
 		str = ft_strtrim(str, "\"");
 		return(str);
 	}
-	else if (*token == SQUOTE)
-	{
-		str = ft_strtrim(token, "'");
-		return (str);
-	}
+
 	return(str);
 }

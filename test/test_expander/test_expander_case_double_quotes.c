@@ -9,12 +9,12 @@ void	check_expander()
 	TEST_ASSERT_EQUAL_STRING(getenv("HOME"), str);
 	free(str);
 
-	str = expander("oi $SHELL $*$ $ tudo $$ $SHELL $? ?$");
-	TEST_ASSERT_EQUAL_STRING("oi /bin/bash $*$ $ tudo $$ /bin/bash $? ?$", str);
-	free(str);
-
 	str = expander("$");
 	TEST_ASSERT_EQUAL_STRING("$", str);
+	free(str);
+
+	str = expander("oi $SHELL $*$ $ tudo $$ $SHELL $? ?$");
+	TEST_ASSERT_EQUAL_STRING("oi /bin/bash $*$ $ tudo $$ /bin/bash $? ?$", str);
 	free(str);
 
 	str = expander("$!");
@@ -39,7 +39,6 @@ void	check_expander()
 
 	str = expander("");
 	TEST_ASSERT_EQUAL_STRING("", str);
-	free(str);
 
 	str = expander("$#$#");
 	TEST_ASSERT_EQUAL_STRING("$#$#", str);
@@ -84,31 +83,52 @@ void	check_expander()
 	TEST_ASSERT_EQUAL_STRING("uname", str);
 	free(str);
 
-	str = expander("$SHELL uname"); //
+	str = expander("$SHELL uname");
 	TEST_ASSERT_EQUAL_STRING("/bin/bash uname", str);
 	free(str);
 
-	str = expander("uname $SHELL"); //
+	str = expander("uname $SHELL");
 	TEST_ASSERT_EQUAL_STRING("uname /bin/bash", str);
 	free(str);
 	
-	str = expander("$SHELL"); //
+	str = expander("$SHELL");
 	TEST_ASSERT_EQUAL_STRING("/bin/bash", str);
 	free(str);
 
-	// str = expander("\"uname$SHELL $SHELL'sim'\""); //
+	str = expander("uname$SHELL#shell");
+	TEST_ASSERT_EQUAL_STRING("uname/bin/bash#shell", str);
+	free(str);
+
+	str = expander("'$HOME'");
+	TEST_ASSERT_EQUAL_STRING("$HOME", str);
+	free(str);
+
+	str = expander("uname$SHELL\"$SHELL\"");
+	TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash\"", str);
+	free(str);
+
+	str = expander("uname$SHELL\"$SHELL'\"");
+	TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash'\"", str);
+	free(str);
+
+	str = expander("'$SHELL'"); //
+	TEST_ASSERT_EQUAL_STRING("$SHELL", str);
+	free(str);
+
+	// str = expander("\"'$SHELL'\""); //
+	// TEST_ASSERT_EQUAL_STRING("'/bin/bash'", str);
+	// free(str);
+
+	// str = expander("\"uname$SHELL $SHELL'sim'\"");
 	// TEST_ASSERT_EQUAL_STRING("uname/bin/bash /bin/bash'sim'", str);
 	// free(str);
 
-	// str = expander("uname$SHELL\"$SHELL\"");
-	// TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash\"", str);
-	// free(str);
-
-	// str = expander("uname$SHELL\"$SHELL'\"");
-	// TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash'\"", str);
-	// free(str);
-
-	// str = expander("\"uname$SHELL'$SHELL'\""); //
+	// str = expander("\"uname$SHELL'$SHELL'\"");
 	// TEST_ASSERT_EQUAL_STRING("uname/bin/bash'/bin/bash'", str);
+	// free(str);
+
+
+	// str = expander("\"$SHELL\"'$SHELL'"); //ESSE NÃO PODE SER USADO NO TESTE, JÁ QUE EXISTEM ->
+	// TEST_ASSERT_EQUAL_STRING("/bin/bash$SHELL", str); //DOIS TOKENS AQUI
 	// free(str);
 }
