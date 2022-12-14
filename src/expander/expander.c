@@ -69,13 +69,13 @@ char	*expand_variables(char *token)
 			return (free(final_str), token);
 		if (token[i] == DOLLAR_SIGN)
 		{
-			// if (token[0] != DOLLAR_SIGN)
-			// {
+			if (check_last_position(token) != 0)
+			{
 				end = i;
 				aux = ft_substr(token, start, (end - start));
 				ft_strupdate(&final_str, ft_strjoin(final_str, aux));
 				free(aux);
-			// }
+			}
 			i = expand_check_next_character(token, i, &final_str);
 			start = i + 1;
 		}

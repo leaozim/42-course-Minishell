@@ -1,0 +1,113 @@
+==5234== Memcheck, a memory error detector
+==5234== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5234== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==5234== Command: ./minishell_test
+==5234== 
+ERROR: Argument list too long
+==5245== 
+==5245== HEAP SUMMARY:
+==5245==     in use at exit: 0 bytes in 0 blocks
+==5245==   total heap usage: 19 allocs, 19 frees, 1,433 bytes allocated
+==5245== 
+==5245== All heap blocks were freed -- no leaks are possible
+==5245== 
+==5245== For lists of detected and suppressed errors, rerun with: -s
+==5245== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+Invalid syntax
+==5234== 
+==5234== HEAP SUMMARY:
+==5234==     in use at exit: 0 bytes in 0 blocks
+==5234==   total heap usage: 590 allocs, 590 frees, 7,829 bytes allocated
+==5234== 
+==5234== All heap blocks were freed -- no leaks are possible
+==5234== 
+==5234== For lists of detected and suppressed errors, rerun with: -s
+==5234== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

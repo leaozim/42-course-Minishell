@@ -84,28 +84,31 @@ void	check_expander()
 	TEST_ASSERT_EQUAL_STRING("uname", str);
 	free(str);
 
-	str = expander("'$SHELL'"); //
-	TEST_ASSERT_EQUAL_STRING("$SHELL", str);
+	str = expander("$SHELL uname"); //
+	TEST_ASSERT_EQUAL_STRING("/bin/bash uname", str);
 	free(str);
 
-	str = expander("\"uname$SHELL $SHELL'sim'\""); //
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash /bin/bash'sim'", str);
+	str = expander("uname $SHELL"); //
+	TEST_ASSERT_EQUAL_STRING("uname /bin/bash", str);
+	free(str);
+	
+	str = expander("$SHELL"); //
+	TEST_ASSERT_EQUAL_STRING("/bin/bash", str);
 	free(str);
 
-	str = expander("uname$SHELL\"$SHELL\"");
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash\"", str);
-	free(str);
+	// str = expander("\"uname$SHELL $SHELL'sim'\""); //
+	// TEST_ASSERT_EQUAL_STRING("uname/bin/bash /bin/bash'sim'", str);
+	// free(str);
 
-	str = expander("uname$SHELL\"$SHELL'\"");
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash'\"", str);
-	free(str);
+	// str = expander("uname$SHELL\"$SHELL\"");
+	// TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash\"", str);
+	// free(str);
 
-	str = expander("\"uname$SHELL'$SHELL'\""); //
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash'/bin/bash'", str);
-	free(str);
+	// str = expander("uname$SHELL\"$SHELL'\"");
+	// TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash'\"", str);
+	// free(str);
 
-	//testes Rodrigo
-	// str = expander("oi\"oi\" \"$SHELL\" \'$SHELL\' $SHELL \"\'$SHELL\'");
-	// TEST_ASSERT_EQUAL_STRING("oioi /bin/bash $SHELL /bin/bash \'/bin/bash\'", str);
+	// str = expander("\"uname$SHELL'$SHELL'\""); //
+	// TEST_ASSERT_EQUAL_STRING("uname/bin/bash'/bin/bash'", str);
 	// free(str);
 }
