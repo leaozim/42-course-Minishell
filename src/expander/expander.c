@@ -81,7 +81,7 @@ char	*expand_variables(char *token)
 		return (free(final_str), token);
 	while (token[i])
 	{
-		if (token[i] == DOLLAR_SIGN)
+		if (token[i] == DOLLAR_SIGN) //"'$SHELL'"
 		{
 			if (check_last_position(token) != 0)
 			{
