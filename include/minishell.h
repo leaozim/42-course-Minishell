@@ -27,7 +27,6 @@ void		get_quotes(int value, char line, int *i, int **qtt_tokens);
 int			count_tokens_specific(char *str);
 int			check_len_tab(char **str);
 void		reverse_replace(char **table_tokens, int len_tab);
-char		*expander(char *token);
 int			parser(t_minishell *ms);
 void		destroy_minishell(t_minishell *ms);
 int			qtt_tokens_heredoc_or_append(int *i, int *qtt_tokens);
@@ -37,6 +36,7 @@ t_bool		is_metachars(int id_tks);
 int			error_syntaxy_metachars(t_list *tks, int len_tokens);
 int			consecutive_metachars(int id_tokens, int next_id_tokens);
 char		*expand_variables(char *token);
+char		*expander(char *token);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

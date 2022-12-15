@@ -34,6 +34,7 @@ void		check_repl(void);
 void		check_valid_expansion(void);
 void		check_expander_count_dollar_sign(void);
 void		check_expander(void);
+void		check_brace_expansion(void);
 void		test_error_syntax_single_metachacacter(void);
 void		test_error_syntax_consecutive_metachacacter(void);
 void		free_ms(t_minishell *ms);

@@ -36,6 +36,7 @@ typedef struct s_minishell
 	char	*modified_str;
 }	t_minishell;
 
+
 enum e_tokens
 {
 	COMMAND = 1,

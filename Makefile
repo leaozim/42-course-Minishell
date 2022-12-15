@@ -34,7 +34,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 VPATH			=	$(addprefix ./src/, $(DIRS))
 VPATH			+=	$(HEADER_PATH)
 
-CFLAGS			+=	-g3 
+CFLAGS			+=	-g
 
 all: $(NAME)
 

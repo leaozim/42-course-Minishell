@@ -13,9 +13,9 @@ void	repl_minshell(t_minishell *ms)
 		parser(ms);
 		print_tokens(ms);
 		printf(CYAN"\nEXPANDER\n"RESET);
-		str = ft_strdup("\"'$SHELL'\"");
-		printf("token expandido: %s\n", str);
+		str = ft_strdup("${SHELL}uname");
 		char *str1 = expander(str);
+		printf("token expandido: |%s|\n", str1);
 		free(str);
 		destroy_minishell(ms);
 		free(str1);
