@@ -76,6 +76,8 @@ typedef struct s_minishell
 	int		outfd;
 }	t_minishell;
 
+t_minishell ms;
+
 enum e_tokens
 {
 	COMMAND = 1,

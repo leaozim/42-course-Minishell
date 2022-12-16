@@ -50,11 +50,11 @@ int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 	return (0);
 }
 
-int	parser(t_minishell *ms)
+int	parser(void)
 {
-	if (error_syntaxy_metachars(ms->tks, ms->len_tokens))
+	if (error_syntaxy_metachars(ms.tks, ms.len_tokens))
 		return (1);
-	reidentify_some_tokens(ms->tks);
-	check_open_files(ms->tks, &ms->infd, &ms->outfd);
+	reidentify_some_tokens(ms.tks);
+	check_open_files(ms.tks, &ms.infd, &ms.outfd);
 	return (0);
 }

@@ -13,6 +13,7 @@ SRC				=	main.c				\
 					error_handling.c	\
 					utils.c				\
 					init_minishell.c	\
+					signals.c \
 					$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)
 
 PROMPT			=	prompt.c

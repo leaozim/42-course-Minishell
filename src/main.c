@@ -1,46 +1,46 @@
 #include "../include/minishell.h"
+// #include <minishell.h>
 
-void	handle_sigint(int sig);
 
-void	repl_minshell(t_minishell *ms)
+void	repl_minshell(void)
 {
 	// char		*str;
 
 	
 	while (TRUE)
 	{
-		ms->prompt_line = create_prompt();
-		// printf(CYAN"\nTOKENS\n"RESET);
-		is_erro_sintaxy_quotes(ms->prompt_line);
-		create_tokens(ms);
-		parser(ms);
-		// print_tokens(ms);
+		ms.prompt_line = create_prompt();
+		printf(CYAN"\nTOKENS\n"RESET);
+		is_erro_sintaxy_quotes(ms.prompt_line);
+		create_tokens();
+		print_tokens();
+		parser();
 		// printf(CYAN"\nEXPANDER\n"RESET);
 		// str = expander("$DDOIDERA");
 		// if (str != NULL)
 		// 	printf("%s\n", str);
-		destroy_minishell(ms);
+		destroy_minishell();
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_minishell	ms;
+	// t_minishell	ms;
 
 	(void)argv;
 	check_arguments(argc);
-	init_minishell(&ms);
-	signal(2, handle_sigint);
-	repl_minshell(&ms);
+	init_minishell();
+	handle_signal();
+	repl_minshell();
 	return (EXIT_SUCCESS);
 }
 
-void	print_tokens(t_minishell *ms)
+void	print_tokens(void)
 {
 	t_list		*no;
 	t_tokens	*temp;
 
-	no = ms->tks;
+	no = ms.tks;
 	while (no)
 	{
 		temp = (t_tokens *)no->content;
