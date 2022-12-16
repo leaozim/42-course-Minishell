@@ -1,9 +1,4 @@
 #include "../../include/minishell.h"
-#include "defines.h"
-#include <readline/chardefs.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include <sys/wait.h>
 
 void ft_strupdate(char **str, char *newstr)
 {
@@ -107,7 +102,7 @@ char	*expand_variables(char *token)
 	if (ft_strchr(token, DOLLAR_SIGN) == NULL)
 	{
 		free(final_str);
-		return (token);
+		return (ft_strdup(token));
 	}
 	while (token[i])
 	{
@@ -146,7 +141,7 @@ char	*expand_variables(char *token)
 	return (final_str);
 }
 
-char	*expander(char *token)
+char	*expanding_tokens(char *token)
 {
 	char	*str;
 
@@ -154,13 +149,13 @@ char	*expander(char *token)
 	{
 		str = ft_strtrim(token, "\'");
 		return(str);
-	}
+	} 
 
 	str = expand_variables(token);
 
 	if (ft_strchr(token, DOLLAR_SIGN) == NULL && *token == DQUOTES)
 	{
-		str = ft_strtrim(token, "\"");
+		ft_strupdate(&str, ft_strtrim(token, "\""));
 		return (str);
 	}
 
@@ -169,6 +164,25 @@ char	*expander(char *token)
 		ft_strupdate(&str, ft_strtrim(str, "\""));
 		return(str);
 	}
-	return(str);
-
+	return (str);
 }
+
+void	expander(void)
+{
+	char		*temp;
+	t_tokens	*tokens;
+	t_list		*node;
+
+	node = ms.tks;
+	while (node)
+	{
+		tokens = (t_tokens *)node->content;
+		temp = expanding_tokens(tokens->tokens);
+		free(tokens->tokens);
+		tokens->tokens = temp;
+		node = node->next;
+	}
+}
+
+// $SHELL
+// /bin/bash

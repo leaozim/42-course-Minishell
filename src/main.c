@@ -3,22 +3,16 @@
 
 void	repl_minshell(void)
 {
-	char		*str;
-
 	while (TRUE)
 	{
 		ms.prompt_line = create_prompt();
-		// printf(CYAN"\nTOKENS\n"RESET);
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens();
 		// print_tokens();
 		parser();
 		printf(CYAN"\nEXPANDER\n"RESET);
-		str = ft_strdup("${SHELL  }");
-		char *str1 = expander(str);
-		printf("token expandido: |%s|\n", str1);
-		free(str);
-		free(str1);
+		expander();
+		print_tokens();
 		destroy_minishell();
 	}
 }

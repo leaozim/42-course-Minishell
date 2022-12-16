@@ -3,38 +3,55 @@
 void    check_brace_expansion()
 {
 	char	*str;
+	char	*temp;
 
-	str = expander("${SHELL}");
-	TEST_ASSERT_EQUAL_STRING("/bin/bash", str);
+	str = ft_strdup("${SHELL}");
+	temp = expanding_tokens(str);
+	TEST_ASSERT_EQUAL_STRING("/bin/bash", temp);
 	free(str);
+	free(temp);
 
-	str = expander("${SHELL}uname");
-	TEST_ASSERT_EQUAL_STRING("/bin/bashuname", str);
+	str = ft_strdup("${SHELL}uname");
+	temp = expanding_tokens(str);
+	TEST_ASSERT_EQUAL_STRING("/bin/bashuname", temp);
 	free(str);
+	free(temp);
 
-	str = expander("${SHELL} uname");
-	TEST_ASSERT_EQUAL_STRING("/bin/bash uname", str);
+	str = ft_strdup("${SHELL} uname");
+	temp = expanding_tokens(str);
+	TEST_ASSERT_EQUAL_STRING("/bin/bash uname", temp);
 	free(str);
+	free(temp);
 
-	str = expander("uname${SHELL}");
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash", str);
+	str = ft_strdup("uname${SHELL}");
+	temp = expanding_tokens(str);
+	TEST_ASSERT_EQUAL_STRING("uname/bin/bash", temp);
 	free(str);
+	free(temp);
 
-	str = expander("uname ${SHELL}");
-	TEST_ASSERT_EQUAL_STRING("uname /bin/bash", str);
+	str = ft_strdup("uname ${SHELL}");
+	temp = expanding_tokens(str);
+	TEST_ASSERT_EQUAL_STRING("uname /bin/bash", temp);
 	free(str);
+	free(temp);
 
-	str = expander("${SHELL}${SHELL}");
-	TEST_ASSERT_EQUAL_STRING("/bin/bash/bin/bash", str);
+	str = ft_strdup("${SHELL}${SHELL}");
+	temp = expanding_tokens(str);
+	TEST_ASSERT_EQUAL_STRING("/bin/bash/bin/bash", temp);
 	free(str);
+	free(temp);
 
-	str = expander("${SHELL} ${SHELL}");
-	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", str);
+	str = ft_strdup("${SHELL} ${SHELL}");
+	temp = expanding_tokens(str);
+	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", temp);
 	free(str);
+	free(temp);
 
-	str = expander("${SHELL }");
-	TEST_ASSERT_EQUAL_STRING("", str);
+	str = ft_strdup("${SHELL }");
+	temp = expanding_tokens(str);
+	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
+	free(temp);
 
 	//touch main.{js,py,ex,r,rs,go,s,rb}
 	// str = expander_brace_expansion("main.{js,py,ex,r,rs,go,s,rb}");

@@ -38,8 +38,11 @@ int			is_single_metachar(int id_tokens, int len_tokens);
 t_bool		is_metachars(int id_tks);
 int			error_syntaxy_metachars(t_list *tks, int len_tokens);
 int			consecutive_metachars(int id_tokens, int next_id_tokens);
-char		*expand_variables(char *token);
-char		*expander(char *token);
+
+//EXPANDER
+char		*expanding_tokens(char *token);
+void        expander(void);
+
 void		open_infile(char *file_tks, int flags, int *outfd, t_bool *err);
 void		open_outfile(char *file_tks, int flags, int *outfd, t_bool *err);
 void		check_open_files(t_list *tks, int *infd, int *outfd);

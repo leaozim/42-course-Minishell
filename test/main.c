@@ -25,7 +25,6 @@ int main(void)
 	RUN_TEST(check_expander);
 	RUN_TEST(check_brace_expansion);
 	RUN_TEST(check_repl);
-	RUN_TEST(check_valid_expansion);
 	RUN_TEST(test_is_error_syntax_metachacacter);
 	RUN_TEST(test_open_files);
 	return (UNITY_END());
