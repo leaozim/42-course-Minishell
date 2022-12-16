@@ -31,13 +31,13 @@ void		test_add_spaces(void);
 void		test_valid_add_spaces(void);
 void		check_identify_tokens(void);
 void		check_qtt_tokens(void);
-// void		check_repl(void);
+void		check_repl(void);
 void		check_valid_expansion(void);
 void		test_error_syntax_single_metachacacter(void);
 void		test_error_syntax_consecutive_metachacacter(void);
 void		free_ms();
-// t_minishell	*creat_minishell(t_minishell *ms);
-// void		test_is_error_syntax_metachacacter(void);
+void		test_is_error_syntax_metachacacter(void);
+void		test_error_syntax_single_metachacacter(void);
 void		test_open_files(void);
 
 #endif

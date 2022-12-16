@@ -49,6 +49,7 @@ void		creat_heredoc(char *delimiter, int *fd, t_bool *error);
 // void		creat_heredoc(char *delimiter, t_bool *error);
 void		handle_signal(void);
 void		signal_break_heredoc(int signal);
+void		destroy_heredoc(void);
 
 
 /*

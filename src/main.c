@@ -1,19 +1,16 @@
 #include "../include/minishell.h"
 // #include <minishell.h>
 
-
 void	repl_minshell(void)
 {
 	// char		*str;
-
-	
 	while (TRUE)
 	{
 		ms.prompt_line = create_prompt();
-		printf(CYAN"\nTOKENS\n"RESET);
+		// printf(CYAN"\nTOKENS\n"RESET);
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens();
-		print_tokens();
+		// print_tokens();
 		parser();
 		// printf(CYAN"\nEXPANDER\n"RESET);
 		// str = expander("$DDOIDERA");
@@ -25,8 +22,6 @@ void	repl_minshell(void)
 
 int	main(int argc, char **argv)
 {
-	// t_minishell	ms;
-
 	(void)argv;
 	check_arguments(argc);
 	init_minishell();
