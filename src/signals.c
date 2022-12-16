@@ -1,13 +1,13 @@
 #include "../include/minishell.h"
-#include <readline/readline.h>
 
 void	signal_break_heredoc(int signal)
 {
-	
 	(void)signal;
-	write(2, "\n", 1);
-	// dprintf(2,);
-	ft_lstclear(&ms.tks, free);
+	destroy_heredoc();
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_clear_history();
 	exit(130);
 }
 
@@ -15,7 +15,7 @@ void	redisplay_prompt(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

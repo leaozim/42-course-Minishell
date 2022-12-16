@@ -33,6 +33,7 @@ typedef struct s_minishell
 	t_list	*tks;
 	char	**tab_tokens;
 	int		*tab_id;
+	char	*line_heredoc;
 	int		len_tokens;
 	char	*modified_str;
 	int		infd;

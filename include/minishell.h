@@ -49,6 +49,7 @@ void		open_infile(char *file_tks, int flags, int *infd, t_bool *error);
 void		creat_heredoc(char *delimiter, int *fd, t_bool *error);
 void		handle_signal(void);
 void		signal_break_heredoc(int signal);
+void		destroy_heredoc(void);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

@@ -15,30 +15,32 @@ int	open_heredoc_file(void)
 
 void	write_heredoc_file(char *delimiter)
 {
-	char *line;
+	// char *line;
 	int fd;
 
 	// signal(SIGQUIT, SIG_IGN);
-	// signal(SIGINT, signal_break_heredoc);
+
+	signal(SIGINT, signal_break_heredoc);
 	fd = open_heredoc_file();
 	while (TRUE)
 	{
-		line =  readline("> ");
-		if (!line)
+		ms.line_heredoc =  readline("> ");
+		if (!ms.line_heredoc)
 		{
-			ft_putstr_fd("warning: here-document delimited by end-of-file", 2);
-			free(line);
+			free(ms.line_heredoc);
+			destroy_heredoc();
+			ft_putstr_fd("warning: here-document delimited by end-of-file\n", 2);
 			close(fd);
 			exit(0);
 		}
 		// check_prompt(line);
-		if (!ft_strcmp(line, delimiter))
+		if (!ft_strcmp(ms.line_heredoc, delimiter))
 		{
-			free(line);
+			free(ms.line_heredoc);
 			close(fd);
 			break ;
 		}
-		ft_putendl_fd(line, fd);
+		ft_putendl_fd(ms.line_heredoc, fd);
 	}
 	exit (0);
 }
@@ -53,9 +55,8 @@ void	creat_heredoc(char *delimiter, int *fd, t_bool *error)
 	int	pid;
 	int	status;
 
-	dprintf(2, "%s", delimiter);
 	(void)error;
-	// signal(SIGINT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid < 0)
 		ft_putstr_fd("fork: creating error\n", STDERR_FILENO);
@@ -65,10 +66,9 @@ void	creat_heredoc(char *delimiter, int *fd, t_bool *error)
 	{
 		// signal(SIGQUIT, SIG_IGN);
 		waitpid(pid, &status, 0);
-		// signal(SIGINT, signal_break_heredoc);
 		*fd = open(TMP_FILE, O_RDONLY);
-		// if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
-		// 	return (break_heredoc(*fd));
+		if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+			return (break_heredoc(*fd));
 	}
 	unlink(TMP_FILE);
 }

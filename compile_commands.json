@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
     {
         "arguments": [
@@ -924,3 +925,6 @@
         "file": "src/lexer/tokens.c"
     }
 ]
+=======
+[]
+>>>>>>> origin/creat_open_files
