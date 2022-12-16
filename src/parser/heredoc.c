@@ -15,10 +15,7 @@ int	open_heredoc_file(void)
 
 void	write_heredoc_file(char *delimiter)
 {
-	// char *line;
 	int fd;
-
-	// signal(SIGQUIT, SIG_IGN);
 
 	signal(SIGINT, signal_break_heredoc);
 	fd = open_heredoc_file();
@@ -64,7 +61,6 @@ void	creat_heredoc(char *delimiter, int *fd, t_bool *error)
 		write_heredoc_file(delimiter);
 	else
 	{
-		// signal(SIGQUIT, SIG_IGN);
 		waitpid(pid, &status, 0);
 		*fd = open(TMP_FILE, O_RDONLY);
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 130)

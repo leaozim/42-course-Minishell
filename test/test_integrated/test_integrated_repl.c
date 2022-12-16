@@ -29,7 +29,6 @@ void create_repl(char *prompt, int *array_int)
 
 void check_repl(void)
 {
-	// t_minishell ms;
 	int expected[2] = {COMMAND, COMMAND};
 	create_repl("ls -la", expected);
 	free_ms();

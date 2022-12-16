@@ -1,6 +1,6 @@
 NAME	= minishell_test
 
-HEADER	= $(shell ls . unity includes | grep .h$)
+HEADER	= $(shell ls . unity | grep .h$)
 
 SRCS	= $(shell ls . unity test_lexer test_expander test_parser test_integrated test_arguments | grep .c$)
 
