@@ -150,15 +150,12 @@ char	*expanding_tokens(char *token)
 		str = ft_strtrim(token, "\'");
 		return(str);
 	} 
-
 	str = expand_variables(token);
-
 	if (ft_strchr(token, DOLLAR_SIGN) == NULL && *token == DQUOTES)
 	{
 		ft_strupdate(&str, ft_strtrim(token, "\""));
 		return (str);
 	}
-
 	if (*token == DQUOTES)
 	{
 		ft_strupdate(&str, ft_strtrim(str, "\""));
