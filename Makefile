@@ -13,18 +13,20 @@ SRC				=	main.c				\
 					error_handling.c	\
 					utils.c				\
 					init_minishell.c	\
+					signals.c \
 					$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)
 
 PROMPT			=	prompt.c
 
-LEXER			=	tokens.c			\
-					handle_spaces.c		\
-					create_token_list.c	\
+LEXER			=	tokens.c								\
+					handle_spaces.c							\
+					create_token_list.c						\
 					utils_lexer.c
 
 EXPANDER		=	expander.c
 
-PARSER 			=	parser.c utils_parser.c
+PARSER 			=	parser.c utils_parser.c open_files.c	\
+					heredoc.c
 
 DIRS			=	. lexer prompt expander parser
 IFLAGS			=	-I $(HEADER_PATH)

@@ -9,6 +9,7 @@
 # include <string.h>
 # include "../include/minishell.h"
 # include "h_defines.h"
+# include "../libft/libft.h"
 
 /*
 Functions to be tested
@@ -31,14 +32,17 @@ void		test_valid_add_spaces(void);
 void		check_identify_tokens(void);
 void		check_qtt_tokens(void);
 void		check_repl(void);
-void		check_valid_expansion(void);
+
+//EXPANDER
 void		check_expander_count_dollar_sign(void);
 void		check_expander(void);
 void		check_brace_expansion(void);
-void		test_error_syntax_single_metachacacter(void);
+
 void		test_error_syntax_consecutive_metachacacter(void);
-void		free_ms(t_minishell *ms);
-t_minishell	*creat_minishell(t_minishell *ms);
 void		test_is_error_syntax_metachacacter(void);
+void		check_valid_expansion(void);
+void		test_error_syntax_single_metachacacter(void);
+void		free_ms();
+void		test_open_files(void);
 
 #endif

@@ -1,45 +1,47 @@
 #include "../include/minishell.h"
+// #include <minishell.h>
 
-void	repl_minshell(t_minishell *ms)
+
+void	repl_minshell(void)
 {
 	char		*str;
 
 	while (TRUE)
 	{
-		ms->prompt_line = create_prompt();
+		ms.prompt_line = create_prompt();
 		printf(CYAN"\nTOKENS\n"RESET);
-		is_erro_sintaxy_quotes(ms->prompt_line);
-		create_tokens(ms);
-		parser(ms);
-		print_tokens(ms);
+		is_erro_sintaxy_quotes(ms.prompt_line);
+		create_tokens();
+		print_tokens();
+		parser();
 		printf(CYAN"\nEXPANDER\n"RESET);
 		str = ft_strdup("${SHELL  }");
 		char *str1 = expander(str);
 		printf("token expandido: |%s|\n", str1);
 		free(str);
-		destroy_minishell(ms);
 		free(str1);
+		destroy_minishell();
 	}
-	free(ms->prompt_line);
 }
 
 int	main(int argc, char **argv)
 {
-	t_minishell	ms;
+	// t_minishell	ms;
 
 	(void)argv;
 	check_arguments(argc);
-	init_minishell(&ms);
-	repl_minshell(&ms);
+	init_minishell();
+	handle_signal();
+	repl_minshell();
 	return (EXIT_SUCCESS);
 }
 
-void	print_tokens(t_minishell *ms)
+void	print_tokens(void)
 {
 	t_list		*no;
 	t_tokens	*temp;
 
-	no = ms->tks;
+	no = ms.tks;
 	while (no)
 	{
 		temp = (t_tokens *)no->content;

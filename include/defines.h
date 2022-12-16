@@ -7,6 +7,7 @@
 # define PROMPT "MiniHELL $ "
 # define TOKEN_COUNT 17
 # define TEMP 2
+# define TMP_FILE	"./minishell_temp_file"
 
 # define REPLACE_VALUE 3
 # define SPACE ' '
@@ -23,8 +24,8 @@ typedef struct s_tokens
 {
 	char	*tokens;
 	int		id_tks;
+	t_bool	err;
 }	t_tokens;
-// t_bool	error;
 
 typedef struct s_minishell
 {
@@ -34,8 +35,11 @@ typedef struct s_minishell
 	int		*tab_id;
 	int		len_tokens;
 	char	*modified_str;
+	int		infd;
+	int		outfd;
 }	t_minishell;
 
+t_minishell ms;
 
 enum e_tokens
 {

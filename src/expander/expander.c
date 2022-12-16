@@ -5,32 +5,6 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
-char    *ft_strjoin_double_free(char *s1, char *s2)
-{
-    int        i;
-    int        j;
-    char    *ptr;
-
-    i = 0;
-    j = 0;
-    ptr = (char *)malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2)) + 1);
-    if (!ptr)
-        return (NULL);
-    while (s1[i])
-    {
-        ptr[i] = s1[i];
-        i++;
-    }
-    while (s2[j])
-    {
-        ptr[i] = s2[j];
-        i++;
-        j++;
-    }
-    ptr[i] = '\0';
-    return (free(s1), free(s2), ptr);
-}
-
 void ft_strupdate(char **str, char *newstr)
 {
 	char	*temp;
