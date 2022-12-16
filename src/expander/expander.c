@@ -63,10 +63,14 @@ void	expand_check_next_character(char *token, int *i, char **final_str)
 			if (expanded_var == NULL)
 				expanded_var = "";
 			ft_strupdate(final_str, ft_strjoin(*final_str, expanded_var));
+			dprintf(2, MAGENTA"%d %c\n"RESET, *i, token[*i]);
 			return ;
 		}
 		else
-			printf("bad substitution\n");
+		{
+			dprintf(2, "bash: %s: bad substitution\n", token);
+			return ;
+		}
 	}
 
 	isdigit = ft_isalpha_underscore(token[*i + 1]);
@@ -92,7 +96,9 @@ int	check_last_position(char *token)
 	int	i;
 
 	i = ft_strrchr_pos(token, DOLLAR_SIGN);
-	while (ft_isalpha_underscore(token[i + 1]))
+	while (ft_isalpha_underscore(token[i + 1]) || token[i + 1] == '{')
+		i++;
+	if (token[i + 1] == '}')
 		i++;
 	return (i);
 }
@@ -190,4 +196,5 @@ char	*expander(char *token)
 		return(str);
 	}
 	return(str);
+
 }

@@ -8,13 +8,33 @@ void    check_brace_expansion()
 	TEST_ASSERT_EQUAL_STRING("/bin/bash", str);
 	free(str);
 
-	// str = expander("${SHELL} uname");
-	// TEST_ASSERT_EQUAL_STRING("/bin/bash uname", str);
-	// free(str);
+	str = expander("${SHELL}uname");
+	TEST_ASSERT_EQUAL_STRING("/bin/bashuname", str);
+	free(str);
 
-	// str = expander("${SHELL}uname");
-	// TEST_ASSERT_EQUAL_STRING("/bin/bashuname", str);
-	// free(str);
+	str = expander("${SHELL} uname");
+	TEST_ASSERT_EQUAL_STRING("/bin/bash uname", str);
+	free(str);
+
+	str = expander("uname${SHELL}");
+	TEST_ASSERT_EQUAL_STRING("uname/bin/bash", str);
+	free(str);
+
+	str = expander("uname ${SHELL}");
+	TEST_ASSERT_EQUAL_STRING("uname /bin/bash", str);
+	free(str);
+
+	str = expander("${SHELL}${SHELL}");
+	TEST_ASSERT_EQUAL_STRING("/bin/bash/bin/bash", str);
+	free(str);
+
+	str = expander("${SHELL} ${SHELL}");
+	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", str);
+	free(str);
+
+	str = expander("${SHELL }");
+	TEST_ASSERT_EQUAL_STRING("", str);
+	free(str);
 
 	//touch main.{js,py,ex,r,rs,go,s,rb}
 	// str = expander_brace_expansion("main.{js,py,ex,r,rs,go,s,rb}");
