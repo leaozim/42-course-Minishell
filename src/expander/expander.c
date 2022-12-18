@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void ft_strupdate(char **str, char *newstr)
+void	ft_strupdate(char **str, char *newstr)
 {
 	char	*temp;
 
@@ -21,7 +21,7 @@ void	expand_check_next_character(char *token, int *i, char **final_str)
 	{
 		*i = *i + 2;
 		start = *i;
-		while(ft_isalpha_underscore(token[*i]))
+		while (ft_isalpha_underscore(token[*i]))
 			*i += 1;
 		if (token[*i] == '}')
 		{
@@ -41,9 +41,8 @@ void	expand_check_next_character(char *token, int *i, char **final_str)
 			return ;
 		}
 	}
-
 	isdigit = ft_isalpha_underscore(token[*i + 1]);
-	if (isdigit == TRUE) //colocar opcao "|| token[i + 1] == QUERY" quando tiver executor pronto
+	if (isdigit == TRUE) //colocar opcao "|| token[i + 1] == QUERY"
 	{
 		start = *i;
 		while (ft_isalpha_underscore(token[*i + 1]))
@@ -72,68 +71,69 @@ int	check_last_position(char *token)
 	return (i);
 }
 
-t_bool is_envar_expansible(char *token)
+t_bool	is_envar_between_squote(char *token)
 {
 	if (token[0] == SQUOTE)
 		return (FALSE);
 	return (TRUE);
 }
 
-// void	cases_where_variable_is_not_expansible(char *token)
-// {
-	
-// }
+char	*is_envar_expansible(char *token, int *i, char **final_str)
+{
+	int		start;
+	int		end;
+	char	*aux;
+
+	if (is_envar_between_squote(*final_str) == TRUE)
+		expand_check_next_character(token, i, final_str);
+	else
+	{
+		start = *i;
+		while (ft_isalpha_underscore(token[*i + 1]))
+			*i += 1;
+		end = *i;
+		aux = ft_substr(token, start, (end - start + 1));
+		return (aux);
+	}
+	return (NULL);
+}
+
+void	expander_get_substrs(char *token, int start, int end, char **final_str)
+{
+	char	*aux;
+
+	aux = ft_substr(token, start, (end - start));
+	ft_strupdate(final_str, ft_strjoin(*final_str, aux));
+	free(aux);
+}
+
 
 char	*expand_variables(char *token)
 {
 	int		i;
-	int		last_dollar_occurence;
 	int		start;
-	int		end;
-	char	*aux;
 	char	*final_str;
+	char	*envar;
 
 	i = 0;
 	start = i;
-
 	final_str = ft_strdup("");
-	last_dollar_occurence = check_last_position(token);
-
 	if (ft_strchr(token, DOLLAR_SIGN) == NULL)
-	{
-		free(final_str);
-		return (ft_strdup(token));
-	}
+		return (free(final_str), ft_strdup(token));
 	while (token[i])
 	{
 		if (token[i] == DOLLAR_SIGN)
 		{
 			if (check_last_position(token) != 0)
-			{
-				end = i;
-				aux = ft_substr(token, start, (end - start));
-				ft_strupdate(&final_str, ft_strjoin(final_str, aux));
-				free(aux);
-			}
-			if (is_envar_expansible(final_str) == TRUE)
-				expand_check_next_character(token, &i, &final_str);
-			else
-			{
-				start = i;
-				while (ft_isalpha_underscore(token[i + 1]))
-					i++;
-				end = i;
-				aux = ft_substr(token, start, (end - start + 1));
-				return (aux);
-			}
+				expander_get_substrs(token, start, i, &final_str);
+			envar = is_envar_expansible(token, &i, &final_str);
+			if (envar != NULL)
+				return (envar);
 			start = i + 1;
 		}
-		if (i == last_dollar_occurence)
+		if (i == check_last_position(token))
 		{
-			start = i + 1;
-			aux = ft_substr(token, start, (ft_strlen(token) - start));
-			ft_strupdate(&final_str, ft_strjoin(final_str, aux));
-			free(aux);
+			expander_get_substrs(token, i + 1, ft_strlen(token), &final_str);
 			break ;
 		}
 		i++;
@@ -146,21 +146,12 @@ char	*expanding_tokens(char *token)
 	char	*str;
 
 	if (token[0] == SQUOTE)
-	{
-		str = ft_strtrim(token, "\'");
-		return(str);
-	} 
+		return (ft_strtrim(token, "\'"));
 	str = expand_variables(token);
 	if (ft_strchr(token, DOLLAR_SIGN) == NULL && *token == DQUOTES)
-	{
-		ft_strupdate(&str, ft_strtrim(token, "\""));
-		return (str);
-	}
+		return (ft_strupdate(&str, ft_strtrim(token, "\"")), str);
 	if (*token == DQUOTES)
-	{
-		ft_strupdate(&str, ft_strtrim(str, "\""));
-		return(str);
-	}
+		return (ft_strupdate(&str, ft_strtrim(str, "\"")), str);
 	return (str);
 }
 
@@ -180,6 +171,3 @@ void	expander(void)
 		node = node->next;
 	}
 }
-
-// $SHELL
-// /bin/bash
