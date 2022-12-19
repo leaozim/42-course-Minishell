@@ -43,7 +43,7 @@ int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 			return (1);
 		if (no->next)
 			next = (t_tokens *)no->next->content;
-		if (no->next && consecutive_metachars(tokens->id_tks, next->id_tks))
+		if (no->next && consecutive_metachars(next->tokens, tokens->id_tks, next->id_tks))
 			return (1);
 		no = no->next;
 	}

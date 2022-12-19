@@ -14,7 +14,7 @@ void	check_prompt(char *line)
 char	*create_prompt(void)
 {
 	char	*line;
-	
+
 	line = readline(PROMPT);
 	check_prompt(line);
 	add_history(line);

@@ -1,5 +1,4 @@
 #include "../include/minishell.h"
-// #include <minishell.h>
 
 void	repl_minshell(void)
 {
@@ -10,8 +9,8 @@ void	repl_minshell(void)
 		// printf(CYAN"\nTOKENS\n"RESET);
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens();
-		// print_tokens();
 		parser();
+		// print_tokens();
 		// printf(CYAN"\nEXPANDER\n"RESET);
 		// str = expander("$DDOIDERA");
 		// if (str != NULL)
