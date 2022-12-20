@@ -1,2 +1,6 @@
-compile_commands.json
-minishell_tester
+.compile_commands.json
+.minishell_tester
+*.json
+..vscode
+..cache
+
