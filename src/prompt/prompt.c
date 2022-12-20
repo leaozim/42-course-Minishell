@@ -6,7 +6,7 @@ void	check_prompt(char *line)
 	{
 		dprintf(2, "\n");
 		free(line);
-		rl_clear_history();
+		// rl_clear_history();
 		exit(EXIT_FAILURE);
 	}
 }
