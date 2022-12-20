@@ -1,12 +1,12 @@
 #include "../../include/minishell.h"
+#include <unistd.h>
 
 void	check_prompt(char *line)
 {
 	if (line == NULL)
 	{
-		dprintf(2, "\n");
+		ft_putstr_fd("\n", STDERR_FILENO);
 		free(line);
-		// rl_clear_history();
 		exit(EXIT_FAILURE);
 	}
 }

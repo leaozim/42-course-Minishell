@@ -90,7 +90,7 @@ enum e_tokens
 	RDRCT_IN = 60,
 	RDRCT_OU = 62,
 	PIPE = 124,
-	QUERY = 63,
+	QUERY = 36,
 	APPEND = 2,
 	HEREDOC = 3,
 	DELIMITER = 4,

@@ -4,14 +4,14 @@ void	open_infile(char *file_tks, int flags, int *infd, t_bool *error)
 {
 	*infd = open(file_tks, flags);
 	if (*infd == -1)
-		error_open_file(file_tks, error);
+		msg_error_open_file(file_tks, error);
 }
 
 void	open_outfile(char *file_tks, int flags, int *outfd, t_bool *error)
 {
 	*outfd = open(file_tks, flags, 0664);
 	if (*outfd == -1)
-		error_open_file(file_tks, error);
+		msg_error_open_file(file_tks, error);
 }
 
 void	open_files(t_tokens *tks, int *ifd, int *ofd)

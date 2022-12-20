@@ -1,12 +1,25 @@
 #include "../../include/minishell.h"
 
+void	destroy_heredoc(void)
+{
+	free_ptrs(ms.tab_tokens);
+	ft_lstclear(&ms.tks, free);
+	free(ms.tab_id);
+	free(ms.line_heredoc);
+}
+
+void	break_heredoc(int fd)
+{
+	close(fd);
+}
+
 int	open_heredoc_file(t_bool *error)
 {
 	int	fd;
 
 	fd = open(TMP_FILE, O_CREAT | O_RDWR | O_TRUNC, 0664);
 	if (fd == -1)
-		error_open_file(TMP_FILE, error);
+		msg_error_open_file(TMP_FILE, error);
 	return (fd);
 }
 
@@ -23,7 +36,7 @@ void	write_heredoc_file(char *delimiter, t_bool *error)
 		{
 			free(ms.line_heredoc);
 			destroy_heredoc();
-			ft_putstr_fd("warning: here-document delimited by end-of-file\n", 2);
+			msg_error_heredoc();
 			close(fd);
 			exit(0);
 		}
@@ -36,11 +49,6 @@ void	write_heredoc_file(char *delimiter, t_bool *error)
 		ft_putendl_fd(ms.line_heredoc, fd);
 	}
 	exit (0);
-}
-
-void	break_heredoc(int fd)
-{
-	close(fd);
 }
 
 void	creat_heredoc(char *delimiter, int *fd, t_bool *error)

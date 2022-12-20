@@ -47,12 +47,12 @@ int			parser(void);
 int			qtt_tokens_heredoc_or_append(int *i, int *qtt_tokens);
 void		qtt_tokens_quotes(int value, char *line, int *i, int *qtt_tokens);
 t_bool		is_metachars(int id_tks);
-int			is_single_metachar(int id_tokens, int len_tokens);
-int			consecutive_metachars(char *token, int id_tokens, int next_id_tokens);
+int			is_single_metachar(char *token, int id, int len_tokens);
+int			consecutive_metachars(char *token, char *next_token,int id, int next_id);
 int			error_syntaxy_metachars(t_list *tks, int len_tokens);
-void		error_invalid_synax(char *token);
-void		error_open_file(char *token, t_bool *error);
-
+void		msg_error_invalid_synax(char *token);
+void		msg_error_open_file(char *token, t_bool *error);
+void		msg_error_heredoc(void);
 void		open_infile(char *file_tks, int flags, int *outfd, t_bool *err);
 void		open_outfile(char *file_tks, int flags, int *outfd, t_bool *err);
 void		check_open_files(t_list *tks, int *infd, int *outfd);

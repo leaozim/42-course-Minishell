@@ -10,12 +10,6 @@ void	repl_minshell(void)
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens();
 		parser();
-		// print_tokens();
-		// printf(CYAN"\nEXPANDER\n"RESET);
-		// str = expander("$DDOIDERA");
-		// if (str != NULL)
-		// 	printf("%s\n", str);
-		destroy_minishell();
 	}
 }
 
