@@ -29,15 +29,15 @@ int	main(int argc, char **argv)
 
 void	print_tokens(void)
 {
-	t_list		*no;
-	t_tokens	*temp;
+	t_list			*no;
+	t_lst_tokens	*temp;
 
 	no = ms.tks;
 	while (no)
 	{
-		temp = (t_tokens *)no->content;
-		printf("tokens = %s\n", temp->tokens);
-		printf("id     = %d\n", temp->id_tks);
+		temp = (t_lst_tokens *)no->content;
+		printf("tokens = %s\n", temp->token);
+		printf("id     = %d\n", temp->id_token);
 		no = no->next;
 	}
 }

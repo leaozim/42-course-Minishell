@@ -18,10 +18,10 @@ void	free_ptrs(char **str)
 
 void	destroy_t_tokens(void *token)
 {
-	t_tokens	*tks;
+	t_lst_tokens	*tks;
 
-	tks = (t_tokens *)token;
-	free(tks->tokens);
+	tks = (t_lst_tokens *)token;
+	free(tks->token);
 	free(tks);
 }
 

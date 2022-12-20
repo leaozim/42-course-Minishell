@@ -1,12 +1,12 @@
 #include "../../include/minishell.h"
 
-t_tokens	*creat_content(char *tks, int index)
+t_lst_tokens	*creat_content(char *tks, int index)
 {
-	t_tokens	*content;
+	t_lst_tokens	*content;
 
-	content = ft_calloc(1, sizeof(t_tokens));
-	content->tokens = tks;
-	content->id_tks = index;
+	content = ft_calloc(1, sizeof(t_lst_tokens));
+	content->token = tks;
+	content->id_token = index;
 	return (content);
 }
 

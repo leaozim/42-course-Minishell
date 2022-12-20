@@ -23,7 +23,7 @@ LEXER			=	tokens.c								\
 					create_token_list.c						\
 					utils_lexer.c
 
-EXPANDER		=	expander.c
+EXPANDER		=	expander.c brace_expansion.c
 
 PARSER 			=	parser.c utils_parser.c open_files.c	\
 					heredoc.c

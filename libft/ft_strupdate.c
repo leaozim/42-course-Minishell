@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr_pos.c                                   :+:      :+:    :+:   */
+/*   ft_strupdate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 01:48:07 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/12/19 21:01:45 by etomiyos         ###   ########.fr       */
+/*   Created: 2022/12/19 11:37:12 by etomiyos          #+#    #+#             */
+/*   Updated: 2022/12/19 11:37:31 by etomiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strrchr_pos(const char	*s, int c)
+void	ft_strupdate(char **str, char *newstr)
 {
-	int	i;
+	char	*temp;
 
-	i = ft_strlen(s);
-	while (i >= 0)
-	{
-		if (s[i] == (char) c)
-			return (i);
-		i--;
-	}
-	return (0);
+	temp = *str;
+	*str = newstr;
+	free(temp);
 }

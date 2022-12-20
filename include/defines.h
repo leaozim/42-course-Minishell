@@ -20,24 +20,31 @@ typedef enum e_bool
 	TRUE,
 }	t_bool;
 
+typedef struct s_expander
+{
+	char	**modified_str;
+	int		start;
+}	t_expander;
+
 typedef struct s_tokens
 {
-	char	*tokens;
-	int		id_tks;
+	char	*token;
+	int		id_token;
 	t_bool	err;
-}	t_tokens;
+}	t_lst_tokens;
 
 typedef struct s_minishell
 {
-	char	*prompt_line;
-	t_list	*tks;
-	char	**tab_tokens;
-	int		*tab_id;
-	char	*line_heredoc;
-	int		len_tokens;
-	char	*modified_str;
-	int		infd;
-	int		outfd;
+	char		*prompt_line;
+	t_list		*tks;
+	t_expander	expander;
+	char		**tab_tokens;
+	int			*tab_id;
+	char		*line_heredoc;
+	int			len_tokens;
+	int			infd;
+	int			outfd;
+	size_t		exit_status;
 }	t_minishell;
 
 t_minishell ms;

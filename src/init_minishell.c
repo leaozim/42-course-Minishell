@@ -6,4 +6,5 @@ void	init_minishell(void)
 	ms.tab_id = NULL;
 	ms.tks = NULL;
 	ms.len_tokens = 0;
+	ms.exit_status = 0;
 }

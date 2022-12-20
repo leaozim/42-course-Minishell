@@ -9,8 +9,8 @@ void free_ms(void)
 
 void create_repl(char *prompt, int *array_int)
 {
-	t_list		*no;
-	t_tokens	*tks;
+	t_list			*no;
+	t_lst_tokens	*tks;
 
 	ms.prompt_line = ft_strdup(prompt);
 	is_erro_sintaxy_quotes(ms.prompt_line);
@@ -19,8 +19,8 @@ void create_repl(char *prompt, int *array_int)
 	no = ms.tks;
 	while (no)
 	{
-		tks = (t_tokens *)no->content;
-		TEST_ASSERT_EQUAL_INT(*array_int, tks->id_tks);
+		tks = (t_lst_tokens *)no->content;
+		TEST_ASSERT_EQUAL_INT(*array_int, tks->id_token);
 		array_int++;
 		no = no->next;
 	}
