@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void	error_bad_substitution(char *token)
+void	msg_error_bad_substitution(char *token)
 {
 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
 	ft_putstr_fd(token, STDERR_FILENO);
@@ -37,7 +37,7 @@ static void brace_expansion(char *token, int start, int *i, char **final_str)
 	}
 	else
 	{
-		error_bad_substitution(token);
+		msg_error_bad_substitution(token);
 		return ;
 	}
 }
@@ -45,8 +45,15 @@ static void brace_expansion(char *token, int start, int *i, char **final_str)
 t_bool	is_brace_expansion(char *token, int *i, char **final_str)
 {
 	int		start;
+	int		len;
 
-	if (token[*i + 1] == '{' && ft_strlen(token) > 2)
+	len = ft_strlen(token);
+	if (token[*i + 1] == '{' && len == 2)
+	{
+		msg_error_bad_substitution(token);
+		return(TRUE);
+	}
+	if (token[*i + 1] == '{' && len > 2)
 	{
 		*i = *i + 2;
 		start = *i;
