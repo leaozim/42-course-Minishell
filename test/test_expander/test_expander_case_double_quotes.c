@@ -196,7 +196,7 @@ void	check_expander()
 
 	// str = ft_strdup("\"$COLORTERM\"'$COLORTERM'"); //ESSE NÃO PODE SER USADO NO TESTE, JÁ QUE EXISTEM ->
 	// TEST_ASSERT_EQUAL_STRING("truecolor$COLORTERM", expanded_var); //DOIS TOKENS AQUI
-	// free(str);
+	// free(str); //
 
 	str = ft_strdup("\"''\"");
 	expanded_var = minishell_expansion(str);
