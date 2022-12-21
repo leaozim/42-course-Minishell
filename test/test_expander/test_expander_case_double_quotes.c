@@ -18,9 +18,9 @@ void	check_expander()
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("oi $SHELL $*$ $ tudo $$ $SHELL $? ?$");
+	str = ft_strdup("oi $COLORTERM $*$ $ tudo $$ $COLORTERM $? ?$");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("oi /bin/bash $*$ $ tudo $$ /bin/bash $? ?$", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("oi truecolor $*$ $ tudo $$ truecolor $? ?$", expanded_var);
 	free(str);
 	free(expanded_var);
 
@@ -80,9 +80,9 @@ void	check_expander()
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("$SHELL $SHELL");
+	str = ft_strdup("$COLORTERM $COLORTERM");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("truecolor truecolor", expanded_var);
 	free(str);
 	free(expanded_var);
 
@@ -98,57 +98,57 @@ void	check_expander()
 	free(str);
 	free(expanded_var);
 	
-	str = ft_strdup("$SHELL$SHELL");
+	str = ft_strdup("$COLORTERM$COLORTERM");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bash/bin/bash", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("truecolortruecolor", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("$SHELLa");
+	str = ft_strdup("$COLORTERMa");
 	expanded_var = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("uname$SHELL");
+	str = ft_strdup("uname$COLORTERM");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("unametruecolor", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("$SHELL uname");
+	str = ft_strdup("$COLORTERM uname");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bash uname", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("truecolor uname", expanded_var);
 	free(str);
 	free(expanded_var);
 	
-	str = ft_strdup("uname$SHELL_INVALIDO");
+	str = ft_strdup("uname$COLORTERM_INVALIDO");
 	expanded_var = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("uname", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("$SHELL uname");
+	str = ft_strdup("$COLORTERM uname");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bash uname", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("truecolor uname", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("uname $SHELL");
+	str = ft_strdup("uname $COLORTERM");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("uname /bin/bash", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("uname truecolor", expanded_var);
 	free(str);
 	free(expanded_var);
 	
-	str = ft_strdup("$SHELL");
+	str = ft_strdup("$COLORTERM");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bash", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("truecolor", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("uname$SHELL#shell");
+	str = ft_strdup("uname$COLORTERM#shell");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash#shell", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("unametruecolor#shell", expanded_var);
 	free(str);
 	free(expanded_var);
 
@@ -158,45 +158,45 @@ void	check_expander()
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("uname$SHELL\"$SHELL\"");
+	str = ft_strdup("uname$COLORTERM\"$COLORTERM\"");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash\"", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("unametruecolor\"truecolor\"", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("uname$SHELL\"$SHELL'\"");
+	str = ft_strdup("uname$COLORTERM\"$COLORTERM'\"");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash\"/bin/bash'\"", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("unametruecolor\"truecolor'\"", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("'$SHELL'");
+	str = ft_strdup("'$COLORTERM'");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("$SHELL", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("$COLORTERM", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("\"'$SHELL'\"");
+	str = ft_strdup("\"'$COLORTERM'\"");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("'/bin/bash'", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("'truecolor'", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("\"uname$SHELL $SHELL'sim'\"");
+	str = ft_strdup("\"uname$COLORTERM $COLORTERM'sim'\"");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash /bin/bash'sim'", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("unametruecolor truecolor'sim'", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	str = ft_strdup("\"uname$SHELL'$SHELL'\"");
+	str = ft_strdup("\"uname$COLORTERM'$COLORTERM'\"");
 	expanded_var = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash'/bin/bash'", expanded_var);
+	TEST_ASSERT_EQUAL_STRING("unametruecolor'truecolor'", expanded_var);
 	free(str);
 	free(expanded_var);
 
-	// str = ft_strdup("\"$SHELL\"'$SHELL'"); //ESSE NÃO PODE SER USADO NO TESTE, JÁ QUE EXISTEM ->
-	// TEST_ASSERT_EQUAL_STRING("/bin/bash$SHELL", expanded_var); //DOIS TOKENS AQUI
-	// free(str);
+	// str = ft_strdup("\"$COLORTERM\"'$COLORTERM'"); //ESSE NÃO PODE SER USADO NO TESTE, JÁ QUE EXISTEM ->
+	// TEST_ASSERT_EQUAL_STRING("truecolor$COLORTERM", expanded_var); //DOIS TOKENS AQUI
+	// free(str); //
 
 	str = ft_strdup("\"''\"");
 	expanded_var = minishell_expansion(str);
