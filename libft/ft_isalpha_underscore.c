@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha_underscore.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 16:28:52 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/12/21 17:56:16 by lade-lim         ###   ########.fr       */
+/*   Created: 2022/05/02 15:44:30 by etomiyos          #+#    #+#             */
+/*   Updated: 2022/12/07 16:47:20 by etomiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_isalpha_underscore(int c)
 {
-	int				id;
-
-	id = 0;
-	while ((s1[id] != '\0') && (s2[id] != '\0') && s1[id] == s2[id])
-		id++;
-	return ((unsigned char)s1[id] - (unsigned char)s2[id]);
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || c == 95)
+		return (1);
+	return (0);
 }

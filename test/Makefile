@@ -52,9 +52,10 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 run: all
-	./$(NAME) 2> error.log 
+	./$(NAME) 2> error.log
 
 val: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all \
+	./$(NAME) 2> error.log
 
 .PHONY:	all clean fclean re run

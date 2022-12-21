@@ -6,9 +6,7 @@ void	free_ptrs(char **str)
 
 	i = 0;
 	if (!str || !*(str))
-	{
 		return ;
-	}
 	while (str[i] != NULL)
 	{
 		free(str[i]);
@@ -18,10 +16,19 @@ void	free_ptrs(char **str)
 	str = NULL;
 }
 
+void	destroy_t_tokens(void *token)
+{
+	t_tokens	*tklist;
+
+	tklist = (t_tokens *)token;
+	free(tklist->token);
+	free(tklist);
+}
+
 void	destroy_minishell(void)
 {
-	ft_lstclear(&ms.tks, free);
+	ft_lstclear(&ms.tks, destroy_t_tokens);
 	free(ms.prompt_line);
-	free_ptrs(ms.tab_tokens);
+	free(ms.tab_tokens);
 	free(ms.tab_id);
 }

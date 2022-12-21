@@ -153,7 +153,6 @@ void	check_token_count_redirection(void)
 	check_token_count_double_lessthan();
 }
 
-
 void	check_token_count(void)
 {
 	check_token_count_mixe();

@@ -12,25 +12,26 @@
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char    *ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*sub;
-	unsigned int	start_len;
+    size_t    i;
+    size_t    len_s;
+    char    *dest;
 
-	if (start < ft_strlen(s))
-		start_len = ft_strlen(s + start);
-	if (s + start > s + ft_strlen(s))
-	{
-		sub = malloc(1);
-		*sub = '\0';
-		return (sub);
-	}
-	else if (start_len < len)
-		sub = malloc(start_len + 1);
-	else
-		sub = malloc(len + 1);
-	if (!sub)
-		return (NULL);
-	ft_strlcpy(sub, (s + start), len + 1);
-	return (sub);
+    len_s = ft_strlen(s);
+    if (start > len_s)
+        return (ft_strdup(""));
+    if (len >= len_s)
+        len = len_s - start;
+    dest = malloc(len * sizeof(char) + 1);
+    if (dest == NULL)
+        return (0);
+    i = 0;
+    while (s[i + start] && i < len)
+    {
+        dest[i] = s[i + start];
+        i++;
+    }
+    dest[i] = '\0';
+    return (dest);
 }
