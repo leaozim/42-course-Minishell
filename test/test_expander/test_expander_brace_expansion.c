@@ -6,85 +6,85 @@ void    check_brace_expansion()
 	char	*temp;
 
 	str = ft_strdup("${SHELL}");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("/bin/bash", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("${SHELL}uname");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("/bin/bashuname", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("${SHELL} uname");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("/bin/bash uname", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("uname${SHELL}");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("uname/bin/bash", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("uname ${SHELL}");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("uname /bin/bash", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("${SHELL}${SHELL}");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("/bin/bash/bin/bash", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("${SHELL} ${SHELL}");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("${}");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("\"${SHELL }\"");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("\"${SHELL\"");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("${{");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("\"${\"");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("\"${}\"");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
 	free(temp);
 
 	str = ft_strdup("\"${{\"");
-	temp = shell_expansion(str);
+	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
 	free(temp);

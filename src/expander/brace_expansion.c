@@ -1,13 +1,13 @@
 #include "../../include/minishell.h"
 
-void	msg_error_bad_substitution(char *token)
+static void	msg_error_bad_substitution(char *token)
 {
 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putstr_fd(": bad substitution\n", STDERR_FILENO);
 }
 
-static void update_index_next_character_after_brace(int *i, char *token)
+static void	update_index_next_character_after_brace(int *i, char *token)
 {
 	while (*i < ((int)ft_strlen(token) - 1))
 	{
@@ -18,7 +18,7 @@ static void update_index_next_character_after_brace(int *i, char *token)
 	}
 }
 
-static void brace_expansion(char *token, int start, int *i, char **final_str)
+static void	brace_expansion(char *token, int start, int *i, char **final_str)
 {
 	char	*expanded_var;
 	int		end;
@@ -51,7 +51,7 @@ t_bool	is_brace_expansion(char *token, int *i, char **final_str)
 	if (token[*i + 1] == '{' && len == 2)
 	{
 		msg_error_bad_substitution(token);
-		return(TRUE);
+		return (TRUE);
 	}
 	if (token[*i + 1] == '{' && len > 2)
 	{

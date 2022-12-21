@@ -41,8 +41,12 @@ int		    	consecutive_metachars(int id_tokens, int next_id_tokens);
 
 //EXPANDER
 void            expander(void);
-char            *shell_expansion(char *token);
+char            *minishell_expansion(char *token);
 t_bool          is_brace_expansion(char *token, int *i, char **final_str);
+int             check_last_expansion_occurrence(char *token);
+t_bool          is_envar_between_squote(char *token);
+char            *is_envar_expansible(char *token, int *i, char **final_str);
+void            expand_check_next_character(char *token, int *i, char **final_str);
 
 void		    open_infile(char *file_tks, int flags, int *outfd, t_bool *err);
 void		    open_outfile(char *file_tks, int flags, int *outfd, t_bool *err);
