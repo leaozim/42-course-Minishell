@@ -1,7 +1,7 @@
 minishell_tester/
 *.json
 *.idx
-cache/
-clangd/
-
+.cache/
+.clangd/
+libft/.cache/
 
