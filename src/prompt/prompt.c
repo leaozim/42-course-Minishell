@@ -4,8 +4,8 @@ void	check_prompt(char *line)
 {
 	if (line == NULL)
 	{
+		ft_putstr_fd("\n", STDERR_FILENO);
 		free(line);
-		printf("\n");
 		exit(EXIT_FAILURE);
 	}
 }

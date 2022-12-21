@@ -1,6 +1,6 @@
 NAME	= minishell_test
 
-HEADER	= $(shell ls . unity includes | grep .h$)
+HEADER	= $(shell ls . unity | grep .h$)
 
 SRCS	= $(shell ls . unity test_lexer test_expander test_parser test_integrated test_arguments | grep .c$)
 
@@ -52,9 +52,10 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 run: all
-	./$(NAME) 2> error.log 
+	./$(NAME) 2> error.log
 
 val: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all \
+	./$(NAME) 2> error.log
 
 .PHONY:	all clean fclean re run

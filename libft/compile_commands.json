@@ -1,0 +1,602 @@
+[
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_memcmp.o",
+            "ft_memcmp.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_memcmp.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_calloc.o",
+            "ft_calloc.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_calloc.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_putnbr_fd.o",
+            "ft_putnbr_fd.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_putnbr_fd.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_bzero.o",
+            "ft_bzero.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_bzero.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strcmp.o",
+            "ft_strcmp.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strcmp.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_split.o",
+            "ft_split.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_split.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_putstr_fd.o",
+            "ft_putstr_fd.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_putstr_fd.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strchr.o",
+            "ft_strchr.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strchr.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strlcpy.o",
+            "ft_strlcpy.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strlcpy.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_isalnum.o",
+            "ft_isalnum.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_isalnum.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_isalpha.o",
+            "ft_isalpha.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_isalpha.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_memcpy.o",
+            "ft_memcpy.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_memcpy.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_memchr.o",
+            "ft_memchr.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_memchr.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strlen.o",
+            "ft_strlen.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strlen.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_memmove.o",
+            "ft_memmove.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_memmove.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_atoi.o",
+            "ft_atoi.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_atoi.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_isprint.o",
+            "ft_isprint.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_isprint.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_isalpha_underscore.o",
+            "ft_isalpha_underscore.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_isalpha_underscore.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strjoin.o",
+            "ft_strjoin.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strjoin.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_atof.o",
+            "ft_atof.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_atof.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_putchar_fd.o",
+            "ft_putchar_fd.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_putchar_fd.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_tolower.o",
+            "ft_tolower.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_tolower.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_itoa.o",
+            "ft_itoa.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_itoa.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_isascii.o",
+            "ft_isascii.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_isascii.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_split_count.o",
+            "ft_split_count.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_split_count.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_toupper.o",
+            "ft_toupper.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_toupper.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strlcat.o",
+            "ft_strlcat.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strlcat.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_putendl_fd.o",
+            "ft_putendl_fd.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_putendl_fd.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strdup.o",
+            "ft_strdup.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strdup.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strmapi.o",
+            "ft_strmapi.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strmapi.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strrchr_pos.o",
+            "ft_strrchr_pos.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strrchr_pos.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strrchr.o",
+            "ft_strrchr.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strrchr.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strtrim.o",
+            "ft_strtrim.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strtrim.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strncmp.o",
+            "ft_strncmp.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strncmp.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_memset.o",
+            "ft_memset.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_memset.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_strnstr.o",
+            "ft_strnstr.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_strnstr.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_is_num.o",
+            "ft_is_num.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_is_num.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_isdigit.o",
+            "ft_isdigit.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_isdigit.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_striteri.o",
+            "ft_striteri.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_striteri.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-g",
+            "-o",
+            "ft_substr.o",
+            "ft_substr.c"
+        ],
+        "directory": "/home/etomiyos/42projetos/42-course-Minishell/libft",
+        "file": "ft_substr.c"
+    }
+]
