@@ -76,7 +76,6 @@ char            *is_envar_expansible(char *token, int *i, char **final_str);
 void            expand_check_next_character(char *token, int *i, char **final_str);
 
 
-
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */
