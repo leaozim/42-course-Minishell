@@ -28,20 +28,20 @@ void	open_files(t_tokens *tks, int *ifd, int *ofd)
 
 void	check_open_files(t_list *tks, int *infd, int *outfd)
 {
-	t_list		*no;
+	t_list		*node;
 	t_tokens	*tokens;
 	t_tokens	*next;
 
-	no = tks;
-	while (no)
+	node = tks;
+	while (node)
 	{
-		tokens = (t_tokens *)no->content;
+		tokens = (t_tokens *)node->content;
 		if (is_metachars(tokens->id_tks) && tokens->id_tks != PIPE && \
-			no->next)
+			node->next)
 		{
-			next = (t_tokens *)no->next->content;
+			next = (t_tokens *)node->next->content;
 			open_files(next, infd, outfd);
 		}
-		no = no->next;
+		node = node->next;
 	}
 }

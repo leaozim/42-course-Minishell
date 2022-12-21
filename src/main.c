@@ -25,15 +25,15 @@ int	main(int argc, char **argv)
 
 void	print_tokens(void)
 {
-	t_list		*no;
+	t_list		*node;
 	t_tokens	*temp;
 
-	no = ms.tks;
-	while (no)
+	node = ms.tks;
+	while (node)
 	{
-		temp = (t_tokens *)no->content;
+		temp = (t_tokens *)node->content;
 		printf("tokens = %s\n", temp->tokens);
 		printf("id     = %d\n", temp->id_tks);
-		no = no->next;
+		node = node->next;
 	}
 }

@@ -60,6 +60,7 @@ typedef enum e_bool
 typedef struct s_tokens
 {
 	char	*tokens;
+	char	*tab_tks;
 	int		id_tks;
 	t_bool	err;
 }	t_tokens;

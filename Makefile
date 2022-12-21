@@ -14,7 +14,7 @@ SRC				=	main.c				\
 					utils.c				\
 					init_minishell.c	\
 					signals.c \
-					$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)
+					$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER) $(BUILTINS)
 
 PROMPT			=	prompt.c
 
@@ -31,7 +31,9 @@ PARSER 			=	parser.c 			\
 					heredoc.c			\
 					error_parser.c
 
-DIRS			=	. lexer prompt expander parser
+BUILTINS		=	echo.c
+
+DIRS			=	. lexer prompt expander parser builtins
 IFLAGS			=	-I $(HEADER_PATH)
 LDFLAGS			=	-L$(LIBFT_PATH) -lft
 CFLAGS			=	-Wall -Wextra -Werror
