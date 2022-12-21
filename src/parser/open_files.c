@@ -16,27 +16,27 @@ void	open_outfile(char *file_tks, int flags, int *outfd, t_bool *error)
 
 void	open_files(t_tokens *tks, int *ifd, int *ofd)
 {	
-	if (tks->id_tks == FILE_IN && !tks->err)
-		open_infile(tks->tokens, O_RDONLY, ifd, &tks->err);
-	if (tks->id_tks == FILE_OUT && !tks->err)
-		open_outfile(tks->tokens, O_CREAT | O_RDWR | O_TRUNC, ofd, &tks->err);
-	if (tks->id_tks == FILE_APPEND && !tks->err)
-		open_outfile(tks->tokens, O_CREAT | O_RDWR | O_APPEND, ofd, &tks->err);
-	if (tks->id_tks == DELIMITER && !tks->err)
-		creat_heredoc(tks->tokens, ifd, &tks->err);
+	if (tks->id_token == FILE_IN && !tks->err)
+		open_infile(tks->token, O_RDONLY, ifd, &tks->err);
+	if (tks->id_token == FILE_OUT && !tks->err)
+		open_outfile(tks->token, O_CREAT | O_RDWR | O_TRUNC, ofd, &tks->err);
+	if (tks->id_token == FILE_APPEND && !tks->err)
+		open_outfile(tks->token, O_CREAT | O_RDWR | O_APPEND, ofd, &tks->err);
+	if (tks->id_token == DELIMITER && !tks->err)
+		creat_heredoc(tks->token, ifd, &tks->err);
 }
 
 void	check_open_files(t_list *tks, int *infd, int *outfd)
 {
 	t_list		*no;
-	t_tokens	*tokens;
+	t_tokens	*tklist;
 	t_tokens	*next;
 
 	no = tks;
 	while (no)
 	{
-		tokens = (t_tokens *)no->content;
-		if (is_metachars(tokens->id_tks) && tokens->id_tks != PIPE && \
+		tklist = (t_tokens *)no->content;
+		if (is_metachars(tklist->id_token) && tklist->id_token != PIPE && \
 			no->next)
 		{
 			next = (t_tokens *)no->next->content;

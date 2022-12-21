@@ -2,14 +2,16 @@
 
 void	repl_minshell(void)
 {
-	// char		*str;
 	while (TRUE)
 	{
 		ms.prompt_line = create_prompt();
-		// printf(CYAN"\nTOKENS\n"RESET);
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens();
 		parser();
+		printf(CYAN"\nEXPANDER\n"RESET);
+		expander();
+		print_tokens();
+		destroy_minishell();
 	}
 }
 
@@ -26,14 +28,14 @@ int	main(int argc, char **argv)
 void	print_tokens(void)
 {
 	t_list		*no;
-	t_tokens	*temp;
+	t_tokens	*tklist;
 
 	no = ms.tks;
 	while (no)
 	{
-		temp = (t_tokens *)no->content;
-		printf("tokens = %s\n", temp->tokens);
-		printf("id     = %d\n", temp->id_tks);
+		tklist = (t_tokens *)no->content;
+		printf("tokens = %s\n", tklist->token);
+		printf("id     = %d\n", tklist->id_token);
 		no = no->next;
 	}
 }

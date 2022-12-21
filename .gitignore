@@ -1,4 +1,11 @@
 minishell_tester/
 *.json
+<<<<<<< HEAD
 cache/
+=======
+*.idx
+.cache/
+.clangd/
+
+>>>>>>> origin/main
 

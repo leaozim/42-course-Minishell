@@ -5,8 +5,8 @@ t_tokens	*create_content(char *tks, int index)
 	t_tokens	*content;
 
 	content = ft_calloc(1, sizeof(t_tokens));
-	content->tokens = tks;
-	content->id_tks = index;
+	content->token = tks;
+	content->id_token = index;
 	return (content);
 }
 
