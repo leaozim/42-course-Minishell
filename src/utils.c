@@ -18,11 +18,11 @@ void	free_ptrs(char **str)
 
 void	destroy_t_tokens(void *token)
 {
-	t_lst_tokens	*tks;
+	t_tokens	*tklist;
 
-	tks = (t_lst_tokens *)token;
-	free(tks->token);
-	free(tks);
+	tklist = (t_tokens *)token;
+	free(tklist->token);
+	free(tklist);
 }
 
 void	destroy_minishell(void)

@@ -1,39 +1,45 @@
 #include "../../include/minishell.h"
 
-int	open_heredoc_file(void)
+void	destroy_heredoc(void)
+{
+	free_ptrs(ms.tab_tokens);
+	ft_lstclear(&ms.tks, free);
+	free(ms.tab_id);
+	free(ms.line_heredoc);
+}
+
+void	break_heredoc(int fd)
+{
+	close(fd);
+}
+
+int	open_heredoc_file(t_bool *error)
 {
 	int	fd;
 
 	fd = open(TMP_FILE, O_CREAT | O_RDWR | O_TRUNC, 0664);
 	if (fd == -1)
-	{
-		ft_putstr_fd("ola", STDERR_FILENO);
-		// *error = TRUE;
-	}
+		msg_error_open_file(TMP_FILE, error);
 	return (fd);
 }
 
-void	write_heredoc_file(char *delimiter)
+void	write_heredoc_file(char *delimiter, t_bool *error)
 {
-	// char *line;
-	int fd;
-
-	// signal(SIGQUIT, SIG_IGN);
+	int	fd;
 
 	signal(SIGINT, signal_break_heredoc);
-	fd = open_heredoc_file();
+	fd = open_heredoc_file(error);
 	while (TRUE)
 	{
-		ms.line_heredoc =  readline("> ");
+		ms.line_heredoc = readline("> ");
 		if (!ms.line_heredoc)
 		{
 			free(ms.line_heredoc);
 			destroy_heredoc();
-			ft_putstr_fd("warning: here-document delimited by end-of-file\n", 2);
+			msg_error_heredoc();
 			close(fd);
 			exit(0);
 		}
-		// check_prompt(line);
 		if (!ft_strcmp(ms.line_heredoc, delimiter))
 		{
 			free(ms.line_heredoc);
@@ -45,26 +51,19 @@ void	write_heredoc_file(char *delimiter)
 	exit (0);
 }
 
-void	break_heredoc(int fd)
-{
-	close(fd);
-}
-
 void	creat_heredoc(char *delimiter, int *fd, t_bool *error)
 {
 	int	pid;
 	int	status;
 
-	(void)error;
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid < 0)
 		ft_putstr_fd("fork: creating error\n", STDERR_FILENO);
 	if (pid == 0)
-		write_heredoc_file(delimiter);
+		write_heredoc_file(delimiter, error);
 	else
 	{
-		// signal(SIGQUIT, SIG_IGN);
 		waitpid(pid, &status, 0);
 		*fd = open(TMP_FILE, O_RDONLY);
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 130)

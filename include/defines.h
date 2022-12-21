@@ -32,7 +32,7 @@ typedef struct s_tokens
 	char	*token;
 	int		id_token;
 	t_bool	err;
-}	t_lst_tokens;
+}	t_tokens;
 
 typedef struct s_minishell
 {
@@ -45,7 +45,8 @@ typedef struct s_minishell
 	int			len_tokens;
 	int			infd;
 	int			outfd;
-	size_t		exit_status;
+	int			exit_status;
+	char		*modified_str;
 }	t_minishell;
 
 t_minishell ms;
@@ -60,7 +61,7 @@ enum e_tokens
 	RDRCT_IN = 60,
 	RDRCT_OU = 62,
 	PIPE = 124,
-	QUERY = 63,
+	QUERY = 36,
 	APPEND = 2,
 	HEREDOC = 3,
 	DELIMITER = 4,

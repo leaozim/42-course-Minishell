@@ -25,8 +25,11 @@ LEXER			=	tokens.c								\
 
 EXPANDER		=	expander.c brace_expansion.c expander_checks.c
 
-PARSER 			=	parser.c utils_parser.c open_files.c	\
-					heredoc.c
+PARSER 			=	parser.c 			\
+					handle_metachars.c	\
+					open_files.c 		\
+					heredoc.c			\
+					error_parser.c
 
 DIRS			=	. lexer prompt expander parser
 IFLAGS			=	-I $(HEADER_PATH)

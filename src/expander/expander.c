@@ -63,13 +63,13 @@ char	*minishell_expansion(char *token)
 void	expander(void)
 {
 	char			*temp;
-	t_lst_tokens	*tklist;
+	t_tokens		*tklist;
 	t_list			*node;
 
 	node = ms.tks;
 	while (node)
 	{
-		tklist = (t_lst_tokens *)node->content;
+		tklist = (t_tokens *)node->content;
 		temp = minishell_expansion(tklist->token);
 		free(tklist->token);
 		tklist->token = temp;

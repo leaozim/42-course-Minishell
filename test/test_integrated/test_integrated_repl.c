@@ -10,7 +10,7 @@ void free_ms(void)
 void create_repl(char *prompt, int *array_int)
 {
 	t_list			*no;
-	t_lst_tokens	*tks;
+	t_tokens		*tklist;
 
 	ms.prompt_line = ft_strdup(prompt);
 	is_erro_sintaxy_quotes(ms.prompt_line);
@@ -19,8 +19,8 @@ void create_repl(char *prompt, int *array_int)
 	no = ms.tks;
 	while (no)
 	{
-		tks = (t_lst_tokens *)no->content;
-		TEST_ASSERT_EQUAL_INT(*array_int, tks->id_token);
+		tklist = (t_tokens *)no->content;
+		TEST_ASSERT_EQUAL_INT(*array_int, tklist->id_token);
 		array_int++;
 		no = no->next;
 	}
@@ -29,7 +29,6 @@ void create_repl(char *prompt, int *array_int)
 
 void check_repl(void)
 {
-	// t_minishell ms;
 	int expected[2] = {COMMAND, COMMAND};
 	create_repl("ls -la", expected);
 	free_ms();
