@@ -35,8 +35,17 @@ COLOR_GREEN		= \e[32m
 COLOR_RED		= \e[91m
 COLOR_BLUE		= \e[34m
 
+# @echo "$(COLOR_GREEN)Compiling $(COLOR_WHITE)$(<:.c=)"
+
+# bc <<< PROGRESS*100/41
+# @echo $$(( $(FOUR) * $(TWO) ))
+
+# $(eval PROGRESS=$(shell echo $$(($(PROGRESS)+1))))
+PROGRESS = 0
+
 %.o: %.c
-	@echo "$(COLOR_GREEN)Compiling $(COLOR_WHITE)$(<:.c=)"
+	@echo -n "$(COLOR_GREEN)Compiling $(COLOR_WHITE)$$(( $(PROGRESS) * 100 / 41))%\r"
+	$(eval PROGRESS=$(shell echo $$(($(PROGRESS)+1))))
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(INC)
