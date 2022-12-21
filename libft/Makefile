@@ -33,6 +33,7 @@ OBJ					=	$(SRC:.c=.o)
 WHITE				=	\e[00m
 GREEN				=	\e[32m
 RED					=	\e[91m
+YELLOW				=	\e[033m
 BLUE				=	\e[34m
 
 NUMBER_OF_SRC_FILES	=	$(words $(SRC))
@@ -40,7 +41,7 @@ NUMBER_OF_SRC_FILES	=	$(words $(SRC))
 PROGRESS			=	0
 
 %.o: %.c
-	@echo -n "$(GREEN)Compiling $(WHITE)$$(( $(PROGRESS) * 100 / $(NUMBER_OF_SRC_FILES)))%\r"
+	@echo -n "$(YELLOW)Compiling $(WHITE)$$(( $(PROGRESS) * 100 / $(NUMBER_OF_SRC_FILES)))%\r"
 	$(eval PROGRESS=$(shell echo $$(($(PROGRESS)+1))))
 	@$(CC) $(CFLAGS) -c $< -o $@
 
