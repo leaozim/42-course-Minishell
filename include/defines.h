@@ -47,7 +47,6 @@ typedef struct s_minishell
 	int			infd;
 	int			outfd;
 	int			exit_status;
-	char		*modified_str;
 }	t_minishell;
 
 t_minishell ms;
