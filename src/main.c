@@ -15,11 +15,12 @@ void	repl_minshell(void)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	(void)argv;
 	check_arguments(argc);
-	init_minishell();
+	init_minishell(envp);
+	env();
 	handle_signal();
 	repl_minshell();
 	return (EXIT_SUCCESS);

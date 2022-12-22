@@ -38,6 +38,7 @@ typedef struct s_minishell
 {
 	char		*prompt_line;
 	t_list		*tks;
+	t_list		*env;
 	t_expander	expander;
 	char		**tab_tokens;
 	int			*tab_id;

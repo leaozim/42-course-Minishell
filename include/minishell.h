@@ -13,9 +13,9 @@
 
 
 /* -----------------------------------------------------------------------*\
-									systen									
+									system									
 \* -----------------------------------------------------------------------*/
-void		init_minishell(void);
+void		init_minishell(char	**envp);
 void		check_arguments(int argc);
 void		check_prompt(char *line);
 char		*create_prompt(void);
@@ -65,7 +65,7 @@ void			signal_break_heredoc(int signal);
 void			destroy_heredoc(void);
 
 /* -----------------------------------------------------------------------*\
-									expander									
+									expander								
 \* -----------------------------------------------------------------------*/
 void            expander(void);
 char            *minishell_expansion(char *token);
@@ -74,6 +74,15 @@ int             check_last_expansion_occurrence(char *token);
 t_bool          is_envar_between_squote(char *token);
 char            *is_envar_expansible(char *token, int *i, char **final_str);
 void            expand_check_next_character(char *token, int *i, char **final_str);
+
+/* -----------------------------------------------------------------------*\
+									builtins								
+\* -----------------------------------------------------------------------*/
+
+void			create_env(char **envp);
+void			ft_lstdelone_array(t_list **lst);
+void			ft_lstclear_array(t_list **lst);
+void			env(void);
 
 
 /*

@@ -9,29 +9,32 @@ OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 HEADER_PATH		=	./include
 HEADER_FILES	=	defines.h minishell.h printf_colors.h
 
-SRC				=	main.c									\
-					error_handling.c						\
-					utils.c									\
-					init_minishell.c						\
-					signals.c								\
-					$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)
+SRC				=	main.c										\
+					error_handling.c							\
+					utils.c										\
+					init_minishell.c							\
+					signals.c									\
+					$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)	\
+					$(BUILTINS)
 
 PROMPT			=	prompt.c
 
-LEXER			=	tokens.c								\
-					handle_spaces.c							\
-					create_token_list.c						\
+LEXER			=	tokens.c									\
+					handle_spaces.c								\
+					create_token_list.c							\
 					utils_lexer.c
 
 EXPANDER		=	expander.c brace_expansion.c expander_checks.c
 
-PARSER 			=	parser.c 			\
-					handle_metachars.c	\
-					open_files.c 		\
-					heredoc.c			\
+PARSER 			=	parser.c 									\
+					handle_metachars.c							\
+					open_files.c 								\
+					heredoc.c									\
 					error_parser.c
 
-DIRS			=	. lexer prompt expander parser
+BUILTINS		=	env.c
+
+DIRS			=	. lexer prompt expander parser builtins
 IFLAGS			=	-I $(HEADER_PATH)
 LDFLAGS			=	-L$(LIBFT_PATH) -lft
 CFLAGS			=	-Wall -Wextra -Werror
@@ -80,7 +83,10 @@ test_vall:	all
 	make val -C test
 
 val: all
-	valgrind -q --leak-check=full --show-leak-kinds=all --trace-children=yes --suppressions=readline.supp --track-fds=yes --track-origins=yes ./minishell
+	valgrind -q --leak-check=full --show-leak-kinds=all			\
+	--track-fds=yes --track-origins=yes --trace-children=yes	\
+	--trace-children-skip='*/bin/*,*/sbin/*'					\
+	--suppressions=readline.supp ./minishell
 
 mc:	all
 	clear
