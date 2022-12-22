@@ -5,6 +5,7 @@ void	check_prompt(char *line)
 	if (line == NULL)
 	{
 		ft_putstr_fd("\n", STDERR_FILENO);
+		ft_lstclear(&ms.env, NULL);
 		free(line);
 		exit(EXIT_FAILURE);
 	}

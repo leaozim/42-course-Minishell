@@ -14,12 +14,12 @@ void	env()
 
 void	create_env(char **envp)
 {
-    int i;
+	int	i;
 
 	i = 0;
-    while(envp[i] != NULL)
-    {
-        ft_lstadd_back(&ms.env, ft_lstnew(envp[i]));
+	while(envp[i] != NULL)
+	{
+		ft_lstadd_back(&ms.env, ft_lstnew(envp[i]));
 		i++;
-    }
+	}
 }

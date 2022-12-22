@@ -10,6 +10,7 @@ void	repl_minshell(void)
 		parser();
 		printf(CYAN"\nEXPANDER\n"RESET);
 		expander();
+		// env();
 		print_tokens();
 		destroy_minishell();
 	}
@@ -20,7 +21,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	check_arguments(argc);
 	init_minishell(envp);
-	env();
 	handle_signal();
 	repl_minshell();
 	return (EXIT_SUCCESS);
