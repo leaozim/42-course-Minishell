@@ -32,7 +32,8 @@ PARSER 			=	parser.c 			\
 					error_parser.c		\
 					handle_quotes.c
 
-BUILTINS		=	echo.c
+BUILTINS		=	echo.c				\
+					is_builtins.c
 
 DIRS			=	. lexer prompt expander parser builtins
 IFLAGS			=	-I $(HEADER_PATH)
