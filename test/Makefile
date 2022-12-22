@@ -33,7 +33,6 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 	rm -f error.log
-	rm oi
 
 re:  fclean all
 
