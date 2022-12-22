@@ -29,7 +29,8 @@ PARSER 			=	parser.c 			\
 					handle_metachars.c	\
 					open_files.c 		\
 					heredoc.c			\
-					error_parser.c
+					error_parser.c		\
+					handle_quotes.c
 
 BUILTINS		=	echo.c
 
