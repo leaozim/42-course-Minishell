@@ -83,10 +83,7 @@ test_vall:	all
 	make val -C test
 
 val: all
-	valgrind --leak-check=full --show-leak-kinds=all			\
-	--track-fds=yes --track-origins=yes --trace-children=yes	\
-	--trace-children-skip='*/bin/*,*/sbin/*'					\
-	--suppressions=readline.supp ./minishell
+	valgrind -q --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --trace-children-skip='*/bin/*,*/sbin/*' --suppressions=readline.supp ./minishell
 
 mc:	all
 	clear
