@@ -5,45 +5,45 @@ void    check_brace_expansion()
 	char	*str;
 	char	*temp;
 
-	str = ft_strdup("${SHELL}");
+	str = ft_strdup("${COLORTERM}");
 	temp = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bash", temp);
+	TEST_ASSERT_EQUAL_STRING("truecolor", temp);
 	free(str);
 	free(temp);
 
-	str = ft_strdup("${SHELL}uname");
+	str = ft_strdup("${COLORTERM}uname");
 	temp = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bashuname", temp);
+	TEST_ASSERT_EQUAL_STRING("truecoloruname", temp);
 	free(str);
 	free(temp);
 
-	str = ft_strdup("${SHELL} uname");
+	str = ft_strdup("${COLORTERM} uname");
 	temp = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bash uname", temp);
+	TEST_ASSERT_EQUAL_STRING("truecolor uname", temp);
 	free(str);
 	free(temp);
 
-	str = ft_strdup("uname${SHELL}");
+	str = ft_strdup("uname${COLORTERM}");
 	temp = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("uname/bin/bash", temp);
+	TEST_ASSERT_EQUAL_STRING("unametruecolor", temp);
 	free(str);
 	free(temp);
 
-	str = ft_strdup("uname ${SHELL}");
+	str = ft_strdup("uname ${COLORTERM}");
 	temp = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("uname /bin/bash", temp);
+	TEST_ASSERT_EQUAL_STRING("uname truecolor", temp);
 	free(str);
 	free(temp);
 
-	str = ft_strdup("${SHELL}${SHELL}");
+	str = ft_strdup("${COLORTERM}${COLORTERM}");
 	temp = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bash/bin/bash", temp);
+	TEST_ASSERT_EQUAL_STRING("truecolortruecolor", temp);
 	free(str);
 	free(temp);
 
-	str = ft_strdup("${SHELL} ${SHELL}");
+	str = ft_strdup("${COLORTERM} ${COLORTERM}");
 	temp = minishell_expansion(str);
-	TEST_ASSERT_EQUAL_STRING("/bin/bash /bin/bash", temp);
+	TEST_ASSERT_EQUAL_STRING("truecolor truecolor", temp);
 	free(str);
 	free(temp);
 
@@ -53,13 +53,13 @@ void    check_brace_expansion()
 	free(str);
 	free(temp);
 
-	str = ft_strdup("\"${SHELL }\"");
+	str = ft_strdup("\"${COLORTERM }\"");
 	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
 	free(temp);
 
-	str = ft_strdup("\"${SHELL\"");
+	str = ft_strdup("\"${COLORTERM\"");
 	temp = minishell_expansion(str);
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
