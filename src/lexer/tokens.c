@@ -58,7 +58,12 @@ void	create_tokens(void)
 {
 	char	*str_with_spcs;
 	int		qtt_tokens;
+	t_bool	quotes_without_space;
 
+	(void)quotes_without_space;
+	// char *str = add_characters_in_specific_position(ms.prompt_line, 4, 'l');
+	ms.prompt_line = add_marcador(ms.prompt_line);
+	// printf("str =  %s", str);
 	replace_value_inside_quotes(ms.prompt_line, SPACE, REPLACE_VALUE);
 	qtt_tokens = count_tokens_specific(ms.prompt_line);
 	str_with_spcs = add_spaces_specific_tokens(ms.prompt_line, qtt_tokens);
@@ -69,3 +74,5 @@ void	create_tokens(void)
 	create_token_list(ms.tab_tokens, ms.tab_id, ms.len_tokens);
 	free(str_with_spcs);
 }
+
+// echo "oi" k "oi"

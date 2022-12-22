@@ -2,15 +2,17 @@
 
 int	echo(void)
 {
-	t_tokens	*tklist;
+	// t_tokens	*tklist;
 	t_tokens	*next;
 	t_list		*node;
 
 	node = ms.tks;
-	while (node)
+	while (node->next)
 	{
-		tklist = (t_tokens *)node->content;
-		printf("%s", tklist->token);
+		if (node->next)
+			next = (t_tokens *)node->next->content;
+		// tklist = (t_tokens *)node->content;
+		printf("%s", next->token);
 		if (node->next)
 			printf(" ");
 		node = node->next;
@@ -21,3 +23,15 @@ int	echo(void)
 		printf("\n");
 	return (0);
 }
+// int	echo(void)
+// {
+// 	t_tokens	*token;
+// 	t_list		*node;
+
+// 	node = ms.tks;
+// 	// if ()
+
+// 	return (0);
+// }
+
+// void	is_builtins(t_st)

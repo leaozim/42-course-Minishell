@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+#include <readline/chardefs.h>
 
 int	check_qtt_to_be_incremented(char *line)
 {
@@ -44,6 +45,7 @@ char	*add_spaces_specific_tokens(char *line, int count)
 			while (value--)
 				str[j++] = line[i++];
 			str[j] = SPACE;
+		
 			j++;
 		}
 		else
@@ -78,4 +80,54 @@ void	replace_value_inside_quotes(char *list, int old_vle, int new_vle)
 		while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
 			i++;
 	}
+}
+
+char	*add_characters_in_specific_position(char *line, int index, char characters)
+{
+	int		j;
+	int		i;
+	char	*str;
+
+	j = 0;
+	i = 0;
+	str = ft_calloc(1, ft_strlen(line) + 2);
+	while (i < (int)ft_strlen(line) + 1)
+	{
+		if (j == index)
+			str[j++] = characters;
+		str[j] = line[i];
+		j++;
+		i++;
+	}
+	free(line);
+	return (str);
+}
+
+char	*add_marcador(char *line)
+{
+	int		i;
+	t_bool	is_two_quotes;
+	int		quotes;
+
+	i = 0;
+	while (line[i])
+	{
+		is_two_quotes = FALSE;
+		if (line[i] == SQUOTE || line[i] == DQUOTES)
+		{
+			quotes = line[i];
+			i++;
+			while (line[i] && line[i] != quotes)
+				i++;
+			i++;
+			if (line[i] == SQUOTE || line[i] == DQUOTES)
+				is_two_quotes = TRUE;
+		}
+		if (is_two_quotes == TRUE)
+		{
+			line = add_characters_in_specific_position(ms.prompt_line, i, 'l');
+		}
+		i++;
+	}
+	return (line);
 }
