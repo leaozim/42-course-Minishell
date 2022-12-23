@@ -41,6 +41,7 @@ t_tokens		*create_content(char *tks, int index);
 t_bool			check_for_specific_token(char c);
 void			get_quotes(int value, char line, int *i, int **qtt_tokens);
 int				check_qtt_to_be_incremented(char *line);
+void			join_tokens(void);
 
 /* -----------------------------------------------------------------------*\
 									parser									

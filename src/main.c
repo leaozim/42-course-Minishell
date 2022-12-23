@@ -11,10 +11,12 @@ void	repl_minshell(void)
 		// printf(CYAN"\nEXPANDER\n"RESET);
 		expander();
 		// echo();
-		print_tokens();
 		// builtin_env();
 		// builtin_export("OLAGALERA");
-		is_builtins();
+		// is_builtins();
+		join_tokens();
+		print_tokens();
+		
 		destroy_minishell();
 	}
 }

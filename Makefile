@@ -22,7 +22,8 @@ PROMPT			=	prompt.c
 LEXER			=	tokens.c									\
 					handle_spaces.c								\
 					create_token_list.c							\
-					utils_lexer.c
+					utils_lexer.c								\
+					join_tokens.c
 
 EXPANDER		=	expander.c brace_expansion.c expander_checks.c
 
