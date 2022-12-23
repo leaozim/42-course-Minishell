@@ -18,11 +18,11 @@ void	check_is_invalid_consecutive_metachar(void)
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars(">>", ">", APPEND, RDRCT_IN));
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars(">>", ">", APPEND, RDRCT_OU));
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars(">", ">", RDRCT_OU, RDRCT_OU));
+	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|", "cmd", PIPE, COMMAND));
 }
 
 void	check_is_valid_consecutive_metachar(void)
 {
-	TEST_ASSERT_EQUAL_INT(0,  consecutive_metachars("|", "cmd", PIPE, COMMAND));
 	TEST_ASSERT_EQUAL_INT(0,  consecutive_metachars("cmd", "|", COMMAND, PIPE));
 	TEST_ASSERT_EQUAL_INT(0,  consecutive_metachars("cmd", "<<", COMMAND, HEREDOC));
 	TEST_ASSERT_EQUAL_INT(0,  consecutive_metachars("<<", "cmd", HEREDOC, COMMAND));
