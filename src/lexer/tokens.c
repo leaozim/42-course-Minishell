@@ -23,6 +23,8 @@ int	count_tokens_specific(char *str)
 			qtt_tokens += 1;
 		else if (str[i] == RDRCT_IN)
 			qtt_tokens += 1;
+		else if(str[i] == '6')
+			qtt_tokens += 1;
 		i++;
 	}
 	return (qtt_tokens);
@@ -59,6 +61,8 @@ void	create_tokens(void)
 	char	*str_with_spcs;
 	int		qtt_tokens;
 
+	// ms.prompt_line = add_bookmark(ms.prompt_line);
+	// printf("str =  %s", ms.prompt_line );
 	replace_value_inside_quotes(ms.prompt_line, SPACE, REPLACE_VALUE);
 	qtt_tokens = count_tokens_specific(ms.prompt_line);
 	str_with_spcs = add_spaces_specific_tokens(ms.prompt_line, qtt_tokens);

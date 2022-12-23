@@ -11,7 +11,7 @@ HEADER_FILES	=	defines.h minishell.h printf_colors.h
 
 SRC				=	main.c										\
 					error_handling.c							\
-					utils.c										\
+					destroyers.c								\
 					init_minishell.c							\
 					signals.c									\
 					$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)	\
