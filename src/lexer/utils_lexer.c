@@ -7,7 +7,7 @@ t_bool	check_for_specific_token(char c)
 		c == PIPE || \
 		c == SQUOTE || \
 		c == DQUOTES || \
-		c == '6')
+		c == MARKER)
 		return (TRUE);
 	return (FALSE);
 }

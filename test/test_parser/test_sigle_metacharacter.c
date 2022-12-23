@@ -2,7 +2,7 @@
 
 void	check_is_invalid_single_metacharacte(void)
 {
-	TEST_ASSERT_EQUAL_INT(1,  is_single_metachar("<", RDRCT_IN, 1));
+	TEST_ASSERT_EQUAL_INT(1,  is_single_metachar("<" , RDRCT_IN, 1));
 	TEST_ASSERT_EQUAL_INT(1,  is_single_metachar(">", RDRCT_OU, 1));
 	TEST_ASSERT_EQUAL_INT(1,  is_single_metachar("<<", HEREDOC, 1));
 	TEST_ASSERT_EQUAL_INT(1,  is_single_metachar(">>", APPEND, 1));

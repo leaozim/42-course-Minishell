@@ -3,5 +3,5 @@ minishell_tester/
 *.idx
 .cache/
 .clangd/
-
+libft/.cache/
 

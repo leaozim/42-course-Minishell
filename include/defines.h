@@ -12,6 +12,7 @@
 
 # define REPLACE_VALUE 3
 # define SPACE ' '
+# define MARKER '\x06'
 
 # include "../libft/libft.h"
 
@@ -40,6 +41,7 @@ typedef struct s_minishell
 {
 	char		*prompt_line;
 	t_list		*tks;
+	t_list		*env;
 	char		**tab_tokens;
 	int			*tab_id;
 	char		*line_heredoc;

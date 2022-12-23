@@ -16,6 +16,36 @@ void	free_ptrs(char **str)
 	str = NULL;
 }
 
+void	ft_lstdelone_array(t_list **lst)
+{
+	t_list	*node;
+
+	node = *lst;
+	if (!node)
+		return ;
+	while (node)
+	{
+		free_ptrs(node->content);
+		node = node->next;
+	}
+	free(node);
+	node = NULL;
+}
+
+void	ft_lstclear_array(t_list **lst)
+{
+	t_list	*tmp;
+
+	if (!lst || !*lst)
+		return ;
+	while (lst && *lst)
+	{
+		tmp = (*lst)->next;
+		ft_lstdelone_array(lst);
+		*lst = tmp;
+	}
+}
+
 void	destroy_t_tokens(void *token)
 {
 	t_tokens	*tklist;

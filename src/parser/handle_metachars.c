@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-t_bool	is_metachars(int id_tks)
+t_bool    is_metachars(int id_tks)
 {
 	if (id_tks == HEREDOC || \
 		id_tks == APPEND || \
@@ -11,10 +11,12 @@ t_bool	is_metachars(int id_tks)
 	return (FALSE);
 }
 
-int	consecutive_metachars(char *token, char *next_token, int id, int next_id)
+int    consecutive_metachars(char *token, char *next_token, int id, int next_id)
 {
 	if (is_metachars(id))
 	{
+		if (id == PIPE && next_token)
+			return(msg_error_invalid_synax(token), 1);
 		if (is_metachars((next_id)))
 		{
 			if (id != PIPE)
@@ -27,7 +29,7 @@ int	consecutive_metachars(char *token, char *next_token, int id, int next_id)
 	return (0);
 }
 
-int	is_single_metachar(char *token, int id, int len_tokens)
+int    is_single_metachar(char *token, int id, int len_tokens)
 {
 	if (is_metachars(id) && len_tokens == 1 && id != QUERY)
 	{

@@ -3,18 +3,69 @@
 void	test_valid_characters_in_espcific_position(void)
 {	
 	char *string;
-	char *temp;
 
-	temp = ft_strdup("\"oi\"\"oi\"");
-	dprintf(2, "string = %s\n", temp);
-	string = add_bookmark(temp);
-	dprintf(2, "string = %s\n", string);
-	TEST_ASSERT_EQUAL_STRING("\"oi\"6\"oi\"", temp);
-	// free(str);
-	// free(temp);
+	string = ft_strdup("\"oi\"\"oi\"");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("\"oi\"\x06\"oi\"", string);
+	free(string);
+
+	string = ft_strdup("\"oi\"oi");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("\"oi\"\x06oi", string);
+	free(string);
+
+	string = ft_strdup("\'oi\'oi");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("\'oi\'\x06oi", string);
+	free(string);
+
+	string = ft_strdup("\'oi\'\'oi\'");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("\'oi\'\x06\'oi\'", string);
+	free(string);
+}
+void test_invalid_characters_in_espcific_position(void)
+{
+	char *string;
+
+	string = ft_strdup("\"oi\" \"oi\"");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("\"oi\" \"oi\"", string);
+	free(string);
+
+	string = ft_strdup("\"oi\" oi");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("\"oi\" oi", string);
+	free(string);
+
+	string = ft_strdup("\'oi\' oi");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("\'oi\' oi", string);
+	free(string);
+
+	string = ft_strdup("\'oi\' \'oi\'");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("\'oi\' \'oi\'", string);
+	free(string);
+
+	string = ft_strdup("oi oi");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("oi oi", string);
+	free(string);
+
+	string = ft_strdup("oi | oi");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("oi | oi", string);
+	free(string);
+	
+	string = ft_strdup("|oi|oi|");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("|oi|oi|", string);
+	free(string);
 }
 
 void	add_characters_in_espcific_position()
 {
 	RUN_TEST(test_valid_characters_in_espcific_position);
+	RUN_TEST(test_invalid_characters_in_espcific_position);
 }

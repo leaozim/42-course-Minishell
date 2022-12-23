@@ -13,9 +13,9 @@
 
 
 /* -----------------------------------------------------------------------*\
-									systen									
+									system									
 \* -----------------------------------------------------------------------*/
-void		init_minishell(void);
+void		init_minishell(char	**envp);
 void		check_arguments(int argc);
 void		check_prompt(char *line);
 char		*create_prompt(void);
@@ -28,7 +28,7 @@ void		destroy_minishell(void);
 									lexer									
 \* -----------------------------------------------------------------------*/
 void			create_tokens(void);
-char			*add_bookmark(char *line);
+char			*add_marker(char *line);
 char			*add_characters_in_specific_position(char *line, int index, char characters);
 void			replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 int				count_tokens_specific(char *str);
@@ -67,7 +67,7 @@ void			signal_break_heredoc(int signal);
 void			destroy_heredoc(void);
 
 /* -----------------------------------------------------------------------*\
-									expander									
+									expander								
 \* -----------------------------------------------------------------------*/
 void            expander(void);
 char            *minishell_expansion(char *token);
@@ -78,11 +78,16 @@ char            *is_envar_expansible(char *token, int *i, char **final_str);
 void            expand_check_next_character(char *token, int *i, char **final_str);
 
 /* -----------------------------------------------------------------------*\
-									buliltins									
+									builtins								
 \* -----------------------------------------------------------------------*/
 
-int	echo(void);
-void	is_builtins(void);
+void			create_env(char **envp);
+void			ft_lstdelone_array(t_list **lst);
+void			ft_lstclear_array(t_list **lst);
+void			builtin_env(void);
+int				builtin_export(char *token);
+int				echo(void);
+void			is_builtins(void);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

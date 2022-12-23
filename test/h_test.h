@@ -43,9 +43,10 @@ void		check_brace_expansion(void);
 void		test_error_syntax_consecutive_metachacacter(void);
 void		test_is_error_syntax_metachacacter(void);
 void		test_error_syntax_single_metachacacter(void);
-void		free_ms();
+void		free_ms(void);
 void		test_is_error_syntax_metachacacter(void);
 void		test_error_syntax_single_metachacacter(void);
 void		test_open_files(void);
+void        test_builtin_export(void);
 
 #endif

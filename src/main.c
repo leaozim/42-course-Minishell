@@ -12,16 +12,18 @@ void	repl_minshell(void)
 		expander();
 		// echo();
 		print_tokens();
+		// builtin_env();
+		// builtin_export("OLAGALERA");
 		is_builtins();
 		destroy_minishell();
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	(void)argv;
 	check_arguments(argc);
-	init_minishell();
+	init_minishell(envp);
 	handle_signal();
 	repl_minshell();
 	return (EXIT_SUCCESS);
