@@ -103,14 +103,14 @@ char	*add_characters_in_specific_position(char *line, int index, char characters
 	return (str);
 }
 
-char	*add_marcador(char *line)
+char	*add_bookmark(char *line)
 {
 	int		i;
 	t_bool	is_two_quotes;
 	int		quotes;
 
 	i = 0;
-	while (line[i])
+	while (i < (int)ft_strlen(line))
 	{
 		is_two_quotes = FALSE;
 		if (line[i] == SQUOTE || line[i] == DQUOTES)
@@ -120,13 +120,12 @@ char	*add_marcador(char *line)
 			while (line[i] && line[i] != quotes)
 				i++;
 			i++;
-			if (line[i] == SQUOTE || line[i] == DQUOTES)
+			// if (line[i] == SQUOTE || line[i] == DQUOTES)
+			if (line[i] && line[i] != ' ')
 				is_two_quotes = TRUE;
 		}
 		if (is_two_quotes == TRUE)
-		{
-			line = add_characters_in_specific_position(ms.prompt_line, i, 'l');
-		}
+			line = add_characters_in_specific_position(ms.prompt_line, i, '6');
 		i++;
 	}
 	return (line);

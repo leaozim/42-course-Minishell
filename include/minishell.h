@@ -28,7 +28,7 @@ void		destroy_minishell(void);
 									lexer									
 \* -----------------------------------------------------------------------*/
 void			create_tokens(void);
-char			*add_marcador(char *line);
+char			*add_bookmark(char *line);
 char			*add_characters_in_specific_position(char *line, int index, char characters);
 void			replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 int				count_tokens_specific(char *str);
