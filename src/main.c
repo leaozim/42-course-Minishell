@@ -11,6 +11,8 @@ void	repl_minshell(void)
 		printf(CYAN"\nEXPANDER\n"RESET);
 		expander();
 		print_tokens();
+		// builtin_env();
+		// builtin_export("OLAGALERA");
 		destroy_minishell();
 	}
 }
@@ -20,7 +22,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	check_arguments(argc);
 	init_minishell(envp);
-	env();
 	handle_signal();
 	repl_minshell();
 	return (EXIT_SUCCESS);

@@ -32,7 +32,7 @@ PARSER 			=	parser.c 									\
 					heredoc.c									\
 					error_parser.c
 
-BUILTINS		=	env.c
+BUILTINS		=	env.c export.c
 
 DIRS			=	. lexer prompt expander parser builtins
 IFLAGS			=	-I $(HEADER_PATH)

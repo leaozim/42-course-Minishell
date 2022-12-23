@@ -82,8 +82,8 @@ void            expand_check_next_character(char *token, int *i, char **final_st
 void			create_env(char **envp);
 void			ft_lstdelone_array(t_list **lst);
 void			ft_lstclear_array(t_list **lst);
-void			env(void);
-
+void			builtin_env(void);
+int				builtin_export(char *token);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

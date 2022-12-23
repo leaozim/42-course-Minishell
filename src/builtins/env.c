@@ -1,14 +1,17 @@
 #include "../../include/minishell.h"
 
-void	env()
+void	builtin_env()
 {
 	t_list	*node;
+	int		i;
 
 	node = ms.env;
+	i = 0;
 	while (node)
 	{
-		printf("%s\n", (char *)node->content);
+		printf(GREEN"%d)"RESET "%s\n", i, (char *)node->content);
 		node = node->next;
+		i++;
 	}
 }
 

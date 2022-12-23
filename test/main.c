@@ -27,5 +27,6 @@ int main(void)
 	RUN_TEST(check_repl);
 	RUN_TEST(test_is_error_syntax_metachacacter);
 	RUN_TEST(test_open_files);
+	RUN_TEST(test_builtin_export);
 	return (UNITY_END());
 }
