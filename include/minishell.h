@@ -84,6 +84,8 @@ void			ft_lstdelone_array(t_list **lst);
 void			ft_lstclear_array(t_list **lst);
 void			builtin_env(void);
 int				builtin_export(char *token);
+int				echo(void);
+void			is_builtins(void);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

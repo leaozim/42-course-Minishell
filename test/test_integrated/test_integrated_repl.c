@@ -9,20 +9,20 @@ void free_ms(void)
 
 void create_repl(char *prompt, int *array_int)
 {
-	t_list			*no;
+	t_list			*node;
 	t_tokens		*tklist;
 
 	ms.prompt_line = ft_strdup(prompt);
 	is_erro_sintaxy_quotes(ms.prompt_line);
 	create_tokens();
 	parser();
-	no = ms.tks;
-	while (no)
+	node = ms.tks;
+	while (node)
 	{
-		tklist = (t_tokens *)no->content;
+		tklist = (t_tokens *)node->content;
 		TEST_ASSERT_EQUAL_INT(*array_int, tklist->id_token);
 		array_int++;
-		no = no->next;
+		node = node->next;
 	}
 	free(ms.prompt_line);
 }

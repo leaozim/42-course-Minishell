@@ -6,11 +6,12 @@
 /*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 16:28:52 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/12/15 17:40:39 by lade-lim         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:56:16 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
 int	ft_strcmp(char *s1, char *s2)
 {

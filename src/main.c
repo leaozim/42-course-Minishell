@@ -8,11 +8,13 @@ void	repl_minshell(void)
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens();
 		parser();
-		printf(CYAN"\nEXPANDER\n"RESET);
+		// printf(CYAN"\nEXPANDER\n"RESET);
 		expander();
+		// echo();
 		print_tokens();
 		// builtin_env();
 		// builtin_export("OLAGALERA");
+		is_builtins();
 		destroy_minishell();
 	}
 }
@@ -29,15 +31,15 @@ int	main(int argc, char **argv, char **envp)
 
 void	print_tokens(void)
 {
-	t_list		*no;
+	t_list		*node;
 	t_tokens	*tklist;
 
-	no = ms.tks;
-	while (no)
+	node = ms.tks;
+	while (node)
 	{
-		tklist = (t_tokens *)no->content;
+		tklist = (t_tokens *)node->content;
 		printf("tokens = %s\n", tklist->token);
 		printf("id     = %d\n", tklist->id_token);
-		no = no->next;
+		node = node->next;
 	}
 }

@@ -26,13 +26,17 @@ LEXER			=	tokens.c									\
 
 EXPANDER		=	expander.c brace_expansion.c expander_checks.c
 
-PARSER 			=	parser.c 									\
-					handle_metachars.c							\
-					open_files.c 								\
-					heredoc.c									\
-					error_parser.c
+PARSER 			=	parser.c 			\
+					handle_metachars.c	\
+					open_files.c 		\
+					heredoc.c			\
+					error_parser.c		\
+					handle_quotes.c
 
-BUILTINS		=	env.c export.c
+BUILTINS		=	echo.c				\
+					is_builtins.c		\
+					env.c				\
+					export.c
 
 DIRS			=	. lexer prompt expander parser builtins
 IFLAGS			=	-I $(HEADER_PATH)
