@@ -15,6 +15,8 @@ int    consecutive_metachars(char *token, char *next_token, int id, int next_id)
 {
     if (is_metachars(id))
     {
+        if (id == PIPE && next_token)
+            return(msg_error_invalid_synax(token), 1);
         if (is_metachars((next_id)))
         {
             if (id != PIPE)

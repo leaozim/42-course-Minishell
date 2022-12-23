@@ -8,12 +8,11 @@ void	repl_minshell(void)
 		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens();
 		parser();
-		// printf(CYAN"\nEXPANDER\n"RESET);
 		expander();
 		// echo();
 		print_tokens();
-		// builtin_env();
-		// builtin_export("OLAGALERA");
+		builtin_env();
+		builtin_export("OLAGALERA");
 		is_builtins();
 		destroy_minishell();
 	}

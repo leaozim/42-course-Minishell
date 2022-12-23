@@ -7,9 +7,6 @@ void	is_builtins(void)
 
 	node = ms.tks;
 	tklist = (t_tokens *)node->content;
-	// printf("tokens = %s\n", tklist->token);
 	if (!ft_strcmp("echo", tklist->token))
-	{
 		echo();
-	}
 }
