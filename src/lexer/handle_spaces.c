@@ -93,7 +93,11 @@ char	*add_characters_in_specific_position(char *line, int index, char characters
 	while (i < (int)ft_strlen(line) + 1)
 	{
 		if (j == index)
+		{
+			// str[j++] = SPACE;
 			str[j++] = characters;
+			// str[j++] = SPACE;
+		}
 		str[j] = line[i];
 		j++;
 		i++;
@@ -103,30 +107,67 @@ char	*add_characters_in_specific_position(char *line, int index, char characters
 	return (str);
 }
 
-char	*add_marker(char *line)
+// char	*add_marker(char *line)
+// {
+// 	t_bool	is_two_quotes;
+// 	int		quotes;
+// 	int		i;
+	
+// 	i = 0;
+// 	while (i < (int)ft_strlen(line))
+// 	{
+// 		is_two_quotes = FALSE;
+// 		if (line[i] == SQUOTE || line[i] == DQUOTES)
+// 		{
+// 			quotes = line[i];
+// 			i++;
+// 			while (line[i] && line[i] != quotes)
+// 				i++;
+// 			if (line[i])
+// 				i++;
+// 			if ((line[i] && line[i] != ' ' && line[i] != '\0'))
+// 				is_two_quotes = TRUE;
+// 		}
+// 		else if (i > 0)
+// 		{
+// 			if (line[i] != ' ' && (line[i + 1] == '\"' || line[i + 1] == '\''))
+// 			{
+// 				is_two_quotes = TRUE;
+// 				i++;
+// 			}
+// 		}
+// 		if (is_two_quotes == TRUE)
+// 			line = add_characters_in_specific_position(line, i, MARKER);
+// 		i++;
+// 	}
+// 	return (line);
+// }
+
+char	*add_marker(char *line, int old_vle, int new_vle)
 {
-	int		i;
-	t_bool	is_two_quotes;
+	char	*str;
 	int		quotes;
+	int		i;
 
 	i = 0;
-	while (i < (int)ft_strlen(line))
+	str = line;
+	quotes = 0;
+	while (str[i])
 	{
-		is_two_quotes = FALSE;
-		if (line[i] == SQUOTE || line[i] == DQUOTES)
+		if (str[i] == SQUOTE || str[i] == DQUOTES)
 		{
-			quotes = line[i];
+			quotes = str[i];
 			i++;
-			while (line[i] && line[i] != quotes)
+			while (str[i] && str[i] != quotes)
+			{
 				i++;
-			if (line[i])
-				i++;
-			if (line[i] && line[i] != ' ')
-				is_two_quotes = TRUE;
+			}
+			if (str[i] == old_vle)
+				str[i] = new_vle;
+			i++;
 		}
-		if (is_two_quotes == TRUE)
-			line = add_characters_in_specific_position(line, i, MARKER);
-		i++;
+		while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
+			i++;
 	}
-	return (line);
+	return(str);
 }
