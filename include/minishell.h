@@ -89,7 +89,10 @@ int				echo(void);
 void			builtin_env(void);
 int				builtin_export(char *token);
 void			msg_error_not_a_valid_identifier(char *token, char *cmd);
-
+int				count_quotes_pair(char	*str, char c, int *i);
+char			**ft_quote_split(char *str, char c);
+int				split_count_words(char *str, char c);
+char			**split_assign_values(char *str, char c, int count);
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */

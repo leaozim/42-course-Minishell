@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void	builtin_env()
+void	builtin_env(void)
 {
 	t_list	*node;
 	int		i;
@@ -20,7 +20,7 @@ void	create_env(char **envp)
 	int	i;
 
 	i = 0;
-	while(envp[i] != NULL)
+	while (envp[i] != NULL)
 	{
 		ft_lstadd_back(&ms.env, ft_lstnew(envp[i]));
 		i++;

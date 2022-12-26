@@ -1,6 +1,6 @@
 # include "../h_test.h"
 
-void    check_brace_expansion()
+void    check_brace_expansion(void)
 {
 	char	*str;
 	char	*temp;

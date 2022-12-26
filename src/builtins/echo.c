@@ -2,9 +2,9 @@
 
 int	echo(void)
 {
-	// t_tokens	*tklist;
 	t_tokens	*next;
 	t_list		*node;
+	// t_tokens	*tklist;
 
 	node = ms.tks;
 	while (node->next)

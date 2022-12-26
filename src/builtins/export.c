@@ -1,17 +1,5 @@
 #include "../../include/minishell.h"
 
-int	count_quotes_pair(char	*str, char c, int *i)
-{
-	*i += 1;
-	while (str[*i] != c)
-	{
-		if (*i == (int)ft_strlen(str) && str[*i] != c)
-			return (FALSE);
-		*i += 1;
-	}
-	return (TRUE);
-}
-
 int	update_strlen_to_quote_removal(char	*str)
 {
 	int	i;
@@ -84,7 +72,7 @@ t_bool	check_error_invalid_identifier(char *token)
 			if (!ft_isalpha_underscore(token[i]))
 				if ((token[0] != '\"') && (token[ft_strlen(token)] != '\"'))
 					return (TRUE);
-	i = ft_strrchr_pos(token, '=');
+	i = ft_strchr_pos(token, '=');
 	if (token[0] == '=')
 		return (TRUE);
 	while (j < i)
@@ -104,6 +92,7 @@ int	builtin_export(char *token)
 {
 	char	*str;
 
+	// ft_quote_split("\"OLA\" PESSOAL TUDO\"BEM COM\" \"VOCES\"\"POR AI?\"", SPACE);
 	str = quote_removal(token);
 	if (check_error_invalid_identifier(str) == TRUE)
 	{

@@ -11,9 +11,9 @@ void	repl_minshell(void)
 		expander();
 		// echo();
 		print_tokens();
-		builtin_env();
+		// builtin_env();
 		builtin_export("OLAGALERA");
-		is_builtins();
+		// is_builtins();
 		destroy_minishell();
 	}
 }

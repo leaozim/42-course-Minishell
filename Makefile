@@ -37,7 +37,8 @@ BUILTINS			=	echo.c				\
 						is_builtins.c		\
 						env.c				\
 						export.c			\
-						msg_error.c
+						msg_error.c			\
+						ft_quote_split.c
 
 DIRS				=	. lexer prompt expander parser builtins
 IFLAGS				=	-I $(HEADER_PATH)

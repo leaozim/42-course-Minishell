@@ -16,7 +16,6 @@ void	free_ptrs(char **str)
 	str = NULL;
 }
 
-
 void	ft_lstdelone_array(t_list **lst)
 {
 	t_list	*node;

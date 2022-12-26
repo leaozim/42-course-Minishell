@@ -45,7 +45,6 @@ char	*add_spaces_specific_tokens(char *line, int count)
 			while (value--)
 				str[j++] = line[i++];
 			str[j] = SPACE;
-		
 			j++;
 		}
 		else
