@@ -61,7 +61,7 @@ void	create_tokens(void)
 	char	*str_with_spcs;
 	int		qtt_tokens;
 
-	// ms.prompt_line = add_marker(ms.prompt_line, SPACE, MARKER);
+	ms.prompt_line = add_marker(ms.prompt_line);
 	replace_value_inside_quotes(ms.prompt_line, SPACE, REPLACE_VALUE);
 	qtt_tokens = count_tokens_specific(ms.prompt_line);
 	str_with_spcs = add_spaces_specific_tokens(ms.prompt_line, qtt_tokens);

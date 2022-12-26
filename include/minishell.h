@@ -28,8 +28,8 @@ void		destroy_minishell(void);
 									lexer									
 \* -----------------------------------------------------------------------*/
 void			create_tokens(void);
-// char			*add_marker(char *line);
-char			*add_marker(char *line, int old_vle, int new_vle);
+char			*add_marker(char *line);
+// char			*add_marker(char *line, int old_vle, int new_vle);
 char			*add_characters_in_specific_position(char *line, int index, char characters);
 void			replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 int				count_tokens_specific(char *str);
@@ -38,7 +38,8 @@ int				check_len_tab(char **str);
 void			reverse_replace(char **table_tokens, int len_tab);
 int				*identify_tokens(char **str, int len_tab);
 void			create_token_list(char **str, int *id, int len);
-t_tokens		*create_content(char *tks, int index);
+// t_tokens		*create_content(char *tks, int index);
+t_tokens		*create_content(char *tks, int index, int id);
 t_bool			check_for_specific_token(char c);
 void			get_quotes(int value, char line, int *i, int **qtt_tokens);
 int				check_qtt_to_be_incremented(char *line);

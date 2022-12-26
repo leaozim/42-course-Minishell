@@ -107,67 +107,67 @@ char	*add_characters_in_specific_position(char *line, int index, char characters
 	return (str);
 }
 
-// char	*add_marker(char *line)
-// {
-// 	t_bool	is_two_quotes;
-// 	int		quotes;
-// 	int		i;
-	
-// 	i = 0;
-// 	while (i < (int)ft_strlen(line))
-// 	{
-// 		is_two_quotes = FALSE;
-// 		if (line[i] == SQUOTE || line[i] == DQUOTES)
-// 		{
-// 			quotes = line[i];
-// 			i++;
-// 			while (line[i] && line[i] != quotes)
-// 				i++;
-// 			if (line[i])
-// 				i++;
-// 			if ((line[i] && line[i] != ' ' && line[i] != '\0'))
-// 				is_two_quotes = TRUE;
-// 		}
-// 		else if (i > 0)
-// 		{
-// 			if (line[i] != ' ' && (line[i + 1] == '\"' || line[i + 1] == '\''))
-// 			{
-// 				is_two_quotes = TRUE;
-// 				i++;
-// 			}
-// 		}
-// 		if (is_two_quotes == TRUE)
-// 			line = add_characters_in_specific_position(line, i, MARKER);
-// 		i++;
-// 	}
-// 	return (line);
-// }
-
-char	*add_marker(char *line, int old_vle, int new_vle)
+char	*add_marker(char *line)
 {
-	char	*str;
+	t_bool	is_two_quotes;
 	int		quotes;
 	int		i;
-
+	
 	i = 0;
-	str = line;
-	quotes = 0;
-	while (str[i])
+	while (i < (int)ft_strlen(line))
 	{
-		if (str[i] == SQUOTE || str[i] == DQUOTES)
+		is_two_quotes = FALSE;
+		if (line[i] == SQUOTE || line[i] == DQUOTES)
 		{
-			quotes = str[i];
+			quotes = line[i];
 			i++;
-			while (str[i] && str[i] != quotes)
+			while (line[i] && line[i] != quotes)
+				i++;
+			if (line[i])
+				i++;
+			if ((line[i] && line[i] != ' ' && line[i] != '\0'))
+				is_two_quotes = TRUE;
+		}
+		else if (i > 0)
+		{
+			if (line[i] != ' ' && (line[i + 1] == '\"' || line[i + 1] == '\''))
 			{
+				is_two_quotes = TRUE;
 				i++;
 			}
-			if (str[i] == old_vle)
-				str[i] = new_vle;
-			i++;
 		}
-		while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
-			i++;
+		if (is_two_quotes == TRUE)
+			line = add_characters_in_specific_position(line, i, MARKER);
+		i++;
 	}
-	return(str);
+	return (line);
 }
+
+// char	*add_marker(char *line, int old_vle, int new_vle)
+// {
+// 	char	*str;
+// 	int		quotes;
+// 	int		i;
+
+// 	i = 0;
+// 	str = line;
+// 	quotes = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == SQUOTE || str[i] == DQUOTES)
+// 		{
+// 			quotes = str[i];
+// 			i++;
+// 			while (str[i] && str[i] != quotes)
+// 			{
+// 				i++;
+// 			}
+// 			if (str[i] == old_vle)
+// 				str[i] = new_vle;
+// 			i++;
+// 		}
+// 		while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
+// 			i++;
+// 	}
+// 	return(str);
+// }

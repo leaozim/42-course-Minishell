@@ -9,6 +9,7 @@
 # define TEMP 2
 # define TMP_FILE	"./minishell_temp_file"
 # define INDEX_ZERO 0
+# define TERMINATOR -1
 
 # define REPLACE_VALUE 3
 # define SPACE ' '
@@ -26,6 +27,7 @@ typedef struct s_tokens
 {
 	char	*token;
 	int		id_token;
+	int		index;
 	t_bool	err;
 }	t_tokens;
 

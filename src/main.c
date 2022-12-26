@@ -1,7 +1,5 @@
 #include "../include/minishell.h"
 
-# define TERMINATOR -1
-
 void	repl_minshell(void)
 {
 	while (TRUE)
@@ -12,13 +10,12 @@ void	repl_minshell(void)
 		parser();
 		// printf(CYAN"\nEXPANDER\n"RESET);
 		expander();
-		
 		// echo();
 		// builtin_env();
 		// builtin_export("OLAGALERA");
 		// is_builtins();
 		// print_tokens();
-		// join_tokens(&ms.tks);
+		join_tokens(&ms.tks);
 		print_tokens();
 		
 		destroy_minishell();
@@ -45,7 +42,7 @@ void	print_tokens(void)
 	{
 		tklist = (t_tokens *)node->content;
 		printf("tokens = %s\n", tklist->token);
-		// printf("id     = %d\n", tklist->id_token);
+		printf("id     = %d\n", tklist->index);
 		node = node->next;
 	}
 }
