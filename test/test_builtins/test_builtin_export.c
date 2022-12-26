@@ -22,8 +22,6 @@ void    test_builtin_export()
 	value = builtin_export("OLA=%PESSOAL");
 	TEST_ASSERT_EQUAL_INT(0, value);
 
-	// value = builtin_export("\"OLA\"=%PESSOAL"); fazer uma função que tira as aspas da
-	// TEST_ASSERT_EQUAL_INT(0, value);            string antes do sinal de igual
 
 	value = builtin_export("%=PESSOAL");
 	TEST_ASSERT_EQUAL_INT(1, value);
@@ -61,20 +59,48 @@ void    test_builtin_export()
 	value = builtin_export("OLA=%");
 	TEST_ASSERT_EQUAL_INT(0, value);
 
+	value = builtin_export("\"OLA\"=%PESSOAL");
+	TEST_ASSERT_EQUAL_INT(0, value);
 
+	value = builtin_export("\'OLA\'=%PESSOAL");
+	TEST_ASSERT_EQUAL_INT(0, value);
 
-	// value = builtin_export("OLA%");
-	// TEST_ASSERT_EQUAL_INT(1, value);
+	value = builtin_export("\'OLA\'=\'%PESSOAL\'");
+	TEST_ASSERT_EQUAL_INT(0, value);
 
-	// value = builtin_export("=");
-	// TEST_ASSERT_EQUAL_INT(1, value);
+	value = builtin_export("\'%OLA\'=\'%PESSOAL\'");
+	TEST_ASSERT_EQUAL_INT(1, value);
 
-	// value = builtin_export("=OLA");
-	// TEST_ASSERT_EQUAL_INT(1, value);
-	
-	// value = builtin_export("_23=OLA");
-	// TEST_ASSERT_EQUAL_INT(1, value);
+	value = builtin_export("\"\'OLA\'\"=\'\"%PESSOAL\"\'");
+	TEST_ASSERT_EQUAL_INT(1, value);
 
-	// value = builtin_export("23=OLA");
-	// TEST_ASSERT_EQUAL_INT(1, value);
+	value = builtin_export("\'\"OLA\"\'=\"\'%PESSOAL\'\"");
+	TEST_ASSERT_EQUAL_INT(1, value);
+
+	value = builtin_export("\"OLA\"=\'\"%PESSOAL\"\'");
+	TEST_ASSERT_EQUAL_INT(0, value);
+
+	value = builtin_export("\"OLA\"=\"\'%PESSOAL\'\"");
+	TEST_ASSERT_EQUAL_INT(0, value);
+
+	value = builtin_export("\"OLA\"=\"\"%PESSOAL\"\"");
+	TEST_ASSERT_EQUAL_INT(0, value);
+
+	value = builtin_export("\"OLA\"=\'\"%PESSOAL\"\'");
+	TEST_ASSERT_EQUAL_INT(0, value);
+
+	value = builtin_export("OLA=\"%PESSOAL\"");
+	TEST_ASSERT_EQUAL_INT(0, value);
+
+	value = builtin_export("OLA=\'%PESSOAL\'");
+	TEST_ASSERT_EQUAL_INT(0, value);
+
+	value = builtin_export("OLA=\"PESSOAL\"");
+	TEST_ASSERT_EQUAL_INT(0, value);
+
+	value = builtin_export("OLA=\'PESSOAL\'");
+	TEST_ASSERT_EQUAL_INT(0, value);
+
+	value = builtin_export("OLA=PESSOAL");
+	TEST_ASSERT_EQUAL_INT(0, value);
 }

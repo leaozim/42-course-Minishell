@@ -48,5 +48,6 @@ void		test_is_error_syntax_metachacacter(void);
 void		test_error_syntax_single_metachacacter(void);
 void		test_open_files(void);
 void        test_builtin_export(void);
+void		test_strtrim_allchars(void);
 
 #endif
