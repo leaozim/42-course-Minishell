@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim_allchars.c                              :+:      :+:    :+:   */
+/*   ft_strtrim_specific_pos.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 08:24:36 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/12/26 09:00:05 by etomiyos         ###   ########.fr       */
+/*   Created: 2022/12/26 08:45:15 by etomiyos          #+#    #+#             */
+/*   Updated: 2022/12/26 08:56:38 by etomiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim_allchars(char *str, char c)
+char	*ft_strtrim_specific_pos(char *str, int *pos, int term)
 {
 	char	*dest;
-	int		count;
 	int		i;
 	int		j;
+	int		k;
 
-	if (ft_strchr(str, c) == NULL)
-		return (ft_strdup(str));
-	count = ft_strchr_count(str, c);
-	dest = ft_calloc(ft_strlen(str) - (count - 1), sizeof(char));
+	k = ft_strlen(str) - ft_intarray_len(pos, term);
+	dest = ft_calloc(k + 1, sizeof(char));
 	i = 0;
 	j = 0;
-	while (i < (int) ft_strlen(str))
+	k = 0;
+	while (i < (int)ft_strlen(str))
 	{
-		while (str[i] == c)
+		while (i == pos[k])
+		{
 			i++;
+			k++;
+		}
 		dest[j] = str[i];
 		j++;
 		i++;

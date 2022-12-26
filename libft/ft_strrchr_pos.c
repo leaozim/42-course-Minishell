@@ -6,13 +6,13 @@
 /*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 01:48:07 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/12/19 21:01:45 by etomiyos         ###   ########.fr       */
+/*   Updated: 2022/12/26 08:59:44 by etomiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strrchr_pos(const char	*s, int c)
+int	ft_strrchr_pos(const char *s, int c)
 {
 	int	i;
 

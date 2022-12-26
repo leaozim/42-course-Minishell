@@ -6,7 +6,7 @@
 /*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 15:24:16 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/12/24 15:24:24 by etomiyos         ###   ########.fr       */
+/*   Updated: 2022/12/26 08:59:53 by etomiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	ft_strchr_count(char *str, char c)
 			count++;
 		i++;
 	}
-	return(count);
+	return (count);
 }

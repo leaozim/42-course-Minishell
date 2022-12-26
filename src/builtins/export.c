@@ -1,15 +1,4 @@
 #include "../../include/minishell.h"
-#include "defines.h"
-
-void	msg_error_not_a_valid_identifier(char *token, char *cmd)
-{
-	ft_putstr_fd("Minishell: ", STDERR_FILENO);
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putstr_fd(" `", STDERR_FILENO);
-	ft_putstr_fd(token, STDERR_FILENO);
-	ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
-	ms.exit_status = 1;
-}
 
 int	count_quotes_pair(char	*str, char c, int *i)
 {
@@ -43,7 +32,7 @@ int	update_strlen_to_quote_removal(char	*str)
 	return (new_len);
 }
 
-int	*set_positions_quote_removal(char *str)
+int	*set_positions_quote_removal(char *str, int terminator)
 {
 	int	i;
 	int	j;
@@ -68,44 +57,8 @@ int	*set_positions_quote_removal(char *str)
 		}
 		i++;
 	}
-	positions[j] = -1;
+	positions[j] = terminator;
 	return (positions);
-}
-
-size_t	ft_intarray_len(int *array, int terminator)
-{
-	int	i;
-
-	i = 0;
-	while (array[i] != terminator)
-		i++;
-	return (i);
-}
-
-char	*ft_strtrim_specific_positions(char *str, int *positions)
-{
-	char	*dest;
-	int		i;
-	int		j;
-	int		k;
-
-	dest = ft_calloc((ft_strlen(str) - ft_intarray_len(positions, -1)) + 1, sizeof(char));
-	i = 0;
-	j = 0;
-	k = 0;
-	while (i < (int)ft_strlen(str))
-	{
-		while (i == positions[k])
-		{
-			i++;
-			k++;
-		}
-		dest[j] = str[i];
-		j++;
-		i++;
-	}
-	printf("%s\n", dest);
-	return (dest);
 }
 
 char	*quote_removal(char *str)
@@ -113,8 +66,8 @@ char	*quote_removal(char *str)
 	int		*positions;
 	char	*new_str;
 
-	positions = set_positions_quote_removal(str);
-	new_str = ft_strtrim_specific_positions(str, positions);
+	positions = set_positions_quote_removal(str, TERMINATOR);
+	new_str = ft_strtrim_specific_pos(str, positions, TERMINATOR);
 	free(positions);
 	return (new_str);
 }

@@ -88,7 +88,7 @@ void			is_builtins(void);
 int				echo(void);
 void			builtin_env(void);
 int				builtin_export(char *token);
-char			*ft_strtrim_allchars(char *str, char c);
+void			msg_error_not_a_valid_identifier(char *token, char *cmd);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

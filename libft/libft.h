@@ -35,6 +35,7 @@ int		ft_tolower(int c);
 double	ft_atof(const char *str);
 
 size_t	ft_strlen(const char *s);
+size_t	ft_intarray_len(int *array, int terminator);
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
@@ -63,6 +64,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strtrim_allchars(char *str, char c);
+char	*ft_strtrim_specific_pos(char *str, int *pos, int term);
 char	**ft_split(char const *s, char c);
 int		split_count_solo(char const *s, char c);
 char	*ft_itoa(int n);
