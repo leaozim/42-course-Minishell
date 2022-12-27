@@ -1,22 +1,38 @@
 #include "../../include/minishell.h"
 
 
-void deleteNode(t_list **head) 
+void delete_next_node(t_list **head, t_list **content) 
 {
 	t_list		*temp;
 	t_list		*aux;
 
-	(void)temp;
-	(void)aux;
-	temp = *head;
-	// aux = key->next;
-	temp = key->next; 
-	ft_lstdelone(key, free);
-	
-	// printf("")
+	aux = *head;
+	temp = (*content)->next;
+	ft_lstdelone(*content, free);
+	aux->next = temp;
+	*head = aux;
 }
 
+void delete_next_next_node(t_list **head, t_list **content)
+{
+	t_list		*temp;
+	t_list		*aux;
 
+	aux = *head;
+	if ((*content)->next)
+	{
+		temp = (*content)->next; 
+		ft_lstdelone(*content, free);
+		aux->next = temp;
+		*head = aux;
+	}
+	else
+	{
+		(*content)->next = NULL;
+		ft_lstdelone(*content, free);
+		aux->next = aux;
+	}
+}
 
 void	join_tokens(t_list **tks)
 {
@@ -43,17 +59,18 @@ void	join_tokens(t_list **tks)
 				temp = ft_strjoin(tklist->token, next_next->token);
 				free(tklist->token);
 				tklist->token = temp;
-				// deleteNode(&node);
+				// delete_next_node(&node, &node->next);
+				// deleteNode(&node, &node->next->next);
 				// deleteNode(&node, next_next->index);
 			}
-			else
-			{
-				temp = ft_strjoin(temp, next_next->token);
-				free(tklist->token);
-				tklist->token = temp;
-			}
+			// else
+			// {
+			// 	temp = ft_strjoin(temp, next_next->token);
+			// 	free(tklist->token);
+			// 	tklist->token = temp;
+			// 	// delete_next_node(&node, &node->next);
+			// }
 			i++;
-			
 		}
 		node = node->next;
 	}

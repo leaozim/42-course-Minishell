@@ -29,7 +29,7 @@ int    consecutive_metachars(char *token, char *next_token, int id, int next_id)
 	return (0);
 }
 
-int    is_single_metachar(char *token, int id, int len_tokens)
+int	is_single_metachar(char *token, int id, int len_tokens)
 {
 	if (is_metachars(id) && len_tokens == 1 && id != QUERY)
 	{

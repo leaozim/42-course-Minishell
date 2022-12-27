@@ -25,9 +25,9 @@ int main(void)
 	RUN_TEST(check_expander);
 	RUN_TEST(check_brace_expansion);
 	RUN_TEST(check_repl);
-	RUN_TEST(test_is_error_syntax_metachacacter);
+	// RUN_TEST(test_is_error_syntax_metachacacter);
 	RUN_TEST(test_open_files);
 	RUN_TEST(test_builtin_export);
-	// RUN_TEST(add_characters_in_espcific_position);
+	RUN_TEST(add_characters_in_espcific_position);
 	return (UNITY_END());
 }

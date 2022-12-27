@@ -7,7 +7,7 @@ void create_valid_metachacacter(char *prompt)
 	ms.prompt_line = ft_strdup(prompt);
 	is_erro_sintaxy_quotes(ms.prompt_line);
 	create_tokens();
-	error_syntaxy_metachars(ms.tks, ms.len_tokens);
+	// error_syntaxy_metachars(ms.tks, ms.len_tokens);
 	node = ms.tks;
 	while (node)
 	{
@@ -24,7 +24,7 @@ void create_invalid_metachacacter(char *prompt)
 	ms.prompt_line = ft_strdup(prompt);
 	is_erro_sintaxy_quotes(ms.prompt_line);
 	create_tokens();
-	error_syntaxy_metachars(ms.tks, ms.len_tokens);
+	// error_syntaxy_metachars(ms.tks, ms.len_tokens);
 	node = ms.tks;
 	while (node)
 	{

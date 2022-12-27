@@ -142,32 +142,3 @@ char	*add_marker(char *line)
 	}
 	return (line);
 }
-
-// char	*add_marker(char *line, int old_vle, int new_vle)
-// {
-// 	char	*str;
-// 	int		quotes;
-// 	int		i;
-
-// 	i = 0;
-// 	str = line;
-// 	quotes = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == SQUOTE || str[i] == DQUOTES)
-// 		{
-// 			quotes = str[i];
-// 			i++;
-// 			while (str[i] && str[i] != quotes)
-// 			{
-// 				i++;
-// 			}
-// 			if (str[i] == old_vle)
-// 				str[i] = new_vle;
-// 			i++;
-// 		}
-// 		while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
-// 			i++;
-// 	}
-// 	return(str);
-// }
