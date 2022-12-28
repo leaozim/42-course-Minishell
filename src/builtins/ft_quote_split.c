@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+#include "defines.h"
 
 int	count_operators(char *str, char c, int *i, int *count);
 
@@ -31,7 +32,6 @@ int	count_quotes_pair(char	*str, char c, int *i)
 	}
 	if (str[*i + 1] != SPACE && !ft_isops(str[*i + 1]))
 	{
-		printf(RED"str[%d]: (%c) len: %ld\n"RESET, *i, str[*i], ft_strlen(str) - 1);
 		while((str[*i] != SQUOTE || str[*i] != DQUOTES) && !ft_isops(str[*i]) && *i != (int)ft_strlen(str) - 1)
 			*i += 1;
 	}
@@ -58,34 +58,30 @@ int	count_quoted_words(char	*str, char c, int *i, int *count)
 
 int	count_operators(char *str, char c, int *i, int *count)
 {
-	t_bool	rdrct_in;
-	t_bool	rdrct_ou;
-
-	rdrct_in = FALSE;
-	rdrct_ou = FALSE;
 	while (str[*i] != DQUOTES && str[*i] != SQUOTE && str[*i] != c)
 	{
-		if (*i == (int)ft_strlen(str) - 1)
+		if (*i == (int)ft_strlen(str))
 		{
-			*count += 1;
 			return (1);
 		}
-		if (str[*i] == '<')
+		else if (str[*i] == RDRCT_IN && str[*i + 1] == RDRCT_IN)
 		{
-			rdrct_in = !rdrct_in;
-			if (rdrct_in == TRUE)
-				*count += 1;
+			*count += 1;
+			*i += 1;
 		}
-		if (str[*i] == '>')
+		else if (str[*i] == RDRCT_OU && str[*i + 1] == RDRCT_OU)
 		{
-			rdrct_ou = !rdrct_ou;
-			if (rdrct_in == TRUE)
-				*count += 1;
+			*count += 1;
+			*i += 1;
 		}
-		if (str[*i] == PIPE)
+		else if (str[*i] == RDRCT_IN)
 		{
 			*count += 1;
 		}
+		else if (str[*i] == RDRCT_OU)
+			*count += 1;
+		else if (str[*i] == PIPE)
+			*count += 1;
 		*i += 1;
 	}
 	return (0);
@@ -102,6 +98,10 @@ int	count_words(char *str, char c, int *i, int *count)
 		}
 		if (ft_isops(str[*i])) //&& diferente de espaço
 		{
+			if (*i > 1 && str[*i - 1] != c)
+			{
+				*count += 1;
+			}
 			if (count_operators(str, c, i, count) == 1)
 			{
 				*count += 1;

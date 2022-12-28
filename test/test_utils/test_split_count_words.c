@@ -408,6 +408,12 @@ void    test_split_count_words(void)
 	TEST_ASSERT_EQUAL_INT(3, count);
 	free(str);
 
+	//64
+	str = strdup("\"ola\"\"<<\"\"mundo\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
 	//65
 	str = strdup("\"ola\"< <\"mundo\"");
 	count = split_count_words(str, ' ');
@@ -443,35 +449,48 @@ void    test_split_count_words(void)
 	TEST_ASSERT_EQUAL_INT(4, count);
 	free(str);
 
-	str = strdup("<");
+
+	str = strdup("<<");
 	count = split_count_words(str, ' ');
 	TEST_ASSERT_EQUAL_INT(1, count);
 	free(str);
 
-	// str = strdup("<<");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(1, count);
-	// free(str);
+	str = strdup("<<<<");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(2, count);
+	free(str);
 
-	// str = strdup("<<<<");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(2, count);
-	// free(str);
+	str = strdup("<<<<<");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(3, count);
+	free(str);
+	
+	str = strdup("<<<");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(2, count);
+	free(str);
 
-	// str = strdup("<<<<<");
+	str = strdup("<><<>>><");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(6, count);
+	free(str);
+
+	// str = strdup("<uname>");
 	// count = split_count_words(str, ' ');
 	// TEST_ASSERT_EQUAL_INT(3, count);
 	// free(str);
-	
-	// str = strdup("<<<");
+
+	// str = strdup("<<uname>>");
 	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(2, count);
+	// TEST_ASSERT_EQUAL_INT(3, count);
 	// free(str);
 
+	// str = strdup("uname < <<uname >>yes");
+	// count = split_count_words(str, ' ');
+	// TEST_ASSERT_EQUAL_INT(6, count);
+	// free(str);
 
-
-
-	//
+	// //
 	// str = strdup("\"\"\'\'\"\"\'\'OLA");
 	// count = split_count_words(str, ' ');
 	// TEST_ASSERT_EQUAL_INT(1, count);
