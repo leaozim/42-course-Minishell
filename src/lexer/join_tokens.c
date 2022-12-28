@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 
 
-void delete_next_node(t_list **head, t_list **content) 
+void	delete_next_node(t_list **head, t_list **content) 
 {
 	t_list		*temp;
 	t_list		*aux;
@@ -13,7 +13,7 @@ void delete_next_node(t_list **head, t_list **content)
 	*head = aux;
 }
 
-void delete_next_next_node(t_list **head, t_list **content)
+void	delete_next_next_node(t_list **head, t_list **content)
 {
 	t_list		*temp;
 	t_list		*aux;

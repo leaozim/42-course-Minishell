@@ -9,10 +9,10 @@ void	repl_minshell(void)
 		create_tokens();
 		parser();
 		expander();
-		echo();
+		// echo();
 		// builtin_env();
 		// builtin_export("OLAGALERA");
-		// is_builtins();
+		is_builtins();
 		// printf(CYAN"\nANTES\n"RESET);
 		// print_tokens();
 		// print_tokens();
@@ -39,6 +39,8 @@ void	print_tokens(void)
 	t_list		*node;
 	t_tokens	*tklist;
 
+	if (!ms.tks)
+		return ;
 	node = ms.tks;
 	while (node)
 	{

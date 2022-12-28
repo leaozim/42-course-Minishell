@@ -5,11 +5,14 @@ void	is_builtins(void)
 	t_list		*node;
 	t_tokens	*tklist;
 
+	if (!ms.tks)
+		return ;
 	node = ms.tks;
 	tklist = (t_tokens *)node->content;
-	// printf("tokens = %s\n", tklist->token);
 	if (!ft_strcmp("echo", tklist->token))
-	{
-		echo();
-	}
+		builtin_echo();
+	if (!ft_strcmp("pwd", tklist->token))
+		builtin_pwd();
+	if (!ft_strcmp("cd", tklist->token))
+		builtin_cd();
 }

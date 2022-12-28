@@ -43,15 +43,13 @@ int	print_echo_node(t_list **node, int qtt_n)
 	int			i;
 
 	i = 0;
-	while (*node)
+	while ((*node)->next)
 	{
-		if ((*node)->next)
-			next = (t_tokens *)(*node)->next->content;
+		next = (t_tokens *)(*node)->next->content;
 		if (ms.len_tokens == 2 && is_operand_n(next->token))
 			return (1);
-		if ((*node)->next)
-			printf("%s", next->token);
-		if ((*node) && i < ms.len_tokens - qtt_n - 2)
+		printf("%s", next->token);
+		if (i < ms.len_tokens - qtt_n - 2)
 			printf(" ");
 		(*node) = (*node)->next;
 		i++;
@@ -66,7 +64,7 @@ int	print_echo_node(t_list **node, int qtt_n)
 	return (0);
 }
 
-int	echo(void)
+int	builtin_echo(void)
 {
 	t_list		*node;
 	int			qtt_n;
