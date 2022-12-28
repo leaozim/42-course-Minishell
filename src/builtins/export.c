@@ -92,7 +92,6 @@ int	builtin_export(char *token)
 {
 	char	*str;
 
-	// ft_quote_split("\"OLA\" PESSOAL TUDO\"BEM COM\" \"VOCES\"\"POR AI?\"", SPACE);
 	str = quote_removal(token);
 	if (check_error_invalid_identifier(str) == TRUE)
 	{

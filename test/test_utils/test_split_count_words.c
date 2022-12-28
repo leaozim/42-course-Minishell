@@ -17,6 +17,12 @@ void    test_split_count_words(void)
 	TEST_ASSERT_EQUAL_INT(2, count);
 	free(str);
 
+	//teste
+	str = strdup("\"OLA\"\"PESSOAL\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
 	//2
 	str = strdup("OLA PESSOAL TUDO");
 	count = split_count_words(str, ' ');
@@ -140,7 +146,7 @@ void    test_split_count_words(void)
 	//22
 	str = strdup("\"OLA\"PESSOAL");
 	count = split_count_words(str, ' ');
-	TEST_ASSERT_EQUAL_INT(2, count);
+	TEST_ASSERT_EQUAL_INT(1, count);
 	free(str);
 
 	//23
@@ -164,119 +170,311 @@ void    test_split_count_words(void)
 	//26
 	str = strdup("\"OLA TUDO BEM    \"\"COM VOCE\" ");
 	count = split_count_words(str, ' ');
-	TEST_ASSERT_EQUAL_INT(2, count);
+	TEST_ASSERT_EQUAL_INT(1, count);
 	free(str);
 
-	//27 //PAREI NO TESTE 27
+	//27
+	str = strdup("\"OLA PESSOAL COMO    \"\"VOCES ESTAO? ");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//28
 	str = strdup("\"OLA TUDO BEM    \"\"COM VOCE ");
 	count = split_count_words(str, ' ');
 	TEST_ASSERT_EQUAL_INT(1, count);
 	free(str);
 
-	// str = strdup("\"OLA\"|\"PESSOAL\"");		//tratar redirecionadores | < > << >>
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(3, count);
-	// free(str);
+	//29
+	str = strdup("\"OLA\"|\"PESSOAL\"");		//ola||mundo
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(3, count);
+	free(str);
 
-	// str = strdup("\"OLA\" PESSOAL TUDO\"BEM COM\" \"VOCES\"\"POR AI?\"");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(6, count);
-	// free(str);
+	//30
+	str = strdup("\"OLA\"||\"PESSOAL\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(4, count);
+	free(str);
 
-	// str = strdup("OLA | PESSOAL");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(3, count);
-	// free(str);
+	//31
+	str = strdup("\"OLA\"|| \"PESSOAL\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(4, count);
+	free(str);
 
-	// str = strdup("\"OLA\"\"PESSOAL\"");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(2, count);
-	// free(str);
+	//32
+	str = strdup("\"OLA\" ||\"PESSOAL\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(4, count);
+	free(str);
 
-	// str = strdup("\"OLA\"PESSOAL");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(2, count);
-	// free(str);
+	//33
+	str = strdup("\"A\"\"B\"\"C\"\"D\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
 
-	// str = strdup("\"OLA\" PESSOAL");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(2, count);
-	// free(str);
+	//34
+	str = strdup("\"A\"\"B\" \'\"C\"\"D\"\'    \'");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(2, count);
+	free(str);
 
-	// str = strdup("OLA \"PESSOAL\"");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(2, count);
-	// free(str);
+	//35
+	str = strdup("\"OLA\" PESSOAL TUDO\"BEM COM\" \"VOCES\"\"POR AI?\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(4, count);
+	free(str);
 
-	// str = strdup("  OLA \"PESSOAL\"  ");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(2, count);
-	// free(str);
+	//36
+	str = strdup("OLA | PESSOAL");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(3, count);
+	free(str);
 
-	// str = strdup("    \"     \"   ");
+	//37
+	str = strdup("\"OLA\"\"PESSOAL\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//38
+	str = strdup("\"OLA\"PESSOAL");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//39
+	str = strdup("\"OLA\" PESSOAL");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(2, count);
+	free(str);
+
+	//40
+	str = strdup("OLA \"PESSOAL\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(2, count);
+	free(str);
+
+	//41
+	str = strdup("  OLA \"PESSOAL\"  ");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(2, count);
+	free(str);
+
+	//42
+	str = strdup("    \"     \"   ");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+
+	//ERRO DE SINTAXE (12 resultados de erros por enquanto)
+	//43
+	str = strdup("\"OLA\"PESSOAL\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//44
+	str = strdup("\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(0, count);
+	free(str);
+
+	//45
+	str = strdup("\"   ");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(0, count);
+	free(str);
+
+	//46
+	str = strdup("    \"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(0, count);
+	free(str);
+
+	//47	
+	str = strdup("    \"   ");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(0, count);
+	free(str);
+
+	//48
+	str = strdup("\"\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(0, count);
+	free(str);
+
+	//49
+	str = strdup("  \"\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(0, count);
+	free(str);
+
+	//50
+	str = strdup("\"\"  ");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(0, count);
+	free(str);
+
+	//51
+	str = strdup("    \"\"   ");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(0, count);
+	free(str);
+
+	//52
+	str = strdup("\"OLA");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(0, count);
+	free(str);
+
+	//53
+	str = strdup("\"OLA\" \'");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//54
+	str = strdup("     \"OLA         \" \'   \' \"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(2, count);
+	free(str);
+
+	//55
+	str = strdup("echo Oi\"oi\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(2, count);
+	free(str);
+
+	//56
+	str = strdup("\"oi\"\"oi\"\"oi\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//57
+	str = strdup("\"oi\"oi\"oo\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//58
+	str = strdup("\"oi\"iajanjka");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//59
+	str = strdup("jszkdjfs\"oi\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//60
+	str = strdup("echo\"oi\"\"oi\"\"oiu\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	str = strdup("echo \"oi\"\"oi\"\"oiu\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(2, count);
+	free(str);
+
+	//61
+	str = strdup("ola||mundo");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(4, count);
+	free(str);
+
+	//62
+	str = strdup("\"ola\"uname|uname\"mundo\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(3, count);
+	free(str);
+
+	//63
+	str = strdup("\"ola\"a|\"mundo\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(3, count);
+	free(str);
+
+	//64
+	str = strdup("\"ola\"<<\"mundo\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(3, count);
+	free(str);
+
+	//65
+	str = strdup("\"ola\"< <\"mundo\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(4, count);
+	free(str);
+
+	//66
+	str = strdup("ola< <mundo");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(4, count);
+	free(str);
+
+	//67
+	str = strdup("ola<<mundo");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(3, count);
+	free(str);
+
+	//69
+	str = strdup("\"ola\"\"|\"\"mundo\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	//70
+	str = strdup("\"ola\"\"||\"\"mundo\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	str = strdup("\"ola\"||\"mundo\"");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(4, count);
+	free(str);
+
+	str = strdup("<");
+	count = split_count_words(str, ' ');
+	TEST_ASSERT_EQUAL_INT(1, count);
+	free(str);
+
+	// str = strdup("<<");
 	// count = split_count_words(str, ' ');
 	// TEST_ASSERT_EQUAL_INT(1, count);
 	// free(str);
 
-	// //ERRO DE SINTAXE (12 resultados de erros por enquanto)
-	// str = strdup("\"OLA\"PESSOAL\"");
+	// str = strdup("<<<<");
 	// count = split_count_words(str, ' ');
 	// TEST_ASSERT_EQUAL_INT(2, count);
 	// free(str);
 
-	// str = strdup("\"");
+	// str = strdup("<<<<<");
 	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(0, count);
-	// free(str);
-
-	// str = strdup("\"   ");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(0, count);
-	// free(str);
-
-	// str = strdup("    \"");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(0, count);
+	// TEST_ASSERT_EQUAL_INT(3, count);
 	// free(str);
 	
-	// str = strdup("    \"   ");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(0, count);
-	// free(str);
-
-	// str = strdup("\"\"");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(0, count);
-	// free(str);
-
-	// str = strdup("  \"\"");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(0, count);
-	// free(str);
-
-	// str = strdup("\"\"  ");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(0, count);
-	// free(str);
-
-	// str = strdup("    \"\"   ");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(0, count);
-	// free(str);
-
-	// str = strdup("\"OLA");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(0, count);
-	// free(str);
-
-	// str = strdup("\"OLA\" \'");
-	// count = split_count_words(str, ' ');
-	// TEST_ASSERT_EQUAL_INT(1, count);
-	// free(str);
-
-	// str = strdup("     \"OLA         \" \'   \' \"");
+	// str = strdup("<<<");
 	// count = split_count_words(str, ' ');
 	// TEST_ASSERT_EQUAL_INT(2, count);
+	// free(str);
+
+
+
+
+	//
+	// str = strdup("\"\"\'\'\"\"\'\'OLA");
+	// count = split_count_words(str, ' ');
+	// TEST_ASSERT_EQUAL_INT(1, count);
 	// free(str);
 }
 

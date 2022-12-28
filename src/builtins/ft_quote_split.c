@@ -1,34 +1,93 @@
 #include "../../include/minishell.h"
 
+int	count_operators(char *str, char c, int *i, int *count);
+
 int	count_quotes_pair(char	*str, char c, int *i)
 {
-	*i += 1;
-	if (*i == (int)ft_strlen(str) || str[*i] == c)
+	if (*i == ((int)ft_strlen(str) - 1))
 	{
 		ft_putstr_fd("Minishell: ", STDERR_FILENO);
 		ft_putstr_fd("ERROR: Invalid quoting syntax\n", STDERR_FILENO);
-		return (FALSE);
+		return (0);
 	}
+	*i += 1;
+	if (str[*i] == c)
+		return (0);
 	while (str[*i] != c)
 	{
-		if (*i == (int)ft_strlen(str))
+		if (*i == (int)ft_strlen(str) - 1)
 		{
-			return (FALSE);
+			return (0);
 		}
 		*i += 1;
+	}
+	if (*i != ((int)ft_strlen(str) - 1)) //check next character after enclosing quote
+	{
+		if (str[*i + 1] == DQUOTES || str[*i + 1] == SQUOTE)
+		{
+			*i += 1;
+			count_quotes_pair(str, c, i);
+		}
+	}
+	if (str[*i + 1] != SPACE && !ft_isops(str[*i + 1]))
+	{
+		printf(RED"str[%d]: (%c) len: %ld\n"RESET, *i, str[*i], ft_strlen(str) - 1);
+		while((str[*i] != SQUOTE || str[*i] != DQUOTES) && !ft_isops(str[*i]) && *i != (int)ft_strlen(str) - 1)
+			*i += 1;
 	}
 	return (TRUE);
 }
 
-int	count_quoted_words(char	*str, int *i, int *count)
+int	count_quoted_words(char	*str, char c, int *i, int *count)
 {
-	if (count_quotes_pair(str, str[*i], i) == FALSE)
-	{
+	int	pair;
+
+	pair = count_quotes_pair(str, str[*i], i);
+	if (pair == 0)
 		return (1);
+	if (ft_isops(str[*i]))
+	{
+		*count += 1;
+		count_operators(str, SPACE, i, count);
 	}
-	*count += 1;
-	printf(YELLOW"%d - str[%d]: %c\n"RESET, *count, *i, str[*i]);
 	*i += 1;
+	*count += 1;
+	(void)c;
+	return (0);
+}
+
+int	count_operators(char *str, char c, int *i, int *count)
+{
+	t_bool	rdrct_in;
+	t_bool	rdrct_ou;
+
+	rdrct_in = FALSE;
+	rdrct_ou = FALSE;
+	while (str[*i] != DQUOTES && str[*i] != SQUOTE && str[*i] != c)
+	{
+		if (*i == (int)ft_strlen(str) - 1)
+		{
+			*count += 1;
+			return (1);
+		}
+		if (str[*i] == '<')
+		{
+			rdrct_in = !rdrct_in;
+			if (rdrct_in == TRUE)
+				*count += 1;
+		}
+		if (str[*i] == '>')
+		{
+			rdrct_ou = !rdrct_ou;
+			if (rdrct_in == TRUE)
+				*count += 1;
+		}
+		if (str[*i] == PIPE)
+		{
+			*count += 1;
+		}
+		*i += 1;
+	}
 	return (0);
 }
 
@@ -36,12 +95,22 @@ int	count_words(char *str, char c, int *i, int *count)
 {
 	while (str[*i] != c)
 	{
-		if (str[*i] == SQUOTE || str[*i] == DQUOTES)	//
-			break ;										//ou return
-		if (*i == (int)ft_strlen(str))
+		if (*i == (int)ft_strlen(str) || ft_strlen(str) == 1)
 		{
 			*count += 1;
 			return (1);
+		}
+		if (ft_isops(str[*i])) //&& diferente de espaço
+		{
+			if (count_operators(str, c, i, count) == 1)
+			{
+				*count += 1;
+				return (1);
+			}
+		}
+		if (str[*i] == SQUOTE || str[*i] == DQUOTES)
+		{
+			return (0);
 		}
 		*i += 1;
 	}
@@ -60,14 +129,20 @@ int	split_count_words(char *str, char c)
 		i++;
 	while (str[i])
 	{
+		if (ft_isops(str[i]))
+		{
+			if (count_operators(str, c, &i, &count) == 1)
+				return (count);
+		}
 		if (str[i] == SQUOTE || str[i] == DQUOTES)
-			count_quoted_words(str, &i, &count); //transformar em void e mudar nome da fn para update index
+		{
+			if (count_quoted_words(str, c, &i, &count) == 1)
+				return (count);
+		}
 		else if (str[i] != c)
 		{
 			if (count_words(str, c, &i, &count) == 1)
-			{
-				return(count);
-			}
+				return (count);
 		}
 		while (str[i] == c && i != (int)ft_strlen(str))
 			i++;
@@ -80,13 +155,9 @@ int	assign_words(char *str, char c, int *i)
 	while (str[*i] != c)
 	{
 		if (str[*i] == SQUOTE || str[*i] == DQUOTES)
-		{
 			break ;
-		}
 		if (*i == (int)ft_strlen(str))
-		{
 			return(1);
-		}
 		*i += 1;
 	}
 	return (0);
@@ -95,19 +166,17 @@ int	assign_words(char *str, char c, int *i)
 int	assign_quoted_words(char *str, int *i)
 {
 	if (count_quotes_pair(str, str[*i], i) == FALSE)
-	{
 		return (1);
-	}
 	*i += 1;
 	return (0);
 }
 
 char	**split_assign_values(char *str, char c, int count)
 {
-	int	i;
-	int	j;
-	int	start;
-	int	end;
+	int		i;
+	int		j;
+	int		start;
+	int		end;
 	char	**table;
 
 	i = 0;
@@ -122,10 +191,14 @@ char	**split_assign_values(char *str, char c, int count)
 		if (str[i] == SQUOTE || str[i] == DQUOTES)
 		{
 			start = i;
-			assign_quoted_words(str, &i);
+			if (assign_quoted_words(str, &i) == 1)
+			{
+				table[j] = NULL;
+				return (table);
+			}
 			end = i;
-			table[j] = ft_substr(str, start, end - start); ///////PEGANDO AQUI
-			printf(BLUE"s: |%d| e: |%d| i:|%d| table[%d]: %s\n"RESET, start, end, i, j, table[j]);
+			table[j] = ft_substr(str, start, end - start);
+			// printf(BLUE"s: |%d| e: |%d| i:|%d| table[%d]: %s\n"RESET, start, end, i, j, table[j]);
 			j++;
 		}
 		if (str[i] != c)
@@ -151,8 +224,6 @@ char	**split_assign_values(char *str, char c, int count)
 		while (str[i] == c && i != (int)ft_strlen(str))
 			i++;
 	}
-	if (count == 0)
-		printf(YELLOW"s: |%d| e: |%d| i:|%d|\n"RESET, start, end, i); //tirar
 	table[j] = NULL;
 	return (table);
 }

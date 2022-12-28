@@ -30,7 +30,7 @@ int main(void)
 	RUN_TEST(test_builtin_export);
 	RUN_TEST(test_strtrim_allchars);
 	RUN_TEST(test_split_count_words);
-	RUN_TEST(test_split_assign_values);
+	// RUN_TEST(test_split_assign_values);
 	// RUN_TEST(add_characters_in_espcific_position);
 	return (UNITY_END());
 }
