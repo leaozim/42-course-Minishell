@@ -16,8 +16,8 @@ void    test_builtin_export()
 	value = builtin_export("OLA");
 	TEST_ASSERT_EQUAL_INT(0, value);
 
-	// value = builtin_export("\"OLA\"");
-	// TEST_ASSERT_EQUAL_INT(0, value);
+	value = builtin_export("\"OLA\"");
+	TEST_ASSERT_EQUAL_INT(0, value);
 
 	value = builtin_export("OLA=PESSOAL");
 	TEST_ASSERT_EQUAL_INT(0, value);

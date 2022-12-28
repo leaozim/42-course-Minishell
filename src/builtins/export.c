@@ -1,5 +1,40 @@
 #include "../../include/minishell.h"
 
+int	count_quotes_pair(char	*str, char c, int *i)
+{
+	if (*i == ((int)ft_strlen(str) - 1))
+	{
+		ft_putstr_fd("Minishell: ", STDERR_FILENO);
+		ft_putstr_fd("ERROR: Invalid quoting syntax\n", STDERR_FILENO);
+		return (0);
+	}
+	*i += 1;
+	if (str[*i] == c)
+		return (0);
+	while (str[*i] != c)
+	{
+		if (*i == (int)ft_strlen(str) - 1)
+		{
+			return (0);
+		}
+		*i += 1;
+	}
+	if (*i != ((int)ft_strlen(str) - 1)) //check next character after enclosing quote
+	{
+		if (str[*i + 1] == DQUOTES || str[*i + 1] == SQUOTE)
+		{
+			*i += 1;
+			count_quotes_pair(str, c, i);
+		}
+	}
+	if (str[*i + 1] != SPACE && !ft_isops(str[*i + 1]))
+	{
+		while((str[*i] != SQUOTE || str[*i] != DQUOTES) && !ft_isops(str[*i]) && *i != (int)ft_strlen(str) - 1)
+			*i += 1;
+	}
+	return (TRUE);
+}
+
 int	update_strlen_to_quote_removal(char	*str)
 {
 	int	i;
