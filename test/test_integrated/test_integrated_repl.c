@@ -46,7 +46,7 @@ void check_repl(void)
 	free_ms();
 
 	int expected6[3] = {COMMAND, RDRCT_OU, FILE_OUT};
-	create_repl( "ls > oi", expected6);
+	create_repl("ls > oi", expected6);
 	free_ms();
 
 	int expected7[4] = {COMMAND, RDRCT_OU, RDRCT_OU, COMMAND};

@@ -22,21 +22,24 @@ PROMPT				=	prompt.c
 LEXER				=	tokens.c									\
 						handle_spaces.c								\
 						create_token_list.c							\
-						utils_lexer.c
+						utils_lexer.c								\
+						join_tokens.c
 
 EXPANDER			=	expander.c brace_expansion.c expander_checks.c
 
-PARSER 				=	parser.c 			\
-						handle_metachars.c	\
-						open_files.c 		\
-						heredoc.c			\
-						error_parser.c		\
+PARSER 				=	parser.c 									\
+						handle_metachars.c							\
+						open_files.c 								\
+						heredoc.c									\
+						error_parser.c								\
 						handle_quotes.c
 
-BUILTINS			=	echo.c				\
-						is_builtins.c		\
-						env.c				\
-						export.c			\
+BUILTINS			=	echo.c										\
+						is_builtins.c								\
+						env.c										\
+						export.c									\
+						pwd.c										\
+						cd.c										\
 						msg_error.c
 
 DIRS				=	. lexer prompt expander parser builtins

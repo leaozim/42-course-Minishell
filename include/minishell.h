@@ -20,7 +20,8 @@ void		check_arguments(int argc);
 void		check_prompt(char *line);
 char		*create_prompt(void);
 t_bool		is_valid_quoting(char **list);
-void		is_erro_sintaxy_quotes(char *line);
+// void		is_erro_sintaxy_quotes(char *line);
+int			is_erro_sintaxy_quotes(char *line);
 void		free_ptrs(char **str);
 void		destroy_minishell(void);
 
@@ -28,7 +29,8 @@ void		destroy_minishell(void);
 									lexer									
 \* -----------------------------------------------------------------------*/
 void			create_tokens(void);
-char			*add_bookmark(char *line);
+char			*add_marker(char *line);
+// char			*add_marker(char *line, int old_vle, int new_vle);
 char			*add_characters_in_specific_position(char *line, int index, char characters);
 void			replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 int				count_tokens_specific(char *str);
@@ -37,10 +39,12 @@ int				check_len_tab(char **str);
 void			reverse_replace(char **table_tokens, int len_tab);
 int				*identify_tokens(char **str, int len_tab);
 void			create_token_list(char **str, int *id, int len);
-t_tokens		*create_content(char *tks, int index);
+// t_tokens		*create_content(char *tks, int index);
+t_tokens		*create_content(char *tks, int index, int id);
 t_bool			check_for_specific_token(char c);
 void			get_quotes(int value, char line, int *i, int **qtt_tokens);
 int				check_qtt_to_be_incremented(char *line);
+void			join_tokens(t_list **tks);
 
 /* -----------------------------------------------------------------------*\
 									parser									
@@ -85,13 +89,16 @@ void			create_env(char **envp);
 void			ft_lstdelone_array(t_list **lst);
 void			ft_lstclear_array(t_list **lst);
 void			is_builtins(void);
-int				echo(void);
+int				builtin_cd(void);
 void			builtin_env(void);
+void			builtin_pwd(void);
+int				builtin_echo(void);
 int				builtin_export(char *token);
 void			msg_error_not_a_valid_identifier(char *token, char *cmd);
 int				count_quotes_pair(char	*str, char c, int *i);
 int				split_count_words(char *str, char c);
 char			**split_assign_values(char *str, char c, int count);
+
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */

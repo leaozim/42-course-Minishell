@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <readline/chardefs.h>
 
 int	check_qtt_to_be_incremented(char *line)
 {
@@ -93,21 +92,26 @@ char	*add_characters_in_specific_position(char *line, int index, char characters
 	while (i < (int)ft_strlen(line) + 1)
 	{
 		if (j == index)
+		{
+			// str[j++] = SPACE;
 			str[j++] = characters;
+			// str[j++] = SPACE;
+		}
 		str[j] = line[i];
 		j++;
 		i++;
 	}
+	str[i] = '\0';
 	free(line);
 	return (str);
 }
 
-char	*add_bookmark(char *line)
+char	*add_marker(char *line)
 {
-	int		i;
 	t_bool	is_two_quotes;
 	int		quotes;
-
+	int		i;
+	
 	i = 0;
 	while (i < (int)ft_strlen(line))
 	{
@@ -118,13 +122,21 @@ char	*add_bookmark(char *line)
 			i++;
 			while (line[i] && line[i] != quotes)
 				i++;
-			i++;
-			// if (line[i] == SQUOTE || line[i] == DQUOTES)
-			if (line[i] && line[i] != ' ')
+			if (line[i])
+				i++;
+			if ((line[i] && line[i] != ' ' && line[i] != '\0'))
 				is_two_quotes = TRUE;
 		}
+		else if (i > 0)
+		{
+			if (line[i] != ' ' && (line[i + 1] == '\"' || line[i + 1] == '\''))
+			{
+				is_two_quotes = TRUE;
+				i++;
+			}
+		}
 		if (is_two_quotes == TRUE)
-			line = add_characters_in_specific_position(ms.prompt_line, i, '6');
+			line = add_characters_in_specific_position(line, i, MARKER);
 		i++;
 	}
 	return (line);

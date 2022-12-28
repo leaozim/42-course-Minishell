@@ -1,37 +1,79 @@
 #include "../../include/minishell.h"
 
-int	echo(void)
+int	is_operand_n(char *str)
 {
-	t_tokens	*next;
-	t_list		*node;
-	// t_tokens	*tklist;
+	int	i;
 
-	node = ms.tks;
-	while (node->next)
+	i = 0;
+	if (str[i] == '-' && ft_strlen(str) > 1)
 	{
-		if (node->next)
-			next = (t_tokens *)node->next->content;
-		// tklist = (t_tokens *)node->content;
-		printf("%s", next->token);
-		if (node->next)
-			printf(" ");
-		node = node->next;
+		i++;
+		while (str[i] == 'n')
+			i++;
+		if (str[i])
+			return (0);
+		else
+			return (1);
 	}
-	node = ms.tks;
-	next = (t_tokens *)node->next->content;
-	if (ft_strcmp("-n", next->token))
-		printf("\n");
 	return (0);
 }
-// int	echo(void)
-// {
-// 	t_tokens	*token;
-// 	t_list		*node;
 
-// 	node = ms.tks;
-// 	// if ()
+void	increment_the_node_while_there_are_n(t_list **node, int *qtt_n)
+{
+	t_tokens	*next;
 
-// 	return (0);
-// }
+	while (*qtt_n < ms.len_tokens)
+	{
+		if ((*node)->next)
+		{
+			next = (t_tokens *)(*node)->next->content;
+			if (is_operand_n(next->token))
+				*node = (*node)->next;
+			else
+				break ;
+		}
+		*qtt_n += 1;
+	}
+}
 
-// void	is_builtins(t_st)
+int	print_echo_node(t_list **node, int qtt_n)
+{
+	t_tokens	*next;
+	int			i;
+
+	i = 0;
+	while ((*node)->next)
+	{
+		next = (t_tokens *)(*node)->next->content;
+		if (ms.len_tokens == 2 && is_operand_n(next->token))
+			return (1);
+		printf("%s", next->token);
+		if (i < ms.len_tokens - qtt_n - 2)
+			printf(" ");
+		(*node) = (*node)->next;
+		i++;
+	}
+	*node = ms.tks;
+	if ((*node)->next)
+	{
+		next = (t_tokens *)(*node)->next->content;
+		if (!is_operand_n(next->token))
+			printf("\n");
+	}
+	return (0);
+}
+
+int	builtin_echo(void)
+{
+	t_list		*node;
+	int			qtt_n;
+
+	node = ms.tks;
+	qtt_n = 0;
+	if (ms.len_tokens == 1)
+		return (printf("\n"), 0);
+	increment_the_node_while_there_are_n(&node, &qtt_n);
+	if (print_echo_node(&node, qtt_n))
+		return (0);
+	return (0);
+}

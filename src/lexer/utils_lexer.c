@@ -6,8 +6,7 @@ t_bool	check_for_specific_token(char c)
 		c == RDRCT_OU || \
 		c == PIPE || \
 		c == SQUOTE || \
-		c == DQUOTES || \
-		c == '6')
+		c == DQUOTES )
 		return (TRUE);
 	return (FALSE);
 }

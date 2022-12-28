@@ -5,15 +5,19 @@ void	repl_minshell(void)
 	while (TRUE)
 	{
 		ms.prompt_line = create_prompt();
-		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens();
 		parser();
 		expander();
 		// echo();
-		print_tokens();
 		// builtin_env();
-		builtin_export("OLAGALERA");
-		// is_builtins();
+		// builtin_export("OLAGALERA");
+		is_builtins();
+		// printf(CYAN"\nANTES\n"RESET);
+		// print_tokens();
+		// print_tokens();
+		// join_tokens(&ms.tks);
+		// printf(CYAN"DEPOIS\n"RESET);
+		// print_tokens();
 		destroy_minishell();
 	}
 }
@@ -33,6 +37,8 @@ void	print_tokens(void)
 	t_list		*node;
 	t_tokens	*tklist;
 
+	if (!ms.tks)
+		return ;
 	node = ms.tks;
 	while (node)
 	{

@@ -23,8 +23,8 @@ int	count_tokens_specific(char *str)
 			qtt_tokens += 1;
 		else if (str[i] == RDRCT_IN)
 			qtt_tokens += 1;
-		else if (str[i] == '6')
-			qtt_tokens += 1;
+		// else if(str[i] == MARKER)
+		// 	qtt_tokens += 1;
 		i++;
 	}
 	return (qtt_tokens);
@@ -61,12 +61,16 @@ void	create_tokens(void)
 	char	*str_with_spcs;
 	int		qtt_tokens;
 
-	// ms.prompt_line = add_bookmark(ms.prompt_line);
-	// printf("str =  %s", ms.prompt_line );
+	if (is_erro_sintaxy_quotes(ms.prompt_line))
+		return ;
+	if (ms.prompt_line == NULL)
+		return ;
+	ms.prompt_line = add_marker(ms.prompt_line);
 	replace_value_inside_quotes(ms.prompt_line, SPACE, REPLACE_VALUE);
 	qtt_tokens = count_tokens_specific(ms.prompt_line);
 	str_with_spcs = add_spaces_specific_tokens(ms.prompt_line, qtt_tokens);
 	ms.tab_tokens = ft_split(str_with_spcs, ' ');
+	// ms.tab_tokens = ft_quote_split(ms.prompt_line, SPACE);
 	ms.len_tokens = check_len_tab(ms.tab_tokens);
 	reverse_replace(ms.tab_tokens, ms.len_tokens);
 	ms.tab_id = identify_tokens(ms.tab_tokens, ms.len_tokens);

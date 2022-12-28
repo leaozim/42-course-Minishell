@@ -13,6 +13,7 @@
 
 # define REPLACE_VALUE 3
 # define SPACE ' '
+# define MARKER '\x06'
 
 # include "../libft/libft.h"
 
@@ -26,6 +27,7 @@ typedef struct s_tokens
 {
 	char	*token;
 	int		id_token;
+	int		index;
 	t_bool	err;
 }	t_tokens;
 
