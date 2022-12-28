@@ -298,7 +298,9 @@ void	create_tokens(void)
 	char	*str_with_spcs;
 	int		qtt_tokens;
 
-	if (ms.prompt_line ==  NULL)
+	if (is_erro_sintaxy_quotes(ms.prompt_line))
+		return ;
+	if (ms.prompt_line == NULL)
 		return ;
 	ms.prompt_line = add_marker(ms.prompt_line);
 	replace_value_inside_quotes(ms.prompt_line, SPACE, REPLACE_VALUE);

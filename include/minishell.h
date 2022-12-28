@@ -20,7 +20,8 @@ void		check_arguments(int argc);
 void		check_prompt(char *line);
 char		*create_prompt(void);
 t_bool		is_valid_quoting(char **list);
-void		is_erro_sintaxy_quotes(char *line);
+// void		is_erro_sintaxy_quotes(char *line);
+int			is_erro_sintaxy_quotes(char *line);
 void		free_ptrs(char **str);
 void		destroy_minishell(void);
 

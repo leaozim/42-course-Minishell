@@ -5,7 +5,6 @@ void	repl_minshell(void)
 	while (TRUE)
 	{
 		ms.prompt_line = create_prompt();
-		is_erro_sintaxy_quotes(ms.prompt_line);
 		create_tokens();
 		parser();
 		expander();
@@ -19,7 +18,6 @@ void	repl_minshell(void)
 		// join_tokens(&ms.tks);
 		// printf(CYAN"DEPOIS\n"RESET);
 		// print_tokens();
-		
 		destroy_minishell();
 	}
 }
