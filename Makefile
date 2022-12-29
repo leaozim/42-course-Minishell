@@ -15,6 +15,7 @@ SRC					=	main.c										\
 						init_minishell.c							\
 						signals.c									\
 						change_colors.c								\
+						cmd_clear.c									\
 						$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)	\
 						$(BUILTINS)
 

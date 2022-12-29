@@ -19,4 +19,6 @@ void	is_builtins(void)
 		builtin_export();
 	else if (!ft_strcmp("color", tklist->token))
 		bash_change_colors();
+	else if (!ft_strcmp("clear", tklist->token))
+		cmd_clear();
 }
