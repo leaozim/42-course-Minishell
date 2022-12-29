@@ -1,6 +1,13 @@
 #include "../include/minishell.h"
-#include "defines.h"
-#include <unistd.h>
+
+static void	msg_available_colors(void)
+{
+	ft_putstr_fd(MSG_INVALID_COLOR 						\
+	BLACK"\nblack" RED"\nred" GREEN"\ngreen"			\
+	YELLOW"\nyellow" BLUE"\nblue" MAGENTA"\nmagenta"	\
+	CYAN"\ncyan" WHITE"\nwhite" RESET"\nreset\n",		\
+	STDIN_FILENO);
+}
 
 void	bash_change_colors()
 {
@@ -29,6 +36,8 @@ void	bash_change_colors()
 			ft_putstr_fd(CYAN, STDIN_FILENO);
 		else if (!ft_strcmp((char*)next->token, "reset"))
 			ft_putstr_fd(RESET, STDIN_FILENO);
+		else
+			msg_available_colors();
 		node = node->next;
 	}
 }
