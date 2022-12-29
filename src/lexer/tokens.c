@@ -23,8 +23,8 @@ int	count_tokens_specific(char *str)
 			qtt_tokens += 1;
 		else if (str[i] == RDRCT_IN)
 			qtt_tokens += 1;
-		// else if(str[i] == MARKER)
-		// 	qtt_tokens += 1;
+		else if(str[i] == MARKER)
+			qtt_tokens += 1;
 		i++;
 	}
 	return (qtt_tokens);

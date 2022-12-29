@@ -15,6 +15,11 @@
 # define SPACE ' '
 # define MARKER '\x06'
 
+# define EXIT_ALONLY 1
+# define EXIT_NO_NUMERIC 2
+# define EXIT_NUMERIC 3
+# define EXIT_TOO_MANY_ARGC 4
+
 # include "../libft/libft.h"
 
 typedef enum e_bool

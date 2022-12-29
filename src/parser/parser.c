@@ -34,11 +34,17 @@ int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 	t_list		*node;
 	t_tokens	*tklist;
 	t_tokens	*next;
+	int			i;
 
 	node = tks;
+	i = 0;
 	while (node)
 	{
 		tklist = (t_tokens *)node->content;
+		if (!ft_strcmp("|", tklist->token) && i == 0)
+			return (msg_error_invalid_synax(tklist->token), 1);
+		if (is_metachars(tklist->id_token) && node->next == NULL)
+			return (msg_error_invalid_synax("newline"), 1);
 		if (is_single_metachar(tklist->token, tklist->id_token, len_tokens))
 			return (1);
 		if (node->next)
@@ -46,6 +52,7 @@ int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 		if (node->next && consecutive_metachars(tklist->token, next->token, \
 			tklist->id_token, next->id_token))
 			return (1);
+		i++;
 		node = node->next;
 	}
 	return (0);

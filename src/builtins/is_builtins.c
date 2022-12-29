@@ -15,4 +15,6 @@ void	is_builtins(void)
 		builtin_pwd();
 	if (!ft_strcmp("cd", tklist->token))
 		builtin_cd();
+	if (!ft_strcmp("exit", tklist->token))
+		builtin_exit();
 }

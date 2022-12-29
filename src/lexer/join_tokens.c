@@ -13,27 +13,33 @@ void	delete_next_node(t_list **head, t_list **content)
 	*head = aux;
 }
 
-void	delete_next_next_node(t_list **head, t_list **content)
+void delete_node(t_list ** tlist, int key)
 {
-	t_list		*temp;
-	t_list		*aux;
-
-	aux = *head;
-	if ((*content)->next)
-	{
-		temp = (*content)->next; 
-		ft_lstdelone(*content, free);
-		aux->next = temp;
-		*head = aux;
+	t_list		*node;
+	t_list		*prev;
+	t_tokens	*token;
+	
+	node = *tlist;
+	token = (t_tokens *)node->content;
+	if (node != NULL && token->index == key) {
+		*tlist = node->next;
+		free(node);
+		return;
 	}
-	else
+	while (node) 
 	{
-		(*content)->next = NULL;
-		ft_lstdelone(*content, free);
-		aux->next = aux;
+		if (token->index == key)
+			break ;
+		printf("id = %d\n", token->index);
+		prev = node;
+		node = node->next;
 	}
+	if (node == NULL)
+		return;
+	prev->next = node->next;
+	free(node);
 }
-
+ 
 void	join_tokens(t_list **tks)
 {
 	t_list		*node;
@@ -41,10 +47,12 @@ void	join_tokens(t_list **tks)
 	t_tokens	*next;
 	t_tokens	*next_next;
 	char		*temp;
+	int			marker;
 	int			i;
 
 	(void)next;
 	node = *tks;
+	marker = 0;
 	i = 0;
 	while (node)
 	{
@@ -54,12 +62,14 @@ void	join_tokens(t_list **tks)
 		if (node->next && ft_strchr(next->token, MARKER))
 		{
 			next_next = (t_tokens *)node->next->next->content;
-			if (i == 0)
+			if (marker == 0)
 			{
 				temp = ft_strjoin(tklist->token, next_next->token);
 				free(tklist->token);
-				tklist->token = temp;
-				// delete_next_node(&node, &node->next);
+				tklist->token = temp; 
+				delete_node(&node, i + 1);
+				// delete_node(&node, i + 2);
+				// delete_next_next_node(&node, &node->next->next);
 				// deleteNode(&node, &node->next->next);
 				// deleteNode(&node, next_next->index);
 			}
@@ -70,8 +80,9 @@ void	join_tokens(t_list **tks)
 			// 	tklist->token = temp;
 			// 	// delete_next_node(&node, &node->next);
 			// }
-			i++;
+			marker++;
 		}
+		i++;
 		node = node->next;
 	}
 }

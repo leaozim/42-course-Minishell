@@ -92,6 +92,7 @@ void			is_builtins(void);
 int				builtin_cd(void);
 void			builtin_env(void);
 void			builtin_pwd(void);
+void			builtin_exit(void);
 int				builtin_echo(void);
 int				builtin_export(char *token);
 void			msg_error_not_a_valid_identifier(char *token, char *cmd);

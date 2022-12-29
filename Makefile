@@ -25,7 +25,9 @@ LEXER				=	tokens.c									\
 						utils_lexer.c								\
 						join_tokens.c
 
-EXPANDER			=	expander.c brace_expansion.c expander_checks.c
+EXPANDER			=	expander.c									\
+						brace_expansion.c							\
+						expander_checks.c
 
 PARSER 				=	parser.c 									\
 						handle_metachars.c							\
@@ -40,7 +42,8 @@ BUILTINS			=	echo.c										\
 						export.c									\
 						pwd.c										\
 						cd.c										\
-						msg_error.c
+						msg_error.c									\
+						exit.c
 
 DIRS				=	. lexer prompt expander parser builtins
 IFLAGS				=	-I $(HEADER_PATH)

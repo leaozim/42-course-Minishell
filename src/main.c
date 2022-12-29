@@ -8,16 +8,12 @@ void	repl_minshell(void)
 		create_tokens();
 		parser();
 		expander();
-		// echo();
-		// builtin_env();
-		// builtin_export("OLAGALERA");
 		is_builtins();
-		// printf(CYAN"\nANTES\n"RESET);
-		// print_tokens();
-		// print_tokens();
-		// join_tokens(&ms.tks);
-		// printf(CYAN"DEPOIS\n"RESET);
-		// print_tokens();
+		printf(CYAN"\nANTES\n"RESET);
+		print_tokens();
+		join_tokens(&ms.tks);
+		printf(CYAN"DEPOIS\n"RESET);
+		print_tokens();
 		destroy_minishell();
 	}
 }
@@ -44,7 +40,7 @@ void	print_tokens(void)
 	{
 		tklist = (t_tokens *)node->content;
 		printf("tokens = %s\n", tklist->token);
-		printf("id     = %d\n", tklist->id_token);
+		printf("id     = %d\n", tklist->index);
 		node = node->next;
 	}
 }
