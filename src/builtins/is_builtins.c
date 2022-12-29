@@ -17,4 +17,6 @@ void	is_builtins(void)
 		builtin_cd();
 	else if (!ft_strcmp("export", tklist->token))
 		builtin_export();
+	else if (!ft_strcmp("color", tklist->token))
+		bash_change_colors();
 }

@@ -4,7 +4,7 @@
 # define ARGUMENT_LIST_TOO_LONG 7
 # define COMMAND_NOT_FOUND 127
 
-# define PROMPT "MiniHELL $ "
+# define PROMPT "🔥 MiniHELL $ "
 # define TOKEN_COUNT 17
 # define TEMP 2
 # define TMP_FILE	"./minishell_temp_file"

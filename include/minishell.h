@@ -99,6 +99,7 @@ void			msg_error_not_a_valid_identifier(char *token, char *cmd);
 int				count_quotes_pair(char	*str, char c, int *i);
 int				split_count_words(char *str, char c);
 char			**split_assign_values(char *str, char c, int count);
+void			bash_change_colors(void);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

@@ -1,5 +1,6 @@
 #include "../../include/minishell.h"
 #include "defines.h"
+#include <stdlib.h>
 #include <unistd.h>
 
 t_bool	check_error_invalid_identifier(char *token)
@@ -28,31 +29,32 @@ t_bool	check_error_invalid_identifier(char *token)
 	return (FALSE);
 }
 
-void	print_export(void)
+int	print_export(t_list **env)
 {
 	t_list		*env_node;
 
-	env_node = ms.env;
+	env_node = *env;
 	if (ms.len_tokens == 1)
 	{
-		while (env_node->next)
+		while (env_node)
 		{
-			ft_putstr_fd(RED"declare -x "RESET, STDOUT_FILENO);
-			ft_putendl_fd(env_node->content, STDOUT_FILENO);
+			ft_putstr_fd("declare -x "RESET, STDOUT_FILENO);
+			ft_putendl_fd((char *)env_node->content, STDOUT_FILENO);
 			env_node = env_node->next;
 		}
+		return (1);
 	}
+	return (0);
 }
 
 int	builtin_export()
 {
 	t_tokens	*next;
 	t_list		*node;
-	t_list		*env_node; //percorrer
 
 	node = ms.tks;
-	env_node = ms.env; //salvar
-	print_export();
+	if (print_export(&ms.env) == 1)
+		return (EXIT_SUCCESS);
 	while (node->next)
 	{
 		next = (t_tokens *)node->next->content;
@@ -61,10 +63,8 @@ int	builtin_export()
 			msg_error_not_a_valid_identifier(next->token, "export");
 			return (EXIT_FAILURE);
 		}
-		ft_lstadd_back(&ms.env, ft_lstnew(next->token));
-		env_node = ft_lstlast(env_node);
+		ft_lstadd_back(&ms.env, ft_lstnew(ft_strdup(next->token)));
 		node = node->next;
-		// printf(RED"%s\n"RESET, (char *)env_node->content);
 	}
 	ms.exit_status = 0;
 	return (EXIT_SUCCESS);

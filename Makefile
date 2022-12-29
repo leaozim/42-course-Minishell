@@ -14,6 +14,7 @@ SRC					=	main.c										\
 						destroyers.c								\
 						init_minishell.c							\
 						signals.c									\
+						change_colors.c								\
 						$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)	\
 						$(BUILTINS)
 

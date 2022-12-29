@@ -9,7 +9,7 @@ void	repl_minshell(void)
 		parser();
 		expander();
 		// echo();
-		// builtin_env();
+		//builtin_env();
 		is_builtins();
 		// printf(CYAN"\nANTES\n"RESET);
 		// print_tokens();
@@ -19,6 +19,7 @@ void	repl_minshell(void)
 		// print_tokens();
 		destroy_minishell();
 	}
+	ft_lstclear(&ms.env, free);
 }
 
 int	main(int argc, char **argv, char **envp)

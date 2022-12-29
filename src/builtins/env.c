@@ -22,7 +22,7 @@ void	create_env(char **envp)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		ft_lstadd_back(&ms.env, ft_lstnew(envp[i]));
+		ft_lstadd_back(&ms.env, ft_lstnew(ft_strdup(envp[i])));
 		i++;
 	}
 }
