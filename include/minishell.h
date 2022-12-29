@@ -24,6 +24,7 @@ t_bool		is_valid_quoting(char **list);
 int			is_erro_sintaxy_quotes(char *line);
 void		free_ptrs(char **str);
 void		destroy_minishell(void);
+void		destroy_t_tokens(void *token);
 
 /* -----------------------------------------------------------------------*\
 									lexer									
@@ -93,7 +94,7 @@ int				builtin_cd(void);
 void			builtin_env(void);
 void			builtin_pwd(void);
 int				builtin_echo(void);
-int				builtin_export(char *token);
+int				builtin_export();
 void			msg_error_not_a_valid_identifier(char *token, char *cmd);
 int				count_quotes_pair(char	*str, char c, int *i);
 int				split_count_words(char *str, char c);

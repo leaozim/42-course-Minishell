@@ -11,8 +11,10 @@ void	is_builtins(void)
 	tklist = (t_tokens *)node->content;
 	if (!ft_strcmp("echo", tklist->token))
 		builtin_echo();
-	if (!ft_strcmp("pwd", tklist->token))
+	else if (!ft_strcmp("pwd", tklist->token))
 		builtin_pwd();
-	if (!ft_strcmp("cd", tklist->token))
+	else if (!ft_strcmp("cd", tklist->token))
 		builtin_cd();
+	else if (!ft_strcmp("export", tklist->token))
+		builtin_export();
 }

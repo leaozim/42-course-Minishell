@@ -10,7 +10,6 @@ void	repl_minshell(void)
 		expander();
 		// echo();
 		// builtin_env();
-		// builtin_export("OLAGALERA");
 		is_builtins();
 		// printf(CYAN"\nANTES\n"RESET);
 		// print_tokens();
