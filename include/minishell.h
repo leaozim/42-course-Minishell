@@ -28,6 +28,8 @@ void		destroy_minishell(void);
 /* -----------------------------------------------------------------------*\
 									lexer									
 \* -----------------------------------------------------------------------*/
+
+void			join_tokens(char **tks, int len_tokens, char *line);
 void			create_tokens(void);
 char			*add_marker(char *line);
 // char			*add_marker(char *line, int old_vle, int new_vle);
@@ -44,7 +46,7 @@ t_tokens		*create_content(char *tks, int index, int id);
 t_bool			check_for_specific_token(char c);
 void			get_quotes(int value, char line, int *i, int **qtt_tokens);
 int				check_qtt_to_be_incremented(char *line);
-void			join_tokens(t_list **tks);
+// void			join_tokens(t_list **tks);
 
 /* -----------------------------------------------------------------------*\
 									parser									

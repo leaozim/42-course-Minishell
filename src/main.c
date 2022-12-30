@@ -6,12 +6,12 @@ void	repl_minshell(void)
 	{
 		ms.prompt_line = create_prompt();
 		create_tokens();
-		parser();
-		expander();
-		is_builtins();
-		printf(CYAN"\nANTES\n"RESET);
-		print_tokens();
-		join_tokens(&ms.tks);
+		// parser();
+		// expander();
+		// is_builtins();
+		// join_tokens(&ms.tks);
+		// printf(CYAN"\nANTES\n"RESET);
+		// print_tokens();
 		printf(CYAN"DEPOIS\n"RESET);
 		print_tokens();
 		destroy_minishell();
@@ -40,7 +40,7 @@ void	print_tokens(void)
 	{
 		tklist = (t_tokens *)node->content;
 		printf("tokens = %s\n", tklist->token);
-		printf("id     = %d\n", tklist->index);
+		// printf("id     = %d\n", tklist->index);
 		node = node->next;
 	}
 }

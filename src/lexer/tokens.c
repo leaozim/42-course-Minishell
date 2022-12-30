@@ -73,7 +73,8 @@ void	create_tokens(void)
 	// ms.tab_tokens = ft_quote_split(ms.prompt_line, SPACE);
 	ms.len_tokens = check_len_tab(ms.tab_tokens);
 	reverse_replace(ms.tab_tokens, ms.len_tokens);
-	ms.tab_id = identify_tokens(ms.tab_tokens, ms.len_tokens);
-	create_token_list(ms.tab_tokens, ms.tab_id, ms.len_tokens);
+	join_tokens(ms.tab_tokens, ms.len_tokens, ms.prompt_line);
+	// ms.tab_id = identify_tokens(ms.tab_tokens, ms.len_tokens);
+	// create_token_list(ms.tab_tokens, ms.tab_id, ms.len_tokens);
 	free(str_with_spcs);
 }

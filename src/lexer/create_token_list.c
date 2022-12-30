@@ -1,13 +1,13 @@
 #include "../../include/minishell.h"
 
-t_tokens	*create_content(char *tks, int index, int id)
+t_tokens	*create_content(char *tks, int index, int key)
 {
 	t_tokens	*content;
 
 	content = ft_calloc(1, sizeof(t_tokens));
 	content->token = tks;
 	content->id_token = index;
-	content->index = id;
+	content->index = key;
 	return (content);
 }
 
