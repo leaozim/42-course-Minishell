@@ -84,11 +84,11 @@ t_bool	check_export_update_value(char *token)
 	return (FALSE);
 }
 
-t_bool export_invalid_identifier(t_tokens **next, t_list **node)
+t_bool error_invalid_identifier(t_tokens **next, t_list **node, char *cmd)
 {
 	if (check_error_invalid_identifier((*next)->token) == TRUE)
 	{
-		msg_error_not_a_valid_identifier((*next)->token, "export");
+		msg_error_not_a_valid_identifier((*next)->token, cmd);
 		ms.exit_status = 1;
 		(*node) = (*node)->next;
 		return (TRUE);
@@ -119,7 +119,7 @@ int	builtin_export(void)
 	while (node->next)
 	{
 		next = (t_tokens *)node->next->content;
-		if (export_invalid_identifier(&next, &node) == TRUE)
+		if (error_invalid_identifier(&next, &node, "export") == TRUE)
 			continue ;
 		if (export_update_value(&next, &node) == TRUE)
 			continue ;

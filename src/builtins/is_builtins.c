@@ -21,4 +21,8 @@ void	is_builtins(void)
 		bash_change_colors();
 	else if (!ft_strcmp("clear", tklist->token))
 		cmd_clear();
+	else if (!ft_strcmp("env", tklist->token))
+		builtin_env();
+	else if (!ft_strcmp("unset", tklist->token))
+		builtin_unset();
 }
