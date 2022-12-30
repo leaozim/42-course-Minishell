@@ -1,6 +1,5 @@
 #include "../../include/minishell.h"
 
-
 void	delete_next_node(t_list **head, t_list **content) 
 {
 	t_list		*temp;
@@ -21,7 +20,7 @@ void	delete_next_next_node(t_list **head, t_list **content)
 	aux = *head;
 	if ((*content)->next)
 	{
-		temp = (*content)->next; 
+		temp = (*content)->next;
 		ft_lstdelone(*content, free);
 		aux->next = temp;
 		*head = aux;

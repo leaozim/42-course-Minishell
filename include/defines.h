@@ -6,7 +6,6 @@
 
 # define PROMPT "🔥 MiniHELL $ "
 # define TMP_FILE	"./minishell_temp_file"
-# define MSG_INVALID_COLOR "Minishell: invalid color name\noptions:"
 # define TOKEN_COUNT 17
 # define EQUAL 61
 # define TEMP 2

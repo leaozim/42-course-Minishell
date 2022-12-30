@@ -80,7 +80,7 @@ void	replace_value_inside_quotes(char *list, int old_vle, int new_vle)
 	}
 }
 
-char	*add_characters_in_specific_position(char *line, int index, char characters)
+char	*add_chrs_in_specific_position(char *line, int index, char characters)
 {
 	int		j;
 	int		i;
@@ -111,7 +111,7 @@ char	*add_marker(char *line)
 	t_bool	is_two_quotes;
 	int		quotes;
 	int		i;
-	
+
 	i = 0;
 	while (i < (int)ft_strlen(line))
 	{
@@ -136,7 +136,7 @@ char	*add_marker(char *line)
 			}
 		}
 		if (is_two_quotes == TRUE)
-			line = add_characters_in_specific_position(line, i, MARKER);
+			line = add_chrs_in_specific_position(line, i, MARKER);
 		i++;
 	}
 	return (line);

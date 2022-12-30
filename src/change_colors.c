@@ -2,14 +2,15 @@
 
 static void	msg_available_colors(void)
 {
-	ft_putstr_fd(MSG_INVALID_COLOR 						\
-	BLACK"\nblack" RED"\nred" GREEN"\ngreen"			\
-	YELLOW"\nyellow" BLUE"\nblue" MAGENTA"\nmagenta"	\
-	CYAN"\ncyan" WHITE"\nwhite" RESET"\nreset\n",		\
+	ft_putstr_fd(MSG_INVALID_COLOR \
+	RED"\nred" GREEN"\ngreen" \
+	YELLOW"\nyellow" BLUE"\nblue" \
+	MAGENTA"\nmagenta" CYAN"\ncyan" \
+	RESET"\nreset (default)\n", \
 	STDIN_FILENO);
 }
 
-void	bash_change_colors()
+void	bash_change_colors(void)
 {
 	t_list		*node;
 	t_tokens	*next;
@@ -18,23 +19,19 @@ void	bash_change_colors()
 	while (node->next)
 	{
 		next = (t_tokens *)node->next->content;
-		if (!ft_strcmp((char*)next->token,"red"))
+		if (!ft_strcmp((char *)next->token, "red"))
 			ft_putstr_fd(RED, STDIN_FILENO);
-		else if (!ft_strcmp((char*)next->token, "green"))
+		else if (!ft_strcmp((char *)next->token, "green"))
 			ft_putstr_fd(GREEN, STDIN_FILENO);
-		else if (!ft_strcmp((char*)next->token, "black"))
-			ft_putstr_fd(BLACK, STDIN_FILENO);
-		else if (!ft_strcmp((char*)next->token, "blue"))
+		else if (!ft_strcmp((char *)next->token, "blue"))
 			ft_putstr_fd(BLUE, STDIN_FILENO);
-		else if (!ft_strcmp((char*)next->token, "yellow"))
+		else if (!ft_strcmp((char *)next->token, "yellow"))
 			ft_putstr_fd(YELLOW, STDIN_FILENO);
-		else if (!ft_strcmp((char*)next->token, "magenta"))
+		else if (!ft_strcmp((char *)next->token, "magenta"))
 			ft_putstr_fd(MAGENTA, STDIN_FILENO);
-		else if (!ft_strcmp((char*)next->token, "white"))
-			ft_putstr_fd(WHITE, STDIN_FILENO);
-		else if (!ft_strcmp((char*)next->token, "cyan"))
+		else if (!ft_strcmp((char *)next->token, "cyan"))
 			ft_putstr_fd(CYAN, STDIN_FILENO);
-		else if (!ft_strcmp((char*)next->token, "reset"))
+		else if (!ft_strcmp((char *)next->token, "reset"))
 			ft_putstr_fd(RESET, STDIN_FILENO);
 		else
 			msg_available_colors();

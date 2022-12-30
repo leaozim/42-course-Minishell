@@ -10,13 +10,13 @@ t_bool	check_error_invalid_identifier(char *token)
 
 	i = -1;
 	j = 0;
-	if (ft_strchr(token, '=') == NULL)
+	if (ft_strchr(token, EQUAL) == NULL)
 		while (token[++i])
 			if (!ft_isalpha_underscore(token[i]))
-				if ((token[0] != '\"') && (token[ft_strlen(token)] != '\"'))
+				if ((token[0] != DQUOTES) && (token[ft_strlen(token)] != DQUOTES))
 					return (TRUE);
-	i = ft_strchr_pos(token, '=');
-	if (token[0] == '=')
+	i = ft_strchr_pos(token, EQUAL);
+	if (token[0] == EQUAL)
 		return (TRUE);
 	while (j < i)
 	{
@@ -38,7 +38,7 @@ int	print_export(t_list **env)
 	{
 		while (env_node)
 		{
-			ft_putstr_fd("declare -x "RESET, STDOUT_FILENO);
+			ft_putstr_fd("declare -x ", STDOUT_FILENO);
 			ft_putendl_fd((char *)env_node->content, STDOUT_FILENO);
 			env_node = env_node->next;
 		}
@@ -51,7 +51,7 @@ t_bool	check_export_update_value(char *token)
 {
 	t_list	*env_node;
 	int		index;
-	char 	*name;
+	char	*name;
 
 	env_node = ms.env;
 	index = ft_strchr_pos(token, EQUAL);
@@ -65,14 +65,16 @@ t_bool	check_export_update_value(char *token)
 		{
 			free(env_node->content);
 			env_node->content = ft_strdup(token);
-			return (free(name), TRUE);
+			free(name);
+			return (TRUE);
 		}
 		env_node = env_node->next;
 	}
-	return(free(name), FALSE);
+	free(name);
+	return(FALSE);
 }
 
-int	builtin_export()
+int	builtin_export(void)
 {
 	t_tokens	*next;
 	t_list		*node;
