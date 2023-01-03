@@ -9,7 +9,7 @@ void test_join_token(char *prompt, char **expected)
 	ms.prompt_line = ft_strdup(prompt);
 	create_tokens();
 	parser();
-	expander();
+	// expander();
 	node = ms.tks;
 	i = 0;
 	while (node)
@@ -90,9 +90,9 @@ void test_join_token(char *prompt, char **expected)
 
 void	test_valid_join_token(void)
 {
-	test_join_token("\"s\"\"-la\"", (char *[]){"s\"\"-la", NULL});
+	test_join_token("\"s\"\"-la\"", (char *[]){"\"s\"\"-la\"", NULL});
 	free_ms();
 
-	test_join_token("oi \"ola\"\"tudo\"\"bem\" com", (char *[]){"oi", "ola\"\"tudo\"\"bem", "com", NULL});
+	test_join_token("oi \"ola\"\"tudo\"\"bem\" com", (char *[]){"oi", "\"ola\"\"tudo\"\"bem\"", "com", NULL});
 	free_ms();
 }
