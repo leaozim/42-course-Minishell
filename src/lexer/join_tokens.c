@@ -154,12 +154,12 @@
 //  len = old_len - (2 * qtt_mark)
 //
 
-void	join_tokens(char **tks, int len_tokens, char *line)
+char	**join_tokens(char **tks, int len_tokens, char *line)
 {
 	char	**new_tab;
 	int		i;
 	int		len_markers;
-	char	*temp;
+	// char	*temp;
 	int		j;
 	int		pos;
 	char	*aux;
@@ -176,8 +176,6 @@ void	join_tokens(char **tks, int len_tokens, char *line)
 	{
 		if (i + 1 == check_len_tab(tks))
 		{
-			printf("j = %d\n", j);
-			// j++;
 			new_tab[j] = tks[i + 1];
 			break ;
 		}
@@ -192,10 +190,14 @@ void	join_tokens(char **tks, int len_tokens, char *line)
 				j++;
 				continue ;
 			}
-			temp = ft_strjoin(tks[i], tks[i + 2]);
-			new_tab[j] = temp;
+			new_tab[j] = ft_strjoin(tks[i], tks[i + 2]);
 			pos = i + 2;
 			i += 2;
+			if (i + 1 ==  check_len_tab(tks))
+			{
+				j++;
+				break ;
+			}
 			continue ;
 		}
 		new_tab[j] = ft_strdup(tks[i]);
@@ -203,6 +205,7 @@ void	join_tokens(char **tks, int len_tokens, char *line)
 		i++;
 	}
 	new_tab[j] = NULL;
+	// printf("new tab = %s\n",new_tab[i]);
 	printf("oi\n");
 	i = 0;
 	while(new_tab[i])
@@ -210,4 +213,5 @@ void	join_tokens(char **tks, int len_tokens, char *line)
 		printf("new tab = %s\n",new_tab[i]);
 		i++;
 	}
+	return (new_tab);
 }

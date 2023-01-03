@@ -29,7 +29,7 @@ void		destroy_minishell(void);
 									lexer									
 \* -----------------------------------------------------------------------*/
 
-void			join_tokens(char **tks, int len_tokens, char *line);
+char			**join_tokens(char **tks, int len_tokens, char *line);
 void			create_tokens(void);
 char			*add_marker(char *line);
 // char			*add_marker(char *line, int old_vle, int new_vle);
