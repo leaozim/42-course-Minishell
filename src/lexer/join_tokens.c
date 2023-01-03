@@ -161,36 +161,53 @@ void	join_tokens(char **tks, int len_tokens, char *line)
 	int		len_markers;
 	char	*temp;
 	int		j;
+	int		pos;
+	char	*aux;
 
-	(void)new_tab;
-	len_markers = ft_strchr_count(line, MARKER);
-	new_tab = ft_calloc(len_tokens - (2 * len_markers), sizeof(char*));
-	printf("maloc %d\n", len_tokens - (2 * len_markers));
 	i = 0;
 	j = 0;
-	while (i < len_tokens)
+	pos = -5;
+	len_markers = ft_strchr_count(line, MARKER);
+	// if (len_markers == 0)
+	// 	return ;
+// oi "ola"*"sim"*ok ola | sim
+	new_tab = ft_calloc(len_tokens - (2 * len_markers) + 1, sizeof(char*));
+	while (tks[i] != NULL)
 	{
-		// if (!ft_strchr(tks[i], MARKER))
-		// {
-		// 	new_tab[j] = tks[i];
-		// 	j++;
-		// 	i++;
-		// 	printf("tks = %s\n", tks[i -1]);
-		// }
-		if (tks[i] && !ft_strchr(tks[i], MARKER))
+		if (i + 1 == check_len_tab(tks))
 		{
-				printf("entrou\n");
+			printf("j = %d\n", j);
+			// j++;
+			new_tab[j] = tks[i + 1];
+			break ;
+		}
+		if (ft_strchr(tks[i + 1], MARKER))
+		{
+			if (i == pos)
+			{
+				aux = ft_strdup(new_tab[j]);
+				free(new_tab[j]);
+				new_tab[j] = ft_strjoin(aux, tks[i + 2]);
+				i += 2;
+				j++;
+				continue ;
+			}
 			temp = ft_strjoin(tks[i], tks[i + 2]);
 			new_tab[j] = temp;
-			i++;
-			j++;
+			pos = i + 2;
+			i += 2;
+			continue ;
 		}
+		new_tab[j] = ft_strdup(tks[i]);
+		j++;
 		i++;
 	}
+	new_tab[j] = NULL;
+	printf("oi\n");
 	i = 0;
-	while(i < 1)
+	while(new_tab[i])
 	{
-		printf("new tab = = %s\n",new_tab[i]);
+		printf("new tab = %s\n",new_tab[i]);
 		i++;
 	}
 }

@@ -6,8 +6,8 @@ void	repl_minshell(void)
 	{
 		ms.prompt_line = create_prompt();
 		create_tokens();
-		// parser();
-		// expander();
+		parser();
+		expander();
 		// is_builtins();
 		// join_tokens(&ms.tks);
 		// printf(CYAN"\nANTES\n"RESET);

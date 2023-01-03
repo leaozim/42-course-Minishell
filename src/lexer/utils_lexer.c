@@ -17,7 +17,9 @@ int	check_len_tab(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (!str)
+		return (0);
+	while (str[i] != NULL)
 		i++;
 	return (i);
 }
