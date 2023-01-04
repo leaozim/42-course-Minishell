@@ -42,7 +42,7 @@ BUILTINS			=	echo.c										\
 						export.c									\
 						pwd.c										\
 						cd.c										\
-						msg_error.c									\
+						export_handle_errors.c						\
 						unset.c
 
 DIRS				=	. lexer prompt expander parser builtins

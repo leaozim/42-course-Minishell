@@ -88,6 +88,7 @@ void            expand_check_next_character(char *token, int *i, char **final_st
 
 void			create_env(char **envp);
 t_bool			error_invalid_identifier(t_tokens **next, t_list **node, char *cmd);
+t_bool			check_error_invalid_identifier(char *token);
 void			ft_lstdelone_array(t_list **lst);
 void			ft_lstclear_array(t_list **lst);
 void			is_builtins(void);
@@ -96,7 +97,7 @@ void			builtin_env(void);
 void			builtin_pwd(void);
 int				builtin_echo(void);
 int				builtin_export(void);
-void    		builtin_unset(void);
+int	    		builtin_unset(void);
 void			msg_error_not_a_valid_identifier(char *token, char *cmd);
 int				count_quotes_pair(char	*str, char c, int *i);
 int				split_count_words(char *str, char c);

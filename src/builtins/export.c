@@ -1,44 +1,20 @@
 #include "../../include/minishell.h"
-#include <unistd.h>
-
-t_bool	check_error_invalid_identifier(char *token)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	j = 0;
-	if (ft_strchr(token, EQUAL) == NULL)
-		while (token[++i])
-			if (!ft_isalpha_underscore(token[i]))
-				if ((token[0] != DQUOTES) && (token[ft_strlen(token)] != DQUOTES))
-					return (TRUE);
-	i = ft_strchr_pos(token, EQUAL);
-	if (token[0] == EQUAL)
-		return (TRUE);
-	while (j < i)
-	{
-		if (!ft_isalpha_underscore(token[0]))
-			return (TRUE);
-		if (!ft_isalpha_underscore(token[j]) && !ft_isdigit(token[j]))
-			return (TRUE);
-		j++;
-	}
-	return (FALSE);
-}
 
 void	msg_print_export(t_list **env_node)
 {
 	char	*aux;
+	char	*str;
 
 	ft_putstr_fd("declare -x ", STDOUT_FILENO);
-	if (ft_strchr((char *)(*env_node)->content, EQUAL) != NULL)
+	str = (char *)(*env_node)->content;
+	if (ft_strchr(str, EQUAL) != NULL)
 	{	
-		aux = ft_stop_chr((char *)(*env_node)->content, EQUAL);
+		aux = ft_stop_chr(str, EQUAL);
 		ft_putstr_fd(aux, STDOUT_FILENO);
-		ft_putstr_fd("\"", STDOUT_FILENO);
-		ft_putstr_fd(ft_strchr((char *)(*env_node)->content, EQUAL) + 1, STDOUT_FILENO);
-		ft_putendl_fd("\"", STDOUT_FILENO);
+		ft_putchar_fd(DQUOTES, STDOUT_FILENO);
+		ft_putstr_fd(ft_strchr(str, EQUAL) + 1, STDOUT_FILENO);
+		ft_putchar_fd(DQUOTES, STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		free(aux);
 	}
 	else
@@ -65,35 +41,24 @@ int	print_export(t_list **env)
 t_bool	check_export_update_value(char *token)
 {
 	t_list	*env_node;
-	int		index;
+	char	*name;
+	char	*content;
 
 	env_node = ms.env;
-	index = ft_strchr_pos(token, EQUAL);
+	name = ft_findsubchr(token, EQUAL);
 	while (env_node)
 	{
-		if (index > 0 && !ft_strncmp((char *)env_node->content, token, index - 1))
+		content = ft_findsubchr((char *)env_node->content, EQUAL);
+		if (!ft_strcmp(name, content))
 		{
-			free(env_node->content);
-			env_node->content = ft_strdup(token);
-			return (TRUE);
+			if (ft_strchr(token, EQUAL) != NULL)
+				ft_strupdate((char **)&env_node->content, ft_strdup(token));
+			return (free(content), free(name), TRUE);
 		}
-		else if (!ft_strncmp((char *)env_node->content, token, ft_strlen(token)))
-			return (TRUE);
+		free(content);
 		env_node = env_node->next;
 	}
-	return (FALSE);
-}
-
-t_bool error_invalid_identifier(t_tokens **next, t_list **node, char *cmd)
-{
-	if (check_error_invalid_identifier((*next)->token) == TRUE)
-	{
-		msg_error_not_a_valid_identifier((*next)->token, cmd);
-		ms.exit_status = 1;
-		(*node) = (*node)->next;
-		return (TRUE);
-	}
-	return (FALSE);
+	return (free(name), FALSE);
 }
 
 t_bool	export_update_value(t_tokens **next, t_list **node)
@@ -106,7 +71,6 @@ t_bool	export_update_value(t_tokens **next, t_list **node)
 	}
 	return (FALSE);
 }
-//exemplo: export oi oi= oi 7=sim ola=% oi ola= cavalinho %=invalid
 
 int	builtin_export(void)
 {
