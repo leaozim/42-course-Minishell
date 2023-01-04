@@ -5,6 +5,7 @@
 # define COMMAND_NOT_FOUND 127
 
 # define PROMPT "🔥 MiniHELL $ "
+# define CIRCLE "●"
 # define TMP_FILE	"./minishell_temp_file"
 # define TOKEN_COUNT 17
 # define EQUAL 61

@@ -8,8 +8,6 @@ void	repl_minshell(void)
 		create_tokens();
 		parser();
 		expander();
-		// echo();
-		//builtin_env();
 		is_builtins();
 		// printf(CYAN"\nANTES\n"RESET);
 		// print_tokens();

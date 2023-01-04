@@ -16,7 +16,7 @@ char	*create_prompt(void)
 {
 	char	*line;
 
-	line = readline(PROMPT);
+	line = readline(CIRCLE" "PROMPT);
 	check_prompt(line);
 	add_history(line);
 	return (line);
