@@ -1,6 +1,7 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
+#include <sys/stat.h>
 # define ARGUMENT_LIST_TOO_LONG 7
 # define COMMAND_NOT_FOUND 127
 
@@ -40,6 +41,24 @@ typedef struct s_tokens
 // 	int			outfd;
 
 // }	t_utils;
+
+// typedef struct s_cmd
+// {
+// 	argc
+// 	argv
+// 	envp
+
+// 	word_token
+
+// 	redir_token
+// 	in
+// 	out
+	
+// 	is_builtin
+// 	status
+// 	pid
+// 	pathname
+// }	t_cmd
 
 typedef struct s_minishell
 {

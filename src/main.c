@@ -10,7 +10,7 @@ void	repl_minshell(void)
 		expander();
 		is_builtins();
 		// printf(CYAN"\nANTES\n"RESET);
-		// print_tokens();
+		print_tokens();
 		// print_tokens();
 		// join_tokens(&ms.tks);
 		// printf(CYAN"DEPOIS\n"RESET);
