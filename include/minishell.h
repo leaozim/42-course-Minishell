@@ -17,19 +17,21 @@
 \* -----------------------------------------------------------------------*/
 void		init_minishell(char	**envp);
 void		check_arguments(int argc);
-void		check_prompt(char *line);
+// void		check_prompt(char *line);
 char		*create_prompt(void);
 t_bool		is_valid_quoting(char **list);
 // void		is_erro_sintaxy_quotes(char *line);
 int			is_erro_sintaxy_quotes(char *line);
 void		free_ptrs(char **str);
 void		destroy_minishell(void);
+void		destroy_t_tokens(void *token);
+int			check_prompt(char *line);
 
 /* -----------------------------------------------------------------------*\
 									lexer									
 \* -----------------------------------------------------------------------*/
 
-char			**join_tokens(char **tks, int len_tokens, char *line);
+// char			**join_tokens(char **tks, int len_tokens, char *line);
 void			create_tokens(void);
 char			*add_marker(char *line);
 // char			*add_marker(char *line, int old_vle, int new_vle);
@@ -38,15 +40,18 @@ void			replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 int				count_tokens_specific(char *str);
 char			*add_spaces_specific_tokens(char *arg, int count);
 int				check_len_tab(char **str);
+// int				check_len_tab(char **str, int i);
 void			reverse_replace(char **table_tokens, int len_tab);
 int				*identify_tokens(char **str, int len_tab);
 void			create_token_list(char **str, int *id, int len);
 // t_tokens		*create_content(char *tks, int index);
 t_tokens		*create_content(char *tks, int index, int id);
 t_bool			check_for_specific_token(char c);
+// t_bool		check_for_specific_token(char c, char c2);
 void			get_quotes(int value, char line, int *i, int **qtt_tokens);
-int				check_qtt_to_be_incremented(char *line);
-// void			join_tokens(t_list **tks);
+// int				check_qtt_to_be_incremented(char *line);
+int				check_qtt_to_be_incremented(char *line, char *full_line);
+void			join_tokens(t_list **tks);
 
 /* -----------------------------------------------------------------------*\
 									parser									

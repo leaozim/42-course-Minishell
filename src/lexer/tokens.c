@@ -61,20 +61,14 @@ void	create_tokens(void)
 	char	*str_with_spcs;
 	int		qtt_tokens;
 
-	if (is_erro_sintaxy_quotes(ms.prompt_line))
-		return ;
-	if (ms.prompt_line == NULL)
-		return ;
 	ms.prompt_line = add_marker(ms.prompt_line);
 	replace_value_inside_quotes(ms.prompt_line, SPACE, REPLACE_VALUE);
 	qtt_tokens = count_tokens_specific(ms.prompt_line);
 	str_with_spcs = add_spaces_specific_tokens(ms.prompt_line, qtt_tokens);
 	ms.tab_tokens = ft_split(str_with_spcs, ' ');
-	// ms.tab_tokens = ft_quote_split(ms.prompt_line, SPACE);
-	ms.len_tokens = check_len_tab(ms.tab_tokens);
+	check_len_tab(ms.tab_tokens);
 	reverse_replace(ms.tab_tokens, ms.len_tokens);
-	ms.tab_tokens = join_tokens(ms.tab_tokens, ms.len_tokens, ms.prompt_line);
-	ms.len_tokens = check_len_tab(ms.tab_tokens);
+	check_len_tab(ms.tab_tokens);
 	ms.tab_id = identify_tokens(ms.tab_tokens, ms.len_tokens);
 	create_token_list(ms.tab_tokens, ms.tab_id, ms.len_tokens);
 	free(str_with_spcs);

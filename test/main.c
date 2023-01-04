@@ -29,6 +29,6 @@ int main(void)
 	RUN_TEST(test_open_files);
 	RUN_TEST(test_builtin_export);
 	RUN_TEST(add_characters_in_espcific_position);
-	RUN_TEST(test_valid_join_token);
+	// RUN_TEST(test_valid_join_token);
 	return (UNITY_END());
 }

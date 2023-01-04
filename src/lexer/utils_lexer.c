@@ -12,6 +12,19 @@ t_bool	check_for_specific_token(char c)
 	return (FALSE);
 }
 
+// t_bool	check_for_specific_token(char c, char c2)
+// {
+// 	if (((c == RDRCT_IN && c2 != SQUOTE ) && 
+// 		(c == RDRCT_IN && c2 != DQUOTES )) || 
+// 		((c == RDRCT_OU && c2 != SQUOTE ) && 
+// 		(c == RDRCT_OU && c2 != DQUOTES )) || 
+// 		((c == PIPE && c2 != SQUOTE ) && 
+// 		(c == PIPE && c2 != DQUOTES )))
+// 		return (TRUE);
+// 	return (FALSE);
+// }
+
+
 int	check_len_tab(char **str)
 {
 	int	i;
@@ -21,6 +34,7 @@ int	check_len_tab(char **str)
 		return (0);
 	while (str[i] != NULL)
 		i++;
+	ms.len_tokens = i;
 	return (i);
 }
 

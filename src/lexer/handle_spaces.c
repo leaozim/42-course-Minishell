@@ -1,18 +1,24 @@
 #include "../../include/minishell.h"
+#include <stddef.h>
+#include <stdio.h>
 
-int	check_qtt_to_be_incremented(char *line)
+int	check_qtt_to_be_incremented(char *line, char *full_line)
 {
 	int	value;
 	int	i;
+	// int	qtt_quotes;
 
 	i = 0;
 	value = 0;
+	(void)full_line;
 	if (line[i] == SQUOTE || line[i] == DQUOTES)
 	{
 		value = line[i];
 			i++;
 		while (line[i] && line[i] != value)
+		{
 			i++;
+		}
 		i++;
 	}
 	else if (line[i] == RDRCT_IN && line[i + 1] == RDRCT_IN)
@@ -28,19 +34,19 @@ char	*add_spaces_specific_tokens(char *line, int count)
 {
 	char	*str;
 	int		value;
-	int		i;
-	int		j;
+	size_t		i;
+	int			j;
 
 	i = 0;
 	j = 0;
 	str = ft_calloc(1, ft_strlen(line) + (count * 2) + 1);
-	while (line[i])
+	while (i < ft_strlen(line))
 	{
 		if (check_for_specific_token(line[i]) == TRUE)
 		{
 			str[j] = SPACE;
 			j++;
-			value = check_qtt_to_be_incremented(&line[i]);
+			value = check_qtt_to_be_incremented(&line[i], line);
 			while (value--)
 				str[j++] = line[i++];
 			str[j] = SPACE;
@@ -92,11 +98,7 @@ char	*add_characters_in_specific_position(char *line, int index, char charac)
 	while (i < (int)ft_strlen(line) + 1)
 	{
 		if (j == index)
-		{
-			// str[j++] = SPACE;
 			str[j++] = charac;
-			// str[j++] = SPACE;
-		}
 		str[j] = line[i];
 		j++;
 		i++;

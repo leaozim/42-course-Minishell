@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 #include <unistd.h>
 
-void	check_prompt(char *line)
+int	check_prompt(char *line)
 {
 	if (line == NULL)
 	{
@@ -10,14 +10,21 @@ void	check_prompt(char *line)
 		free(line);
 		exit(EXIT_FAILURE);
 	}
+	else if (ft_strlen(line) == 0 || is_erro_sintaxy_quotes(line))
+		return (free(line), 1);
+	return (0);
+
 }
 
 char	*create_prompt(void)
 {
 	char	*line;
 
-	line = readline(PROMPT);
-	check_prompt(line);
-	add_history(line);
+	line = ft_strdup("");
+	while (check_prompt(line))
+	{
+		line = readline(PROMPT);
+		add_history(line);
+	}
 	return (line);
 }
