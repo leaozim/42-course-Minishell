@@ -2,16 +2,16 @@
 
 void	free_ptrs(char **str)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	if (!str || !*(str))
 		return ;
-	while (str[i] != NULL)
-	{
-		free(str[i]);
-		i++;
-	}
+	// while (str[i] != NULL)
+	// {
+	// 	free(str[i]);
+	// 	i++;
+	// }
 	free(str);
 	str = NULL;
 }

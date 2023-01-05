@@ -16,11 +16,11 @@ void	repl_minshell(void)
 	{
 		ms.prompt_line = create_prompt();
 		create_tokens();
+		expander();
 		parser();
+		join_tokens(&ms.tks);
 		printf(CYAN"\nANTES\n"RESET);
 		print_tokens();
-		expander();
-		join_tokens(&ms.tks);
 		reidentify_some_tokens(ms.tks);
 		is_builtins();
 		printf(CYAN"DEPOIS\n"RESET);
