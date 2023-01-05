@@ -1,0 +1,142 @@
+#include "42-course-Minishell/libft/libft.h"
+exit                       /   status: 0
+exit 1      |    4 5 20    /   status: (num)
+exit a                     /   status: 2     error: numeric argument required
+exit 1 a    |    1 1       /   status: 1     error: too many arguments 
+exit a 1    |    a a       /   status: 2     error: numeric argument required
+
+
+int is_error_exit()
+{
+    if (argc > 2)
+    {
+        if (!ft_is_numeric(argv[1]))
+            exit(2) erro: numeric argument required
+            return (TRUE);
+        else
+            exit(1) erro: too many arguments
+            return (TRUE);
+    }
+    return (FALSE);
+}
+
+if is_error_exit() == TRUE;
+    exit ();
+
+if (argv[0] > 0)
+    return (numero)
+
+return (0)
+
+
+
+//JOIN TOKENS
+//oi "ola"6"sim"6ok ola | sim
+
+len_actual: 9
+len_expected: 5
+
+if (marker_count == 0)
+{
+    return ;
+}
+
+char **;
+//oi "ola"6"sim"6ok ola | sim
+
+while (str[i] != NULL)
+{
+    if (i + 1 = len_array)
+        return ;
+    if (str[i + 1] = has Marker)
+    {
+        ft_strjoin(str[i], str[i + 2]);
+    }
+    i++;
+}
+
+
+oi "ola"_"sim"_ok ola | sim
+
+
+tokens normais
+//oi
+//oi ola
+//oi ola tudo
+//oi < tudo
+//oi<tudo
+
+
+conjunto único de aspas
+//"oi"
+//"oi""ola"
+//"ola" "tudo"
+//"oi"ola
+//oi"ola"
+//"oi" ola
+//oi "ola"
+
+
+múltiplos conjuntos de aspas
+//"ola""tudo""bem"
+//"ola""tudo""bem""com"
+//"ola""tudo""bem""com""voce"
+//"ola""tudo""bem""com""voce""?"
+
+
+conjuntos separados
+//"ola" "tudo" "bem"
+//"ola" "tudo" "com" "voce"
+//"ola" "tudo" "com" "voce" "?"
+
+
+conjunto de aspas (2) entre tokens normais
+//oi "ola"tudo bem
+//oi ola"tudo" bem
+//oi "ola""tudo" bem
+
+//"oi" ola"tudo" "bem"
+//"oi" "ola"tudo "bem"
+//"oi" "ola""tudo" "bem"
+
+//oi "ola""tudo" "bem"
+//"oi" "ola""tudo" bem
+//oi ola"tudo" "bem"
+//oi "ola"tudo "bem"
+//"oi" "ola"tudo bem
+//"oi" ola"tudo" bem
+
+
+conjunto de aspas (3) entre tokens normais
+//oi "ola""tudo""bem" com
+//oi ola"tudo"bem com
+//oi "ola"tudo"bem" com
+
+//"oi" "ola""tudo""bem" "com"
+//"oi" ola"tudo"bem "com"
+//"oi" "ola"tudo"bem" "com"
+
+//oi "ola""tudo""bem" "com"
+//oi ola"tudo"bem "com"
+//oi "ola"tudo"bem" "com"
+
+//"oi" "ola""tudo""bem" com
+//"oi" ola"tudo"bem com
+//"oi" "ola"tudo"bem" com
+
+//""oi""
+//""oi"ola"
+//"ola"oi""
+//"""oi"""
+
+variaveis de ambiente normais
+//$COLORTERM
+//$COLORTERM $COLORTERM
+//$COLORTERM $COLORTERM $COLORTERM
+//$COLORTERM < $COLORTERM
+//$COLORTERM<$COLORTERM
+
+
+variáveis de ambiente
+aspas simples
+redirecionadores

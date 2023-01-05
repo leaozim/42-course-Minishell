@@ -9,11 +9,7 @@ void	repl_minshell(void)
 		parser();
 		expander();
 		is_builtins();
-		// printf(CYAN"\nANTES\n"RESET);
-		print_tokens();
-		// print_tokens();
-		// join_tokens(&ms.tks);
-		// printf(CYAN"DEPOIS\n"RESET);
+		executer();
 		// print_tokens();
 		destroy_minishell();
 	}
@@ -22,7 +18,7 @@ void	repl_minshell(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	(void)argv;
+	(void) argv;
 	check_arguments(argc);
 	init_minishell(envp);
 	handle_signal();

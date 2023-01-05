@@ -105,6 +105,8 @@ char			**split_assign_values(char *str, char c, int count);
 void			bash_change_colors(void);
 void			cmd_clear(void);
 
+void			executer(void);
+
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */

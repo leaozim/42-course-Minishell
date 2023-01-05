@@ -17,7 +17,7 @@ SRC					=	main.c										\
 						change_colors.c								\
 						cmd_clear.c									\
 						$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)	\
-						$(BUILTINS)
+						$(BUILTINS) $(EXECUTER)
 
 PROMPT				=	prompt.c
 
@@ -27,7 +27,9 @@ LEXER				=	tokens.c									\
 						utils_lexer.c								\
 						join_tokens.c
 
-EXPANDER			=	expander.c brace_expansion.c expander_checks.c
+EXPANDER			=	expander.c									\
+						brace_expansion.c							\
+						expander_checks.c							\
 
 PARSER 				=	parser.c 									\
 						handle_metachars.c							\
@@ -45,7 +47,9 @@ BUILTINS			=	echo.c										\
 						export_handle_errors.c						\
 						unset.c
 
-DIRS				=	. lexer prompt expander parser builtins
+EXECUTER			=	executer.c
+
+DIRS				=	. lexer prompt expander parser builtins executer
 IFLAGS				=	-I $(HEADER_PATH)
 LDFLAGS				=	-L$(LIBFT_PATH) -lft
 CFLAGS				=	-Wall -Wextra -Werror

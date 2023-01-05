@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 void	check_prompt(char *line)
 {
@@ -8,32 +7,25 @@ void	check_prompt(char *line)
 		ft_putstr_fd("\n", STDERR_FILENO);
 		ft_lstclear(&ms.env, free);
 		free(line);
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
 }
 
-char	*get_prompt_line(void)
-{
-	static char	prompt_line[50];
-	char		*temp;
-	char		*status_line;
+// char	*get_prompt_line(void)
+// {
+// 	static char	prompt_line[50];
+// 	char		*temp;
 
-	status_line = ft_itoa(ms.exit_status);
-	temp = ft_strjoin(CIRCLE, status_line);
-	free(status_line);
-	ft_strupdate(&temp, ft_strjoin(temp, PROMPT));
-	ft_strlcpy(prompt_line, temp, ft_strlen(temp));
-	free(temp);
-	return (prompt_line);
-}
-
-// Minishell (127)
+// 	temp = ft_strjoin(ARROW, PROMPT);
+// 	ft_strlcpy(prompt_line, temp, ft_strlen(temp));
+// 	return (prompt_line);
+// }
 
 char	*create_prompt(void)
 {
 	char		*line;
 
-	line = readline(get_prompt_line());
+	line = readline(PROMPT);
 	check_prompt(line);
 	add_history(line);
 	return (line);

@@ -5,8 +5,8 @@
 # define ARGUMENT_LIST_TOO_LONG 7
 # define COMMAND_NOT_FOUND 127
 
-# define PROMPT "🔥 MiniHELL $ "
-# define CIRCLE "●"
+# define ARROW "> "
+# define PROMPT "MiniHELL $"
 # define TMP_FILE	"./minishell_temp_file"
 # define TOKEN_COUNT 17
 # define EQUAL 61
@@ -44,21 +44,20 @@ typedef struct s_tokens
 
 // typedef struct s_cmd
 // {
-// 	argc
-// 	argv
-// 	envp
+// 	int		argc;
+// 	char	**argv
+// 	char	**envp;
 
-// 	word_token
-
-// 	redir_token
-// 	in
-// 	out
+// 	char	*word_token;
+// 	char	*redir_token;
+// 	char	*in;
+// 	char	*out
 	
 // 	is_builtin
 // 	status
 // 	pid
 // 	pathname
-// }	t_cmd
+// }	t_cmd;
 
 typedef struct s_minishell
 {
