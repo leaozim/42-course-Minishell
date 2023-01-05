@@ -56,6 +56,7 @@ typedef struct s_minishell
 	int			len_tokens;
 	int			infd;
 	int			outfd;
+	int			fd_heredoc;
 }	t_minishell;
 
 t_minishell ms;
