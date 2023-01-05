@@ -42,22 +42,22 @@ typedef struct s_tokens
 
 // }	t_utils;
 
-// typedef struct s_cmd
-// {
-// 	int		argc;
-// 	char	**argv
-// 	char	**envp;
+typedef struct s_cmd
+{
+	int		argc;
+	char	**argv;
+	char	**envp;
 
-// 	char	*word_token;
-// 	char	*redir_token;
-// 	char	*in;
-// 	char	*out
+	// char	*word_token;
+	// char	*redir_token;
+	// char	*in;
+	// char	*out
 	
-// 	is_builtin
-// 	status
-// 	pid
-// 	pathname
-// }	t_cmd;
+	// is_builtin
+	// status
+	// pid
+	// pathname
+}	t_cmd;
 
 typedef struct s_minishell
 {
