@@ -1,19 +1,19 @@
 #include "../../include/minishell.h"
+#include <stdlib.h>
 #include <unistd.h>
 
 int	check_prompt(char *line)
 {
 	if (line == NULL)
 	{
-		ft_putstr_fd("\n", STDERR_FILENO);
+		ft_putstr_fd("exit\n", STDERR_FILENO);
 		ft_lstclear(&ms.env, NULL);
 		free(line);
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
 	else if (ft_strlen(line) == 0 || is_erro_sintaxy_quotes(line))
 		return (free(line), 1);
 	return (0);
-
 }
 
 char	*create_prompt(void)

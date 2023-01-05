@@ -1,24 +1,18 @@
 #include "../../include/minishell.h"
-#include <stddef.h>
-#include <stdio.h>
 
-int	check_qtt_to_be_incremented(char *line, char *full_line)
+int	check_qtt_to_be_incremented(char *line)
 {
 	int	value;
 	int	i;
-	// int	qtt_quotes;
 
 	i = 0;
 	value = 0;
-	(void)full_line;
 	if (line[i] == SQUOTE || line[i] == DQUOTES)
 	{
 		value = line[i];
 			i++;
 		while (line[i] && line[i] != value)
-		{
 			i++;
-		}
 		i++;
 	}
 	else if (line[i] == RDRCT_IN && line[i + 1] == RDRCT_IN)
@@ -32,8 +26,8 @@ int	check_qtt_to_be_incremented(char *line, char *full_line)
 
 char	*add_spaces_specific_tokens(char *line, int count)
 {
-	char	*str;
-	int		value;
+	char		*str;
+	int			value;
 	size_t		i;
 	int			j;
 
@@ -46,7 +40,7 @@ char	*add_spaces_specific_tokens(char *line, int count)
 		{
 			str[j] = SPACE;
 			j++;
-			value = check_qtt_to_be_incremented(&line[i], line);
+			value = check_qtt_to_be_incremented(&line[i]);
 			while (value--)
 				str[j++] = line[i++];
 			str[j] = SPACE;
@@ -106,40 +100,4 @@ char	*add_characters_in_specific_position(char *line, int index, char charac)
 	str[i] = '\0';
 	free(line);
 	return (str);
-}
-
-char	*add_marker(char *line)
-{
-	t_bool	is_two_quotes;
-	int		quotes;
-	int		i;
-	
-	i = 0;
-	while (i < (int)ft_strlen(line))
-	{
-		is_two_quotes = FALSE;
-		if (line[i] == SQUOTE || line[i] == DQUOTES)
-		{
-			quotes = line[i];
-			i++;
-			while (line[i] && line[i] != quotes)
-				i++;
-			if (line[i])
-				i++;
-			if ((line[i] && line[i] != ' ' && line[i] != '\0'))
-				is_two_quotes = TRUE;
-		}
-		else if (i > 0)
-		{
-			if (line[i] != ' ' && (line[i + 1] == '\"' || line[i + 1] == '\''))
-			{
-				is_two_quotes = TRUE;
-				i++;
-			}
-		}
-		if (is_two_quotes == TRUE)
-			line = add_characters_in_specific_position(line, i, MARKER);
-		i++;
-	}
-	return (line);
 }

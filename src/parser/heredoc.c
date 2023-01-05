@@ -3,7 +3,7 @@
 void	destroy_heredoc(void)
 {
 	free_ptrs(ms.tab_tokens);
-	ft_lstclear(&ms.tks, free);
+	ft_lstclear(&ms.tks, destroy_t_tokens);
 	free(ms.tab_id);
 	free(ms.line_heredoc);
 }

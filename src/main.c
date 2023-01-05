@@ -15,19 +15,14 @@ void	repl_minshell(void)
 	while (TRUE)
 	{
 		ms.prompt_line = create_prompt();
-		// if (is_erro_sintaxy_quotes(ms.prompt_line))
-		// {
-		// 	if (ms.prompt_line)
-		// 		free(ms.prompt_line);
-		// 	continue ;
-		// }
 		create_tokens();
 		parser();
+		printf(CYAN"\nANTES\n"RESET);
+		print_tokens();
 		expander();
-		// is_builtins();
-		// printf(CYAN"\nANTES\n"RESET);
-		// print_tokens();
 		join_tokens(&ms.tks);
+		reidentify_some_tokens(ms.tks);
+		is_builtins();
 		printf(CYAN"DEPOIS\n"RESET);
 		print_tokens();
 		destroy_minishell();
@@ -56,7 +51,7 @@ void	print_tokens(void)
 	{
 		tklist = (t_tokens *)node->content;
 		printf("tokens = %s\n", tklist->token);
-		// printf("id     = %d\n", tklist->index);
+		printf("id     = %d\n", tklist->id_token);
 		node = node->next;
 	}
 }

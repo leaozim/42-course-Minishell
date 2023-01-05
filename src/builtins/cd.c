@@ -6,10 +6,10 @@ void	msg_error_cd(void)
 	ft_putstr_fd("too many arguments\n", STDERR_FILENO);
 }
 
-void msg_result_error(char *token)
+void	msg_result_error(char *token)
 {
-	char *msg_error;
-	
+	char	*msg_error;
+
 	msg_error = ft_strjoin("minishell: cd: ", token);
 	perror(msg_error);
 	free(msg_error);

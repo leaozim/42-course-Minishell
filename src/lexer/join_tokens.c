@@ -1,36 +1,14 @@
 #include "../../include/minishell.h"
-#include <stdio.h>
-// #include <stdio.h>
 
-
-// void	delete_next_node(t_list **head, t_list **content) 
-// {
-// 	t_list		*temp;
-// 	t_list		*aux;
-
-// 	aux = *head;
-// 	temp = (*content)->next;
-// 	ft_lstdelone(*content, free);
-// 	aux->next = temp;
-// 	*head = aux;
-// }
-
-void delete_node(t_list **tlist, int key)
+void	delete_node(t_list **tlist, int key)
 {
 	t_list		*node;
 	t_list		*prev;
 	t_tokens	*token;
-	
+
 	node = *tlist;
 	token = (t_tokens *)node->content;
-	// if (node && token->index == key) 
-	// {
-	// 	*tlist = node->next;
-	// 	free(node);
-	// 	return ;
-	// }
-
-	while (node) 
+	while (node)
 	{
 		token = (t_tokens *)node->content;
 		if (token->index == key)
@@ -42,34 +20,34 @@ void delete_node(t_list **tlist, int key)
 		return ;
 	prev->next = node->next;
 	destroy_t_tokens(node->content);
-	// free(node->content);
-	free(node); 
+	free(node);
 }
-
 
 void	join_tokens(t_list **tks)
 {
 	t_list		*node;
-	t_tokens	*tklist;
-	t_tokens	*next;
-	t_tokens	*next_next;
+	t_tokens	*marker_position;
+	t_tokens	*after_marker;
 	char		*temp;
 
 	node = *tks;
-	tklist = (t_tokens *)node->content;
 	if (!node->next)
 		return ;
-	next = (t_tokens *)node->next->content;
-	while (node && !ft_strchr(next->token, MARKER))
+	while (node && \
+	!ft_strchr(((t_tokens *)node->next->content)->token, MARKER))
+	{
 		node = node->next;
-	if (node == NULL)
-		return ;
-	next_next = (t_tokens *)node->next->next->content;
-	temp = ft_strjoin(tklist->token, next_next->token);
-	free(tklist->token);
-	tklist->token = ft_strdup(temp);
+		if (node->next == NULL)
+			return ;
+	}
+	marker_position = (t_tokens *)node->next->content;
+	after_marker = (t_tokens *)node->next->next->content;
+	temp = ft_strjoin(((t_tokens *)node->content)->token, after_marker->token);
+	free(((t_tokens *)node->content)->token);
+	((t_tokens *)node->content)->token = ft_strdup(temp);
+	((t_tokens *)node->content)->id_token = COMMAND;
 	free(temp);
-	delete_node(&node, next->index);
-	delete_node(&node, next_next->index);
+	delete_node(&node, marker_position->index);
+	delete_node(&node, after_marker->index);
 	join_tokens(&ms.tks);
 }
