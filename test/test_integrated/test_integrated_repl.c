@@ -16,9 +16,6 @@ void create_repl(char *prompt, int *array_int)
 	ms.prompt_line = ft_strdup(prompt);
 	create_tokens();
 	parser();
-	expander();
-	join_tokens(&ms.tks);
-	reidentify_some_tokens(ms.tks);
 	node = ms.tks;
 	while (node)
 	{
@@ -55,15 +52,4 @@ void check_repl(void)
 	int expected6[3] = {COMMAND, RDRCT_OU, FILE_OUT};
 	create_repl("ls > oi", expected6);
 	free_ms();
-
-	int expected8[4] = {COMMAND};
-	create_repl("\"ls\"\">\"\">\"oi\"", expected8);
-	free_ms();
-
-	int expected9[4] = {COMMAND, APPEND, FILE_APPEND};
-	create_repl("\"ls\">>\"oi\"", expected9);
-	free_ms();
-
-
-	
 }

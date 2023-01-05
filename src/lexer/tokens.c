@@ -11,8 +11,8 @@ int	*identify_tokens(char **str, int len_tab)
 	while (i < len_tab)
 	{
 		aux = str[i];
-		// if (aux[0] == DQUOTES || aux[0] == SQUOTE)
-		// 	id_tks[i] = aux[0];
+		if (aux[0] == DQUOTES || aux[0] == SQUOTE)
+			id_tks[i] = aux[0];
 		if (ft_strlen(aux) == 1)
 			id_tks[i] = aux[0];
 		else if (aux[0] == RDRCT_IN && ft_strlen(aux) == 2)
