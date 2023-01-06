@@ -48,7 +48,7 @@ BUILTINS			=	echo.c										\
 						unset.c										\
 						exit.c
 
-EXECUTER			=	executer.c
+EXECUTER			=	executer.c cmd_operations.c
 
 DIRS				=	. lexer prompt expander parser builtins executer
 IFLAGS				=	-I $(HEADER_PATH)

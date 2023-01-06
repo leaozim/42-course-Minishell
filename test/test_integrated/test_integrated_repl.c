@@ -2,10 +2,10 @@
 
 void	free_ms(void)
 {
-	ft_lstclear(&ms.tks, destroy_t_tokens);
-	free(ms.tab_tokens);
-	free(ms.tab_id);
-	ft_lstclear(&ms.env, free);
+	ft_lstclear(&g_ms.tks, destroy_t_tokens);
+	free(g_ms.tab_tokens);
+	free(g_ms.tab_id);
+	ft_lstclear(&g_ms.env, free);
 }
 
 void create_repl(char *prompt, int *array_int)
@@ -13,10 +13,10 @@ void create_repl(char *prompt, int *array_int)
 	t_list			*node;
 	t_tokens		*tklist;
 
-	ms.prompt_line = ft_strdup(prompt);
+	g_ms.prompt_line = ft_strdup(prompt);
 	create_tokens();
 	parser();
-	node = ms.tks;
+	node = g_ms.tks;
 	while (node)
 	{
 		tklist = (t_tokens *)node->content;
@@ -24,7 +24,7 @@ void create_repl(char *prompt, int *array_int)
 		array_int++;
 		node = node->next;
 	}
-	free(ms.prompt_line);
+	free(g_ms.prompt_line);
 }
 
 void check_repl(void)

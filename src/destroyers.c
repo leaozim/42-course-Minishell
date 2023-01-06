@@ -57,8 +57,8 @@ void	destroy_t_tokens(void *token)
 
 void	destroy_minishell(void)
 {
-	ft_lstclear(&ms.tks, destroy_t_tokens);
-	free(ms.prompt_line);
-	free(ms.tab_tokens);
-	free(ms.tab_id);
+	ft_lstclear(&g_ms.tks, destroy_t_tokens);
+	free(g_ms.prompt_line);
+	free(g_ms.tab_tokens);
+	free(g_ms.tab_id);
 }

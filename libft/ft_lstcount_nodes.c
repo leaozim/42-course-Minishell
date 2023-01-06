@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stop_chr.c                                      :+:      :+:    :+:   */
+/*   ft_lstcount_nodes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 16:52:18 by etomiyos          #+#    #+#             */
-/*   Updated: 2023/01/06 15:56:12 by etomiyos         ###   ########.fr       */
+/*   Created: 2023/01/06 15:54:11 by etomiyos          #+#    #+#             */
+/*   Updated: 2023/01/06 16:45:36 by etomiyos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_stop_chr(char *str, char c)
+int	ft_lstcount_nodes(t_list *lst)
 {
-	int		i;
-	char	*dest;
+	int		count;
+	t_list	*env_node;
 
-	i = 0;
-	while (str[i])
+	count = 0;
+	env_node = lst;
+	if (!env_node)
+		return (count);
+	while (env_node != NULL)
 	{
-		if (str[i] == c)
-		{
-			dest = ft_calloc(i + 2, sizeof(char));
-			dest = ft_memcpy(dest, str, i + 1);
-			return (dest);
-		}
-		i++;
+		count++;
+		env_node = env_node->next;	
 	}
-	return (str);
+	return (count);
 }

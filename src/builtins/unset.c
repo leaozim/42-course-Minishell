@@ -22,12 +22,12 @@ t_bool check_unset_delete_value(char *token)
 	t_list	*prev;
 	char	*content;
 
-	env_node = ms.env;
+	env_node = g_ms.env;
 	content = ft_findsubchr((char *)env_node->content, EQUAL);
 	if (!ft_strcmp(token, content))
 	{
-		prev = ms.env;
-		ms.env = ms.env->next;
+		prev = g_ms.env;
+		g_ms.env = g_ms.env->next;
 		ft_lstdelone(prev, free);
 		free(content);
 		return (FALSE);
@@ -55,7 +55,7 @@ t_bool	unset_error_identifier(t_tokens **next, t_list **node, char *cmd)
 	if (check_unset_chr_valid_name((*next)->token) == TRUE)
 	{
 		msg_error_not_a_valid_identifier((*next)->token, cmd);
-		ms.exit_status = 1;
+		g_ms.exit_status = 1;
 		(*node) = (*node)->next;
 		return (TRUE);
 	}
@@ -66,7 +66,7 @@ t_bool unset_delete_value(t_tokens **next, t_list **node)
 {
 	if (check_unset_delete_value((*next)->token) == TRUE)
 	{
-		ms.exit_status = 0;
+		g_ms.exit_status = 0;
 		(*node) = (*node)->next;
 		return (TRUE);
 	}
@@ -78,7 +78,7 @@ int	builtin_unset(void)
     t_tokens	*next;
 	t_list		*node;
 
-    node = ms.tks->next;
+    node = g_ms.tks->next;
     while (node)
     {
         next = (t_tokens *)node->content;
@@ -88,5 +88,5 @@ int	builtin_unset(void)
 			continue ;
         node = node->next;
     }
-    return (ms.exit_status = 0, EXIT_SUCCESS);
+    return (g_ms.exit_status = 0, EXIT_SUCCESS);
 }

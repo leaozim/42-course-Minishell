@@ -29,7 +29,8 @@ SRC 				=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c	\
 						ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c				\
 						ft_strchr_pos.c ft_strchr_count.c ft_strtrim_allchars.c				\
 						ft_strtrim_specific_pos.c ft_intarray_len.c							\
-						ft_free_char_array_memory.c	ft_isops.c ft_stop_chr.c ft_findsubchr.c
+						ft_free_char_array_memory.c	ft_isops.c ft_stop_chr.c ft_findsubchr.c\
+						ft_lstcount_nodes.c
 
 OBJ					=	$(SRC:.c=.o)
 

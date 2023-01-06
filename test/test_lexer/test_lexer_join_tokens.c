@@ -6,13 +6,13 @@ void test_join_token(char *prompt, char **expected)
 	t_tokens	*tklist;
 	int			i;
 
-	ms.prompt_line = ft_strdup(prompt);
+	g_ms.prompt_line = ft_strdup(prompt);
 	create_tokens();
 	parser();
 	expander();
-	join_tokens(&ms.tks);
-	reidentify_some_tokens(ms.tks);
-	node = ms.tks;
+	join_tokens(&g_ms.tks);
+	reidentify_some_tokens(g_ms.tks);
+	node = g_ms.tks;
 	i = 0;
 	while (node)
 
@@ -22,7 +22,7 @@ void test_join_token(char *prompt, char **expected)
 		node = node->next;
 		i++;
 	}
-	free(ms.prompt_line);
+	free(g_ms.prompt_line);
 }
 
 void	test_valid_join_token(void)

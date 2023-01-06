@@ -60,9 +60,9 @@ int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 
 int	parser(void)
 {
-	if (error_syntaxy_metachars(ms.tks, ms.len_tokens))
+	if (error_syntaxy_metachars(g_ms.tks, g_ms.len_tokens))
 		return (1);
-	reidentify_some_tokens(ms.tks);
-	check_open_files(ms.tks, &ms.infd, &ms.outfd);
+	reidentify_some_tokens(g_ms.tks);
+	check_open_files(g_ms.tks, &g_ms.infd, &g_ms.outfd);
 	return (0);
 }

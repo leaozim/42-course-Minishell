@@ -7,7 +7,7 @@
 # define COMMAND_NOT_FOUND 127
 
 # define ARROW "> "
-# define PROMPT "MiniHELL $"
+# define PROMPT "🔥 MiniHELL $ "
 # define TMP_FILE	"./minishell_temp_file"
 # define TOKEN_COUNT 17
 # define EQUAL 61
@@ -51,22 +51,22 @@ typedef struct s_tokens
 // MiniSHELL $ ls
 // execve ("/bin/ls", {"ls", "-shit", "-l", 0}, envp);
 
-// typedef struct s_commands
-// {
-// 	char	*cmd;
-// 	char	**arg_list;
-// 	char	**env_list;
+typedef struct s_commands
+{
+	char	**argv;
+	char	**envp;
+	char	**path_envp;
 
-// 	// char	*word_token;
-// 	// char	*redir_token;
-// 	// char	*in;
-// 	// char	*out;
+	// char	*word_token;
+	// char	*redir_token;
+	// char	*in;
+	// char	*out;
 
-// 	// is_builtin
-// 	// status
-// 	// pid
-// 	// pathname
-// }	t_commands;
+	// is_builtin
+	// status
+	// pid
+	// pathname
+}	t_commands;
 
 typedef struct s_minishell
 {
@@ -84,7 +84,7 @@ typedef struct s_minishell
 	int			fd_heredoc;
 }	t_minishell;
 
-t_minishell ms;
+t_minishell g_ms;
 
 enum e_tokens
 {

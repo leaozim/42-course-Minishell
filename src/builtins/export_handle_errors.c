@@ -32,7 +32,7 @@ void	msg_error_not_a_valid_identifier(char *token, char *cmd)
 	ft_putstr_fd(" `", STDERR_FILENO);
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
-	ms.exit_status = 1;
+	g_ms.exit_status = 1;
 }
 
 t_bool	error_invalid_identifier(t_tokens **next, t_list **node, char *cmd)
@@ -40,7 +40,7 @@ t_bool	error_invalid_identifier(t_tokens **next, t_list **node, char *cmd)
 	if (check_error_invalid_identifier((*next)->token) == TRUE)
 	{
 		msg_error_not_a_valid_identifier((*next)->token, cmd);
-		ms.exit_status = 1;
+		g_ms.exit_status = 1;
 		(*node) = (*node)->next;
 		return (TRUE);
 	}

@@ -1,30 +1,27 @@
 #include "../../include/minishell.h"
 
-void	is_builtins(void)
+t_bool	is_builtins(void)
 {
 	t_list		*node;
 	t_tokens	*tklist;
 
-	node = ms.tks;
-	if (!ms.tks)
-		return ;
+	node = g_ms.tks;
 	tklist = (t_tokens *)node->content;
 	if (!ft_strcmp("cd", tklist->token))
-		builtin_cd();
+		return (builtin_cd(), TRUE);
 	else if (!ft_strcmp("echo", tklist->token))
-		builtin_echo();
+		return (builtin_echo(), TRUE);
 	else if (!ft_strcmp("env", tklist->token))
-		builtin_env();
+		return (builtin_env(), TRUE);
 	if (!ft_strcmp("exit", tklist->token))
-		builtin_exit();
+		return (builtin_exit(), TRUE);
 	else if (!ft_strcmp("export", tklist->token))
-		builtin_export();
+		return (builtin_export(), TRUE);
 	else if (!ft_strcmp("pwd", tklist->token))
-		builtin_pwd();
+		return (builtin_pwd(), TRUE);
 	else if (!ft_strcmp("unset", tklist->token))
-		builtin_unset();
+		return (builtin_unset(), TRUE);
 	else if (!ft_strcmp("color", tklist->token))
-		bash_change_colors();
-	else if (!ft_strcmp("clear", tklist->token))
-		cmd_clear();
+		return (bash_change_colors(), TRUE);
+	return (FALSE);
 }

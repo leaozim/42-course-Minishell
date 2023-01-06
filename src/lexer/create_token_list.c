@@ -17,6 +17,6 @@ void	create_token_list(char **str, int *id, int len)
 
 	i = -1;
 	while (++i < len)
-		ft_lstadd_back(&ms.tks, \
-		ft_lstnew(create_content(str[i], id[i], i)));
+		ft_lstadd_back(&g_ms.tks,
+			ft_lstnew(create_content(str[i], id[i], i)));
 }

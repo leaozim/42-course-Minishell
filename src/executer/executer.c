@@ -1,30 +1,13 @@
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 //caso de sucesso -> (comando simples + lista de argumentos)
 //ex: echo -n oi ola
+
 #define CMD_NOT_FOUND 127
 
-
-char	**split_pathname(void)
-{
-	int		i;
-	char	**envp_path_list;
-	t_list	*env_node;
-
-	i = 0;
-	env_node = ms.env;
-	envp_path_list = NULL;
-	while (env_node != NULL)
-	{
-		if (!ft_strncmp(env_node->content, "PATH=", 5))
-		{
-			envp_path_list = ft_split(env_node->content, ':');
-		}
-		env_node = env_node->next;
-		i++;
-	}
-	return (envp_path_list);
-}
 
 // int	check_path(t_pipex *p, int count)
 // {
@@ -45,55 +28,6 @@ char	**split_pathname(void)
 // 	return (CMD_NOT_FOUND);
 // }
 
-int	qtt_commands(void)
-{
-		t_tokens	*next;
-	t_list		*node;
-	int			i;
-	// t_cmd       *cmd;
-
-	i = 0;
-	node = ms.tks;
-	while (node)
-	{
-		next = (t_tokens *)node->content;
-		printf(BLUE"%s\n"RESET, (char *)next->token);
-		if (next->id_token == COMMAND)
-			i++;
-		node = node->next;
-	}
-	printf(BLUE"%d\n"RESET, i);
-	return (i);
-}
-
-char	**create_cmd_list(void)
-{
-	int			size_comnands;
-	char		**arguments;
-	t_list		*node;
-	t_tokens	*tklist;
-	int			i;
-
-	node = ms.tks;
-	size_comnands = qtt_commands();
-	arguments = ft_calloc(size_comnands + 1, sizeof(char*));
-	if (!arguments)
-		return (NULL);
-	i = 0;
-	while (node)
-	{
-		tklist = (t_tokens *)node->content;
-		if (tklist->id_token == COMMAND)
-		{
-			arguments[i] = ft_strdup(tklist->token);
-			i++;
-		}
-		node = node->next;
-	}
-	arguments[i] = NULL;
-	return (arguments);
-}
-
 // int	check_path(char **envp_path_list, int count)
 // {
 // 	int	i;
@@ -113,28 +47,94 @@ char	**create_cmd_list(void)
 // 	return (CMD_NOT_FOUND);
 // }
 
-void	executer(void)
+char	**split_envp_path(void)
 {
-	char **argc;
-	int	i;
-	char **env;
+	char	**envp_path_list;
+	t_list	*env_node;
+
+	env_node = g_ms.env;
+	envp_path_list = NULL;
+	while (env_node != NULL)
+	{
+		if (!ft_strncmp(env_node->content, "PATH=", 5))
+			envp_path_list = ft_split(env_node->content, ':');
+		env_node = env_node->next;
+	}
+	return (envp_path_list);
+}
+
+char	*get_executable_path(char **envp, char **argv)
+{
+	char	*path_slash;
+	char	*executable_path;
+	int		i;
 
 	i = 0;
-	argc = create_cmd_list();
-	while (argc[i])
+	path_slash = ft_strjoin("/", argv[0]);
+	while (envp[i] != NULL)
 	{
-		printf("argc = %s\n", argc[i]);
+		executable_path = ft_strjoin(envp[i], path_slash);
+		if (access(executable_path, F_OK | X_OK) == 0)
+		{
+			return (free(path_slash), executable_path);
+		}
 		i++;
+		free(executable_path);
 	}
-	env = split_pathname();
-	while (env[i])
-	{
-		printf("env = %s\n", env[i]);
-		i++;
-	}
-	free_ptrs(argc);
-	free_ptrs(env);
+	return (free(path_slash), NULL);
 }
+
+t_commands	*create_cmd_content(char **argv, char **envp, char **path_envp)
+{
+	t_commands	*content;
+
+	content = ft_calloc(1, sizeof(t_commands));
+	content->argv = argv;
+	content->envp = envp;
+	content->path_envp = path_envp;
+	return (content);
+}
+
+void	create_cmd_list(char **argv, char **envp, char **path_envp)
+{
+	int	i;
+
+	i = -1;
+	while (++i < get_cmd_count())
+		ft_lstadd_back(&g_ms.commands,
+			ft_lstnew(create_cmd_content(argv, envp, path_envp)));
+}
+
+void	executer(void)
+{
+	int		status;
+	char	*executable_path;
+
+	if (is_builtins() == TRUE)
+		return ;
+	argv = create_cmd_list();
+	envp = get_envp();
+	path_envp = split_envp_path();
+	executable_path = get_executable_path(path_envp, argv);
+	
+	// pid_t	pid;
+
+	// pid = fork();
+	// if (pid == 0)
+	// {
+	// 	execve(executable_path, argv, envp);
+	// 	exit(EXIT_FAILURE);
+	// }
+	// waitpid(pid, &status, 0);
+	// free(argv);
+	// free(envp);
+	// free_ptrs(path_envp);
+	// free(executable_path);
+}
+
+//PASSOS
+// ver se é builtin
+// status de saída
 
 
 //caso de sucesso -> (comando simples + lista de argumentos)

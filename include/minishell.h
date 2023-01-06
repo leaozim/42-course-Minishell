@@ -92,7 +92,7 @@ t_bool			error_invalid_identifier(t_tokens **next, t_list **node, char *cmd);
 t_bool			check_error_invalid_identifier(char *token);
 void			ft_lstdelone_array(t_list **lst);
 void			ft_lstclear_array(t_list **lst);
-void			is_builtins(void);
+t_bool			is_builtins(void);
 int				builtin_cd(void);
 void			builtin_env(void);
 void			builtin_pwd(void);
@@ -108,6 +108,9 @@ void			bash_change_colors(void);
 void			cmd_clear(void);
 
 void			executer(void);
+int				get_cmd_count(void);
+char			**split_envp_path(void);
+char			**get_envp(void);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
