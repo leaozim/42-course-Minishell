@@ -26,15 +26,15 @@ int	check_qtt_to_be_incremented(char *line)
 
 char	*add_spaces_specific_tokens(char *line, int count)
 {
-	char	*str;
-	int		value;
-	int		i;
-	int		j;
+	char		*str;
+	int			value;
+	size_t		i;
+	int			j;
 
 	i = 0;
 	j = 0;
 	str = ft_calloc(1, ft_strlen(line) + (count * 2) + 1);
-	while (line[i])
+	while (i < ft_strlen(line))
 	{
 		if (check_for_specific_token(line[i]) == TRUE)
 		{
@@ -80,7 +80,7 @@ void	replace_value_inside_quotes(char *list, int old_vle, int new_vle)
 	}
 }
 
-char	*add_chrs_in_specific_position(char *line, int index, char characters)
+char	*add_chrs_in_specific_position(char *line, int index, char charac)
 {
 	int		j;
 	int		i;
@@ -92,11 +92,7 @@ char	*add_chrs_in_specific_position(char *line, int index, char characters)
 	while (i < (int)ft_strlen(line) + 1)
 	{
 		if (j == index)
-		{
-			// str[j++] = SPACE;
-			str[j++] = characters;
-			// str[j++] = SPACE;
-		}
+			str[j++] = charac;
 		str[j] = line[i];
 		j++;
 		i++;

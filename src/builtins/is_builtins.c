@@ -25,4 +25,6 @@ void	is_builtins(void)
 		builtin_env();
 	else if (!ft_strcmp("unset", tklist->token))
 		builtin_unset();
+	if (!ft_strcmp("exit", tklist->token))
+		builtin_exit();
 }

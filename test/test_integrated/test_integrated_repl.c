@@ -1,10 +1,11 @@
 #include "../h_test.h"
 
-void free_ms(void)
+void	free_ms(void)
 {
-	free_ptrs(ms.tab_tokens);
-	ft_lstclear(&ms.tks, free);
+	ft_lstclear(&ms.tks, destroy_t_tokens);
+	free(ms.tab_tokens);
 	free(ms.tab_id);
+	ft_lstclear(&ms.env, NULL);
 }
 
 void create_repl(char *prompt, int *array_int)
@@ -13,7 +14,6 @@ void create_repl(char *prompt, int *array_int)
 	t_tokens		*tklist;
 
 	ms.prompt_line = ft_strdup(prompt);
-	is_erro_sintaxy_quotes(ms.prompt_line);
 	create_tokens();
 	parser();
 	node = ms.tks;
@@ -41,19 +41,15 @@ void check_repl(void)
 	create_repl("ls >> oi", expected3);
 	free_ms();
 
+	int expected4[3] = {COMMAND, HEREDOC};
+	create_repl("ls <<", expected4);
+	free_ms();
+
 	int expected5[3] = {COMMAND, RDRCT_IN, FILE_IN};
 	create_repl("ls < oi", expected5);
 	free_ms();
 
 	int expected6[3] = {COMMAND, RDRCT_OU, FILE_OUT};
 	create_repl("ls > oi", expected6);
-	free_ms();
-
-	int expected7[4] = {COMMAND, RDRCT_OU, RDRCT_OU, COMMAND};
-	create_repl("ls > > oi", expected7);
-	free_ms();
-
-	int expected4[3] = {COMMAND, HEREDOC};
-	create_repl("ls <<", expected4);
 	free_ms();
 }

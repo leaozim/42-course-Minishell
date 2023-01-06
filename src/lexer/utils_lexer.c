@@ -6,7 +6,8 @@ t_bool	check_for_specific_token(char c)
 		c == RDRCT_OU || \
 		c == PIPE || \
 		c == SQUOTE || \
-		c == DQUOTES)
+		c == DQUOTES || \
+		c == MARKER)
 		return (TRUE);
 	return (FALSE);
 }
@@ -16,8 +17,11 @@ int	check_len_tab(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (!str)
+		return (0);
+	while (str[i] != NULL)
 		i++;
+	ms.len_tokens = i;
 	return (i);
 }
 

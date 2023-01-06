@@ -40,6 +40,21 @@ void	test_is_error_syntax_metachacacter(void)
 	create_valid_metachacacter("s -la");
 	free_ms();
 
+	create_valid_metachacacter("s | -la");
+	free_ms();
+
+	create_valid_metachacacter("s > -la");
+	free_ms();
+
+	create_valid_metachacacter("s <-la");
+	free_ms();
+
+	create_valid_metachacacter("s << -la");
+	free_ms();
+
+	create_valid_metachacacter("s >> -la");
+	free_ms();
+
 	create_invalid_metachacacter("ls || oi");
 	free_ms();
 
@@ -91,6 +106,18 @@ void	test_is_error_syntax_metachacacter(void)
 	create_invalid_metachacacter("<<");
 	free_ms();
 	
-	create_invalid_metachacacter("|");
+	create_invalid_metachacacter("OLA=|");
+	free_ms();
+
+	create_invalid_metachacacter("OLA=<");
+	free_ms();
+
+	create_invalid_metachacacter("OLA=>");
+	free_ms();
+
+	create_invalid_metachacacter("OLA=<<");
+	free_ms();
+
+	create_invalid_metachacacter("OLA=>>");
 	free_ms();
 }

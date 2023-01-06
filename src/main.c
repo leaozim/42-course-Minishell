@@ -1,16 +1,27 @@
 #include "../include/minishell.h"
 
+// void is_error(char *prompt_line)
+// {
+// 	if (is_erro_sintaxy_quotes(ms.prompt_line))
+// 		{
+// 			if (ms.prompt_line)
+// 				free(ms.prompt_line);
+// 			continue ;
+// 		}
+// }
+
 void	repl_minshell(void)
 {
 	while (TRUE)
 	{
 		ms.prompt_line = create_prompt();
 		create_tokens();
-		parser();
 		expander();
+		parser();
+		join_tokens(&ms.tks);
+		reidentify_some_tokens(ms.tks);
 		is_builtins();
 		executer();
-		// print_tokens();
 		destroy_minishell();
 	}
 	ft_lstclear(&ms.env, free);

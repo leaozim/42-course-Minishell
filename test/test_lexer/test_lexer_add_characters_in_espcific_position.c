@@ -19,6 +19,11 @@ void	test_valid_characters_in_espcific_position(void)
 	TEST_ASSERT_EQUAL_STRING("uname\x06\"oi\"", string);
 	free(string);
 
+	string = ft_strdup("oi\"oi\"\"oi\"\'oi\'oi\'oi\'\'oi\'\"oi\"\'oi\'");
+	string = add_marker(string);
+	TEST_ASSERT_EQUAL_STRING("oi\x06\"oi\"\x06\"oi\"\x06\'oi\'\x06oi\x06\'oi\'\x06\'oi\'\x06\"oi\"\x06\'oi\'", string);
+	free(string);
+
 	string = ft_strdup("\"oi\"uname");
 	string = add_marker(string);
 	TEST_ASSERT_EQUAL_STRING("\"oi\"\x06uname", string);

@@ -7,7 +7,7 @@ void	free_ptrs(char **str)
 	i = 0;
 	if (!str || !*(str))
 		return ;
-	while (str[i] != NULL)
+	while (str[i])
 	{
 		free(str[i]);
 		i++;
@@ -61,4 +61,5 @@ void	destroy_minishell(void)
 	free(ms.prompt_line);
 	free(ms.tab_tokens);
 	free(ms.tab_id);
+	ft_lstclear(&ms.env, NULL);
 }

@@ -29,7 +29,7 @@ LEXER				=	tokens.c									\
 
 EXPANDER			=	expander.c									\
 						brace_expansion.c							\
-						expander_checks.c							\
+						expander_checks.c
 
 PARSER 				=	parser.c 									\
 						handle_metachars.c							\
@@ -45,7 +45,9 @@ BUILTINS			=	echo.c										\
 						pwd.c										\
 						cd.c										\
 						export_handle_errors.c						\
-						unset.c
+						unset.c										\
+						msg_error.c									\
+						exit.c
 
 EXECUTER			=	executer.c
 
