@@ -95,7 +95,7 @@ char	*add_marker(char *line)
 		if (set_true_quotes(line, &i))
 			is_two_quotes = TRUE;
 		if (is_two_quotes == TRUE)
-			line = add_characters_in_specific_position(line, i, MARKER);
+			line = add_chrs_in_specific_position(line, i, MARKER);
 		i++;
 	}
 	return (line);
