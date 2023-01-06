@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_findsubchr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 12:03:57 by etomiyos          #+#    #+#             */
-/*   Updated: 2023/01/02 11:14:30 by etomiyos         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:25:32 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_findsubchr(char *str, char c)
 	{
 		if (str[i] == c)
 		{
-            dest = ft_calloc(i + 1, sizeof(char));
+			dest = ft_calloc(i + 1, sizeof(char));
 			dest = ft_memcpy(dest, str, i);
 			return (dest);
 		}

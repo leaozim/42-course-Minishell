@@ -22,7 +22,7 @@ void	increment_the_node_while_there_are_n(t_list **node, int *qtt_n)
 {
 	t_tokens	*next;
 
-	while (*qtt_n < ms.len_tokens)
+	while (*qtt_n < g_ms.len_tokens)
 	{
 		if ((*node)->next)
 		{
@@ -45,15 +45,15 @@ int	print_echo_node(t_list **node, int qtt_n)
 	while ((*node)->next)
 	{
 		next = (t_tokens *)(*node)->next->content;
-		if (ms.len_tokens == 2 && is_operand_n(next->token))
+		if (g_ms.len_tokens == 2 && is_operand_n(next->token))
 			return (1);
 		printf("%s", next->token);
-		if (i < ms.len_tokens - qtt_n - 2)
+		if (i < g_ms.len_tokens - qtt_n - 2)
 			printf(" ");
 		(*node) = (*node)->next;
 		i++;
 	}
-	*node = ms.tks;
+	*node = g_ms.tks;
 	if ((*node)->next)
 	{
 		next = (t_tokens *)(*node)->next->content;
@@ -68,9 +68,9 @@ int	builtin_echo(void)
 	t_list		*node;
 	int			qtt_n;
 
-	node = ms.tks;
+	node = g_ms.tks;
 	qtt_n = 0;
-	if (ms.len_tokens == 1)
+	if (g_ms.len_tokens == 1)
 		return (printf("\n"), 0);
 	increment_the_node_while_there_are_n(&node, &qtt_n);
 	if (print_echo_node(&node, qtt_n))

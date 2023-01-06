@@ -2,36 +2,36 @@
 
 // void	free_ms_export(void)
 // {
-// 	ft_lstclear(&ms.tks, destroy_t_tokens);
-// 	free(ms.tab_tokens);
-// 	free(ms.tab_id);
-// 	ft_lstclear(&ms.env, NULL);
+// 	ft_lstclear(&g_ms.tks, destroy_t_tokens);
+// 	free(g_ms.tab_tokens);
+// 	free(g_ms.tab_id);
+// 	ft_lstclear(&g_ms.env, NULL);
 // }
 
 // void create_export_valid(char *prompt, char *expected)
 // {
 // 	t_list			*node;
 
-// 	ms.prompt_line = ft_strdup(prompt);
+// 	g_ms.prompt_line = ft_strdup(prompt);
 // 	create_tokens();
 // 	parser();
 // 	expander();
 // 	is_builtins();
-// 	node = ms.env;
+// 	node = g_ms.env;
 // 	node = ft_lstlast(node);
 // 	TEST_ASSERT_EQUAL_STRING(expected, node->content);
-// 	free(ms.prompt_line);
+// 	free(g_ms.prompt_line);
 // }
 
 // void create_export_invalid(char *prompt)
 // {
-// 	ms.prompt_line = ft_strdup(prompt);
+// 	g_ms.prompt_line = ft_strdup(prompt);
 // 	create_tokens();
 // 	parser();
 // 	expander();
 // 	is_builtins();
-// 	TEST_ASSERT_EQUAL_INT(1, ms.exit_status);
-// 	free(ms.prompt_line);
+// 	TEST_ASSERT_EQUAL_INT(1, g_ms.exit_status);
+// 	free(g_ms.prompt_line);
 // }
 
 // void    check_export(void)

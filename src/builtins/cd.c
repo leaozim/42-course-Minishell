@@ -23,11 +23,11 @@ int	builtin_cd(void)
 	int			result;
 
 	result = 0;
-	node = ms.tks;
+	node = g_ms.tks;
 	home = getenv("HOME");
-	if (ms.len_tokens > 2)
+	if (g_ms.len_tokens > 2)
 		return (msg_error_cd(), 1);
-	if (ms.len_tokens == 1)
+	if (g_ms.len_tokens == 1)
 		result = chdir(home);
 	else if (node->next)
 	{

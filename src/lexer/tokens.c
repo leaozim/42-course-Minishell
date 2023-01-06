@@ -95,7 +95,7 @@ char	*add_marker(char *line)
 		if (set_true_quotes(line, &i))
 			is_two_quotes = TRUE;
 		if (is_two_quotes == TRUE)
-			line = add_characters_in_specific_position(line, i, MARKER);
+			line = add_chars_in_specific_position(line, i, MARKER);
 		i++;
 	}
 	return (line);
@@ -106,14 +106,14 @@ void	create_tokens(void)
 	char	*str_with_spcs;
 	int		qtt_tokens;
 
-	ms.prompt_line = add_marker(ms.prompt_line);
-	replace_value_inside_quotes(ms.prompt_line, SPACE, REPLACE_VALUE);
-	qtt_tokens = count_specific_tokens(ms.prompt_line);
-	str_with_spcs = add_spaces_specific_tokens(ms.prompt_line, qtt_tokens);
-	ms.tab_tokens = ft_split(str_with_spcs, ' ');
-	check_len_tab(ms.tab_tokens);
-	reverse_replace(ms.tab_tokens, ms.len_tokens);
-	ms.tab_id = identify_tokens(ms.tab_tokens, ms.len_tokens);
-	create_token_list(ms.tab_tokens, ms.tab_id, ms.len_tokens);
+	g_ms.prompt_line = add_marker(g_ms.prompt_line);
+	replace_value_inside_quotes(g_ms.prompt_line, SPACE, REPLACE_VALUE);
+	qtt_tokens = count_specific_tokens(g_ms.prompt_line);
+	str_with_spcs = add_spaces_specific_tokens(g_ms.prompt_line, qtt_tokens);
+	g_ms.tab_tokens = ft_split(str_with_spcs, ' ');
+	check_len_tab(g_ms.tab_tokens);
+	reverse_replace(g_ms.tab_tokens, g_ms.len_tokens);
+	g_ms.tab_id = identify_tokens(g_ms.tab_tokens, g_ms.len_tokens);
+	create_token_list(g_ms.tab_tokens, g_ms.tab_id, g_ms.len_tokens);
 	free(str_with_spcs);
 }

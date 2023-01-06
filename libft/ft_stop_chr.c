@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_stop_chr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 16:52:18 by etomiyos          #+#    #+#             */
-/*   Updated: 2022/12/30 17:27:31 by etomiyos         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:25:17 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_stop_chr(char *str, char c)
 	{
 		if (str[i] == c)
 		{
-            dest = ft_calloc(i + 2, sizeof(char));
+			dest = ft_calloc(i + 2, sizeof(char));
 			dest = ft_memcpy(dest, str, i + 1);
 			return (dest);
 		}

@@ -15,7 +15,7 @@ void	bash_change_colors(void)
 	t_list		*node;
 	t_tokens	*next;
 
-	node = ms.tks;
+	node = g_ms.tks;
 	while (node->next)
 	{
 		next = (t_tokens *)node->next->content;

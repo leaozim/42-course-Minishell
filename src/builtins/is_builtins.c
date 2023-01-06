@@ -5,9 +5,9 @@ void	is_builtins(void)
 	t_list		*node;
 	t_tokens	*tklist;
 
-	if (!ms.tks)
+	if (!g_ms.tks)
 		return ;
-	node = ms.tks;
+	node = g_ms.tks;
 	tklist = (t_tokens *)node->content;
 	if (!ft_strcmp("echo", tklist->token))
 		builtin_echo();

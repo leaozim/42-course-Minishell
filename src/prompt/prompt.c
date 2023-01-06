@@ -5,7 +5,7 @@ int	check_prompt(char *line)
 	if (line == NULL)
 	{
 		ft_putstr_fd("exit\n", STDERR_FILENO);
-		ft_lstclear(&ms.env, free);
+		ft_lstclear(&g_ms.env, free);
 		free(line);
 		exit(EXIT_SUCCESS);
 	}
@@ -31,7 +31,7 @@ char	*create_prompt(void)
 //     if (line == NULL)
 //     {
 //         ft_putstr_fd("\n", STDERR_FILENO);
-//         ft_lstclear(&ms.env, free);
+//         ft_lstclear(&g_ms.env, free);
 //         free(line);
 //         exit(EXIT_FAILURE);
 //     }

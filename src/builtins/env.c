@@ -5,7 +5,7 @@ void	builtin_env(void)
 {
 	t_list	*env_node;
 
-	env_node = ms.env;
+	env_node = g_ms.env;
 	while (env_node)
 	{
 		if (ft_strchr((char *)env_node->content, EQUAL) != NULL)
@@ -22,7 +22,7 @@ void	create_env(char **envp)
 	while (envp[i] != NULL)
 	{
 		printf("i = %d\n", i);
-		ft_lstadd_back(&ms.env, ft_lstnew(ft_strdup(envp[i])));
+		ft_lstadd_back(&g_ms.env, ft_lstnew(ft_strdup(envp[i])));
 		i++;
 	}
 }

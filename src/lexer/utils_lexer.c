@@ -21,7 +21,7 @@ int	check_len_tab(char **str)
 		return (0);
 	while (str[i] != NULL)
 		i++;
-	ms.len_tokens = i;
+	g_ms.len_tokens = i;
 	return (i);
 }
 

@@ -49,5 +49,5 @@ void	join_tokens(t_list **tks)
 	free(temp);
 	delete_node(&node, marker_position->index);
 	delete_node(&node, after_marker->index);
-	join_tokens(&ms.tks);
+	join_tokens(&g_ms.tks);
 }

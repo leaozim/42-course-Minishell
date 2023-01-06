@@ -26,9 +26,8 @@ int	print_export(t_list **env)
 	t_list	*env_node;
 
 	env_node = *env;
-	if (ms.len_tokens == 1)
+	if (g_ms.len_tokens == 1)
 	{
-		printf(GREEN"env = %s\n"RESET, (char*)env_node->content);
 		while (env_node)
 		{
 			msg_print_export(&env_node);
@@ -45,7 +44,7 @@ t_bool	check_export_update_value(char *token)
 	char	*name;
 	char	*content;
 
-	env_node = ms.env;
+	env_node = g_ms.env;
 	name = ft_findsubchr(token, EQUAL);
 	while (env_node)
 	{
@@ -66,7 +65,7 @@ t_bool	export_update_value(t_tokens **next, t_list **node)
 {
 	if (check_export_update_value((*next)->token) == TRUE)
 	{
-		ms.exit_status = 0;
+		g_ms.exit_status = 0;
 		(*node) = (*node)->next;
 		return (TRUE);
 	}
@@ -78,9 +77,9 @@ int	builtin_export(void)
 	t_tokens	*next;
 	t_list		*node;
 
-	node = ms.tks;
-	if (print_export(&ms.env) == 1)
-		return (ms.exit_status = 0, EXIT_SUCCESS);
+	node = g_ms.tks;
+	if (print_export(&g_ms.env) == 1)
+		return (g_ms.exit_status = 0, EXIT_SUCCESS);
 	while (node->next)
 	{
 		next = (t_tokens *)node->next->content;
@@ -88,8 +87,8 @@ int	builtin_export(void)
 			continue ;
 		if (export_update_value(&next, &node) == TRUE)
 			continue ;
-		ft_lstadd_back(&ms.env, ft_lstnew(ft_strdup(next->token)));
+		ft_lstadd_back(&g_ms.env, ft_lstnew(ft_strdup(next->token)));
 		node = node->next;
 	}
-	return (ms.exit_status = 0, EXIT_SUCCESS);
+	return (g_ms.exit_status = 0, EXIT_SUCCESS);
 }

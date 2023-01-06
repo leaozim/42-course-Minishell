@@ -80,7 +80,7 @@ void	replace_value_inside_quotes(char *list, int old_vle, int new_vle)
 	}
 }
 
-char	*add_characters_in_specific_position(char *line, int index, char charac)
+char	*add_chars_in_specific_position(char *line, int index, char chars)
 {
 	int		j;
 	int		i;
@@ -92,7 +92,7 @@ char	*add_characters_in_specific_position(char *line, int index, char charac)
 	while (i < (int)ft_strlen(line) + 1)
 	{
 		if (j == index)
-			str[j++] = charac;
+			str[j++] = chars;
 		str[j] = line[i];
 		j++;
 		i++;

@@ -38,14 +38,6 @@ typedef struct s_tokens
 	t_bool	err;
 }	t_tokens;
 
-// typedef struct s_utils
-// {
-// 	int			len_tokens;
-// 	int			infd;
-// 	int			outfd;
-
-// }	t_utils;
-
 typedef struct s_minishell
 {
 	char		*prompt_line;
@@ -61,7 +53,7 @@ typedef struct s_minishell
 	int			fd_heredoc;
 }	t_minishell;
 
-t_minishell ms;
+t_minishell	g_ms;
 
 enum e_tokens
 {

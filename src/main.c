@@ -1,33 +1,23 @@
 #include "../include/minishell.h"
 
-// void is_error(char *prompt_line)
-// {
-// 	if (is_erro_sintaxy_quotes(ms.prompt_line))
-// 		{
-// 			if (ms.prompt_line)
-// 				free(ms.prompt_line);
-// 			continue ;
-// 		}
-// }
-
 void	repl_minshell(void)
 {
 	while (TRUE)
 	{
-		ms.prompt_line = create_prompt();
+		g_ms.prompt_line = create_prompt();
 		create_tokens();
 		expander();
 		parser();
-		join_tokens(&ms.tks);
-		// printf(CYAN"\nANTES\n"RESET);
-		// print_tokens();
-		reidentify_some_tokens(ms.tks);
+		join_tokens(&g_ms.tks);
+		printf(CYAN"\nANTES\n"RESET);
+		print_tokens();
+		reidentify_some_tokens(g_ms.tks);
 		is_builtins();
 		printf(CYAN"DEPOIS\n"RESET);
 		print_tokens();
 		destroy_minishell();
 	}
-	ft_lstclear(&ms.env, free);
+	ft_lstclear(&g_ms.env, free);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -45,9 +35,9 @@ void	print_tokens(void)
 	t_list		*node;
 	t_tokens	*tklist;
 
-	if (!ms.tks)
+	if (!g_ms.tks)
 		return ;
-	node = ms.tks;
+	node = g_ms.tks;
 	while (node)
 	{
 		tklist = (t_tokens *)node->content;
