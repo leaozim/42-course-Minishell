@@ -1,6 +1,9 @@
 #ifndef PRINTF_COLORS_H
 # define PRINTF_COLORS_H
 
+# define MSG_INVALID_COLOR "Minishell: invalid color name. \
+Available options are as below:\n"
+
 //Regular text
 # define BLACK   "\e[0;30m"
 # define RED     "\e[0;31m"
@@ -66,6 +69,4 @@
 # define CRESET      "\e[0m"
 # define COLOR_RESET "\e[0m"
 
-/*thanks to RabaDabaDoba on Github!
-src: https://gist.github.com/RabaDabaDoba/145049536f815903c79944599c6f952a*/
 #endif

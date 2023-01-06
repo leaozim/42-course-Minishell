@@ -1,143 +1,95 @@
 #include "../../include/minishell.h"
 
-int	count_quotes_pair(char	*str, char c, int *i)
+void	msg_print_export(t_list **env_node)
 {
-	if (*i == ((int)ft_strlen(str) - 1))
-	{
-		ft_putstr_fd("Minishell: ", STDERR_FILENO);
-		ft_putstr_fd("ERROR: Invalid quoting syntax\n", STDERR_FILENO);
-		return (0);
+	char	*aux;
+	char	*str;
+
+	ft_putstr_fd("declare -x ", STDOUT_FILENO);
+	str = (char *)(*env_node)->content;
+	if (ft_strchr(str, EQUAL) != NULL)
+	{	
+		aux = ft_stop_chr(str, EQUAL);
+		ft_putstr_fd(aux, STDOUT_FILENO);
+		ft_putchar_fd(DQUOTES, STDOUT_FILENO);
+		ft_putstr_fd(ft_strchr(str, EQUAL) + 1, STDOUT_FILENO);
+		ft_putchar_fd(DQUOTES, STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		free(aux);
 	}
-	*i += 1;
-	if (str[*i] == c)
-		return (0);
-	while (str[*i] != c)
-	{
-		if (*i == (int)ft_strlen(str) - 1)
-		{
-			return (0);
-		}
-		*i += 1;
-	}
-	if (*i != ((int)ft_strlen(str) - 1)) //check next character after enclosing quote
-	{
-		if (str[*i + 1] == DQUOTES || str[*i + 1] == SQUOTE)
-		{
-			*i += 1;
-			count_quotes_pair(str, c, i);
-		}
-	}
-	if (str[*i + 1] != SPACE && !ft_isops(str[*i + 1]))
-	{
-		while((str[*i] != SQUOTE || str[*i] != DQUOTES) && !ft_isops(str[*i]) && *i != (int)ft_strlen(str) - 1)
-			*i += 1;
-	}
-	return (TRUE);
+	else
+		ft_putendl_fd((char *)(*env_node)->content, STDOUT_FILENO);
 }
 
-int	update_strlen_to_quote_removal(char	*str)
+int	print_export(t_list **env)
 {
-	int	i;
-	int	new_len;
+	t_list	*env_node;
 
-	i = 0;
-	new_len = 0;
-	while (str[i])
+	env_node = *env;
+	if (ms.len_tokens == 1)
 	{
-		if (str[i] == SQUOTE || str[i] == DQUOTES)
+		printf(GREEN"env = %s\n"RESET, (char*)env_node->content);
+		while (env_node)
 		{
-			if (count_quotes_pair(str, str[i], &i) == FALSE)
-				return (-1);
-			new_len++;
+			msg_print_export(&env_node);
+			env_node = env_node->next;
 		}
-		i++;
+		return (1);
 	}
-	return (new_len);
+	return (0);
 }
 
-int	*set_positions_quote_removal(char *str, int terminator)
+t_bool	check_export_update_value(char *token)
 {
-	int	i;
-	int	j;
-	int	*positions;
-	int	count;
+	t_list	*env_node;
+	char	*name;
+	char	*content;
 
-	count = update_strlen_to_quote_removal(str);
-	if (count == -1)
-		return (NULL);
-	positions = ft_calloc((count * 2) + 1, sizeof(int));
-	i = 0;
-	j = 0;
-	while (str[i])
+	env_node = ms.env;
+	name = ft_findsubchr(token, EQUAL);
+	while (env_node)
 	{
-		if (str[i] == SQUOTE || str[i] == DQUOTES)
+		content = ft_findsubchr((char *)env_node->content, EQUAL);
+		if (!ft_strcmp(name, content))
 		{
-			positions[j] = i;
-			j++;
-			count_quotes_pair(str, str[i], &i);
-			positions[j] = i;
-			j++;
+			if (ft_strchr(token, EQUAL) != NULL)
+				ft_strupdate((char **)&env_node->content, ft_strdup(token));
+			return (free(content), free(name), TRUE);
 		}
-		i++;
+		free(content);
+		env_node = env_node->next;
 	}
-	positions[j] = terminator;
-	return (positions);
+	return (free(name), FALSE);
 }
 
-char	*quote_removal(char *str)
+t_bool	export_update_value(t_tokens **next, t_list **node)
 {
-	int		*positions;
-	char	*new_str;
-
-	positions = set_positions_quote_removal(str, TERMINATOR);
-	new_str = ft_strtrim_specific_pos(str, positions, TERMINATOR);
-	free(positions);
-	return (new_str);
-}
-
-t_bool	check_error_invalid_identifier(char *token)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	j = 0;
-	if (ft_strchr(token, '=') == NULL)
-		while (token[++i])
-			if (!ft_isalpha_underscore(token[i]))
-				if ((token[0] != '\"') && (token[ft_strlen(token)] != '\"'))
-					return (TRUE);
-	i = ft_strchr_pos(token, '=');
-	if (token[0] == '=')
+	if (check_export_update_value((*next)->token) == TRUE)
+	{
+		ms.exit_status = 0;
+		(*node) = (*node)->next;
 		return (TRUE);
-	while (j < i)
-	{
-		if (!ft_isalpha_underscore(token[0]))
-			return (TRUE);
-		if (!ft_isalpha_underscore(token[j]) && !ft_isdigit(token[j]))
-			return (TRUE);
-		j++;
 	}
 	return (FALSE);
 }
 
-//assuming that all quotes are enclosed
-//mas e quando não houver "aspas" 'aspas' na parte depois do sinal de igual?
-int	builtin_export(char *token)
+int	builtin_export(void)
 {
-	char	*str;
+	t_tokens	*next;
+	t_list		*node;
 
-	str = quote_removal(token);
-	if (check_error_invalid_identifier(str) == TRUE)
+	node = ms.tks;
+	if (print_export(&ms.env) == 1)
+		return (ms.exit_status = 0, EXIT_SUCCESS);
+	while (node->next)
 	{
-		msg_error_not_a_valid_identifier(token, "export");
-		return (free(str), EXIT_FAILURE);
+		next = (t_tokens *)node->next->content;
+		if (error_invalid_identifier(&next, &node, "export") == TRUE)
+			continue ;
+		if (export_update_value(&next, &node) == TRUE)
+			continue ;
+		ft_lstadd_back(&ms.env, ft_lstnew(ft_strdup(next->token)));
+		node = node->next;
 	}
-	ms.exit_status = 0;
-	// ft_lstadd_back(&ms.env, ft_lstnew(token));
-	// t_list *node;
-	// node = ms.env;
-	// node = ft_lstlast(node);
-	// printf(RED"%s\n"RESET, (char *)node->content);
-	return (free(str), EXIT_SUCCESS);
+	return (ms.exit_status = 0, EXIT_SUCCESS);
 }

@@ -14,6 +14,8 @@ SRC					=	main.c										\
 						destroyers.c								\
 						init_minishell.c							\
 						signals.c									\
+						change_colors.c								\
+						cmd_clear.c									\
 						$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)	\
 						$(BUILTINS)
 
@@ -42,8 +44,9 @@ BUILTINS			=	echo.c										\
 						export.c									\
 						pwd.c										\
 						cd.c										\
-						msg_error.c									\
-						exit.c
+						exit.c										\
+						export_handle_errors.c						\
+						unset.c
 
 DIRS				=	. lexer prompt expander parser builtins
 IFLAGS				=	-I $(HEADER_PATH)

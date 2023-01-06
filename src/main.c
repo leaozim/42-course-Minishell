@@ -17,16 +17,17 @@ void	repl_minshell(void)
 		ms.prompt_line = create_prompt();
 		create_tokens();
 		expander();
-		is_builtins();
 		parser();
-		// join_tokens(&ms.tks);
+		join_tokens(&ms.tks);
 		// printf(CYAN"\nANTES\n"RESET);
 		// print_tokens();
-		// reidentify_some_tokens(ms.tks);
+		reidentify_some_tokens(ms.tks);
+		is_builtins();
 		printf(CYAN"DEPOIS\n"RESET);
 		print_tokens();
 		destroy_minishell();
 	}
+	ft_lstclear(&ms.env, free);
 }
 
 int	main(int argc, char **argv, char **envp)

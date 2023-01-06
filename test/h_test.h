@@ -34,6 +34,7 @@ void		test_valid_add_spaces(void);
 void		check_identify_tokens(void);
 void		check_qtt_tokens(void);
 void		check_repl(void);
+void        check_export(void);
 
 //EXPANDER
 void		check_expander_count_dollar_sign(void);
@@ -49,7 +50,6 @@ void		free_ms(void);
 void		test_is_error_syntax_metachacacter(void);
 void		test_error_syntax_single_metachacacter(void);
 void		test_open_files(void);
-void        test_builtin_export(void);
 void		test_strtrim_allchars(void);
 void		test_valid_join_token(void);
 #endif

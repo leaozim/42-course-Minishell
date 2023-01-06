@@ -24,6 +24,7 @@ void		free_ptrs(char **str);
 void		destroy_minishell(void);
 void		destroy_t_tokens(void *token);
 int			check_prompt(char *line);
+// void	check_prompt(char *line);
 
 /* -----------------------------------------------------------------------*\
 									lexer									
@@ -87,6 +88,8 @@ void            expand_check_next_character(char *token, int *i, char **final_st
 \* -----------------------------------------------------------------------*/
 
 void			create_env(char **envp);
+t_bool			error_invalid_identifier(t_tokens **next, t_list **node, char *cmd);
+t_bool			check_error_invalid_identifier(char *token);
 void			ft_lstdelone_array(t_list **lst);
 void			ft_lstclear_array(t_list **lst);
 void			is_builtins(void);
@@ -95,11 +98,14 @@ void			builtin_env(void);
 void			builtin_pwd(void);
 void			builtin_exit(void);
 int				builtin_echo(void);
-int				builtin_export(char *token);
+int				builtin_export(void);
+int	    		builtin_unset(void);
 void			msg_error_not_a_valid_identifier(char *token, char *cmd);
 int				count_quotes_pair(char	*str, char c, int *i);
 int				split_count_words(char *str, char c);
 char			**split_assign_values(char *str, char c, int count);
+void			bash_change_colors(void);
+void			cmd_clear(void);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
