@@ -5,7 +5,7 @@ int	check_prompt(char *line)
 	if (line == NULL)
 	{
 		ft_putstr_fd("exit\n", STDERR_FILENO);
-		ft_lstclear(&ms.env, NULL);
+		ft_lstclear(&ms.env, free);
 		free(line);
 		exit(EXIT_SUCCESS);
 	}

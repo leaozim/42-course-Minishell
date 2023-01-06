@@ -136,9 +136,20 @@ void	executer(void)
 	free_ptrs(env);
 }
 
+
+//caso de sucesso -> (comando simples + lista de argumentos)
+//ex: echo -n oi ola
+
+//1) char ** do comando e dos argumentos do execve
+//2) se é builtin, não vai pro execve
+//3)
+
+// execve("/usr/bin/ls", {"ls", "-l", "-s", "-h", 0}, envp);
+// echo -n > test2 > test3 oi ola | ls | grep obj > test1 | ls -l
+
+
 //pipe_number = cmd_number - 1
 //
-
 
 
 

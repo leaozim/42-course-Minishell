@@ -18,9 +18,9 @@ void	repl_minshell(void)
 		create_tokens();
 		expander();
 		parser();
+		is_builtins();
 		join_tokens(&ms.tks);
 		reidentify_some_tokens(ms.tks);
-		is_builtins();
 		executer();
 		destroy_minishell();
 	}
@@ -29,7 +29,7 @@ void	repl_minshell(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	(void) argv;
+	(void)argv;
 	check_arguments(argc);
 	init_minishell(envp);
 	handle_signal();
@@ -42,9 +42,9 @@ void	print_tokens(void)
 	t_list		*node;
 	t_tokens	*tklist;
 
+	node = ms.tks;
 	if (!ms.tks)
 		return ;
-	node = ms.tks;
 	while (node)
 	{
 		tklist = (t_tokens *)node->content;

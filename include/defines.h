@@ -2,6 +2,7 @@
 # define DEFINES_H
 
 #include <sys/stat.h>
+#include <unistd.h>
 # define ARGUMENT_LIST_TOO_LONG 7
 # define COMMAND_NOT_FOUND 127
 
@@ -47,28 +48,32 @@ typedef struct s_tokens
 
 // }	t_utils;
 
-typedef struct s_cmd
-{
-	int		argc;
-	char	**argv;
-	char	**envp;
+// MiniSHELL $ ls
+// execve ("/bin/ls", {"ls", "-shit", "-l", 0}, envp);
 
-	// char	*word_token;
-	// char	*redir_token;
-	// char	*in;
-	// char	*out
-	
-	// is_builtin
-	// status
-	// pid
-	// pathname
-}	t_cmd;
+// typedef struct s_commands
+// {
+// 	char	*cmd;
+// 	char	**arg_list;
+// 	char	**env_list;
+
+// 	// char	*word_token;
+// 	// char	*redir_token;
+// 	// char	*in;
+// 	// char	*out;
+
+// 	// is_builtin
+// 	// status
+// 	// pid
+// 	// pathname
+// }	t_commands;
 
 typedef struct s_minishell
 {
 	char		*prompt_line;
 	t_list		*tks;
 	t_list		*env;
+	t_list		*commands;
 	char		**tab_tokens;
 	int			*tab_id;
 	char		*line_heredoc;

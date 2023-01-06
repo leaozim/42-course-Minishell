@@ -5,7 +5,7 @@ void	free_ms(void)
 	ft_lstclear(&ms.tks, destroy_t_tokens);
 	free(ms.tab_tokens);
 	free(ms.tab_id);
-	ft_lstclear(&ms.env, NULL);
+	ft_lstclear(&ms.env, free);
 }
 
 void create_repl(char *prompt, int *array_int)
