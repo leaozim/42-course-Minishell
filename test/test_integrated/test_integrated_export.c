@@ -5,7 +5,7 @@ void	free_ms_export(void)
 	ft_lstclear(&ms.tks, destroy_t_tokens);
 	free(ms.tab_tokens);
 	free(ms.tab_id);
-	ft_lstclear(&ms.env, NULL);
+	ft_lstclear(&ms.env, free);
 }
 
 void create_export_valid(char *prompt, char *expected)

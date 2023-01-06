@@ -6,7 +6,7 @@ void	destroy_heredoc(void)
 	free(ms.tab_tokens);
 	close(ms.fd_heredoc);
 	free(ms.tab_id);
-	ft_lstclear(&ms.env, NULL);
+	ft_lstclear(&ms.env, free);
 }
 
 void	break_heredoc(int fd, int fd_file_temp)
