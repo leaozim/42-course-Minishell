@@ -61,5 +61,4 @@ void	destroy_minishell(void)
 	free(ms.prompt_line);
 	free(ms.tab_tokens);
 	free(ms.tab_id);
-	ft_lstclear(&ms.env, free);
 }
