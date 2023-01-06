@@ -40,6 +40,15 @@ typedef struct s_tokens
 	t_bool	err;
 }	t_tokens;
 
+typedef struct s_utils
+{
+	char		*executable_path;
+	char		**argv;
+	char		**path_envp;
+	char		**envp;
+
+}	t_utils;
+
 // typedef struct s_utils
 // {
 // 	int			len_tokens;

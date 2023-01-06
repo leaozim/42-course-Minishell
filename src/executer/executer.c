@@ -8,78 +8,37 @@
 
 #define CMD_NOT_FOUND 127
 
-
-// int	check_path(t_pipex *p, int count)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	p->bar = ft_strjoin("/", p->splitted_cmd[count][0]);
-// 	while (p->envp_path_list[i] != NULL)
-// 	{
-// 		p->path = ft_strjoin(p->envp_path_list[i], p->bar);
-// 		if (access(p->path, F_OK | X_OK) == 0)
-// 		{
-// 			return (i);
-// 		}
-// 		i++;
-// 		free(p->path);
-// 	}
-// 	return (CMD_NOT_FOUND);
-// }
-
-// int	check_path(char **envp_path_list, int count)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	p->bar = ft_strjoin("/", p->splitted_cmd[count][0]);
-// 	while (p->envp_path_list[i] != NULL)
-// 	{
-// 		p->path = ft_strjoin(p->envp_path_list[i], p->bar);
-// 		if (access(p->path, F_OK | X_OK) == 0)
-// 		{
-// 			return (i);
-// 		}
-// 		i++;
-// 		free(p->path);
-// 	}
-// 	return (CMD_NOT_FOUND);
-// }
-
-char	**split_envp_path(void)
+void	split_envp_path(t_utils *data)
 {
-	char	**envp_path_list;
 	t_list	*env_node;
 
 	env_node = g_ms.env;
-	envp_path_list = NULL;
+	data->path_envp = NULL;
 	while (env_node != NULL)
 	{
 		if (!ft_strncmp(env_node->content, "PATH=", 5))
-			envp_path_list = ft_split(env_node->content, ':');
+			data->path_envp = ft_split(env_node->content, ':');
 		env_node = env_node->next;
 	}
-	return (envp_path_list);
+
 }
 
-char	*get_executable_path(char **envp, char **argv)
+char	*get_executable_path(t_utils *data)
 {
 	char	*path_slash;
-	char	*executable_path;
 	int		i;
 
 	i = 0;
-	path_slash = ft_strjoin("/", argv[0]);
-	while (envp[i] != NULL)
+	path_slash = ft_strjoin("/", data->argv[0]);
+	while (data->path_envp[i] != NULL)
 	{
-		executable_path = ft_strjoin(envp[i], path_slash);
-		if (access(executable_path, F_OK | X_OK) == 0)
+		data->executable_path = ft_strjoin(data->path_envp[i], path_slash);
+		if (access(data->executable_path, F_OK | X_OK) == 0)
 		{
-			return (free(path_slash), executable_path);
+			return (free(path_slash), data->executable_path);
 		}
 		i++;
-		free(executable_path);
+		free(data->executable_path);
 	}
 	return (free(path_slash), NULL);
 }
@@ -105,18 +64,31 @@ void	create_cmd_list(char **argv, char **envp, char **path_envp)
 			ft_lstnew(create_cmd_content(argv, envp, path_envp)));
 }
 
+int	print_array(char **array)
+{
+	int i = 0;
+	while(array[i])
+	{
+		printf("%s\n", array[i]);
+		i++;
+	}
+	return (i);
+}
+
 void	executer(void)
 {
-	int		status;
-	char	*executable_path;
+	t_utils	cmd_data;
+
 
 	if (is_builtins() == TRUE)
 		return ;
-	argv = create_cmd_list();
-	envp = get_envp();
-	path_envp = split_envp_path();
-	executable_path = get_executable_path(path_envp, argv);
-	
+	get_cmd_list(&cmd_data);
+	get_envp(&cmd_data);
+	split_envp_path(&cmd_data);
+	get_executable_path(&cmd_data);
+	// print_array(cmd_data.argv);
+	// print_array(cmd_data.envp);
+	printf("%s\n", cmd_data.executable_path);
 	// pid_t	pid;
 
 	// pid = fork();

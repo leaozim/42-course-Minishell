@@ -109,8 +109,9 @@ void			cmd_clear(void);
 
 void			executer(void);
 int				get_cmd_count(void);
-char			**split_envp_path(void);
-char			**get_envp(void);
+void			split_envp_path(t_utils *data);
+void			get_envp(t_utils *data);
+void			get_cmd_list(t_utils *data);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

@@ -18,16 +18,15 @@ int	get_cmd_count(void)
 	return (cmd_count);
 }
 
-char	**create_cmd_list(void)
+void	get_cmd_list(t_utils *data)
 {
 	int			cmd_count;
-	char		**arguments;
 	t_list		*node;
 	t_tokens	*tklist;
 	int			i;
 
 	cmd_count = get_cmd_count();
-	arguments = ft_calloc(cmd_count + 1, sizeof(char*));
+	data->argv = ft_calloc(cmd_count + 1, sizeof(char*));
 	node = g_ms.tks;
 	i = 0;
 	while (node)
@@ -35,18 +34,16 @@ char	**create_cmd_list(void)
 		tklist = (t_tokens *)node->content;
 		if (tklist->id_token == COMMAND)
 		{
-			arguments[i] = tklist->token;
+			data->argv[i] = tklist->token;
 			i++;
 		}
 		node = node->next;
 	}
-	arguments[i] = NULL;
-	return (arguments);
+	data->argv[i] = NULL;
 }
 
-char	**get_envp(void)
+void	get_envp(t_utils *data)
 {
-	char	**envp;
 	t_list	*env_node;
 	size_t	count;
 	int		i;
@@ -54,13 +51,12 @@ char	**get_envp(void)
 	i = 0;
 	env_node = g_ms.env;
 	count = ft_lstcount_nodes(env_node);
-	envp = ft_calloc(count + 1, sizeof(char *));
+	data->envp = ft_calloc(count + 1, sizeof(char *));
 	while (env_node)
 	{
-		envp[i] = (char *)env_node->content;
+		data->envp[i] = (char *)env_node->content;
 		env_node = env_node->next;
 		i++;
 	}
-	envp[i] = NULL;
-	return (envp);
+	data->envp[i] = NULL;
 }

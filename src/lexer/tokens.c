@@ -13,7 +13,7 @@ int	*identify_tokens(char **str, int len_tab)
 		aux = str[i];
 		if (aux[0] == DQUOTES || aux[0] == SQUOTE)
 			id_tks[i] = aux[0];
-		if (ft_strlen(aux) == 1)
+		if (ft_strlen(aux) == 1 && !ft_isalpha_underscore(aux[0]))
 			id_tks[i] = aux[0];
 		else if (aux[0] == RDRCT_IN && ft_strlen(aux) == 2)
 			id_tks[i] = HEREDOC;
