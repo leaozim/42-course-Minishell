@@ -46,7 +46,6 @@ BUILTINS			=	echo.c										\
 						cd.c										\
 						export_handle_errors.c						\
 						unset.c										\
-						msg_error.c									\
 						exit.c
 
 EXECUTER			=	executer.c

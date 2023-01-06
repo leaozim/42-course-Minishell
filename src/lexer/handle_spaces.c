@@ -101,39 +101,3 @@ char	*add_chrs_in_specific_position(char *line, int index, char charac)
 	free(line);
 	return (str);
 }
-
-char	*add_marker(char *line)
-{
-	t_bool	is_two_quotes;
-	int		quotes;
-	int		i;
-
-	i = 0;
-	while (i < (int)ft_strlen(line))
-	{
-		is_two_quotes = FALSE;
-		if (line[i] == SQUOTE || line[i] == DQUOTES)
-		{
-			quotes = line[i];
-			i++;
-			while (line[i] && line[i] != quotes)
-				i++;
-			if (line[i])
-				i++;
-			if ((line[i] && line[i] != ' ' && line[i] != '\0'))
-				is_two_quotes = TRUE;
-		}
-		else if (i > 0)
-		{
-			if (line[i] != ' ' && (line[i + 1] == '\"' || line[i + 1] == '\''))
-			{
-				is_two_quotes = TRUE;
-				i++;
-			}
-		}
-		if (is_two_quotes == TRUE)
-			line = add_chrs_in_specific_position(line, i, MARKER);
-		i++;
-	}
-	return (line);
-}

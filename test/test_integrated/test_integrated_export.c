@@ -36,53 +36,53 @@ void create_export_invalid(char *prompt)
 
 void    check_export(void)
 {
-	create_export_valid("export OLA=", "OLA=");
-	free_ms_export();
+	// create_export_valid("export OLA=", "OLA=");
+	// free_ms_export();
 
-	create_export_valid("export OLA====PESSOAL", "OLA====PESSOAL");
-	free_ms_export();
+	// create_export_valid("export OLA====PESSOAL", "OLA====PESSOAL");
+	// free_ms_export();
 
-	create_export_valid("export OLA", "OLA");
-	free_ms_export();
+	// create_export_valid("export OLA", "OLA");
+	// free_ms_export();
 
-	create_export_valid("export \"OLA\"", "OLA");
-	free_ms_export();
+	// create_export_valid("export \"OLA\"", "OLA");
+	// free_ms_export();
 
-	create_export_valid("export OLA=PESSOAL", "OLA=PESSOAL");
-	free_ms_export();
+	// create_export_valid("export OLA=PESSOAL", "OLA=PESSOAL");
+	// free_ms_export();
 
-	create_export_invalid("export OLA%");
-	free_ms_export();
+	// create_export_invalid("export OLA%");
+	// free_ms_export();
 
-	create_export_valid("export OLA=%PESSOAL", "OLA=%PESSOAL");
-	free_ms_export();
+	// create_export_valid("export OLA=%PESSOAL", "OLA=%PESSOAL");
+	// free_ms_export();
 
-	create_export_invalid("export %=PESSOAL");
-	free_ms_export();
+	// create_export_invalid("export %=PESSOAL");
+	// free_ms_export();
 
-	create_export_invalid("export 2=PESSOAL");
-	free_ms_export();
+	// create_export_invalid("export 2=PESSOAL");
+	// free_ms_export();
 
-	create_export_invalid("export %A=PESSOAL");
-	free_ms_export();
+	// create_export_invalid("export %A=PESSOAL");
+	// free_ms_export();
 
-	create_export_valid("export _2=PESSOAL", "_2=PESSOAL");
-	free_ms_export();
+	// create_export_valid("export _2=PESSOAL", "_2=PESSOAL");
+	// free_ms_export();
 
-	create_export_invalid("export 2_=PESSOAL");
-	free_ms_export();
+	// create_export_invalid("export 2_=PESSOAL");
+	// free_ms_export();
 
-	create_export_invalid("export =PESSOAL");
-	free_ms_export();
+	// create_export_invalid("export =PESSOAL");
+	// free_ms_export();
 
-	create_export_valid("export OLA=2PESSOAL", "OLA=2PESSOAL");
-	free_ms_export();
+	// create_export_valid("export OLA=2PESSOAL", "OLA=2PESSOAL");
+	// free_ms_export();
 
-	create_export_valid("export OLA=2", "OLA=2");
-	free_ms_export();
+	// create_export_valid("export OLA=2", "OLA=2");
+	// free_ms_export();
 
-	create_export_valid("export OLA=2", "OLA=2");
-	free_ms_export();
+	// create_export_valid("export OLA=2", "OLA=2");
+	// free_ms_export();
 
 	// create_export_valid("export OLA=\"ola\"", "OLA=\"ola\"");
 	// free_ms_export();

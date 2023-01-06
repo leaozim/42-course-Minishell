@@ -10,8 +10,7 @@ t_bool	check_error_invalid_identifier(char *token)
 	if (ft_strchr(token, EQUAL) == NULL)
 		while (token[++i])
 			if (!ft_isalpha_underscore(token[i]))
-				if ((token[0] != '\"') && (token[ft_strlen(token)] != '\"'))
-					return (TRUE);
+				return (TRUE);
 	i = ft_strchr_pos(token, EQUAL);
 	if (token[0] == EQUAL)
 		return (TRUE);
