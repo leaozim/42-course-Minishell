@@ -17,4 +17,8 @@ void	is_builtins(void)
 		builtin_cd();
 	if (!ft_strcmp("exit", tklist->token))
 		builtin_exit();
+	if (!ft_strcmp("env", tklist->token))
+		builtin_env();
+	// if (!ft_strcmp("export", tklist->token))
+	// 	builtin_export();
 }
