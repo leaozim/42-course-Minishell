@@ -14,16 +14,6 @@ int	check_prompt(char *line)
 	return (0);
 }
 
-// char	*get_prompt_line(void)
-// {
-// 	static char	prompt_line[50];
-// 	char		*temp;
-
-// 	temp = ft_strjoin(ARROW, PROMPT);
-// 	ft_strlcpy(prompt_line, temp, ft_strlen(temp));
-// 	return (prompt_line);
-// }
-
 char	*create_prompt(void)
 {
 	char		*line;

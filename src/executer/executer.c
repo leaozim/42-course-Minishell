@@ -1,7 +1,4 @@
 #include "../../include/minishell.h"
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 //caso de sucesso -> (comando simples + lista de argumentos)
 //ex: echo -n oi ola
@@ -56,12 +53,31 @@ t_commands	*create_cmd_content(char **argv, char **envp, char **path_envp)
 
 void	create_cmd_list(char **argv, char **envp, char **path_envp)
 {
-	int	i;
+	int			i;
+	t_list		*node;
+	t_tokens	*tklist;
+	int			qtt_cmd_group;
+	int			qtt_pipes;
+	// int			
 
 	i = -1;
-	while (++i < get_cmd_count())
+	node = g_ms.tks;
+	qtt_pipes = id_token_count(PIPE);
+	qtt_cmd_group = 1;
+	if (id_token_count(PIPE) > 0)
+		qtt_cmd_group = qtt_pipes + 1; 
+	while (++i < id_token_count(COMMAND))
+	{
+		tklist = (t_tokens *)node->content;
+		if (tklist->id_token == PIPE)
+		{
+			node = node->next;
+			qtt_cmd_group--;
+			i++;
+		}
 		ft_lstadd_back(&g_ms.commands,
-			ft_lstnew(create_cmd_content(argv, envp, path_envp)));
+		ft_lstnew(create_cmd_content(argv, envp, path_envp)));
+	}
 }
 
 int	print_array(char **array)
@@ -78,7 +94,7 @@ int	print_array(char **array)
 void	executer(void)
 {
 	t_utils	cmd_data;
-
+	int		status;
 
 	if (is_builtins() == TRUE)
 		return ;
@@ -86,22 +102,22 @@ void	executer(void)
 	get_envp(&cmd_data);
 	split_envp_path(&cmd_data);
 	get_executable_path(&cmd_data);
-	// print_array(cmd_data.argv);
-	// print_array(cmd_data.envp);
-	printf("%s\n", cmd_data.executable_path);
-	// pid_t	pid;
+	print_array(cmd_data.argv);
+	print_array(cmd_data.envp);
+	// printf("%s\n", cmd_data.executable_path);
+	pid_t	pid;
 
-	// pid = fork();
-	// if (pid == 0)
-	// {
-	// 	execve(executable_path, argv, envp);
-	// 	exit(EXIT_FAILURE);
-	// }
-	// waitpid(pid, &status, 0);
-	// free(argv);
-	// free(envp);
-	// free_ptrs(path_envp);
-	// free(executable_path);
+	pid = fork();
+	if (pid == 0)
+	{
+		execve(cmd_data.executable_path, cmd_data.argv, cmd_data.envp);
+		exit(EXIT_FAILURE);
+	}
+	waitpid(pid, &status, 0);
+	free(cmd_data.argv);
+	free(cmd_data.envp);
+	free_ptrs(cmd_data.path_envp);
+	free(cmd_data.executable_path);
 }
 
 //PASSOS

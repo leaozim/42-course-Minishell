@@ -108,7 +108,7 @@ void			bash_change_colors(void);
 void			cmd_clear(void);
 
 void			executer(void);
-int				get_cmd_count(void);
+int				id_token_count(int id);
 void			split_envp_path(t_utils *data);
 void			get_envp(t_utils *data);
 void			get_cmd_list(t_utils *data);

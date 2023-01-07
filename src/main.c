@@ -17,7 +17,13 @@ void	repl_minshell(void)
 		g_ms.prompt_line = create_prompt();
 		create_tokens();
 		expander();
-		parser();
+		if (parser() == 1)
+		{
+			ft_lstclear(&g_ms.env, free);
+			destroy_minishell();
+			rl_redisplay();
+			continue ;
+		}
 		join_tokens(&g_ms.tks);
 		reidentify_some_tokens(g_ms.tks);
 		executer();

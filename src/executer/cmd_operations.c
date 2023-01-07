@@ -1,21 +1,21 @@
 #include "../../include/minishell.h"
 
-int	get_cmd_count(void)
+int	id_token_count(int id)
 {
 	t_tokens	*next;
 	t_list		*node;
-	int			cmd_count;
+	int			id_count;
 
-	cmd_count = 0;
+	id_count = 0;
 	node = g_ms.tks;
 	while (node)
 	{
 		next = (t_tokens *)node->content;
-		if (next->id_token == COMMAND)
-			cmd_count++;
+		if (next->id_token == id)
+			id_count++;
 		node = node->next;
 	}
-	return (cmd_count);
+	return (id_count);
 }
 
 void	get_cmd_list(t_utils *data)
@@ -25,7 +25,7 @@ void	get_cmd_list(t_utils *data)
 	t_tokens	*tklist;
 	int			i;
 
-	cmd_count = get_cmd_count();
+	cmd_count = id_token_count(COMMAND);
 	data->argv = ft_calloc(cmd_count + 1, sizeof(char*));
 	node = g_ms.tks;
 	i = 0;
