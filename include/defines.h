@@ -18,7 +18,6 @@
 # define REPLACE_VALUE 3
 # define SPACE ' '
 # define MARKER '\x06'
-# define DELIM_INT_ARR -5
 
 # define EXIT_ALONLY 1
 # define EXIT_NO_NUMERIC 2
@@ -78,6 +77,7 @@ typedef struct s_commands
 	char		**argv;
 	char		**path_envp;
 	char		**envp;
+	char		**tks;
 }	t_commands;
 
 typedef struct s_minishell

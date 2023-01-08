@@ -1,101 +1,120 @@
 #include "../../include/minishell.h"
 
-//caso de sucesso -> (comando simples + lista de argumentos)
-//ex: echo -n oi ola
-
-// t_commands	*create_cmd_content(char **argv, char **envp, char **path_envp)
-// {
-// 	t_commands	*content;
-
-// 	content = ft_calloc(1, sizeof(t_commands));
-// 	content->argv = argv;
-// 	content->envp = envp;
-// 	content->path_envp = path_envp;
-// 	return (content);
-// }
-
-// void	create_cmd_list(char **argv, char **envp, char **path_envp)
-// {
-// 	int			i;
-// 	t_list		*node;
-// 	t_tokens	*tklist;
-// 	int			qtt_cmd_group;
-// 	int			qtt_pipes;
-
-// 	i = -1;
-// 	node = g_ms.tks;
-// 	qtt_pipes = id_token_count(PIPE);
-// 	qtt_cmd_group = 1;
-// 	if (id_token_count(PIPE) > 0)
-// 		qtt_cmd_group = qtt_pipes + 1; 
-// 	while (++i < id_token_count(COMMAND))
-// 	{
-// 		tklist = (t_tokens *)node->content;
-// 		if (tklist->id_token == PIPE)
-// 		{
-// 			node = node->next;
-// 			qtt_cmd_group--;
-// 			i++;
-// 		}
-// 		ft_lstadd_back(&g_ms.commands,
-// 		ft_lstnew(create_cmd_content(argv, envp, path_envp)));
-// 	}
-// }
-
 void	free_commands(void)
 {
 	free(g_ms.cmd_data.argv);
 	free(g_ms.cmd_data.executable_path);
 }
 
-void	get_argv(void)
+void	close_pipes()
 {
-	int	cmd_count;
 	int	i;
-
+	
 	i = 0;
-	cmd_count = count_id_token_before_pipe(COMMAND);
-	g_ms.cmd_data.argv = ft_calloc(cmd_count + 1, sizeof(char *));
-	while (g_ms.cmd_data.node)
+	while (i < g_ms.len_pipes)
 	{
-		g_ms.cmd_data.tklist = (t_tokens *)g_ms.cmd_data.node->content;
-		if (g_ms.cmd_data.tklist->id_token == PIPE)
-		{
-			g_ms.cmd_data.node = g_ms.cmd_data.node->next;
-			break ;
-		}
-		if (g_ms.cmd_data.tklist->id_token == COMMAND)
-		{
-			g_ms.cmd_data.argv[i] = g_ms.cmd_data.tklist->token;
-			i++;
-		}
-		g_ms.cmd_data.node = g_ms.cmd_data.node->next;
+		close(g_ms.array_fd[i][0]);
+		close(g_ms.array_fd[i][1]);
+		i++;
 	}
-	g_ms.cmd_data.argv[i] = NULL;
+	if (g_ms.infd != -1)
+		close(g_ms.infd);
+	close(g_ms.outfd);
+}
+
+void	child_dup_redirection(int index)
+{
+	if (index == 0)
+	{
+		dup2(g_ms.infd, STDIN_FILENO);
+		dup2(g_ms.array_fd[index][1], STDOUT_FILENO);
+	}
+	else if (index != (g_ms.len_pipes))
+	{
+		dup2(g_ms.array_fd[index - 1][0], STDIN_FILENO);
+		dup2(g_ms.array_fd[index][1], STDOUT_FILENO);
+	}
+	else
+	{
+		dup2(g_ms.array_fd[index - 1][0], STDIN_FILENO);
+		dup2(g_ms.outfd, STDOUT_FILENO);
+	}
+}
+
+void	child_process_execution(void)
+{
+	if (execve(g_ms.cmd_data.executable_path, g_ms.cmd_data.argv, g_ms.cmd_data.envp) == -1)
+	{
+		exit(errno);
+	}
+}
+
+void	child_process_check(int index)
+{
+	// if (check_path() == FALSE)
+	// {
+	// 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
+	// 	perror(g_ms.cmd_data.argv[0]);
+	// 	g_ms.exit_status = COMMAND_NOT_FOUND;
+	// }
+	child_dup_redirection(index);
+	close_pipes();
+	child_process_execution();
+}
+
+void	fork_check(int index)
+{
+	if (g_ms.pid_fd[index] < 0)
+		exit(EXIT_FAILURE);
+	if (g_ms.pid_fd[index] == 0)
+	{
+		if (g_ms.infd == -1 && index == 0)
+		{
+			// free_de_tudo
+			exit(EXIT_FAILURE);
+		}
+		child_process_check(index);
+	}
 }
 
 void	get_cmd_data(void)
 {
 	get_argv();
-	if (is_cmd_executable() == FALSE)
-		printf(YELLOW"error!\n"RESET);
+	get_cmds();
+	if (check_path() == FALSE)
+	{
+		ft_putstr_fd("Minishell: ", STDERR_FILENO);
+		perror(g_ms.cmd_data.argv[0]);
+		g_ms.exit_status = COMMAND_NOT_FOUND;
+	}
 	printf(BLACK"\nPATH\n"RESET);
 	printf(MAGENTA"%s\n"RESET, g_ms.cmd_data.executable_path);
 	printf(BLACK"ARGV\n"RESET);
 	printf("\n");
 }
 
+void	forking(void)
+{
+	int	index;
+
+	index = 0;
+	while (g_ms.cmd_data.node)
+	{
+		get_cmd_data();
+		check_open_files(g_ms.tks, &g_ms.infd, &g_ms.outfd);
+		g_ms.pid_fd[index] = fork();
+		fork_check(index);
+		free_commands();
+		index++;
+	}
+}
+
 void	executer(void)
 {
 	init_cmd_data();
-	while (g_ms.cmd_data.tklist->index != g_ms.len_tokens - 1)
-	{
-		get_cmd_data();
-		free_commands();
-	}
+	forking();
 	free_ptrs(g_ms.cmd_data.path_envp);
 	free(g_ms.cmd_data.envp);
-	// execve("/usr/bin/ls", "/usr/bin/ls -l", envp)
 }
 
 // 	qtt_pipes = id_token_count(PIPE);

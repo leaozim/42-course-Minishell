@@ -19,11 +19,11 @@ void	open_files(t_tokens *tks, int *ifd, int *ofd)
 	if (tks->id_token == FILE_IN && !tks->err)
 		open_infile(tks->token, O_RDONLY, ifd, &tks->err);
 	if (tks->id_token == FILE_OUT && !tks->err)
-		open_outfile(tks->token, O_CREAT | O_RDWR | O_TRUNC, ofd, &tks->err);
+		open_outfile(tks->token, O_CREAT | O_WRONLY | O_TRUNC, ofd, &tks->err);
 	if (tks->id_token == FILE_APPEND && !tks->err)
-		open_outfile(tks->token, O_CREAT | O_RDWR | O_APPEND, ofd, &tks->err);
+		open_outfile(tks->token, O_CREAT | O_WRONLY | O_APPEND, ofd, &tks->err);
 	if (tks->id_token == DELIMITER && !tks->err)
-		creat_heredoc(tks->token, ifd, &tks->err);
+		create_heredoc(tks->token, ifd, &tks->err);
 }
 
 void	check_open_files(t_list *tks, int *infd, int *outfd)

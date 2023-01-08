@@ -1,4 +1,5 @@
 #include "../h_test.h"
+#include <fcntl.h>
 
 void	check_open_infile(void)
 {
@@ -18,17 +19,17 @@ void	check_open_append_file(void)
 	t_bool error;
 
 	error = FALSE;
-	infd = open("files/file2", O_CREAT | O_RDWR | O_TRUNC, 0664);
+	infd = open("files/file2", O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (infd == -1)
 		perror("1");
 	close(infd);
 	infd = 10;
-	open_infile("files/file2", O_CREAT | O_RDWR | O_APPEND, &infd, &error);
+	open_infile("files/file2", O_CREAT | O_WRONLY | O_APPEND, &infd, &error);
 	if (infd == -1)
 		perror("2");
 	write(infd, "cavalinho", 9);
 	close(infd);
-	open_infile("files/file2", O_CREAT | O_RDWR | O_APPEND, &infd, &error);
+	open_infile("files/file2", O_CREAT | O_WRONLY | O_APPEND, &infd, &error);
 	if (infd == -1)
 		perror("3");
 	write(infd, "outra", 5);
@@ -48,12 +49,12 @@ void	check_open_outfile(void)
 
 	error = FALSE;
 	infd = 10;
-	open_outfile("files/file3", O_CREAT | O_RDWR | O_TRUNC, &infd, &error);
+	open_outfile("files/file3", O_CREAT | O_WRONLY | O_TRUNC, &infd, &error);
 	if (infd == -1)
 		perror("1");
 	close(infd);
 	infd = 10;
-	open_infile("files/file3", O_CREAT | O_RDWR | O_TRUNC, &infd, &error);
+	open_infile("files/file3", O_CREAT | O_WRONLY | O_TRUNC, &infd, &error);
 	if (infd == -1)
 		perror("2");
 	write(infd, "a", 9);
@@ -61,7 +62,7 @@ void	check_open_outfile(void)
 	read(infd, &buff, 1);
 	TEST_ASSERT_EQUAL_STRING("a", buff);
 	close(infd);
-	open_infile("files/file3", O_CREAT | O_RDWR | O_TRUNC, &infd, &error);
+	open_infile("files/file3", O_CREAT | O_WRONLY | O_TRUNC, &infd, &error);
 	if (infd == -1)
 		perror("3");
 	write(infd, "b", 5);
