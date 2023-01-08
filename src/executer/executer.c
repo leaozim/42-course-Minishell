@@ -20,14 +20,12 @@ void	executer(void)
 {
 	init_cmd_data();
 	forking();
+	close_pipes();
+	wait_status();
 	free_ptrs(g_ms.cmd_data.path_envp);
 	free(g_ms.cmd_data.envp);
+	// free_commands();
 }
-
-// 	qtt_pipes = id_token_count(PIPE);
-// 	qtt_cmd_group = 1;
-// 	if (id_token_count(PIPE) > 0)
-// 		qtt_cmd_group = qtt_pipes + 1;
 
 //command and search execution
 
@@ -39,33 +37,6 @@ void	executer(void)
 
 // else
 //     procurar no PATH
-
-
-
-
-
-
-	// pid_t	pid;
-	// int		status;
-
-	// pid = fork();
-
-	// if (pid == 0)
-	// {
-	// 	execve(cmd_data.executable_path, cmd_data.argv, cmd_data.envp);
-	// 	exit(EXIT_FAILURE);
-	// }
-	// waitpid(pid, &status, 0);
-
-	// if (is_builtins() == TRUE)
-	// 	return ;
-	// free(cmd_data.executable_path);
-
-
-
-
-
-
 
 
 //PASSOS
@@ -92,25 +63,3 @@ void	executer(void)
 //access dup dup2
 //execve fork pipe
 //unlink wait waitpid
-
-
-// char	**get_array_token()
-// {
-// 	char			**array_token;
-// 	t_tokens		*next;
-// 	t_list			*node;
-// 	int			i;
-
-// 	node = g_ms.tks;
-// 	i = 0;
-// 	array_token = ft_calloc(g_ms.len_tokens + 1, sizeof(char *));
-// 	while (node)
-// 	{
-// 		next = (t_tokens *)node->content;
-// 		array_token[i] = next->token;
-// 		node = node->next;
-// 		i++;
-// 	}
-// 	array_token[i] = NULL;
-// 	return (array_token);
-// }

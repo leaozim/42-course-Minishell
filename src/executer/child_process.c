@@ -7,7 +7,7 @@ void	child_dup_redirection(int i)
 		dup2(g_ms.infd, STDIN_FILENO);
 		dup2(g_ms.array_fd[i][1], STDOUT_FILENO);
 	}
-	else if (i != g_ms.len_pipes + 1)
+	else if (i != g_ms.len_pipes) //pode ser que seja len_pipes + 1
 	{
 		dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
 		dup2(g_ms.array_fd[i][1], STDOUT_FILENO);
@@ -26,6 +26,7 @@ void	child_process_check(int i)
 		ft_putstr_fd("Minishell: ", STDERR_FILENO);
 		perror(g_ms.cmd_data.argv[0]);
 		g_ms.exit_status = COMMAND_NOT_FOUND;
+		free_commands();
 		exit(g_ms.exit_status);
 	}
 	child_dup_redirection(i);
@@ -35,8 +36,15 @@ void	child_process_check(int i)
 
 void	child_process_execution(void)
 {
+	if (g_ms.cmd_data.executable_path == NULL) //talvez seja desnecessário
+	{
+		free_commands();
+		exit(COMMAND_NOT_FOUND);
+	}
 	if (execve(g_ms.cmd_data.executable_path, g_ms.cmd_data.argv, g_ms.cmd_data.envp) == -1)
 	{
+		free_commands();
 		exit(errno);
 	}
+	free_commands();
 }

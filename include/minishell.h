@@ -156,6 +156,9 @@ void			get_envp(void);
 void			split_envp_path(void);
 t_bool			get_executable_path(void);
 
+//wait_status.c
+void			wait_status(void);
+
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
 */
