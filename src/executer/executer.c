@@ -6,107 +6,14 @@ void	free_commands(void)
 	free(g_ms.cmd_data.executable_path);
 }
 
-void	close_pipes()
-{
-	int	i;
-	
-	i = 0;
-	while (i < g_ms.len_pipes)
-	{
-		close(g_ms.array_fd[i][0]);
-		close(g_ms.array_fd[i][1]);
-		i++;
-	}
-	if (g_ms.infd != -1)
-		close(g_ms.infd);
-	close(g_ms.outfd);
-}
-
-void	child_dup_redirection(int index)
-{
-	if (index == 0)
-	{
-		dup2(g_ms.infd, STDIN_FILENO);
-		dup2(g_ms.array_fd[index][1], STDOUT_FILENO);
-	}
-	else if (index != (g_ms.len_pipes))
-	{
-		dup2(g_ms.array_fd[index - 1][0], STDIN_FILENO);
-		dup2(g_ms.array_fd[index][1], STDOUT_FILENO);
-	}
-	else
-	{
-		dup2(g_ms.array_fd[index - 1][0], STDIN_FILENO);
-		dup2(g_ms.outfd, STDOUT_FILENO);
-	}
-}
-
-void	child_process_execution(void)
-{
-	if (execve(g_ms.cmd_data.executable_path, g_ms.cmd_data.argv, g_ms.cmd_data.envp) == -1)
-	{
-		exit(errno);
-	}
-}
-
-void	child_process_check(int index)
-{
-	// if (check_path() == FALSE)
-	// {
-	// 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
-	// 	perror(g_ms.cmd_data.argv[0]);
-	// 	g_ms.exit_status = COMMAND_NOT_FOUND;
-	// }
-	child_dup_redirection(index);
-	close_pipes();
-	child_process_execution();
-}
-
-void	fork_check(int index)
-{
-	if (g_ms.pid_fd[index] < 0)
-		exit(EXIT_FAILURE);
-	if (g_ms.pid_fd[index] == 0)
-	{
-		if (g_ms.infd == -1 && index == 0)
-		{
-			// free_de_tudo
-			exit(EXIT_FAILURE);
-		}
-		child_process_check(index);
-	}
-}
-
 void	get_cmd_data(void)
 {
 	get_argv();
 	get_cmds();
-	if (check_path() == FALSE)
-	{
-		ft_putstr_fd("Minishell: ", STDERR_FILENO);
-		perror(g_ms.cmd_data.argv[0]);
-		g_ms.exit_status = COMMAND_NOT_FOUND;
-	}
 	printf(BLACK"\nPATH\n"RESET);
 	printf(MAGENTA"%s\n"RESET, g_ms.cmd_data.executable_path);
 	printf(BLACK"ARGV\n"RESET);
 	printf("\n");
-}
-
-void	forking(void)
-{
-	int	index;
-
-	index = 0;
-	while (g_ms.cmd_data.node)
-	{
-		get_cmd_data();
-		check_open_files(g_ms.tks, &g_ms.infd, &g_ms.outfd);
-		g_ms.pid_fd[index] = fork();
-		fork_check(index);
-		free_commands();
-		index++;
-	}
 }
 
 void	executer(void)
