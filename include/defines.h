@@ -46,6 +46,7 @@ typedef struct s_utils
 	char		**argv;
 	char		**path_envp;
 	char		**envp;
+	char		*cmd;
 
 }	t_utils;
 
@@ -65,6 +66,7 @@ typedef struct s_commands
 	char	**argv;
 	char	**envp;
 	char	**path_envp;
+	char	*cmd;
 
 	// char	*word_token;
 	// char	*redir_token;
