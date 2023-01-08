@@ -18,6 +18,7 @@
 # define REPLACE_VALUE 3
 # define SPACE ' '
 # define MARKER '\x06'
+# define DELIM_INT_ARR -5
 
 # define EXIT_ALONLY 1
 # define EXIT_NO_NUMERIC 2
@@ -42,11 +43,12 @@ typedef struct s_tokens
 
 typedef struct s_utils
 {
+	t_list		*node;
+	t_tokens	*tklist;
 	char		*executable_path;
 	char		**argv;
 	char		**path_envp;
 	char		**envp;
-
 }	t_utils;
 
 // typedef struct s_utils
@@ -83,6 +85,7 @@ typedef struct s_minishell
 	t_list		*tks;
 	t_list		*env;
 	t_list		*commands;
+	t_utils		cmd_data;
 	char		**tab_tokens;
 	int			*tab_id;
 	char		*line_heredoc;
@@ -101,6 +104,7 @@ enum e_tokens
 	DQUOTES = 34,
 	DOLLAR_SIGN = 36,
 	SQUOTE = 39,
+	SLASH = 47,
 	SEMICOLON = 59,
 	RDRCT_IN = 60,
 	RDRCT_OU = 62,

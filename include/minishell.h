@@ -108,10 +108,12 @@ void			bash_change_colors(void);
 void			cmd_clear(void);
 
 void			executer(void);
-int				id_token_count(int id);
-void			split_envp_path(t_utils *data);
-void			get_envp(t_utils *data);
-void			get_cmd_list(t_utils *data);
+int				count_id_token_before_pipe(int id);
+void			split_envp_path();
+void			get_envp();
+void			get_argv();
+t_bool			get_executable_path();
+int				print_array(char **array);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
