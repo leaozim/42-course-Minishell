@@ -17,6 +17,34 @@ static void	init_dynamic_cmd_data()
 	split_envp_path();
 }
 
+void	fd_memory_allocate()
+{
+	int	i;
+
+	i = 0;
+	while (i < g_ms.len_pipes)
+	{
+		g_ms.array_fd[i] = ft_calloc(2, sizeof(int));
+		i++;
+	}
+}
+
+void	init_pipe_values()
+{
+	int	i;
+	int value;
+
+	i = 0;
+	value = -5;
+	while (i < g_ms.len_pipes)
+	{
+		value = pipe(g_ms.array_fd[i]);
+		if (value == - 1)
+			perror("pipe:");
+		i++;
+	}
+}
+
 void	init_cmd_data(void)
 {
 	init_static_cmd_data();
