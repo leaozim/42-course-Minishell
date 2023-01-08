@@ -42,10 +42,9 @@
 // 	}
 // }
 
-void	free_utils(void)
+void	free_commands(void)
 {
 	free(g_ms.cmd_data.argv);
-	free_ptrs(g_ms.cmd_data.path_envp);
 	free(g_ms.cmd_data.executable_path);
 }
 
@@ -78,30 +77,47 @@ void	get_argv(void)
 void	get_cmd_data(void)
 {
 	get_argv();
-	split_envp_path();
-	if (get_executable_path() == FALSE)
-		printf("command not found\n");
+	if (is_cmd_executable() == FALSE)
+		printf(YELLOW"error!\n"RESET);
 	printf(BLACK"\nPATH\n"RESET);
 	printf(MAGENTA"%s\n"RESET, g_ms.cmd_data.executable_path);
 	printf(BLACK"ARGV\n"RESET);
-	// print_array(g_ms.cmd_data.argv);
 	printf("\n");
 }
 
 void	executer(void)
 {
-	get_envp(g_ms.cmd_data);
-	g_ms.cmd_data.node = g_ms.tks;
-	g_ms.cmd_data.tklist = (t_tokens *)g_ms.cmd_data.node->content;
-	g_ms.cmd_data.tklist->index = 0;
+	init_cmd_data();
 	while (g_ms.cmd_data.tklist->index != g_ms.len_tokens - 1)
 	{
 		get_cmd_data();
-		free_utils();
+		free_commands();
 	}
+	free_ptrs(g_ms.cmd_data.path_envp);
 	free(g_ms.cmd_data.envp);
-
+	// execve("/usr/bin/ls", "/usr/bin/ls -l", envp)
 }
+
+// 	qtt_pipes = id_token_count(PIPE);
+// 	qtt_cmd_group = 1;
+// 	if (id_token_count(PIPE) > 0)
+// 		qtt_cmd_group = qtt_pipes + 1;
+
+//command and search execution
+
+// if (slash)
+//     já tem o caminho
+
+// if (builtin)
+//     is_builtin
+
+// else
+//     procurar no PATH
+
+
+
+
+
 
 	// pid_t	pid;
 	// int		status;
@@ -144,18 +160,6 @@ void	executer(void)
 
 //pipe_number = cmd_number - 1
 //
-
-
-//command and search executing
-
-// if (slash)
-//     já tem o caminho
-
-// if (builtin)
-//     is_builtin
-
-// else
-//     procurar no PATH
 
 
 //open close read

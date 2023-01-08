@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <string.h>
 
 int	count_id_token_before_pipe(int id)
 {
@@ -14,6 +13,24 @@ int	count_id_token_before_pipe(int id)
 		next = (t_tokens *)node->content;
 		if (next->id_token == PIPE)
 			break ;
+		if (next->id_token == id)
+			id_count++;
+		node = node->next;
+	}
+	return (id_count);
+}
+
+int	count_id_token(int id)
+{
+	t_tokens	*next;
+	t_list		*node;
+	int			id_count;
+
+	id_count = 0;
+	node = g_ms.tks;
+	while (node)
+	{
+		next = (t_tokens *)node->content;
 		if (next->id_token == id)
 			id_count++;
 		node = node->next;
@@ -45,7 +62,6 @@ void	split_envp_path()
 	t_list	*env_node;
 
 	env_node = g_ms.env;
-	g_ms.cmd_data.path_envp = NULL;
 	while (env_node != NULL)
 	{
 		if (!ft_strncmp(env_node->content, "PATH=", 5))
@@ -60,13 +76,6 @@ t_bool	get_executable_path()
 	int		i;
 
 	i = 0;
-	if (ft_strchr(g_ms.cmd_data.argv[0], SLASH) != NULL)
-	{
-		g_ms.cmd_data.executable_path = ft_strdup(g_ms.cmd_data.argv[0]);
-		if (access(g_ms.cmd_data.executable_path, F_OK | X_OK) == 0)
-			return (TRUE);
-		return (FALSE);
-	}
 	path_slash = ft_strjoin("/", g_ms.cmd_data.argv[0]);
 	while (g_ms.cmd_data.path_envp[i] != NULL)
 	{
@@ -81,6 +90,28 @@ t_bool	get_executable_path()
 	}
 	g_ms.cmd_data.executable_path = ft_strdup(g_ms.cmd_data.argv[0]);
 	free(path_slash);
+	return (FALSE);
+}
+
+t_bool	is_cmd_with_slash_executable()
+{
+	if (ft_strchr(g_ms.cmd_data.argv[0], SLASH))
+	{
+		g_ms.cmd_data.executable_path = ft_strdup(g_ms.cmd_data.argv[0]);
+		if (access(g_ms.cmd_data.executable_path, F_OK | X_OK) == 0)
+			return (TRUE);
+		else
+			free(g_ms.cmd_data.executable_path);
+	}
+	return (FALSE);
+}
+
+t_bool	is_cmd_executable(void)
+{
+	if (is_cmd_with_slash_executable() == TRUE)
+		return (TRUE);
+	else if (get_executable_path() == TRUE)
+		return (TRUE);
 	return (FALSE);
 }
 

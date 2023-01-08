@@ -114,6 +114,9 @@ void			get_envp();
 void			get_argv();
 t_bool			get_executable_path();
 int				print_array(char **array);
+t_bool			is_cmd_executable(void);
+int				count_id_token(int id);
+void			init_cmd_data(void);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
