@@ -40,15 +40,6 @@ typedef struct s_tokens
 	t_bool	err;
 }	t_tokens;
 
-typedef struct s_utils
-{
-	char		*executable_path;
-	char		**argv;
-	char		**path_envp;
-	char		**envp;
-	char		*cmd;
-
-}	t_utils;
 
 // typedef struct s_utils
 // {
@@ -61,22 +52,32 @@ typedef struct s_utils
 // MiniSHELL $ ls
 // execve ("/bin/ls", {"ls", "-shit", "-l", 0}, envp);
 
+// typedef struct s_commands
+// {
+// 	char	**argv;
+// 	char	**envp;
+// 	char	**path_envp;
+
+// 	// char	*word_token;
+// 	// char	*redir_token;
+// 	// char	*in;
+// 	// char	*out;
+
+// 	// is_builtin
+// 	// status
+// 	// pid
+// 	// pathname
+// }	t_commands;
+
 typedef struct s_commands
 {
-	char	**argv;
-	char	**envp;
-	char	**path_envp;
-	char	*cmd;
-
-	// char	*word_token;
-	// char	*redir_token;
-	// char	*in;
-	// char	*out;
-
-	// is_builtin
-	// status
-	// pid
-	// pathname
+	t_list		*node;
+	t_tokens	*tklist;
+	char		*executable_path;
+	char		**argv;
+	char		**path_envp;
+	char		**envp;
+	char		**tks;
 }	t_commands;
 
 typedef struct s_minishell
@@ -85,11 +86,18 @@ typedef struct s_minishell
 	t_list		*tks;
 	t_list		*env;
 	t_list		*commands;
+	t_commands	cmd_data;
 	char		**tab_tokens;
 	int			*tab_id;
 	char		*line_heredoc;
 	int			exit_status;
+
+	int			**array_fd;
+	int			*pid_fd;
+
 	int			len_tokens;
+	int			len_pipes;
+
 	int			infd;
 	int			outfd;
 	int			fd_heredoc;
@@ -103,6 +111,7 @@ enum e_tokens
 	DQUOTES = 34,
 	DOLLAR_SIGN = 36,
 	SQUOTE = 39,
+	SLASH = 47,
 	SEMICOLON = 59,
 	RDRCT_IN = 60,
 	RDRCT_OU = 62,

@@ -1,134 +1,80 @@
 #include "../../include/minishell.h"
-#include "defines.h"
 
-//caso de sucesso -> (comando simples + lista de argumentos)
-//ex: echo -n oi ola
-
-#define CMD_NOT_FOUND 127
-
-void	split_envp_path(t_utils *data)
+void	free_commands(void)
 {
-	t_list	*env_node;
-
-	env_node = g_ms.env;
-	data->path_envp = NULL;
-	while (env_node != NULL)
-	{
-		if (!ft_strncmp(env_node->content, "PATH=", 5))
-			data->path_envp = ft_split(env_node->content, ':');
-		env_node = env_node->next;
-	}
-
+	free(g_ms.cmd_data.argv);
+	free(g_ms.cmd_data.executable_path);
 }
 
-char	*get_executable_path(t_utils *data)
+void	close_pipes()
 {
-	char	*path_slash;
-	int		i;
-
+	int	i;
+	
 	i = 0;
-	path_slash = ft_strjoin("/", data->argv[0]);
-	while (data->path_envp[i] != NULL)
+	while (i < g_ms.len_pipes)
 	{
-		data->executable_path = ft_strjoin(data->path_envp[i], path_slash);
-		if (access(data->executable_path, F_OK | X_OK) == 0)
-		{
-			return (free(path_slash), data->executable_path);
-		}
+		close(g_ms.array_fd[i][0]);
+		close(g_ms.array_fd[i][1]);
 		i++;
-		free(data->executable_path);
 	}
-	return (free(path_slash), NULL);
+	if (g_ms.infd != -1)
+		close(g_ms.infd);
+	close(g_ms.outfd);
 }
 
-// t_commands	*create_cmd_content(char **argv, char **envp, char **path_envp)
-// {
-// 	t_commands	*content;
-
-// 	content = ft_calloc(1, sizeof(t_commands));
-// 	content->argv = argv;
-// 	content->envp = envp;
-// 	content->path_envp = path_envp;
-// 	return (content);
-// }
-
-// void	create_cmd_list(char **argv, char **envp, char **path_envp)
-// {
-// 	int			i;
-// 	t_list		*node;
-// 	t_tokens	*tklist;
-// 	int			qtt_cmd_group;
-// 	int			qtt_pipes;
-// 	// int			
-
-// 	i = -1;
-// 	node = g_ms.tks;
-// 	qtt_pipes = id_token_count(PIPE);
-// 	qtt_cmd_group = 1;
-// 	if (id_token_count(PIPE) > 0)
-// 		qtt_cmd_group = qtt_pipes + 1; 
-// 	while (++i < id_token_count(COMMAND))
-// 	{
-// 		tklist = (t_tokens *)node->content;
-// 		if (tklist->id_token == PIPE)
-// 		{
-// 			node = node->next;
-// 			qtt_cmd_group--;
-// 			i++;
-// 		}
-// 		ft_lstadd_back(&g_ms.commands,
-// 		ft_lstnew(create_cmd_content(argv, envp, path_envp)));
-// 	}
-// }
-
-int	id_token_count2(int id)
+void	child_dup_redirection(int index)
 {
-	t_tokens	*next;
-	t_list		*node;
-	int			id_count;
-
-	id_count = 0;
-	node = g_ms.tks;
-	while (node)
+	if (index == 0)
 	{
-		next = (t_tokens *)node->content;
-		while (next->id_token != PIPE)
-		{
-			if (next->id_token == id)
-				id_count++;
-			node = node->next;
-		}
-		node = node->next;
+		dup2(g_ms.infd, STDIN_FILENO);
+		dup2(g_ms.array_fd[index][1], STDOUT_FILENO);
 	}
-	return (id_count);
+	else if (index != (g_ms.len_pipes))
+	{
+		dup2(g_ms.array_fd[index - 1][0], STDIN_FILENO);
+		dup2(g_ms.array_fd[index][1], STDOUT_FILENO);
+	}
+	else
+	{
+		dup2(g_ms.array_fd[index - 1][0], STDIN_FILENO);
+		dup2(g_ms.outfd, STDOUT_FILENO);
+	}
 }
 
-void	get_cmd_list2(t_utils *data)
+void	child_process_execution(void)
 {
-	int			cmd_count;
-	t_list		*node;
-	t_tokens	*tklist;
-	int			i;
-
-	cmd_count = id_token_count2(COMMAND);
-	data->argv = ft_calloc(cmd_count + 1, sizeof(char*));
-	node = g_ms.tks;
-	i = 0;
-	while (node)
+	if (execve(g_ms.cmd_data.executable_path, g_ms.cmd_data.argv, g_ms.cmd_data.envp) == -1)
 	{
-		tklist = (t_tokens *)node->content;
-		while (tklist->id_token != PIPE) 
-		{
-			if (tklist->id_token == COMMAND)
-			{
-				data->argv[i] = tklist->token;
-				i++;
-			}
-			node = node->next;
-		}
-		node = node->next;
+		exit(errno);
 	}
-	data->argv[i] = NULL;
+}
+
+void	child_process_check(int index)
+{
+	// if (check_path() == FALSE)
+	// {
+	// 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
+	// 	perror(g_ms.cmd_data.argv[0]);
+	// 	g_ms.exit_status = COMMAND_NOT_FOUND;
+	// }
+	child_dup_redirection(index);
+	close_pipes();
+	child_process_execution();
+}
+
+void	fork_check(int index)
+{
+	if (g_ms.pid_fd[index] < 0)
+		exit(EXIT_FAILURE);
+	if (g_ms.pid_fd[index] == 0)
+	{
+		if (g_ms.infd == -1 && index == 0)
+		{
+			// free_de_tudo
+			exit(EXIT_FAILURE);
+		}
+		child_process_check(index);
+	}
 }
 
 
@@ -145,106 +91,89 @@ t_commands	*create_cmd_content(char **cmd)
 	return (content);
 }
 
-int	print_array(char **array)
+void	get_cmd_data(void)
 {
-	int i = 0;
-	while(array[i])
+	get_argv();
+	get_cmds();
+	if (check_path() == FALSE)
 	{
-		printf("%s\n", array[i]);
-		i++;
+		ft_putstr_fd("Minishell: ", STDERR_FILENO);
+		perror(g_ms.cmd_data.argv[0]);
+		g_ms.exit_status = COMMAND_NOT_FOUND;
 	}
-	return (i);
+	printf(BLACK"\nPATH\n"RESET);
+	printf(MAGENTA"%s\n"RESET, g_ms.cmd_data.executable_path);
+	printf(BLACK"ARGV\n"RESET);
+	printf("\n");
 }
 
-
-void	print_cmds(void)
+void	forking(void)
 {
-	t_list		*node;
-	t_commands	*tklist;
+	int	index;
 
-	node = g_ms.commands;
-	if (!g_ms.commands)
-		return ;
-	tklist = (t_commands *)node->content;
-	// printf("tokens = %s\n", tklist->cmd);	
-	while (node)
+	index = 0;
+	while (g_ms.cmd_data.node)
 	{
-		tklist = (t_commands *)node->content;
-		printf("argv = %s\n", tklist->argv[0]);
-		printf("argv = %s\n", tklist->argv[1]);
-			printf("argv = %s\n", tklist->argv[2]);
-		printf("argv = %s\n", tklist->argv[3]);
-		// printf("id     = %d\n", tklist->id_token);
-		node = node->next;
+		get_cmd_data();
+		check_open_files(g_ms.tks, &g_ms.infd, &g_ms.outfd);
+		g_ms.pid_fd[index] = fork();
+		fork_check(index);
+		free_commands();
+		index++;
 	}
-}
-
-void	create_commands(t_utils	*cmd_list)
-{
-	t_list		*node;
-	t_tokens	*tklist;
-
-	node = g_ms.tks;
-	// while (node )
-	// {
-		if (!node)
-			return ; 
-		while (((t_tokens *)node->content)->id_token != PIPE)
-		{
-			tklist = (t_tokens *)node->content;
-			check_open_files(g_ms.tks, &g_ms.infd, &g_ms.outfd);
-			if (tklist->id_token == COMMAND)
-			{
-				ft_lstadd_back(&g_ms.commands,
-					ft_lstnew(create_cmd_content(cmd_list->argv)));
-			// printf("cmd = %s\n", tklist->token);
-			}
-			if (!node->next)
-				break ;
-			// node = node->next;
-			node = node->next;
-
-		}
-		if (((t_tokens *)node->content)->id_token == PIPE)
-		{
-			node = node->next;
-			create_commands(cmd_list);
-		}
 }
 
 void	executer(void)
 {
-	t_utils	cmd_data;
+	init_cmd_data();
+	forking();
+	free_ptrs(g_ms.cmd_data.path_envp);
+	free(g_ms.cmd_data.envp);
+}
+
+// 	qtt_pipes = id_token_count(PIPE);
+// 	qtt_cmd_group = 1;
+// 	if (id_token_count(PIPE) > 0)
+// 		qtt_cmd_group = qtt_pipes + 1;
+
+//command and search execution
+
+// if (slash)
+//     já tem o caminho
+
+// if (builtin)
+//     is_builtin
+
+// else
+//     procurar no PATH
+
+
+
+
+
+
+	// pid_t	pid;
 	// int		status;
 
-	get_cmd_list2(&cmd_data);
-	// get_cmd_list2(&cmd_data);
-	create_commands(&cmd_data);
-	print_cmds();
-	// check_open_files(g_ms.tks, &g_ms.infd, &g_ms.outfd);
-	// if (is_builtins() == TRUE)
-	// 	return ;
-	// get_cmd_list(&cmd_data);
-	// get_envp(&cmd_data);
-	// split_envp_path(&cmd_data);
-	// get_executable_path(&cmd_data);
-	// print_array(cmd_data.argv);
-	// print_array(cmd_data.envp);
-	// printf("%s\n", cmd_data.executable_path);
-	// pid_t	pid;
-
 	// pid = fork();
+
 	// if (pid == 0)
 	// {
 	// 	execve(cmd_data.executable_path, cmd_data.argv, cmd_data.envp);
 	// 	exit(EXIT_FAILURE);
 	// }
 	// waitpid(pid, &status, 0);
-	// free(cmd_data.argv);
-	// free(cmd_data.envp);
-	// free_ptrs(cmd_data.path_envp);
+
+	// if (is_builtins() == TRUE)
+	// 	return ;
 	// free(cmd_data.executable_path);
-}
+
+
+
+
+
+
+
 
 //PASSOS
 // ver se é builtin
@@ -266,18 +195,29 @@ void	executer(void)
 //
 
 
-
-// if (slash)
-//     já tem o caminho
-
-// if (builtin)
-//     is_builtin
-
-// else
-//     procurar no PATH
-
-
 //open close read
 //access dup dup2
 //execve fork pipe
 //unlink wait waitpid
+
+
+// char	**get_array_token()
+// {
+// 	char			**array_token;
+// 	t_tokens		*next;
+// 	t_list			*node;
+// 	int			i;
+
+// 	node = g_ms.tks;
+// 	i = 0;
+// 	array_token = ft_calloc(g_ms.len_tokens + 1, sizeof(char *));
+// 	while (node)
+// 	{
+// 		next = (t_tokens *)node->content;
+// 		array_token[i] = next->token;
+// 		node = node->next;
+// 		i++;
+// 	}
+// 	array_token[i] = NULL;
+// 	return (array_token);
+// }

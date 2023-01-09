@@ -2,7 +2,7 @@ NAME	= minishell_test
 
 HEADER	= $(shell ls . unity | grep .h$)
 
-SRCS	= $(shell ls . unity test_lexer test_expander test_parser test_integrated test_builtins test_utils | grep .c$)
+SRCS	= $(shell ls . unity test_lexer test_expander test_parser test_integrated test_builtins test_utils test_executer| grep .c$)
 
 LIBFT_PATH	= ../libft
 LIBFT 	= $(LIBFT_PATH)/libft.a
@@ -24,6 +24,7 @@ VPATH	+= test_integrated
 VPATH	+= test_parser
 VPATH	+= test_builtins
 VPATH	+= test_utils
+VPATH	+= test_executer
 LDFLAGS	= -L$(LIBFT_PATH) -lft
 
 all: $(NAME)

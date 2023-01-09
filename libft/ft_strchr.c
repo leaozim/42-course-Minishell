@@ -18,6 +18,8 @@ char	*ft_strchr(const char *s, int c)
 	char	c_dup;
 	char	*s_dup;
 
+	if (!s)
+		return (NULL);
 	c_dup = (unsigned char) c;
 	s_dup = (char *)s;
 	i = 0;

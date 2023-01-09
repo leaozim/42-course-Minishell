@@ -55,7 +55,7 @@ void	write_heredoc_file(char *delimiter, int *fd)
 	exit (0);
 }
 
-void	creat_heredoc(char *delimiter, int *fd, t_bool *error)
+void	create_heredoc(char *delimiter, int *fd, t_bool *error)
 {
 	int	pid;
 	int	status;

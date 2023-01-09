@@ -10,6 +10,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 
 /* -----------------------------------------------------------------------*\
@@ -61,13 +62,15 @@ int				error_syntaxy_metachars(t_list *tks, int len_tokens);
 void			msg_error_invalid_synax(char *token);
 void			msg_error_open_file(char *token, t_bool *error);
 void			msg_error_heredoc(void);
-void			open_infile(char *file_tks, int flags, int *outfd, t_bool *err);
-void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *err);
 void			check_open_files(t_list *tks, int *infd, int *outfd);
+// void	msg_error_open_file(char *token, int outfd, t_bool *error);
+
+
 void			open_files(t_tokens *tks, int *infd, int *outfd);
+void			open_infile(char *file_tks, int flags, int *outfd, t_bool *err);
 void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
-void			open_infile(char *file_tks, int flags, int *infd, t_bool *error);
-void			creat_heredoc(char *delimiter, int *fd, t_bool *error);
+
+void			create_heredoc(char *delimiter, int *fd, t_bool *error);
 void			handle_signal(void);
 void			signal_break_heredoc(int signal);
 void			destroy_heredoc(void);
@@ -108,10 +111,18 @@ void			bash_change_colors(void);
 void			cmd_clear(void);
 
 void			executer(void);
-int				id_token_count(int id);
-void			split_envp_path(t_utils *data);
-void			get_envp(t_utils *data);
-void			get_cmd_list(t_utils *data);
+int				count_id_token_before_pipe(int id);
+int				count_tokens_before_pipe(void);
+void			split_envp_path();
+void			get_envp();
+void			get_cmds();
+void			free_commands(void);
+void			get_argv(void);
+t_bool			get_executable_path();
+int				print_array(char **array);
+t_bool			check_path(void);
+int				count_id_token(int id);
+void			init_cmd_data(void);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

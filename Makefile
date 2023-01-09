@@ -32,7 +32,6 @@ EXPANDER			=	expander.c									\
 
 PARSER 				=	parser.c 									\
 						handle_metachars.c							\
-						open_files.c 								\
 						heredoc.c									\
 						error_parser.c								\
 						handle_quotes.c
@@ -47,7 +46,8 @@ BUILTINS			=	echo.c										\
 						unset.c										\
 						exit.c
 
-EXECUTER			=	executer.c cmd_operations.c
+EXECUTER			=	executer.c cmd_operations.c error_executer.c\
+						init_data_executer.c open_files.c
 
 DIRS				=	. lexer prompt expander parser builtins executer
 IFLAGS				=	-I $(HEADER_PATH)

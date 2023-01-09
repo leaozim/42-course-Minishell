@@ -12,8 +12,8 @@ void	msg_error_invalid_synax(char *token)
 void	msg_error_open_file(char *token, t_bool *error)
 {
 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
-	ft_putstr_fd(token, STDERR_FILENO);
-	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+	perror(token);
+	// strerror(outfd);
 	g_ms.exit_status = 1;
 	*error = TRUE;
 }

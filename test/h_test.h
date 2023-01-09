@@ -52,4 +52,7 @@ void		test_error_syntax_single_metachacacter(void);
 void		test_open_files(void);
 void		test_strtrim_allchars(void);
 void		test_valid_join_token(void);
+
+
+void		test_valid_create_cmds(void);
 #endif
