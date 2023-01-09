@@ -36,15 +36,15 @@ void	child_process_check(int i)
 
 void	child_process_execution(void)
 {
-	if (g_ms.cmd_data.executable_path == NULL) //talvez seja desnecessário
-	{
-		free_commands();
-		exit(COMMAND_NOT_FOUND);
-	}
+	printf(BLACK"\nPATH\n"RESET);
+	printf(MAGENTA"%s\n"RESET, g_ms.cmd_data.executable_path);
+	printf(BLACK"\nARGV\n"RESET);
+	printf(MAGENTA"%s\n"RESET, g_ms.cmd_data.argv[0]);
+	printf(BLACK"\nENVP\n"RESET);
+	printf(MAGENTA"%s\n"RESET, g_ms.cmd_data.envp[0]);
 	if (execve(g_ms.cmd_data.executable_path, g_ms.cmd_data.argv, g_ms.cmd_data.envp) == -1)
 	{
 		free_commands();
 		exit(errno);
 	}
-	free_commands();
 }

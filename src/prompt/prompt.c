@@ -19,6 +19,7 @@ char	*create_prompt(void)
 	char		*line;
 
 	line = ft_strdup("");
+	printf(GREEN"entrou\n"RESET);
 	while (check_prompt(line))
 	{
 		line = readline(PROMPT);

@@ -10,9 +10,6 @@ void	get_cmd_data(void)
 {
 	get_argv();
 	get_cmds();
-	printf(BLACK"\nPATH\n"RESET);
-	printf(MAGENTA"%s\n"RESET, g_ms.cmd_data.executable_path);
-	printf(BLACK"ARGV\n"RESET);
 	printf("\n");
 }
 
@@ -28,7 +25,6 @@ void	executer(void)
 	ft_free_int_array(g_ms.array_fd, g_ms.len_pipes + 1);
 	free(g_ms.pid_fd);
 	free(g_ms.cmd_data.tks);
-	// free_commands();
 }
 
 //command and search execution
