@@ -115,7 +115,7 @@ void			child_process_execution(void);
 void			close_pipes(void);
 
 //cmd_operations.c
-void			get_cmds(void);
+void			get_cmds(t_commands *cmd);
 void			get_argv(void);
 int				count_tokens_before_pipe(void);
 int				count_id_token_before_pipe(int id);
@@ -128,18 +128,19 @@ int				print_array(char **array);
 void			msg_error_cmd_not_found(int status, char *cmd);
 
 //executer.c
-void			free_commands(void);
-void			get_cmd_data(void);
 void			executer(void);
 
 //forking.c
+void			get_cmd_data(void);
 void			fork_check(int i);
 void			forking(void);
 
+//free_memory.c
+void			free_commands(void);
+void			free_expander(t_commands *cmd);
+
 //init_data_executer.c
-void			init_static_cmd_data(void);
-void			init_dynamic_cmd_data(void);
-void			init_cmd_data(void);
+void	init_cmd_data(t_commands *cmd);
 
 //init_pipe_data.c
 void			fd_memory_allocate(void);
@@ -158,6 +159,8 @@ t_bool			get_executable_path(void);
 
 //wait_status.c
 void			wait_status(void);
+
+
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

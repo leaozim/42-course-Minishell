@@ -33,7 +33,7 @@ void	check_open_files(t_list *tks, int *infd, int *outfd)
 	t_tokens	*next;
 
 	node = tks;
-	while (node)
+	while (node) //
 	{
 		tklist = (t_tokens *)node->content;
 		if (is_metachars(tklist->id_token) && tklist->id_token != PIPE && \

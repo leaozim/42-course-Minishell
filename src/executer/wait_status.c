@@ -5,7 +5,7 @@ void	wait_status(void)
 	int	i;
 
 	i = 0;
-	while (i < (g_ms.len_pipes + 1))
+	while (i < (g_ms.num_pipes + 1))
 	{
 		waitpid(g_ms.pid_fd[i], &g_ms.exit_status, 0);
 		if (WIFEXITED(g_ms.exit_status))

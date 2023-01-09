@@ -54,3 +54,12 @@ t_bool	get_executable_path(void)
 	free(path_slash);
 	return (FALSE);
 }
+
+t_bool	check_path(void)
+{
+	if (is_cmd_with_slash_executable() == TRUE)
+		return (TRUE);
+	else if (get_executable_path() == TRUE)
+		return (TRUE);
+	return (FALSE);
+}
