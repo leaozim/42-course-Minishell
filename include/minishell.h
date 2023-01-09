@@ -120,8 +120,8 @@ void			get_argv(void);
 int				count_tokens_before_pipe(void);
 int				count_id_token_before_pipe(int id);
 int				count_id_token(int id);
-t_bool			is_cmd_with_slash_executable(void);
-t_bool			check_path(void);
+t_bool			is_cmd_executable(t_commands *cmd);
+t_bool			check_path(t_commands *cmd);
 int				print_array(char **array);
 
 //error_executer.c
@@ -153,9 +153,9 @@ void			open_infile(char *file_tks, int flags, int *outfd, t_bool *err);
 void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
 
 //path.c
-void			get_envp(void);
-void			split_envp_path(void);
-t_bool			get_executable_path(void);
+void			get_envp(t_commands *cmd);
+void			get_envp_path(t_commands *cmd);
+t_bool			get_path(t_commands *cmd);
 
 //wait_status.c
 void			wait_status(void);

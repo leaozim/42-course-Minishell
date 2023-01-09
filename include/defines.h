@@ -75,11 +75,13 @@ typedef struct s_commands
 	char		**cmd_list;
 	t_list		*node;
 	t_tokens	*token_list;
+	char		**envp;
+	char		**envp_path;
+	char		*path;
 
 	char		**argv;
-	char		*executable_path;
-	char		**path_envp;
-	char		**envp;
+	char		*executable_path; 	//
+	char		**path_envp;		//
 	char		**tks;
 }	t_commands;
 

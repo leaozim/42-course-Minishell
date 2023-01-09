@@ -1,10 +1,17 @@
 #include "../../include/minishell.h"
+#include <stdio.h>
 
 void	executer(void)
 {
 	t_commands cmd;
 
 	init_cmd_data(&cmd);
+
+	if (check_path(&cmd) == FALSE)
+	{
+		printf("command not found\n");
+	}
+
 	free_expander(&cmd);
 	// forking();
 	// close_pipes();

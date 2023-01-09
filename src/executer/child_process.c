@@ -21,17 +21,18 @@ void	child_dup_redirection(int i)
 
 void	child_process_check(int i)
 {
-	if (check_path() == FALSE)
-	{
-		ft_putstr_fd("Minishell: ", STDERR_FILENO);
-		perror(g_ms.cmd_data.argv[0]);
-		g_ms.exit_status = COMMAND_NOT_FOUND;
-		free_commands();
-		exit(g_ms.exit_status);
-	}
-	child_dup_redirection(i);
-	close_pipes();
-	child_process_execution();
+	(void)i;
+	// if (check_path() == FALSE)
+	// {
+	// 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
+	// 	perror(g_ms.cmd_data.argv[0]);
+	// 	g_ms.exit_status = COMMAND_NOT_FOUND;
+	// 	free_commands();
+	// 	exit(g_ms.exit_status);
+	// }
+	// child_dup_redirection(i);
+	// close_pipes();
+	// child_process_execution();
 }
 
 void	child_process_execution(void)

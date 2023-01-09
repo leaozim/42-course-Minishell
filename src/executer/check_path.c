@@ -1,25 +1,6 @@
 #include "../../include/minishell.h"
 
-void	get_envp(void)
-{
-	t_list	*env_node;
-	size_t	count;
-	int		i;
-
-	i = 0;
-	env_node = g_ms.env;
-	count = ft_lstcount_nodes(env_node);
-	g_ms.cmd_data.envp = ft_calloc(count + 1, sizeof(char *));
-	while (env_node)
-	{
-		g_ms.cmd_data.envp[i] = (char *)env_node->content;
-		env_node = env_node->next;
-		i++;
-	}
-	g_ms.cmd_data.envp[i] = NULL;
-}
-
-void	split_envp_path(void)
+void	get_envp_path(t_commands *cmd)
 {
 	t_list	*env_node;
 
@@ -27,39 +8,48 @@ void	split_envp_path(void)
 	while (env_node != NULL)
 	{
 		if (!ft_strncmp(env_node->content, "PATH=", 5))
-			g_ms.cmd_data.path_envp = ft_split(env_node->content, ':');
+			cmd->envp_path = ft_split(env_node->content, ':');
 		env_node = env_node->next;
 	}
 }
 
-t_bool	get_executable_path(void)
+t_bool	get_path(t_commands *cmd)
 {
 	char	*path_slash;
 	int		i;
 
 	i = 0;
-	path_slash = ft_strjoin("/", g_ms.cmd_data.argv[0]);
-	while (g_ms.cmd_data.path_envp[i] != NULL)
+	path_slash = ft_strjoin("/", cmd->cmd_list[0]);
+	while (cmd->envp_path[i] != NULL)
 	{
-		g_ms.cmd_data.executable_path = ft_strjoin(g_ms.cmd_data.path_envp[i], path_slash);
-		if (access(g_ms.cmd_data.executable_path, F_OK | X_OK) == 0)
+		cmd->path = ft_strjoin(cmd->envp_path[i], path_slash);
+		if (access(cmd->path, F_OK | X_OK) == 0)
 		{
-			free(path_slash);
-			return (TRUE);
+			return (free(path_slash), TRUE);
 		}
+		free(cmd->path);
 		i++;
-		free(g_ms.cmd_data.executable_path);
 	}
-	g_ms.cmd_data.executable_path = ft_strdup(g_ms.cmd_data.argv[0]);
-	free(path_slash);
+	cmd->path = ft_strdup(cmd->cmd_list[0]);
+	return (free(path_slash), FALSE);
+}
+
+t_bool	is_cmd_executable(t_commands *cmd)
+{
+	if (ft_strchr(cmd->cmd_list[0], SLASH))
+	{
+		cmd->path = ft_strdup(cmd->cmd_list[0]);
+		if (access(cmd->path, F_OK | X_OK) == 0)
+			return (TRUE);
+	}
 	return (FALSE);
 }
 
-t_bool	check_path(void)
+t_bool	check_path(t_commands *cmd)
 {
-	if (is_cmd_with_slash_executable() == TRUE)
+	if (is_cmd_executable(cmd) == TRUE)
 		return (TRUE);
-	else if (get_executable_path() == TRUE)
+	else if (get_path(cmd) == TRUE)
 		return (TRUE);
 	return (FALSE);
 }

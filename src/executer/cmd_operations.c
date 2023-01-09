@@ -26,6 +26,25 @@ void	get_cmds(t_commands *cmd)
 	cmd->cmd_list[i] = NULL;
 }
 
+void	get_envp(t_commands *cmd)
+{
+	t_list	*env_node;
+	size_t	count;
+	int		i;
+
+	i = 0;
+	env_node = g_ms.env;
+	count = ft_lstcount_nodes(env_node);
+	cmd->envp = ft_calloc(count + 1, sizeof(char *));
+	while (env_node)
+	{
+		cmd->envp[i] = (char *)env_node->content;
+		env_node = env_node->next;
+		i++;
+	}
+	cmd->envp[i] = NULL;
+}
+
 
 // void	get_cmds(void)
 // {
@@ -134,19 +153,6 @@ int	count_id_token(int id)
 		node = node->next;
 	}
 	return (count);
-}
-
-t_bool	is_cmd_with_slash_executable(void)
-{
-	if (ft_strchr(g_ms.cmd_data.argv[0], SLASH))
-	{
-		g_ms.cmd_data.executable_path = ft_strdup(g_ms.cmd_data.argv[0]);
-		if (access(g_ms.cmd_data.executable_path, F_OK | X_OK) == 0)
-			return (TRUE);
-		else
-			free(g_ms.cmd_data.executable_path);
-	}
-	return (FALSE);
 }
 
 int	print_array(char **array)
