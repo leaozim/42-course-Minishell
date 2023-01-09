@@ -89,5 +89,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_lstcount_nodes(t_list *lst);
+void	ft_free_int_array(int **my_array, int count);
 
 #endif

@@ -46,8 +46,17 @@ BUILTINS			=	echo.c										\
 						unset.c										\
 						exit.c
 
-EXECUTER			=	executer.c cmd_operations.c error_executer.c\
-						init_data_executer.c open_files.c
+EXECUTER			=	child_process.c								\
+						close_pipes.c								\
+						cmd_operations.c							\
+						error_executer.c							\
+						executer.c									\
+						forking.c									\
+						init_data_executer.c						\
+						init_pipe_data.c							\
+						open_files.c								\
+						path.c										\
+						wait_status.c
 
 DIRS				=	. lexer prompt expander parser builtins executer
 IFLAGS				=	-I $(HEADER_PATH)

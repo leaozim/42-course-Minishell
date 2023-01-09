@@ -60,17 +60,6 @@ int				is_single_metachar(char *token, int id, int len_tokens);
 int				consecutive_metachars(char *token, char *next_token,int id, int next_id);
 int				error_syntaxy_metachars(t_list *tks, int len_tokens);
 void			msg_error_invalid_synax(char *token);
-void			msg_error_open_file(char *token, t_bool *error);
-void			msg_error_heredoc(void);
-void			check_open_files(t_list *tks, int *infd, int *outfd);
-// void	msg_error_open_file(char *token, int outfd, t_bool *error);
-
-
-void			open_files(t_tokens *tks, int *infd, int *outfd);
-void			open_infile(char *file_tks, int flags, int *outfd, t_bool *err);
-void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
-
-void			create_heredoc(char *delimiter, int *fd, t_bool *error);
 void			handle_signal(void);
 void			signal_break_heredoc(int signal);
 void			destroy_heredoc(void);
@@ -110,19 +99,67 @@ char			**split_assign_values(char *str, char c, int count);
 void			bash_change_colors(void);
 void			cmd_clear(void);
 
-void			executer(void);
-int				count_id_token_before_pipe(int id);
-int				count_tokens_before_pipe(void);
-void			split_envp_path();
-void			get_envp();
-void			get_cmds();
-void			free_commands(void);
+/* -----------------------------------------------------------------------*\
+									executer								
+\* -----------------------------------------------------------------------*/
+
+//child_process.c
+void			child_dup_redirection(int i);
+void			child_process_check(int i);
+void			child_process_execution(void);
+
+//close_pipes.c
+void			close_pipes(void);
+
+//cmd_operations.c
+void			get_cmds(void);
 void			get_argv(void);
-t_bool			get_executable_path();
-int				print_array(char **array);
-t_bool			check_path(void);
+int				count_tokens_before_pipe(void);
+int				count_id_token_before_pipe(int id);
 int				count_id_token(int id);
+t_bool			is_cmd_with_slash_executable(void);
+t_bool			check_path(void);
+int				print_array(char **array);
+
+//error_executer.c
+void			msg_error_cmd_not_found(int status, char *cmd);
+
+//executer.c
+void			free_commands(void);
+void			get_cmd_data(void);
+void			executer(void);
+
+//forking.c
+void			fork_check(int i);
+void			forking(void);
+
+//init_data_executer.c
+void			init_static_cmd_data(void);
+void			init_dynamic_cmd_data(void);
 void			init_cmd_data(void);
+
+//init_pipe_data.c
+void			fd_memory_allocate(void);
+void			init_pipe_values(void);
+
+//open_files.c
+void			check_open_files(char **tks, int *infd, int *outfd);
+void			open_files(char *redirect, char *file, int *ifd, int *ofd);
+void			open_outfile(char *file_tks, int flags, int *outfd);
+void			open_infile(char *file_tks, int flags, int *infd);
+void			create_heredoc(char *delimiter, int *fd);
+int				open_heredoc_file(void);
+void			msg_error_heredoc(void);
+void			msg_error_open_file(char *token);
+
+
+//path.c
+void			get_envp(void);
+void			split_envp_path(void);
+t_bool			get_executable_path(void);
+
+//wait_status.c
+void			wait_status(void);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

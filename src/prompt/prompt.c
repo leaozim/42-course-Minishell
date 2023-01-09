@@ -4,6 +4,7 @@ int	check_prompt(char *line)
 {
 	if (line == NULL)
 	{
+	printf(GREEN"aaaaaaaaaaaaaaaaaaaaaaaaa\n"RESET);
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 		ft_lstclear(&g_ms.env, free);
 		free(line);
@@ -19,6 +20,7 @@ char	*create_prompt(void)
 	char		*line;
 
 	line = ft_strdup("");
+	
 	while (check_prompt(line))
 	{
 		line = readline(PROMPT);

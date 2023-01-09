@@ -26,7 +26,7 @@ void	repl_minshell(void)
 		}
 		join_tokens(&g_ms.tks);
 		reidentify_some_tokens(g_ms.tks);
-		// executer();
+		executer();
 		destroy_minishell();
 	}
 	ft_lstclear(&g_ms.env, free);

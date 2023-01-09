@@ -7,6 +7,12 @@ void	destroy_heredoc(void)
 	close(g_ms.fd_heredoc);
 	free(g_ms.tab_id);
 	ft_lstclear(&g_ms.env, free);
+	free_commands();
+	free_ptrs(g_ms.cmd_data.path_envp);
+	free(g_ms.cmd_data.envp);
+	ft_free_int_array(g_ms.array_fd, g_ms.len_pipes + 1);
+	free(g_ms.pid_fd);
+	free(g_ms.cmd_data.tks);
 }
 
 void	break_heredoc(int fd, int fd_file_temp)
@@ -17,13 +23,13 @@ void	break_heredoc(int fd, int fd_file_temp)
 	g_ms.exit_status = 130;
 }
 
-int	open_heredoc_file(t_bool *error)
+int	open_heredoc_file(void)
 {
 	int	fd;
 
 	fd = open(TMP_FILE, O_CREAT | O_RDWR | O_TRUNC, 0664);
 	if (fd == -1)
-		msg_error_open_file(TMP_FILE, error);
+		msg_error_open_file(TMP_FILE);
 	return (fd);
 }
 
@@ -55,14 +61,14 @@ void	write_heredoc_file(char *delimiter, int *fd)
 	exit (0);
 }
 
-void	create_heredoc(char *delimiter, int *fd, t_bool *error)
+void	create_heredoc(char *delimiter, int *fd)
 {
 	int	pid;
 	int	status;
 	int	fd_file_temp;
 
 	signal(SIGINT, SIG_IGN);
-	fd_file_temp = open_heredoc_file(error);
+	fd_file_temp = open_heredoc_file();
 	if (fd_file_temp == -1)
 		return ;
 	g_ms.fd_heredoc = fd_file_temp;

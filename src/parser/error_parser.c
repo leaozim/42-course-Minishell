@@ -9,13 +9,13 @@ void	msg_error_invalid_synax(char *token)
 	g_ms.exit_status = 2;
 }
 
-void	msg_error_open_file(char *token, t_bool *error)
+void	msg_error_open_file(char *token)
 {
+	g_ms.error_file = TRUE;
 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
 	perror(token);
-	// strerror(outfd);
+	strerror(errno);
 	g_ms.exit_status = 1;
-	*error = TRUE;
 }
 
 void	msg_error_heredoc(void)

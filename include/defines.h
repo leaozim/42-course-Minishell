@@ -101,6 +101,7 @@ typedef struct s_minishell
 	int			infd;
 	int			outfd;
 	int			fd_heredoc;
+	t_bool		error_file;
 }	t_minishell;
 
 t_minishell g_ms;
