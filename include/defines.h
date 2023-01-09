@@ -78,6 +78,7 @@ typedef struct s_commands
 	char		**envp;
 	char		**envp_path;
 	char		*path;
+	int			pid_fd;
 
 	char		**argv;
 	char		*executable_path; 	//

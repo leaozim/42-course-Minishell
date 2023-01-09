@@ -109,7 +109,7 @@ void			cmd_clear(void);
 //child_process.c
 void			child_dup_redirection(int i);
 void			child_process_check(int i);
-void			child_process_execution(void);
+void			child_process_execution(t_commands *cmd);
 
 //close_pipes.c
 void			close_pipes(void);
@@ -158,7 +158,7 @@ void			get_envp_path(t_commands *cmd);
 t_bool			get_path(t_commands *cmd);
 
 //wait_status.c
-void			wait_status(void);
+void			wait_status(t_commands *cmd);
 
 
 
