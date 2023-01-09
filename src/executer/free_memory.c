@@ -2,10 +2,10 @@
 
 void	free_expander(t_commands *cmd)
 {
+	free(cmd->cmd_list);
 	free(cmd->path);
-	free_ptrs(cmd->envp);
-	// free_ptrs(cmd->cmd_list);
-	// free_ptrs(cmd->envp);
+	free(cmd->envp);
+	free_ptrs(cmd->envp_path);
 }
 
 void	free_commands(void)
