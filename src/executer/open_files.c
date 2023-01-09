@@ -10,7 +10,7 @@ void	open_outfile(char *file, int flags, int *outfd)
 		// else
 		// {
 		// 	// dup2(STDOUT_FILENO, *outfd);
-		// 	dup2(*outfd, STDIN_FILENO);
+		// 	dup2(*outfd, STDOUT_FILENO);
 		// 	close(*outfd);
 		// }
 	}
@@ -40,7 +40,7 @@ void	open_files(char *redirect, char *file, int *ifd, int *ofd)
 	else if (!ft_strcmp(redirect, "<<"))
 		create_heredoc(file, ifd);
 }
-// #include <cstdio>
+
 void	check_open_files(char **tks, int *infd, int *outfd)
 {
 	int	i;

@@ -29,8 +29,10 @@ void	child_process_check(int i)
 		free_commands();
 		exit(g_ms.exit_status);
 	}
+	(void)i;
 	child_dup_redirection(i);
 	close_pipes();
+
 	child_process_execution();
 }
 
@@ -42,6 +44,8 @@ void	child_process_execution(void)
 	// dprintf(2, MAGENTA"%s\n"RESET, g_ms.cmd_data.argv[0]);
 	// dprintf(2, BLACK"\nENVP\n"RESET);
 	// dprintf(2, MAGENTA"%s\n"RESET, g_ms.cmd_data.envp[0]);
+	// dprintf(2, "%d\n", g_ms.outfd);
+	// dup2(g_ms.array_fd[i], STDOUT_FILENO);
 	if (execve(g_ms.cmd_data.executable_path, g_ms.cmd_data.argv, g_ms.cmd_data.envp) == -1)
 	{
 		free_commands();
