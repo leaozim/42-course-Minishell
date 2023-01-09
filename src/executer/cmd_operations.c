@@ -127,6 +127,8 @@ t_bool	check_path(void)
 		return (TRUE);
 	else if (get_executable_path() == TRUE)
 		return (TRUE);
+	else if (is_builtins() == TRUE)
+		return (TRUE);
 	return (FALSE);
 }
 

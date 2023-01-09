@@ -27,9 +27,9 @@ void	forking(void)
 	{
 		get_cmd_data(); //split_cmd
 		check_open_files(g_ms.cmd_data.tks, &g_ms.infd, &g_ms.outfd);
-		// g_ms.pid_fd[i] = fork();
-		// fork_check(i);
-		// free_commands();
+		g_ms.pid_fd[i] = fork();
+		fork_check(i);
+		free_commands();
 		i++;
 	}
 }

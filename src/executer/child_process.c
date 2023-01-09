@@ -36,12 +36,12 @@ void	child_process_check(int i)
 
 void	child_process_execution(void)
 {
-	dprintf(2, BLACK"\nPATH\n"RESET);
-	dprintf(2, MAGENTA"%s\n"RESET, g_ms.cmd_data.executable_path);
-	dprintf(2, BLACK"\nARGV\n"RESET);
-	dprintf(2, MAGENTA"%s\n"RESET, g_ms.cmd_data.argv[0]);
-	dprintf(2, BLACK"\nENVP\n"RESET);
-	dprintf(2, MAGENTA"%s\n"RESET, g_ms.cmd_data.envp[0]);
+	// dprintf(2, BLACK"\nPATH\n"RESET);
+	// dprintf(2, MAGENTA"%s\n"RESET, g_ms.cmd_data.executable_path);
+	// dprintf(2, BLACK"\nARGV\n"RESET);
+	// dprintf(2, MAGENTA"%s\n"RESET, g_ms.cmd_data.argv[0]);
+	// dprintf(2, BLACK"\nENVP\n"RESET);
+	// dprintf(2, MAGENTA"%s\n"RESET, g_ms.cmd_data.envp[0]);
 	if (execve(g_ms.cmd_data.executable_path, g_ms.cmd_data.argv, g_ms.cmd_data.envp) == -1)
 	{
 		free_commands();
