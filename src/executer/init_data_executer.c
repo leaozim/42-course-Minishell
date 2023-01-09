@@ -11,7 +11,7 @@ void	init_static_cmd_data(void)
 
 void	init_dynamic_cmd_data(void)
 {
-	g_ms.array_fd = ft_calloc(g_ms.len_pipes, sizeof(int *));
+	g_ms.array_fd = ft_calloc(g_ms.len_pipes + 1, sizeof(int *));
 	g_ms.pid_fd = ft_calloc(g_ms.len_pipes + 1, sizeof(int));
 	get_envp();
 	split_envp_path();
