@@ -63,16 +63,15 @@ void	get_cmds(t_commands *cmd, t_list *node)
 	cmd->cmd_list = ft_calloc(cmd_count + 1, sizeof(char *));
 	while (node)
 	{
-		cmd->token_list = (t_tokens *)cmd->node->content;
+		cmd->token_list = (t_tokens *)node->content;
 		if (cmd->token_list->id_token == PIPE)
 		{
-			node = node->next;
 			break ;
 		}
 		else if (cmd->token_list->id_token == COMMAND)
 		{
-			printf(GREEN"%s\n"RESET, cmd->cmd_list[i]);
 			cmd->cmd_list[i] = cmd->token_list->token;
+			printf(MAGENTA"get_cmd: %s\n"RESET, cmd->cmd_list[i]);
 			i++;
 		}
 		node = node->next;
@@ -116,7 +115,6 @@ void	get_argv(void)
 
 	i = 0;
 	count = count_tokens_before_pipe();
-	node = g_ms.cmd_data.node;
 	g_ms.cmd_data.tks = ft_calloc(count + 1, sizeof(char *));
 	while (node)
 	{
@@ -140,7 +138,7 @@ int	count_tokens_before_pipe(void)
 	int			count;
 
 	count = 0;
-	node = g_ms.cmd_data.node;
+	node = g_ms.tks;
 	while (node)
 	{
 		next = (t_tokens *)node->content;

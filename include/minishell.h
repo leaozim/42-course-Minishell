@@ -152,7 +152,7 @@ void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
 
 //path.c
 void			get_cmds(t_commands *cmd, t_list *node);
-void			init_cmd_data(t_commands **cmd, t_list **node);
+t_commands		*create_cmd_node(t_list **node);
 void			get_envp(t_commands *cmd);
 void			get_envp_path(t_commands *cmd);
 t_bool			get_path(t_commands *cmd);

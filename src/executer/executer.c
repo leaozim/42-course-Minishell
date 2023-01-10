@@ -63,33 +63,75 @@ void	create_child_process(t_commands *cmd)
 // create_child_process(&cmd);
 // wait_status(&cmd);
 
-t_commands	*create_cmd_node(t_list **node)
-{
-	t_commands	*cmd;
+// void	create_cmd_table(void)
+// {
+// 	t_list		*node;
+// 	// t_commands	*next;
 
-	init_cmd_data(&cmd, node);
-	return (cmd);
-}
+// 	node = g_ms.tks;
+// 	g_ms.cmd_table = ft_lstnew(NULL);
+// 	while (node)
+// 	{
+// 		// next = ((t_commands *)node->content);
+// 		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(create_cmd_node(&node)));
+// 		node = node->next;
+// 	}
+// }
 
-void	create_cmd_table(void)
+void	print_cmds(void)
 {
 	t_list		*node;
-	t_tokens	*next;
-
-	node = g_ms.tks;
-	g_ms.cmd_table = ft_lstnew(NULL);
-	while (node)
+	t_commands	*cmd;
+	int			i;
+	
+	i = 0;
+	int count = ft_lstcount_nodes(g_ms.cmd_table);
+	node = g_ms.cmd_table;
+	while (i < count)
 	{
-		next = (t_tokens *)node->next->content;
-		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(next));
-		create_cmd_node(&node);
+		cmd = ((t_commands *)node->content);
+		printf(YELLOW"print_cmds = %s\n"RESET, cmd->cmd_list[0]);
 		node = node->next;
+		i++;
 	}
 }
 
 void	executer(void)
 {
-	create_cmd_table();
+	t_list		*node;
+	t_commands	*cmd;
+
+	node = g_ms.tks;
+	// cmd->num_pipes = count_id_token(PIPE);  //
+	cmd = ft_calloc(1, sizeof(t_commands)); //
+	// g_ms.cmd_table = ft_calloc(1, sizeof(t_list));
+	while (node)
+	{
+		get_cmds(cmd, node);
+		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(cmd));
+		while (node && ((t_tokens *)node->content)->id_token != PIPE)
+		{
+			node = node->next;
+		}
+		if (node && ((t_tokens *)node->content)->id_token == PIPE)
+		{
+			node = node->next;
+		}
+		// free(cmd->cmd_list); //fazer uma fn com free de tudo da cmd
+	}
+	print_cmds();
+	// free(g_ms.cmd_table);
+
+	// ls echo | oi ola | uname yes
+
+	// t_commands	*next;
+	// next = ((t_commands *)g_ms.cmd_table->content);
+	// g_ms.cmd_table = g_ms.cmd_table->next;
+	// printf("%s\n", *next->cmd_list);
+
+	// create_cmd_table();
+
+
 	// free_expander(&cmd);
 }
 
