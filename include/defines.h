@@ -61,7 +61,6 @@ typedef struct s_commands
 {
 	int			num_pipes;
 	char		**cmd_list;
-	t_list		*node;
 	t_tokens	*token_list;
 	t_list		argv_list;
 	char		**envp;
