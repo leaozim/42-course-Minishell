@@ -58,25 +58,39 @@ void	create_child_process(t_commands *cmd)
 	check_fork(cmd);
 }
 
+// if (check_path(&cmd) == FALSE)
+// 	printf("command not found\n");
+// create_child_process(&cmd);
+// wait_status(&cmd);
+
+t_commands	*create_cmd_node(t_list **node)
+{
+	t_commands	*cmd;
+
+	init_cmd_data(&cmd, node);
+	return (cmd);
+}
+
+void	create_cmd_table(void)
+{
+	t_list		*node;
+	t_tokens	*next;
+
+	node = g_ms.tks;
+	g_ms.cmd_table = ft_lstnew(NULL);
+	while (node)
+	{
+		next = (t_tokens *)node->next->content;
+		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(next));
+		create_cmd_node(&node);
+		node = node->next;
+	}
+}
+
 void	executer(void)
 {
-	t_commands cmd;
-
-	init_cmd_data(&cmd);
-	if (check_path(&cmd) == FALSE)
-		printf("command not found\n");
-	create_child_process(&cmd);
-	wait_status(&cmd);
-	free_expander(&cmd);
-	// forking();
-	// close_pipes();
-	// wait_status();
-
-	// free_ptrs(g_ms.cmd_data.path_envp);
-	// free(g_ms.cmd_data.envp);
-	// ft_free_int_array(g_ms.array_fd, g_ms.num_pipes + 1);
-	// free(g_ms.pid_fd);
-	// free(g_ms.cmd_data.tks);
+	create_cmd_table();
+	// free_expander(&cmd);
 }
 
 void	wait_status(t_commands *cmd)

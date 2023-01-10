@@ -115,7 +115,6 @@ void			child_process_execution(t_commands *cmd);
 void			close_pipes(void);
 
 //cmd_operations.c
-void			get_cmds(t_commands *cmd);
 void			get_argv(void);
 int				count_tokens_before_pipe(void);
 int				count_id_token_before_pipe(int id);
@@ -140,7 +139,6 @@ void			free_commands(void);
 void			free_expander(t_commands *cmd);
 
 //init_data_executer.c
-void	init_cmd_data(t_commands *cmd);
 
 //init_pipe_data.c
 void			fd_memory_allocate(void);
@@ -153,6 +151,8 @@ void			open_infile(char *file_tks, int flags, int *outfd, t_bool *err);
 void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
 
 //path.c
+void			get_cmds(t_commands *cmd, t_list *node);
+void			init_cmd_data(t_commands **cmd, t_list **node);
 void			get_envp(t_commands *cmd);
 void			get_envp_path(t_commands *cmd);
 t_bool			get_path(t_commands *cmd);
