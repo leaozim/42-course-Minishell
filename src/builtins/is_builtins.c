@@ -5,10 +5,10 @@ t_bool	is_builtins(void)
 	t_list		*node;
 	t_tokens	*tklist;
 
-	node = g_ms.commands;
+	node = g_ms.tks;
 	tklist = (t_tokens *)node->content;
 	if (!ft_strcmp("echo", tklist->token))
-		return (builtin_echo(), TRUE);
+		return (builtin_echo(node), TRUE);
 	else if (!ft_strcmp("cd", tklist->token))
 		return (builtin_cd(), TRUE);
 	else if (!ft_strcmp("env", tklist->token))

@@ -89,7 +89,8 @@ int				builtin_cd(void);
 void			builtin_env(void);
 void			builtin_pwd(void);
 void			builtin_exit(void);
-int				builtin_echo(void);
+// int				builtin_echo(void);
+int				builtin_echo(t_list *commands);
 int				builtin_export(void);
 int	    		builtin_unset(void);
 void			msg_error_not_a_valid_identifier(char *token, char *cmd);
@@ -106,13 +107,12 @@ void			cmd_clear(void);
 //child_process.c
 void			child_dup_redirection(int i);
 void			child_process_check(int i);
-void			child_process_execution(void);
+void			child_process_execution(t_commands *cmd);
 
 //close_pipes.c
 void			close_pipes(void);
 
 //cmd_operations.c
-void			get_cmds(t_commands *cmd);
 void			get_argv(void);
 int				count_tokens_before_pipe(void);
 int				count_id_token_before_pipe(int id);
@@ -137,7 +137,6 @@ void			free_commands(void);
 void			free_expander(t_commands *cmd);
 
 //init_data_executer.c
-void	init_cmd_data(t_commands *cmd);
 
 //init_pipe_data.c
 void			fd_memory_allocate(void);
@@ -155,12 +154,14 @@ void			msg_error_open_file(char *token);
 
 
 //path.c
+void			get_cmds(t_commands *cmd, t_list *node);
+void			init_cmd_data(t_commands **cmd, t_list **node);
 void			get_envp(t_commands *cmd);
 void			get_envp_path(t_commands *cmd);
 t_bool			get_path(t_commands *cmd);
 
 //wait_status.c
-void			wait_status(void);
+void			wait_status(t_commands *cmd);
 
 
 

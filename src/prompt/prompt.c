@@ -22,7 +22,6 @@ char	*create_prompt(void)
 	while (check_prompt(line))
 	{
 		line = readline(PROMPT);
-		dprintf(2, "%s\n", line);
 		add_history(line);
 	}
 	return (line);

@@ -32,26 +32,6 @@ typedef enum e_bool
 	TRUE,
 }	t_bool;
 
-typedef struct s_tokens
-{
-	char	*token;
-	int		id_token;
-	int		index;
-	t_bool	err;
-}	t_tokens;
-
-
-// typedef struct s_utils
-// {
-// 	int			len_tokens;
-// 	int			infd;
-// 	int			outfd;
-
-// }	t_utils;
-
-// MiniSHELL $ ls
-// execve ("/bin/ls", {"ls", "-shit", "-l", 0}, envp);
-
 // typedef struct s_commands
 // {
 // 	char	**argv;
@@ -69,15 +49,25 @@ typedef struct s_tokens
 // 	// pathname
 // }	t_commands;
 
+typedef struct s_tokens
+{
+	char	*token;
+	int		id_token;
+	int		index;
+	t_bool	err;
+}	t_tokens;
+
 typedef struct s_commands
 {
 	int			num_pipes;
 	char		**cmd_list;
 	t_list		*node;
 	t_tokens	*token_list;
+	t_list		argv_list;
 	char		**envp;
 	char		**envp_path;
 	char		*path;
+	int			pid_fd;
 
 	char		**argv;
 	char		*executable_path; 	//
@@ -85,9 +75,12 @@ typedef struct s_commands
 	char		**tks;
 }	t_commands;
 
+
+
 typedef struct s_minishell
 {
 	char		*prompt_line;
+	t_list		*cmd_table;
 	t_list		*tks;
 	t_list		*env;
 	t_list		*commands;

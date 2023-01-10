@@ -63,12 +63,12 @@ int	print_echo_node(t_list **node, int qtt_n)
 	return (0);
 }
 
-int	builtin_echo(void)
+int	builtin_echo(t_list *commands)
 {
 	t_list		*node;
 	int			qtt_n;
 
-	node = g_ms.tks;
+	node = commands;
 	qtt_n = 0;
 	if (g_ms.len_tokens == 1)
 		return (printf("\n"), 0);

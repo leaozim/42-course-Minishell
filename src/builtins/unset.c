@@ -75,18 +75,18 @@ t_bool unset_delete_value(t_tokens **next, t_list **node)
 
 int	builtin_unset(void)
 {
-    t_tokens	*next;
+	t_tokens	*next;
 	t_list		*node;
 
-    node = g_ms.tks->next;
-    while (node)
-    {
-        next = (t_tokens *)node->content;
-        if (unset_error_identifier(&next, &node, "unset") == TRUE)
+	node = g_ms.tks->next;
+	while (node)
+	{
+		next = (t_tokens *)node->content;
+		if (unset_error_identifier(&next, &node, "unset") == TRUE)
 			continue ;
 		if (unset_delete_value(&next, &node) == TRUE)
 			continue ;
-        node = node->next;
-    }
-    return (g_ms.exit_status = 0, EXIT_SUCCESS);
+		node = node->next;
+	}
+	return (g_ms.exit_status = 0, EXIT_SUCCESS);
 }
