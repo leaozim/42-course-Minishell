@@ -10,7 +10,7 @@ void	destroy_heredoc(void)
 	free_commands();
 	free_ptrs(g_ms.cmd_data.path_envp);
 	free(g_ms.cmd_data.envp);
-	ft_free_int_array(g_ms.array_fd, g_ms.len_pipes + 1);
+	ft_free_int_array(g_ms.array_fd, g_ms.num_pipes + 1);
 	free(g_ms.pid_fd);
 	free(g_ms.cmd_data.tks);
 }

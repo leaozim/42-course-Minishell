@@ -19,7 +19,6 @@ char	*create_prompt(void)
 	char		*line;
 
 	line = ft_strdup("");
-	
 	while (check_prompt(line))
 	{
 		line = readline(PROMPT);

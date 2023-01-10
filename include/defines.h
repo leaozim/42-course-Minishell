@@ -71,12 +71,17 @@ typedef struct s_tokens
 
 typedef struct s_commands
 {
+	int			num_pipes;
+	char		**cmd_list;
 	t_list		*node;
-	t_tokens	*tklist;
-	char		*executable_path;
-	char		**argv;
-	char		**path_envp;
+	t_tokens	*token_list;
 	char		**envp;
+	char		**envp_path;
+	char		*path;
+
+	char		**argv;
+	char		*executable_path; 	//
+	char		**path_envp;		//
 	char		**tks;
 }	t_commands;
 
@@ -96,7 +101,7 @@ typedef struct s_minishell
 	int			*pid_fd;
 
 	int			len_tokens;
-	int			len_pipes;
+	int			num_pipes;
 
 	int			infd;
 	int			outfd;
