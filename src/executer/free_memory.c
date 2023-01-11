@@ -8,8 +8,14 @@ void	free_expander(t_commands *cmd)
 	free_ptrs(cmd->envp_path);
 }
 
-void	free_commands(void)
+void	destroy_t_commands(void *cmds)
 {
-	// free(g_ms.cmd_data.argv);
-	// free(g_ms.cmd_data.executable_path);
+	t_commands	*cmd;
+
+	cmd = (t_commands *)cmds;
+	free_ptrs(cmd->cmd_list);
+	free(cmd->path);
+	free(cmd->envp);
+	free_ptrs(cmd->envp_path);
+	free(cmd);
 }

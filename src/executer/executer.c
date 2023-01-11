@@ -90,7 +90,8 @@ void	print_cmds(void)
 	while (i < count)
 	{
 		cmd = ((t_commands *)node->content);
-		printf(YELLOW"print_cmds = %s\n"RESET, cmd->cmd_list[0]);
+		printf(YELLOW"cmd = %s\n"RESET, cmd->cmd_list[0]);
+		printf(MAGENTA"path = %s\n"RESET, cmd->path);
 		node = node->next;
 		i++;
 	}
@@ -103,11 +104,13 @@ void	executer(void)
 
 	node = g_ms.tks;
 	// cmd->num_pipes = count_id_token(PIPE);  //
-	cmd = ft_calloc(1, sizeof(t_commands)); //
-	// g_ms.cmd_table = ft_calloc(1, sizeof(t_list));
 	while (node)
 	{
+		cmd = ft_calloc(1, sizeof(t_commands)); //
 		get_cmds(cmd, node);
+		get_envp(cmd);
+		get_envp_path(cmd);
+		get_path(cmd);
 		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(cmd));
 		while (node && ((t_tokens *)node->content)->id_token != PIPE)
 		{
@@ -117,10 +120,9 @@ void	executer(void)
 		{
 			node = node->next;
 		}
-		// free(cmd->cmd_list); //fazer uma fn com free de tudo da cmd
 	}
 	print_cmds();
-	// free(g_ms.cmd_table);
+	ft_lstclear(&g_ms.cmd_table, destroy_t_commands);
 
 	// ls echo | oi ola | uname yes
 
@@ -128,7 +130,6 @@ void	executer(void)
 	// next = ((t_commands *)g_ms.cmd_table->content);
 	// g_ms.cmd_table = g_ms.cmd_table->next;
 	// printf("%s\n", *next->cmd_list);
-
 	// create_cmd_table();
 
 
