@@ -92,9 +92,22 @@ void	print_cmds(void)
 		cmd = ((t_commands *)node->content);
 		printf(YELLOW"cmd = %s\n"RESET, cmd->cmd_list[0]);
 		printf(MAGENTA"path = %s\n"RESET, cmd->path);
+		printf(MAGENTA"infd = %d\n"RESET, cmd->infd);
+		printf(MAGENTA"outfd = %d\n"RESET, cmd->outfd);
 		node = node->next;
 		i++;
 	}
+}
+
+void init_cmd(t_commands *cmd)
+{
+	cmd->infd = -6;
+	cmd->outfd = -6;
+	cmd->error_file = FALSE;
+	cmd->rdc_out_app = FALSE;
+	cmd->rdc_out = FALSE;
+	cmd->rdc_in = FALSE;
+	cmd->rdc_heredoc = FALSE;
 }
 
 void	get_cmd_data(void)
@@ -103,14 +116,15 @@ void	get_cmd_data(void)
 	t_commands	*cmd;
 
 	node = g_ms.tks;
-	// cmd->num_pipes = count_id_token(PIPE);  //
 	while (node)
 	{
-		cmd = ft_calloc(1, sizeof(t_commands)); //
+		cmd = ft_calloc(1, sizeof(t_commands));
+		init_cmd(cmd);
 		get_cmds(cmd, node);
 		get_envp(cmd);
 		get_envp_path(cmd);
 		get_path(cmd);
+		open_files(node, cmd, &cmd->infd, &cmd->outfd);
 		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(cmd));
 		while (node && ((t_tokens *)node->content)->id_token != PIPE)
 			node = node->next;

@@ -16,15 +16,15 @@
 /* -----------------------------------------------------------------------*\
 									system									
 \* -----------------------------------------------------------------------*/
-void		init_minishell(char	**envp);
-void		check_arguments(int argc);
-char		*create_prompt(void);
-t_bool		is_valid_quoting(char **list);
-int			is_erro_sintaxy_quotes(char *line);
-void		free_ptrs(char **str);
-void		destroy_minishell(void);
-void		destroy_t_tokens(void *token);
-int			check_prompt(char *line);
+void			init_minishell(char	**envp);
+void			check_arguments(int argc);
+char			*create_prompt(void);
+t_bool			is_valid_quoting(char **list);
+int				is_erro_sintaxy_quotes(char *line);
+void			free_ptrs(char **str);
+void			destroy_minishell(void);
+void			destroy_t_tokens(void *token);
+int				check_prompt(char *line);
 
 /* -----------------------------------------------------------------------*\
 									lexer									
@@ -60,23 +60,19 @@ int				is_single_metachar(char *token, int id, int len_tokens);
 int				consecutive_metachars(char *token, char *next_token,int id, int next_id);
 int				error_syntaxy_metachars(t_list *tks, int len_tokens);
 void			msg_error_invalid_synax(char *token);
-void			msg_error_open_file(char *token, t_bool *error);
-void			msg_error_heredoc(void);
-void			create_heredoc(char *delimiter, int *fd, t_bool *error);
 void			handle_signal(void);
 void			signal_break_heredoc(int signal);
-void			destroy_heredoc(void);
 
 /* -----------------------------------------------------------------------*\
 									expander								
 \* -----------------------------------------------------------------------*/
-void            expander(void);
-char            *minishell_expansion(char *token);
-t_bool          is_brace_expansion(char *token, int *i, char **final_str);
-int             check_last_expansion_occurrence(char *token);
-t_bool          is_envar_between_squote(char *token);
-char            *is_envar_expansible(char *token, int *i, char **final_str);
-void            expand_check_next_character(char *token, int *i, char **final_str);
+void			expander(void);
+char			*minishell_expansion(char *token);
+t_bool			is_brace_expansion(char *token, int *i, char **final_str);
+int				check_last_expansion_occurrence(char *token);
+t_bool			is_envar_between_squote(char *token);
+char			*is_envar_expansible(char *token, int *i, char **final_str);
+void			expand_check_next_character(char *token, int *i, char **final_str);
 
 /* -----------------------------------------------------------------------*\
 									builtins								
@@ -146,10 +142,14 @@ void			fd_memory_allocate(void);
 void			init_pipe_values(void);
 
 //open_files.c
-void			check_open_files(t_list *tks, int *infd, int *outfd);
-void			open_files(t_tokens *tks, int *infd, int *outfd);
-void			open_infile(char *file_tks, int flags, int *outfd, t_bool *err);
+void			open_files(t_list *tks, t_commands *cmd, int *infd, int *outfd);
+void			check_redirectors(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd);
+void			open_infile(char *file_tks, int flags, int *outfd, t_bool *error);
 void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
+void			msg_error_open_file(char *token, t_bool *error);
+void			msg_error_heredoc(void);
+void			create_heredoc(char *delimiter, int *fd, t_bool *error);
+void			destroy_heredoc(void);
 
 //path.c
 void			get_cmds(t_commands *cmd, t_list *node);
@@ -160,8 +160,6 @@ t_bool			get_path(t_commands *cmd);
 
 //wait_status.c
 void			wait_status(t_commands *cmd);
-
-
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR
