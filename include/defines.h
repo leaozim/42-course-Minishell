@@ -66,6 +66,13 @@ typedef struct s_commands
 	char		*path;
 	int			pid_fd;
 
+	int			infd;
+	int			outfd;
+	t_bool		rdc_in;
+	t_bool		rdc_out;
+	t_bool		rdc_out_app;
+	t_bool		rdc_heredoc;
+	t_bool		error_file;
 	char		**argv;
 	char		*executable_path; 	//
 	char		**path_envp;		//
@@ -94,8 +101,6 @@ typedef struct s_minishell
 	int			num_pipes;
 	int			num_cmds;
 
-	int			infd;
-	int			outfd;
 	int			fd_heredoc;
 }	t_minishell;
 
