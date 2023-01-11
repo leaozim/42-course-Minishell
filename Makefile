@@ -53,6 +53,7 @@ EXECUTER			=	child_process.c								\
 						executer.c									\
 						forking.c									\
 						free_memory.c								\
+						get_cmd_data.c								\
 						init_data_executer.c						\
 						init_pipe_data.c							\
 						open_files.c								\

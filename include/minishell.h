@@ -108,8 +108,8 @@ void			cmd_clear(void);
 
 //child_process.c
 void			child_dup_redirection(int i);
-void			child_process_check(int i);
-void			child_process_execution(t_commands *cmd);
+void			child_process_check(t_list *node);
+void			child_process_execution(t_list *node);
 
 //close_pipes.c
 void			close_pipes(void);
@@ -140,6 +140,7 @@ void			destroy_t_commands(void *cmds);
 void			free_expander(t_commands *cmd);
 
 //init_data_executer.c
+void			init_data_executer(void);
 
 //init_pipe_data.c
 void			fd_memory_allocate(void);
@@ -153,13 +154,12 @@ void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
 
 //path.c
 void			get_cmds(t_commands *cmd, t_list *node);
-t_commands		*create_cmd_node(t_list **node);
 void			get_envp(t_commands *cmd);
 void			get_envp_path(t_commands *cmd);
 t_bool			get_path(t_commands *cmd);
 
 //wait_status.c
-void			wait_status(t_commands *cmd);
+void			wait_status();
 
 
 

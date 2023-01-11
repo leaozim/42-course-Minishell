@@ -1,13 +1,9 @@
 #include "../../include/minishell.h"
 
-t_commands	*create_cmd_node(t_list **node)
+void	init_data_executer(void)
 {
-	t_commands	*cmd;
-
-	cmd = ft_calloc(1, sizeof(t_commands));
-	// cmd->num_pipes = count_id_token(PIPE);
-	get_cmds(cmd, *node);
-	get_envp(cmd);
-	get_envp_path(cmd);
-	return (cmd);
+	g_ms.num_pipes = count_id_token(PIPE);
+	g_ms.num_cmds = g_ms.num_pipes + 1;
+	g_ms.array_fd = ft_calloc(g_ms.num_pipes, sizeof(int *));
+	g_ms.pid_fd = ft_calloc(g_ms.num_cmds, sizeof(int));
 }

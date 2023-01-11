@@ -35,28 +35,28 @@ void	child_dup_redirection(int i)
 // 	child_process_execution();
 // }
 
-void	child_process_execution(t_commands *cmd)
-{
-	if (execve(cmd->path, cmd->cmd_list, cmd->envp) == -1)
-	{
-		free_expander(cmd);
-		exit(errno);
-	}
-}
+// void	child_process_execution(t_commands *cmd)
+// {
+// 	if (execve(cmd->path, cmd->cmd_list, cmd->envp) == -1)
+// 	{
+// 		free_expander(cmd);
+// 		exit(errno);
+// 	}
+// }
 
-void	check_fork(t_commands *cmd)
-{
-	if (cmd->pid_fd < 0)
-		exit(EXIT_FAILURE);
-	if (cmd->pid_fd == 0)
-		child_process_execution(cmd);
-}
+// void	check_fork(t_commands *cmd)
+// {
+// 	if (cmd->pid_fd < 0)
+// 		exit(EXIT_FAILURE);
+// 	if (cmd->pid_fd == 0)
+// 		child_process_execution(cmd);
+// }
 
-void	create_child_process(t_commands *cmd)
-{
-	cmd->pid_fd = fork();
-	check_fork(cmd);
-}
+// void	create_child_process(t_commands *cmd)
+// {
+// 	cmd->pid_fd = fork();
+// 	check_fork(cmd);
+// }
 
 // if (check_path(&cmd) == FALSE)
 // 	printf("command not found\n");
@@ -103,7 +103,6 @@ void	get_cmd_data(void)
 	t_commands	*cmd;
 
 	node = g_ms.tks;
-	// cmd->num_pipes = count_id_token(PIPE);  //
 	while (node)
 	{
 		cmd = ft_calloc(1, sizeof(t_commands)); //
@@ -121,19 +120,29 @@ void	get_cmd_data(void)
 
 void	executer(void)
 {
+	init_data_executer();
 	get_cmd_data();
-	print_cmds();
+	// print_cmds();
+	forking();
+	wait_status();
 	free_cmd_data();
 }
 
 
-void	wait_status(t_commands *cmd)
+void	wait_status()
 {
-	waitpid(cmd->pid_fd, &g_ms.exit_status, 0);
-	if (WIFEXITED(g_ms.exit_status))
-		g_ms.exit_status = WEXITSTATUS(g_ms.exit_status);
-	if (g_ms.exit_status != 0)
-		msg_error_cmd_not_found(g_ms.exit_status, cmd->cmd_list[0]);
+	int	i;
+
+	i = 0;
+	while (i < g_ms.num_cmds)
+	{
+		waitpid(g_ms.pid_fd[i], &g_ms.exit_status, 0);
+		if (WIFEXITED(g_ms.exit_status))
+			g_ms.exit_status = WEXITSTATUS(g_ms.exit_status);
+		// if (g_ms.exit_status != 0)
+		// 	msg_error_cmd_not_found(g_ms.exit_status, cmd->cmd_list[0]);
+		i++;
+	}
 }
 
 //command and search execution
