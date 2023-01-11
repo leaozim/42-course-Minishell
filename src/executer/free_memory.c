@@ -1,5 +1,10 @@
 #include "../../include/minishell.h"
 
+void	free_cmd_data(void)
+{
+	ft_lstclear(&g_ms.cmd_table, destroy_t_commands);
+}
+
 void	free_expander(t_commands *cmd)
 {
 	free(cmd->cmd_list);

@@ -135,6 +135,7 @@ void			fork_check(int i);
 void			forking(void);
 
 //free_memory.c
+void			free_cmd_data(void);
 void			destroy_t_commands(void *cmds);
 void			free_expander(t_commands *cmd);
 

@@ -97,7 +97,7 @@ void	print_cmds(void)
 	}
 }
 
-void	executer(void)
+void	get_cmd_data(void)
 {
 	t_list		*node;
 	t_commands	*cmd;
@@ -117,19 +117,13 @@ void	executer(void)
 		if (node && ((t_tokens *)node->content)->id_token == PIPE)
 			node = node->next;
 	}
+}
+
+void	executer(void)
+{
+	get_cmd_data();
 	print_cmds();
-	ft_lstclear(&g_ms.cmd_table, destroy_t_commands);
-
-	// ls echo | oi ola | uname yes
-
-	// t_commands	*next;
-	// next = ((t_commands *)g_ms.cmd_table->content);
-	// g_ms.cmd_table = g_ms.cmd_table->next;
-	// printf("%s\n", *next->cmd_list);
-	// create_cmd_table();
-
-
-	// free_expander(&cmd);
+	free_cmd_data();
 }
 
 void	wait_status(t_commands *cmd)

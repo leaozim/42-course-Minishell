@@ -1,11 +1,5 @@
 #include "../../include/minishell.h"
 
-void	get_cmd_data(void)
-{
-	get_argv();
-	printf("\n");
-}
-
 void	fork_check(int i)
 {
 	(void)i;
