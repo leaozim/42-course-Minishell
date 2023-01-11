@@ -59,10 +59,11 @@ void	get_cmds(t_commands *cmd, t_list *node)
 	int	i;
 
 	i = 0;
-	cmd_count = count_id_token_before_pipe(COMMAND);
+	cmd_count = count_id_token_before_pipe(COMMAND, node);
 	cmd->cmd_list = ft_calloc(cmd_count + 1, sizeof(char *));
+		printf("count %d\n", cmd_count);
 	while (node)
-	{
+	{ 
 		cmd->token_list = (t_tokens *)node->content;
 		if (cmd->token_list->id_token == PIPE)
 		{
@@ -70,13 +71,14 @@ void	get_cmds(t_commands *cmd, t_list *node)
 		}
 		else if (cmd->token_list->id_token == COMMAND)
 		{
-			cmd->cmd_list[i] = cmd->token_list->token;
+			cmd->cmd_list[i] = ft_strdup(cmd->token_list->token);
 			printf(MAGENTA"get_cmd: %s\n"RESET, cmd->cmd_list[i]);
 			i++;
 		}
 		node = node->next;
 	}
 	cmd->cmd_list[i] = NULL;
+	printf(MAGENTA"get_cmd: %s\n"RESET, cmd->cmd_list[i]);
 }
 
 void	get_argv(void)
@@ -122,14 +124,14 @@ int	count_tokens_before_pipe(void)
 	return (count);
 }
 
-int	count_id_token_before_pipe(int id)
+int	count_id_token_before_pipe(int id, t_list *tks)
 {
 	t_tokens	*next;
 	t_list		*node;
 	int			id_count;
 
 	id_count = 0;
-	node = g_ms.tks;
+	node = tks;
 	while (node)
 	{
 		next = (t_tokens *)node->content;

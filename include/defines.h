@@ -54,6 +54,7 @@ typedef struct s_tokens
 	char	*token;
 	int		id_token;
 	int		index;
+	char	**cmd_list;
 	t_bool	err;
 }	t_tokens;
 

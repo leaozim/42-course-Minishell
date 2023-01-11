@@ -115,8 +115,9 @@ void			close_pipes(void);
 //cmd_operations.c
 void			get_argv(void);
 int				count_tokens_before_pipe(void);
-int				count_id_token_before_pipe(int id);
+// int				count_id_token_before_pipe(int id);
 int				count_id_token(int id);
+int				count_id_token_before_pipe(int id, t_list *tks);
 t_bool			is_cmd_executable(t_commands *cmd);
 t_bool			check_path(t_commands *cmd);
 int				print_array(char **array);
