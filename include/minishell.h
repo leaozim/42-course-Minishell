@@ -137,14 +137,10 @@ void			forking(void);
 //free_memory.c
 void			free_cmd_data(void);
 void			destroy_t_commands(void *cmds);
-void			free_expander(t_commands *cmd);
 
 //init_data_executer.c
 void			init_data_executer(void);
 
-//init_pipe_data.c
-void			fd_memory_allocate(void);
-void			init_pipe_values(void);
 
 //open_files.c
 void			check_open_files(t_list *tks, int *infd, int *outfd);
@@ -158,8 +154,12 @@ void			get_envp(t_commands *cmd);
 void			get_envp_path(t_commands *cmd);
 t_bool			get_path(t_commands *cmd);
 
+//init_pipe_data.c
+void			fd_memory_allocate(void);
+void			init_pipe_values(void);
+
 //wait_status.c
-void			wait_status();
+void			wait_status(void);
 
 
 

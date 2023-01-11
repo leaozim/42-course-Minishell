@@ -18,11 +18,3 @@ void	destroy_t_commands(void *cmds)
 	free_ptrs(cmd->envp_path);
 	free(cmd);
 }
-
-void	free_expander(t_commands *cmd)
-{
-	free(cmd->cmd_list);
-	free(cmd->path);
-	free(cmd->envp);
-	free_ptrs(cmd->envp_path);
-}
