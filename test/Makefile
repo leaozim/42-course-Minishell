@@ -10,8 +10,6 @@ LIBFT 	= $(LIBFT_PATH)/libft.a
 MINISHELL_PATH = ../
 MINISHELL = $(MINISHELL_PATH)/minishell.a
 
-MINISHELL_OBJS = $(shell find ../obj -type f | grep .o$ | grep -v main)
-
 OBJ_DIR	= ./obj
 OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MINISHELL_OBJS)
 
