@@ -80,23 +80,23 @@ void	child_dup_redirection(int i)
 
 void	print_cmds(void)
 {
-	t_list		*node;
-	t_commands	*cmd;
-	int			i;
+	// t_list		*node;
+	// t_commands	*cmd;
+	// int			i;
 	
-	i = 0;
-	int count = ft_lstcount_nodes(g_ms.cmd_table);
-	node = g_ms.cmd_table;
-	while (i < count)
-	{
-		cmd = ((t_commands *)node->content);
-		printf(YELLOW"cmd = %s\n"RESET, cmd->cmd_list[0]);
-		printf(MAGENTA"path = %s\n"RESET, cmd->path);
-		printf(MAGENTA"infd = %d\n"RESET, cmd->infd);
-		printf(MAGENTA"outfd = %d\n"RESET, cmd->outfd);
-		node = node->next;
-		i++;
-	}
+	// i = 0;
+	// int count = ft_lstcount_nodes(g_ms.cmd_table);
+	// node = g_ms.cmd_table;
+	// while (i < count)
+	// {
+	// 	cmd = ((t_commands *)node->content);
+	// 	// printf(YELLOW"cmd = %s\n"RESET, cmd->cmd_list[0]);
+	// 	// printf(MAGENTA"path = %s\n"RESET, cmd->path);
+	// 	// printf(MAGENTA"infd = %d\n"RESET, cmd->infd);
+	// 	// printf(MAGENTA"outfd = %d\n"RESET, cmd->outfd);
+	// 	node = node->next;
+	// 	i++;
+	// }
 }
 
 void init_cmd(t_commands *cmd)
