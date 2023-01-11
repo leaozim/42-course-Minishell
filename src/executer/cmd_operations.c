@@ -53,6 +53,26 @@ void	get_envp(t_commands *cmd)
 	cmd->envp[i] = NULL;
 }
 
+int	count_id_token_before_pipe(int id, t_list *node)
+{
+	t_tokens	*next;
+	int			id_count;
+
+	id_count = 0;
+	while (node)
+	{
+		next = (t_tokens *)node->content;
+		if (next->id_token == PIPE)
+			break ;
+		if (next->id_token == id)
+			id_count++;
+		node = node->next;
+	}
+	printf(BLUE"%d\n"RESET, id_count);
+	return (id_count);
+}
+
+
 void	get_cmds(t_commands *cmd, t_list *node)
 {
 	int	cmd_count;
@@ -65,6 +85,7 @@ void	get_cmds(t_commands *cmd, t_list *node)
 	while (node)
 	{ 
 		cmd->token_list = (t_tokens *)node->content;
+		printf("%s\n", cmd->token_list->token);
 		if (cmd->token_list->id_token == PIPE)
 		{
 			break ;
@@ -72,13 +93,11 @@ void	get_cmds(t_commands *cmd, t_list *node)
 		else if (cmd->token_list->id_token == COMMAND)
 		{
 			cmd->cmd_list[i] = ft_strdup(cmd->token_list->token);
-			printf(MAGENTA"get_cmd: %s\n"RESET, cmd->cmd_list[i]);
 			i++;
 		}
 		node = node->next;
 	}
 	cmd->cmd_list[i] = NULL;
-	printf(MAGENTA"get_cmd: %s\n"RESET, cmd->cmd_list[i]);
 }
 
 void	get_argv(void)
@@ -88,7 +107,7 @@ void	get_argv(void)
 	int	i;
 
 	i = 0;
-	count = count_tokens_before_pipe();
+	count = count_tokens_before_pipe(COMMAND, node);
 	g_ms.cmd_data.tks = ft_calloc(count + 1, sizeof(char *));
 	while (node)
 	{
@@ -122,26 +141,6 @@ int	count_tokens_before_pipe(void)
 		count++;
 	}
 	return (count);
-}
-
-int	count_id_token_before_pipe(int id, t_list *tks)
-{
-	t_tokens	*next;
-	t_list		*node;
-	int			id_count;
-
-	id_count = 0;
-	node = tks;
-	while (node)
-	{
-		next = (t_tokens *)node->content;
-		if (next->id_token == PIPE)
-			break ;
-		if (next->id_token == id)
-			id_count++;
-		node = node->next;
-	}
-	return (id_count);
 }
 
 int	count_id_token(int id)

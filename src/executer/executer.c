@@ -92,12 +92,8 @@ void	print_cmds(void)
 	while (i < count)
 	{
 		cmd = ((t_commands *)node->content);
-		if (node->next)
-			cmd2 = ((t_commands *)node->next->content);
-		else
-		 	break;;
-		printf(YELLOW"print_cmds = %s\n"RESET, *cmd->cmd_list);
-		printf(YELLOW"print_cmd2 = %s\n"RESET, *cmd2->cmd_list);
+		printf(YELLOW"cmd = %s\n"RESET, cmd->cmd_list[0]);
+		printf(MAGENTA"path = %s\n"RESET, cmd->path);
 		node = node->next;
 		i++;
 	}
@@ -109,28 +105,22 @@ void	executer(void)
 	t_commands	*cmd;
 
 	node = g_ms.tks;
-	// cmd->num_pipes = count_id_token(PIPE);  //
-	// g_ms.cmd_table = ft_calloc(1, sizeof(t_list));
-	cmd = ft_calloc(1, sizeof(t_commands)); //
 	while (node)
 	{
-		printf("entrou = %s\n", ((t_tokens *)node->content)->token);
+		cmd = ft_calloc(1, sizeof(t_commands)); //
 		get_cmds(cmd, node);
-
+		get_envp(cmd);
+		get_envp_path(cmd);
+		get_path(cmd);
 		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(cmd));
 		while (node && ((t_tokens *)node->content)->id_token != PIPE)
-		{
 			node = node->next;
-		}
-		if (node)	
-		{
+		if (node && ((t_tokens *)node->content)->id_token == PIPE)
 			node = node->next;
-			printf("id = %s\n", ((t_tokens *)node->content)->token);
 
-		}
 	}
 	print_cmds();
-	// free(g_ms.cmd_table);
+	ft_lstclear(&g_ms.cmd_table, destroy_t_commands);
 
 	// ls echo | oi ola | uname yes
 
@@ -138,7 +128,6 @@ void	executer(void)
 	// next = ((t_commands *)g_ms.cmd_table->content);
 	// g_ms.cmd_table = g_ms.cmd_table->next;
 	// printf("%s\n", *next->cmd_list);
-
 	// create_cmd_table();
 
 

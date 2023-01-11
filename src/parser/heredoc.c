@@ -7,7 +7,6 @@ void	destroy_heredoc(void)
 	close(g_ms.fd_heredoc);
 	free(g_ms.tab_id);
 	ft_lstclear(&g_ms.env, free);
-	free_commands();
 	free_ptrs(g_ms.cmd_data.path_envp);
 	free(g_ms.cmd_data.envp);
 	ft_free_int_array(g_ms.array_fd, g_ms.num_pipes + 1);
