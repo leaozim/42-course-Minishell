@@ -113,13 +113,9 @@ void	executer(void)
 		get_path(cmd);
 		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(cmd));
 		while (node && ((t_tokens *)node->content)->id_token != PIPE)
-		{
 			node = node->next;
-		}
 		if (node && ((t_tokens *)node->content)->id_token == PIPE)
-		{
 			node = node->next;
-		}
 	}
 	print_cmds();
 	ft_lstclear(&g_ms.cmd_table, destroy_t_commands);
