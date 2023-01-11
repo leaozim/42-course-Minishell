@@ -126,6 +126,7 @@ void	executer(void)
 	free_cmd_data();
 }
 
+
 void	wait_status(t_commands *cmd)
 {
 	waitpid(cmd->pid_fd, &g_ms.exit_status, 0);
