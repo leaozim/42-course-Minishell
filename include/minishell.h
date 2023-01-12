@@ -104,7 +104,7 @@ void			cmd_clear(void);
 
 //child_process.c
 void			child_dup_redirection(int i);
-void			child_process_check(t_list *node, int i);
+void			child_process_check(t_list *node);
 void			child_process_execution(t_list *node);
 
 //close_pipes.c
