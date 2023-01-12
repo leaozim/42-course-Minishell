@@ -9,8 +9,6 @@ void	dup_redirection(t_list *node)
 	infd = ((t_commands*)node->content)->infd;
 	outfd = ((t_commands*)node->content)->outfd;
 
-	printf(RED"INFD: %d\n", infd);
-	printf(RED"OUTFD: %d\n", outfd);
 	if (infd > 0)
 		dup2(infd, STDIN_FILENO);
 	if (outfd > 0)

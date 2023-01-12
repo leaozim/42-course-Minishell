@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+#include <unistd.h>
 
 // void	child_dup_redirection(int i)
 // {
@@ -41,6 +42,8 @@ void	child_process_check(t_list *node)
 	if (check_path((t_commands *)node->content) == FALSE)
 	{
 		ft_putstr_fd("Minishell: ", STDERR_FILENO);
+		ft_putstr_fd(((t_commands *)node->content)->cmd_list[0], STDERR_FILENO);
+		ft_putendl_fd(": command not found", STDERR_FILENO);
 		perror(g_ms.cmd_data.argv[0]);
 		g_ms.exit_status = COMMAND_NOT_FOUND;
 		// free_commands();
