@@ -136,12 +136,13 @@ void	get_cmd_data(void)
 void	executer(void)
 {
 	init_data_executer();
-	get_cmd_data();
-	// print_cmds();
 	forking();
+	close_pipes();
 	wait_status();
 	free_cmd_data();
 }
+
+// print_cmds();
 
 //command and search execution
 

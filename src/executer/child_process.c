@@ -19,33 +19,38 @@
 // 	}
 // }
 
-void	child_process_check(t_list *node)
-{
-	// if (check_path() == FALSE)
-	// {
-	// 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
-	// 	perror(g_ms.cmd_data.argv[0]);
-	// 	g_ms.exit_status = COMMAND_NOT_FOUND;
-	// 	free_commands();
-	// 	exit(g_ms.exit_status);
-	// }
-	// child_dup_redirection(i);
-	// close_pipes();
-	child_process_execution(node);
-}
-
 void	child_process_execution(t_list *node)
 {
 	char	*path;
 	char	**cmds;
 	char	**envp;
 
-	path = ((t_commands*)node->content)->path;
-	cmds = ((t_commands*)node->content)->cmd_list;
-	envp = ((t_commands*)node->content)->envp;
+	path = ((t_commands *)node->content)->path;
+	cmds = ((t_commands *)node->content)->cmd_list;
+	envp = ((t_commands *)node->content)->envp;
+
 	if (execve(path, cmds, envp) == -1)
 	{
 		// free_commands();
 		// exit(errno);
 	}
 }
+
+void	child_process_check(t_list *node)
+{
+	if (check_path((t_commands *)node->content) == FALSE)
+	{
+		ft_putstr_fd("Minishell: ", STDERR_FILENO);
+		perror(g_ms.cmd_data.argv[0]);
+		g_ms.exit_status = COMMAND_NOT_FOUND;
+		// free_commands();
+		exit(g_ms.exit_status);
+	}
+	// child_dup_redirection();
+	close_pipes();
+	child_process_execution(node);
+}
+
+// stdin 0 teclado
+// stdout 1 terminal
+// stderr 2 terminal

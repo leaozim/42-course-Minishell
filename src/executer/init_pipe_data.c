@@ -15,7 +15,7 @@ void	fd_memory_allocate(void)
 void	init_pipe_values(void)
 {
 	int	i;
-	int value;
+	int value;		
 
 	i = 0;
 	value = -5;
