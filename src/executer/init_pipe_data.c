@@ -24,8 +24,6 @@ void	init_pipe_values(void)
 		value = pipe(g_ms.array_fd[i]);
 		if (value == -1)
 			perror("pipe:");
-		printf(BLUE"%d\n"RESET, g_ms.array_fd[i][0]);
-		printf(BLUE"%d\n"RESET, g_ms.array_fd[i][1]);
 		i++;
 	}
 }

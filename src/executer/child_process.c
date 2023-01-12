@@ -3,7 +3,6 @@
 
 void	child_dup_redirection(int i)
 {
-	printf(RED"%d\n"RESET, i);
 	if (i == 0)
 	{
 		dup2(g_ms.array_fd[i][1], STDOUT_FILENO);
