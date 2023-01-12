@@ -3,14 +3,14 @@
 void	open_infile(char *file_tks, int flags, int *infd, t_bool *error)
 {
 	*infd = open(file_tks, flags);
-	if (*infd == -1)
+	if (*infd < 0)
 		msg_error_open_file(file_tks, error);
 }
 
 void	open_outfile(char *file_tks, int flags, int *outfd, t_bool *error)
 {
 	*outfd = open(file_tks, flags, 0644);
-	if (*outfd == -1)
+	if (*outfd < 0)
 		msg_error_open_file(file_tks, error);
 }
 
@@ -33,7 +33,7 @@ void	check_redirectors(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
 	}
 	if (tks->id_token == DELIMITER && cmd->error_file == FALSE)
 	{
-		cmd->rdc_out_app = TRUE;
+		cmd->rdc_heredoc = TRUE;
 		create_heredoc(tks->token, ifd, &cmd->error_file);
 	}
 }

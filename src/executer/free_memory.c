@@ -3,14 +3,8 @@
 void	free_cmd_data(void)
 {
 	ft_lstclear(&g_ms.cmd_table, destroy_t_commands);
-}
-
-void	free_expander(t_commands *cmd)
-{
-	free(cmd->cmd_list);
-	free(cmd->path);
-	free(cmd->envp);
-	free_ptrs(cmd->envp_path);
+	ft_free_int_array(g_ms.array_fd, g_ms.num_pipes);
+	free(g_ms.pid_fd);
 }
 
 void	destroy_t_commands(void *cmds)

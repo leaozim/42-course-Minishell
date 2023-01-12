@@ -59,7 +59,6 @@ typedef struct s_tokens
 
 typedef struct s_commands
 {
-	int			num_pipes;
 	char		**cmd_list;
 	t_tokens	*token_list;
 	char		**envp;
@@ -100,6 +99,7 @@ typedef struct s_minishell
 
 	int			len_tokens;
 	int			num_pipes;
+	int			num_cmds;
 
 	int			fd_heredoc;
 }	t_minishell;
