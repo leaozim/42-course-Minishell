@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 void	child_dup_redirection(int i)
 {

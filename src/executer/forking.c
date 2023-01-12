@@ -27,11 +27,11 @@ void	check_fork(int i, t_list *node)
 		dup_redirection(node);
 		if (infd == -1 || outfd == -1)
 		{
-			free_cmd_data(); //
+			free_cmd_data();
 			destroy_minishell();
 			exit(EXIT_FAILURE);
 		}
-		child_process_check(node, i);
+		child_process_check(node);
 	}
 }
 
