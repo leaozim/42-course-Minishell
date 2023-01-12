@@ -24,14 +24,14 @@ t_bool check_unset_delete_value(char *token)
 
 	env_node = g_ms.env;
 	content = ft_findsubchr((char *)env_node->content, EQUAL);
-	if (!ft_strcmp(token, content))
-	{
-		prev = g_ms.env;
-		g_ms.env = g_ms.env->next;
-		ft_lstdelone(prev, free);
-		free(content);
-		return (FALSE);
-	}
+		if (!ft_strcmp(token, content))
+		{
+			prev = g_ms.env;
+			g_ms.env = g_ms.env->next;
+			ft_lstdelone(prev, free);
+			free(content);
+			return (FALSE);
+		}
 	free(content);
 	while (env_node)
 	{
