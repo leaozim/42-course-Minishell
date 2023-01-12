@@ -33,7 +33,7 @@ void	forking(void)
 		{
 			g_ms.pid_fd[i] = fork();
 			check_fork(i, node);
-		};
+		}
 		node = node->next;
 		i++;
 	}

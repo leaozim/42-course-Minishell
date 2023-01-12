@@ -40,6 +40,7 @@ int	print_echo_node(t_list **node, int qtt_n)
 {
 	char	*next_cmd;
 	int			i;
+	t_list	*node_tks;
 
 	i = 0;
 	while ((*node)->next)
@@ -53,7 +54,8 @@ int	print_echo_node(t_list **node, int qtt_n)
 		(*node) = (*node)->next;
 		i++;
 	}
-	*node = (((t_commands *)(*node)->content)->builtins_cmd_list);
+	node_tks = g_ms.cmd_table;
+	*node = (((t_commands *)node_tks->content)->builtins_cmd_list);
 	if ((*node)->next)
 	{
 		next_cmd = (*node)->next->content;
