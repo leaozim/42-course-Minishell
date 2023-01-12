@@ -143,8 +143,9 @@ void			init_data_executer(void);
 
 
 //open_files.c
-void			open_files(t_list *tks, t_commands *cmd, int *infd, int *outfd);
-void			check_redirectors(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd);
+void			get_files_redirectors(t_list *tks, t_commands *cmd, int *infd, int *outfd);
+void			open_files(t_tokens *tks, int *infd, int *outfd, t_commands *cmd);
+void			check_redirectors(t_commands *cmd, int	id_token);
 void			open_infile(char *file_tks, int flags, int *outfd, t_bool *error);
 void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
 void			msg_error_open_file(char *token, t_bool *error);

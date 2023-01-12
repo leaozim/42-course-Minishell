@@ -12,25 +12,24 @@ static void	msg_available_colors(void)
 
 void	bash_change_colors(t_list *node)
 {
-	t_tokens	*next;
+	char	*next;
 
-	node = g_ms.tks;
 	while (node->next)
 	{
-		next = (t_tokens *)node->next->content;
-		if (!ft_strcmp((char *)next->token, "red"))
+		next = (char *)node->next->content;
+		if (!ft_strcmp((char *)next, "red"))
 			ft_putstr_fd(RED, STDIN_FILENO);
-		else if (!ft_strcmp((char *)next->token, "green"))
+		else if (!ft_strcmp((char *)next, "green"))
 			ft_putstr_fd(GREEN, STDIN_FILENO);
-		else if (!ft_strcmp((char *)next->token, "blue"))
+		else if (!ft_strcmp((char *)next, "blue"))
 			ft_putstr_fd(BLUE, STDIN_FILENO);
-		else if (!ft_strcmp((char *)next->token, "yellow"))
+		else if (!ft_strcmp((char *)next, "yellow"))
 			ft_putstr_fd(YELLOW, STDIN_FILENO);
-		else if (!ft_strcmp((char *)next->token, "magenta"))
+		else if (!ft_strcmp((char *)next, "magenta"))
 			ft_putstr_fd(MAGENTA, STDIN_FILENO);
-		else if (!ft_strcmp((char *)next->token, "cyan"))
+		else if (!ft_strcmp((char *)next, "cyan"))
 			ft_putstr_fd(CYAN, STDIN_FILENO);
-		else if (!ft_strcmp((char *)next->token, "reset"))
+		else if (!ft_strcmp((char *)next, "reset"))
 			ft_putstr_fd(RESET, STDIN_FILENO);
 		else
 			msg_available_colors();

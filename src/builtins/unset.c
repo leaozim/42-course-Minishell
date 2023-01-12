@@ -16,7 +16,7 @@ t_bool	check_unset_chr_valid_name(char *token)
 	return (FALSE);
 }
 
-t_bool check_unset_delete_value(char *token)
+t_bool	check_unset_delete_value(char *token)
 {
 	t_list	*env_node;
 	t_list	*prev;
@@ -24,6 +24,7 @@ t_bool check_unset_delete_value(char *token)
 
 	env_node = g_ms.env;
 	content = ft_findsubchr((char *)env_node->content, EQUAL);
+	// unset_delite_first_node
 	if (!ft_strcmp(token, content))
 	{
 		prev = g_ms.env;
@@ -62,7 +63,7 @@ t_bool	unset_error_identifier(char **next, t_list **node, char *cmd)
 	return (FALSE);
 }
 
-t_bool unset_delete_value(char **next, t_list **node)
+t_bool	unset_delete_value(char **next, t_list **node)
 {
 	if (check_unset_delete_value(*next) == TRUE)
 	{

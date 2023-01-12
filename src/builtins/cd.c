@@ -1,18 +1,5 @@
 #include "../../include/minishell.h"
 
-int get_size_node(t_list *node)
-{
-	int	size;
-
-	size = 0;
-	while(node)
-	{
-		size++;
-		node = node->next;
-	}
-	return(size);
-}
-
 void	msg_error_cd(void)
 {
 	ft_putstr_fd("Minishell: cd: ", STDERR_FILENO);
@@ -37,7 +24,6 @@ int	builtin_cd(t_list *cmd_builtins)
 	size = 0;
 	result = 0;
 	home = getenv("HOME");
-	
 	if (size > 2)
 		return (msg_error_cd(), 1);
 	if (size == 1)

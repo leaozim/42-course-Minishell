@@ -1,6 +1,17 @@
 #include "../../include/minishell.h"
-#include <stdio.h>
 
+int	get_size_node(t_list *node)
+{
+	int	size;
+
+	size = 0;
+	while(node)
+	{
+		size++;
+		node = node->next;
+	}
+	return(size);
+}
 
 t_bool	is_builtins()
 {
@@ -32,14 +43,11 @@ t_bool	is_builtins()
 
 void	execute_builtins(t_list *node)
 {
-	// t_list		*node;
 	t_list		*cmd_builtins;
 	char		*cmd;
 
-
 	cmd_builtins = (((t_commands *)node->content)->builtins_cmd_list);
 	g_ms.size_node_builtin = get_size_node(cmd_builtins);
-	
 	cmd = (char *)cmd_builtins->content;
 	printf(YELLOW"cmd builtins = %s\n"RESET, (char *)cmd_builtins->content);
 	if (!ft_strcmp("cd",cmd))
@@ -56,6 +64,6 @@ void	execute_builtins(t_list *node)
 		(builtin_pwd());
 	else if (!ft_strcmp("unset", cmd))
 		(builtin_unset(cmd_builtins->next));
-	// else if (!ft_strcmp("color", cmd))
-	// 	bash_change_colors(cmd_builtins);
+	else if (!ft_strcmp("color", cmd))
+		bash_change_colors(cmd_builtins);
 }
