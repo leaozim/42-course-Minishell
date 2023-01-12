@@ -66,7 +66,9 @@ void	expander(void)
 	t_tokens		*tklist;
 	t_list			*node;
 
-	node = ms.tks;
+	if (!g_ms.tks)
+		return ;
+	node = g_ms.tks;
 	while (node)
 	{
 		tklist = (t_tokens *)node->content;

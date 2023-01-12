@@ -10,12 +10,13 @@ void	check_arguments(int argc)
 	}
 }
 
-void	is_erro_sintaxy_quotes(char *line)
+int	is_erro_sintaxy_quotes(char *line)
 {
 	if (!is_valid_quoting(&line))
 	{
 		ft_putstr_fd("Minishell: ", STDERR_FILENO);
 		ft_putstr_fd("ERROR: Invalid quote syntax\n", STDERR_FILENO);
-		exit(1);
+		return (1);
 	}
+	return (0);
 }

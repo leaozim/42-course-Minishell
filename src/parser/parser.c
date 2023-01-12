@@ -2,18 +2,18 @@
 
 void	reidentify_some_tokens(t_list *tks)
 {
-	t_list			*no;
+	t_list		*node;
 	t_tokens	*tokens;
 	t_tokens	*next_tokens;
 
-	no = tks;
-	while (no)
+	node = tks;
+	while (node)
 	{
-		tokens = (t_tokens *)no->content;
+		tokens = (t_tokens *)node->content;
 		if (is_metachars(tokens->id_token) && tokens->id_token != PIPE && \
-			no->next)
+			node->next)
 		{
-			next_tokens = (t_tokens *)no->next->content;
+			next_tokens = (t_tokens *)node->next->content;
 			if (tokens->id_token == HEREDOC)
 				next_tokens->id_token = DELIMITER;
 			else if (tokens->id_token == APPEND)
@@ -25,37 +25,44 @@ void	reidentify_some_tokens(t_list *tks)
 			else
 				next_tokens->id_token = COMMAND;
 		}
-		no = no->next;
+		node = node->next;
 	}
 }
 
 int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 {
-	t_list		*no;
+	t_list		*node;
 	t_tokens	*tklist;
 	t_tokens	*next;
+	int			i;
 
-	no = tks;
-	while (no)
+	node = tks;
+	i = 0;
+	while (node)
 	{
-		tklist = (t_tokens *)no->content;
+		tklist = (t_tokens *)node->content;
+		if (!ft_strcmp("|", tklist->token) && i == 0)
+			return (msg_error_invalid_synax(tklist->token), 1);
+		if (is_metachars(tklist->id_token) && node->next == NULL)
+			return (msg_error_invalid_synax("newline"), 1);
 		if (is_single_metachar(tklist->token, tklist->id_token, len_tokens))
 			return (1);
-		if (no->next)
-			next = (t_tokens *)no->next->content;
-		if (no->next && consecutive_metachars(tklist->token, next->token, \
+		if (node->next)
+			next = (t_tokens *)node->next->content;
+		if (node->next && consecut_metachars(tklist->token, next->token, \
 			tklist->id_token, next->id_token))
 			return (1);
-		no = no->next;
+		i++;
+		node = node->next;
 	}
 	return (0);
 }
 
 int	parser(void)
 {
-	if (error_syntaxy_metachars(ms.tks, ms.len_tokens))
+	if (error_syntaxy_metachars(g_ms.tks, g_ms.len_tokens))
 		return (1);
-	reidentify_some_tokens(ms.tks);
-	check_open_files(ms.tks, &ms.infd, &ms.outfd);
+	reidentify_some_tokens(g_ms.tks);
+	check_open_files(g_ms.tks, &g_ms.infd, &g_ms.outfd);
 	return (0);
 }

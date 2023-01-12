@@ -4,22 +4,27 @@ void	repl_minshell(void)
 {
 	while (TRUE)
 	{
-		ms.prompt_line = create_prompt();
-		is_erro_sintaxy_quotes(ms.prompt_line);
+		g_ms.prompt_line = create_prompt();
 		create_tokens();
-		parser();
-		printf(CYAN"\nEXPANDER\n"RESET);
 		expander();
+		parser();
+		join_tokens(&g_ms.tks);
+		printf(CYAN"\nANTES\n"RESET);
+		print_tokens();
+		reidentify_some_tokens(g_ms.tks);
+		is_builtins();
+		printf(CYAN"DEPOIS\n"RESET);
 		print_tokens();
 		destroy_minishell();
 	}
+	ft_lstclear(&g_ms.env, free);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	(void)argv;
 	check_arguments(argc);
-	init_minishell();
+	init_minishell(envp);
 	handle_signal();
 	repl_minshell();
 	return (EXIT_SUCCESS);
@@ -27,15 +32,17 @@ int	main(int argc, char **argv)
 
 void	print_tokens(void)
 {
-	t_list		*no;
+	t_list		*node;
 	t_tokens	*tklist;
 
-	no = ms.tks;
-	while (no)
+	if (!g_ms.tks)
+		return ;
+	node = g_ms.tks;
+	while (node)
 	{
-		tklist = (t_tokens *)no->content;
+		tklist = (t_tokens *)node->content;
 		printf("tokens = %s\n", tklist->token);
 		printf("id     = %d\n", tklist->id_token);
-		no = no->next;
+		node = node->next;
 	}
 }

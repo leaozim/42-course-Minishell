@@ -2,24 +2,24 @@
 
 void	ckeck_token_quoting()
 {
-	int	id_array[2] = {COMMAND, 34};
+	int	id_array[2] = {COMMAND, COMMAND};
 	int *id_tokens;
 
 	id_tokens = identify_tokens((char *[]){"echo", "\"oi\"", NULL}, 2);
 	TEST_ASSERT_EQUAL_INT_ARRAY(id_array, id_tokens, 2);
 	free(id_tokens);
 
-	int id_array1[2] = {34, 34};
+	int id_array1[2] = {COMMAND, COMMAND};
 	id_tokens = identify_tokens((char *[]){"\"echo\"", "\"oi\"", NULL}, 2);
 	TEST_ASSERT_EQUAL_INT_ARRAY(id_array1, id_tokens, 2);
 	free(id_tokens);
 
-	int id_array2[2] = {39, 39};
+	int id_array2[2] = {COMMAND, COMMAND};
 	id_tokens = identify_tokens((char *[]){"\'echo\'", "\'oi\'", NULL}, 2);
 	TEST_ASSERT_EQUAL_INT_ARRAY(id_array2, id_tokens, 2);
 	free(id_tokens);
 
-	int id_array3[2] = {34, 39};
+	int id_array3[2] = {1, 1};
 	id_tokens = identify_tokens((char *[]){"\"echo\"", "\'oi\'", NULL}, 2);
 	TEST_ASSERT_EQUAL_INT_ARRAY(id_array3, id_tokens, 2);
 	free(id_tokens);

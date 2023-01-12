@@ -1,30 +1,5 @@
 #include "../../include/minishell.h"
 
-t_bool	is_valid_quoting(char **list)
-{
-	int		i;
-	int		value;
-	char	*str;
-
-	i = 0;
-	str = *list;
-	value = 0;
-	while (str[i])
-	{
-		if (str[i] == SQUOTE || str[i] == DQUOTES)
-		{
-			value = str[i];
-			i++;
-			while (str[i] && str[i] != value)
-				i++;
-			if (str[i] == '\0')
-				return (FALSE);
-		}
-		i++;
-	}
-	return (TRUE);
-}
-
 int	check_qtt_to_be_incremented(char *line)
 {
 	int	value;
@@ -51,15 +26,15 @@ int	check_qtt_to_be_incremented(char *line)
 
 char	*add_spaces_specific_tokens(char *line, int count)
 {
-	char	*str;
-	int		value;
-	int		i;
-	int		j;
+	char		*str;
+	int			value;
+	size_t		i;
+	int			j;
 
 	i = 0;
 	j = 0;
 	str = ft_calloc(1, ft_strlen(line) + (count * 2) + 1);
-	while (line[i])
+	while (i < ft_strlen(line))
 	{
 		if (check_for_specific_token(line[i]) == TRUE)
 		{
@@ -103,4 +78,26 @@ void	replace_value_inside_quotes(char *list, int old_vle, int new_vle)
 		while (str[i] && str[i] != SQUOTE && str[i] != DQUOTES)
 			i++;
 	}
+}
+
+char	*add_chars_in_specific_position(char *line, int index, char chars)
+{
+	int		j;
+	int		i;
+	char	*str;
+
+	j = 0;
+	i = 0;
+	str = ft_calloc(1, ft_strlen(line) + 2);
+	while (i < (int)ft_strlen(line) + 1)
+	{
+		if (j == index)
+			str[j++] = chars;
+		str[j] = line[i];
+		j++;
+		i++;
+	}
+	str[i] = '\0';
+	free(line);
+	return (str);
 }

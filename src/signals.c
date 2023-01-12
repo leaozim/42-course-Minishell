@@ -3,6 +3,7 @@
 void	signal_break_heredoc(int signal)
 {
 	(void)signal;
+	close(g_ms.fd_heredoc);
 	destroy_heredoc();
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();

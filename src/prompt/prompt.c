@@ -1,21 +1,48 @@
 #include "../../include/minishell.h"
 
-void	check_prompt(char *line)
+int	check_prompt(char *line)
 {
 	if (line == NULL)
 	{
-		ft_putstr_fd("\n", STDERR_FILENO);
+		ft_putstr_fd("exit\n", STDERR_FILENO);
+		ft_lstclear(&g_ms.env, free);
 		free(line);
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
+	else if (ft_strlen(line) == 0 || is_erro_sintaxy_quotes(line))
+		return (free(line), 1);
+	return (0);
 }
 
 char	*create_prompt(void)
 {
 	char	*line;
 
-	line = readline(PROMPT);
-	check_prompt(line);
-	add_history(line);
+	line = ft_strdup("");
+	while (check_prompt(line))
+	{
+		line = readline(PROMPT);
+		add_history(line);
+	}
 	return (line);
 }
+// void    check_prompt(char *line)
+// {
+//     if (line == NULL)
+//     {
+//         ft_putstr_fd("\n", STDERR_FILENO);
+//         ft_lstclear(&g_ms.env, free);
+//         free(line);
+//         exit(EXIT_FAILURE);
+//     }
+// }
+
+// char    *create_prompt(void)
+// {
+//     char    *line;
+
+//     line = readline(CIRCLE" "PROMPT);
+//     check_prompt(line);
+//     add_history(line);
+//     return (line);
+// }

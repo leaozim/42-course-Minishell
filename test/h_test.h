@@ -20,6 +20,8 @@ void		test_check_valid_quoting(void);
 void		test_check_program(void);
 void		test_check_replace_value_inside_quotes(void);
 
+void		add_characters_in_espcific_position(void);
+
 //The specific characters: < > | ' " >> <<
 void		check_token_qtt(void);
 void		test_save_spaces(void);
@@ -32,18 +34,22 @@ void		test_valid_add_spaces(void);
 void		check_identify_tokens(void);
 void		check_qtt_tokens(void);
 void		check_repl(void);
+void        check_export(void);
 
 //EXPANDER
 void		check_expander_count_dollar_sign(void);
 void		check_expander(void);
 void		check_brace_expansion(void);
+void		test_split_count_words(void);
+void		test_split_assign_values(void);
 
 void		test_error_syntax_consecutive_metachacacter(void);
 void		test_is_error_syntax_metachacacter(void);
 void		test_error_syntax_single_metachacacter(void);
-void		free_ms();
+void		free_ms(void);
 void		test_is_error_syntax_metachacacter(void);
 void		test_error_syntax_single_metachacacter(void);
 void		test_open_files(void);
-
+void		test_strtrim_allchars(void);
+void		test_valid_join_token(void);
 #endif

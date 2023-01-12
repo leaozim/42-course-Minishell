@@ -1,6 +1,6 @@
 # include "../h_test.h"
 
-void    check_brace_expansion()
+void    check_brace_expansion(void)
 {
 	char	*str;
 	char	*temp;
@@ -88,6 +88,12 @@ void    check_brace_expansion()
 	TEST_ASSERT_EQUAL_STRING("", temp);
 	free(str);
 	free(temp);
+
+	// str = ft_strdup("\"${COLORTERM}\"\"${COLORTERM}\"");
+	// temp = minishell_expansion(str);
+	// TEST_ASSERT_EQUAL_STRING("truecolortruecolor", temp);
+	// free(str);
+	// free(temp);
 
 	// //touch main.{js,py,ex,r,rs,go,s,rb}
 	// // str = expander_brace_expansion("main.{js,py,ex,r,rs,go,s,rb}");
