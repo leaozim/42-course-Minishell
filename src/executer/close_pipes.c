@@ -19,6 +19,6 @@ void	close_pipes(void)
 		}
 	}
 	if (infd > 0)
-		close (infd);
+		close(infd);
 	close(outfd);
 }
