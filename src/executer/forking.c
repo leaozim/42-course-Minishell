@@ -46,13 +46,13 @@ void	forking(void)
 	init_pipe_values();
 	while (node)
 	{
-		if(is_builtins() == TRUE)
-			execute_builtins(node); 
-		else
-		{
+		// if(is_builtins() == TRUE)
+		// 	execute_builtins(node); 
+		// else
+		// {
 			g_ms.pid_fd[i] = fork();
 			check_fork(i, node);
-		}
+		// }
 		node = node->next;
 		i++;
 	}

@@ -34,7 +34,7 @@ void	get_cmd_data(void)
 		get_envp(cmd);
 		get_envp_path(cmd);
 		get_path(cmd);
-		open_files(node, cmd, &cmd->infd, &cmd->outfd);
+		get_files_redirectors(node, cmd, &cmd->infd, &cmd->outfd);
 		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(cmd));
 		while (node && ((t_tokens *)node->content)->id_token != PIPE)
 			node = node->next;
