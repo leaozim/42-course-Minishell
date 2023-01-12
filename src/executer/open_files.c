@@ -3,15 +3,21 @@
 void	open_infile(char *file_tks, int flags, int *infd, t_bool *error)
 {
 	*infd = open(file_tks, flags);
-	if (*infd < 0)
+	if (*infd == -1)
+	{
+		printf(GREEN"in: %d\n"RESET, *infd);
 		msg_error_open_file(file_tks, error);
+	}
 }
 
 void	open_outfile(char *file_tks, int flags, int *outfd, t_bool *error)
 {
 	*outfd = open(file_tks, flags, 0644);
-	if (*outfd < 0)
+	if (*outfd == -1)
+		{
+		printf(GREEN"out: %d\n"RESET, *outfd);
 		msg_error_open_file(file_tks, error);
+	}
 }
 
 void	open_files(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
@@ -30,10 +36,7 @@ void	open_files(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
 	if (tks->id_token == FILE_APPEND && cmd->error_file == FALSE)
 		open_outfile(tks->token, append_flags, ofd, &cmd->error_file);
 	if (tks->id_token == DELIMITER && cmd->error_file == FALSE)
-	{
-		cmd->rdc_heredoc = TRUE;
 		create_heredoc(tks->token, ifd, &cmd->error_file);
-	}
 }
 
 void	check_redirectors(t_commands *cmd, int	id_token)
@@ -61,9 +64,9 @@ void	get_files_redirectors(t_list *tks, t_commands *cmd, int *ifd, int *ofd)
 		if (is_metachars(tklist->id_token) && tklist->id_token != PIPE && \
 			node->next)
 		{
+			next = (t_tokens *)node->next->content;
 			check_redirectors(cmd, next->id_token);
 			open_files(next, ifd, ofd, cmd);
-			next = (t_tokens *)node->next->content;
 		}
 		node = node->next;
 	}

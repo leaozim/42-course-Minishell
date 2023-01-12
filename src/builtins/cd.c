@@ -28,7 +28,6 @@ int	builtin_cd(t_list *cmd_builtins)
 		return (msg_error_cd(), 1);
 	if (size == 1)
 		result = chdir(home);
-	printf(BLUE"cmd builtins = %s\n"RESET, (char *)cmd_builtins->content);
 	if (cmd_builtins->next)
 		result = chdir((char *)cmd_builtins->next->content);
 	if (result < 0)

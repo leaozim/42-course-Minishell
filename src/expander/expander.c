@@ -62,22 +62,41 @@ char	*minishell_expansion(char *token)
 	return (str);
 }
 
-
 void	expander(void)
 {
 	char			*temp;
 	t_tokens		*tklist;
 	t_list			*node;
+	t_list			*prev;
+	t_list			*next;
 
 	if (!g_ms.tks)
 		return ;
 	node = g_ms.tks;
+	prev = NULL;
+	next = NULL;
 	while (node)
 	{
 		tklist = (t_tokens *)node->content;
 		temp = minishell_expansion(tklist->token);
 		free(tklist->token);
+		if (ft_strlen(temp) == 0)
+		{
+			next = node->next;
+			if (prev)
+				prev->next = next;
+			else
+			{
+				printf(BLUE"%p\n"RESET, next);
+				g_ms.tks = next;
+			}
+			destroy_t_tokens(node);
+			free(temp);
+			node = next;
+			continue ;
+		}
 		tklist->token = temp;
+		prev = node;
 		node = node->next;
 	}
 }

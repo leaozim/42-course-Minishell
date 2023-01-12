@@ -17,9 +17,9 @@ void	repl_minshell(void)
 		g_ms.prompt_line = create_prompt();
 		create_tokens();
 		expander();
-		if (parser() == 1)
+		if (!g_ms.tks || parser() == 1)
 		{
-			ft_lstclear(&g_ms.env, free);
+			// ft_lstclear(&g_ms.env, free);
 			destroy_minishell();
 			rl_redisplay();
 			continue ;

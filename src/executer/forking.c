@@ -1,18 +1,5 @@
 #include "../../include/minishell.h"
 
-void	dup_redirection(t_list *node)
-{
-	int	infd;
-	int	outfd;
-
-	infd = ((t_commands *)node->content)->infd;
-	outfd = ((t_commands *)node->content)->outfd;
-	if (infd > 0)
-		dup2(infd, STDIN_FILENO);
-	if (outfd > 0)
-		dup2(outfd, STDOUT_FILENO);
-}
-
 void	check_fork(int i, t_list *node)
 {
 	int	infd;
@@ -28,10 +15,10 @@ void	check_fork(int i, t_list *node)
 		if (infd == -1 || outfd == -1)
 		{
 			free_cmd_data();
-			destroy_minishell();
+			// destroy_minishell();
 			exit(EXIT_FAILURE);
 		}
-		child_process_check(node);
+		child_process_check(node, i);
 	}
 }
 
@@ -46,13 +33,8 @@ void	forking(void)
 	init_pipe_values();
 	while (node)
 	{
-		// if(is_builtins() == TRUE)
-		// 	execute_builtins(node); 
-		// else
-		// {
-			g_ms.pid_fd[i] = fork();
-			check_fork(i, node);
-		// }
+		g_ms.pid_fd[i] = fork();
+		check_fork(i, node);
 		node = node->next;
 		i++;
 	}

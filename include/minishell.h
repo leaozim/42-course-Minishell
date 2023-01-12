@@ -108,7 +108,7 @@ void			cmd_clear(void);
 
 //child_process.c
 void			child_dup_redirection(int i);
-void			child_process_check(t_list *node);
+void			child_process_check(t_list *node, int i);
 void			child_process_execution(t_list *node);
 
 //close_pipes.c
@@ -137,6 +137,7 @@ void			forking(void);
 //free_memory.c
 void			free_cmd_data(void);
 void			destroy_t_commands(void *cmds);
+void			dup_redirection(t_list *node);
 
 //init_data_executer.c
 void			init_data_executer(void);
