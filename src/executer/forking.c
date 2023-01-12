@@ -1,14 +1,12 @@
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 void	dup_redirection(t_list *node)
 {
 	int	infd;
 	int	outfd;
 
-	infd = ((t_commands*)node->content)->infd;
-	outfd = ((t_commands*)node->content)->outfd;
-
+	infd = ((t_commands *)node->content)->infd;
+	outfd = ((t_commands *)node->content)->outfd;
 	if (infd > 0)
 		dup2(infd, STDIN_FILENO);
 	if (outfd > 0)
@@ -18,10 +16,10 @@ void	dup_redirection(t_list *node)
 void	check_fork(int i, t_list *node)
 {
 	int	infd;
-	int outfd;
+	int	outfd;
 
-	infd = ((t_commands*)g_ms.cmd_table->content)->infd;
-	outfd = ((t_commands*)g_ms.cmd_table->content)->outfd;
+	infd = ((t_commands *)g_ms.cmd_table->content)->infd;
+	outfd = ((t_commands *)g_ms.cmd_table->content)->outfd;
 	if (g_ms.pid_fd[i] < 0)
 		exit(EXIT_FAILURE);
 	if (g_ms.pid_fd[i] == 0)
@@ -35,10 +33,10 @@ void	check_fork(int i, t_list *node)
 		child_process_check(node);
 	}
 }
- 
+
 void	forking(void)
 {
-	int	i;
+	int		i;
 	t_list	*node;
 
 	i = 0;

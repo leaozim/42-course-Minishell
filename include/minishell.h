@@ -153,6 +153,7 @@ void			get_cmds(t_commands *cmd, t_list *node);
 void			get_envp(t_commands *cmd);
 void			get_envp_path(t_commands *cmd);
 t_bool			get_path(t_commands *cmd);
+void			init_fd_data(t_commands *cmd);
 
 //init_pipe_data.c
 void			fd_memory_allocate(void);

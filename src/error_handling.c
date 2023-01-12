@@ -1,5 +1,4 @@
 #include "../include/minishell.h"
-#include <stdlib.h>
 
 void	check_arguments(int argc)
 {
