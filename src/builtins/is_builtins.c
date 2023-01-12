@@ -1,27 +1,69 @@
 #include "../../include/minishell.h"
 
-t_bool	is_builtins(void)
+int	get_size_node(t_list *node)
+{
+	int	size;
+
+	size = 0;
+	while(node)
+	{
+		size++;
+		node = node->next;
+	}
+	return(size);
+}
+
+t_bool	is_builtins()
 {
 	t_list		*node;
-	t_tokens	*tklist;
+	t_list		*cmd_builtins;
+	char		*cmd;
 
-	node = g_ms.tks;
-	tklist = (t_tokens *)node->content;
-	if (!ft_strcmp("cd", tklist->token))
-		return (builtin_cd(), TRUE);
-	else if (!ft_strcmp("echo", tklist->token))
-		return (builtin_echo(), TRUE);
-	else if (!ft_strcmp("env", tklist->token))
-		return (builtin_env(), TRUE);
-	if (!ft_strcmp("exit", tklist->token))
-		return (builtin_exit(), TRUE);
-	else if (!ft_strcmp("export", tklist->token))
-		return (builtin_export(), TRUE);
-	else if (!ft_strcmp("pwd", tklist->token))
-		return (builtin_pwd(), TRUE);
-	else if (!ft_strcmp("unset", tklist->token))
-		return (builtin_unset(), TRUE);
-	else if (!ft_strcmp("color", tklist->token))
-		return (bash_change_colors(), TRUE);
+	node = g_ms.cmd_table;
+	cmd_builtins = (((t_commands *)node->content)->builtins_cmd_list);	
+	cmd = cmd_builtins->content;
+	if (!ft_strcmp("cd",cmd))
+		return (TRUE);
+	else if (!ft_strcmp("echo", cmd))
+		return (TRUE);
+	else if (!ft_strcmp("env", cmd))
+		return (TRUE);
+	if (!ft_strcmp("exit",cmd))
+		return (TRUE);
+	else if (!ft_strcmp("export", cmd))
+		return (TRUE);
+	else if (!ft_strcmp("pwd", cmd))
+		return (TRUE);
+	else if (!ft_strcmp("unset", cmd))
+		return (TRUE);
+	else if (!ft_strcmp("color", cmd))
+		return (TRUE);
 	return (FALSE);
+}
+
+void	execute_builtins(t_list *node)
+{
+	t_list		*cmd_builtins;
+	char		*cmd;
+
+	cmd_builtins = (((t_commands *)node->content)->builtins_cmd_list);
+	g_ms.size_node_builtin = get_size_node(cmd_builtins);
+	cmd = (char *)cmd_builtins->content;
+	printf(YELLOW"cmd builtins = %s\n"RESET, (char *)cmd_builtins->content);
+	if (!ft_strcmp("cd",cmd))
+		(builtin_cd(cmd_builtins));
+	else if (!ft_strcmp("echo", cmd))
+		(builtin_echo(cmd_builtins));
+	else if (!ft_strcmp("env", cmd))
+		(builtin_env());
+	else if (!ft_strcmp("exit",cmd))
+		(builtin_exit(cmd_builtins));
+	else if (!ft_strcmp("export", cmd))
+		(builtin_export(cmd_builtins));
+	else if (!ft_strcmp("pwd", cmd))
+		(builtin_pwd());
+	else if (!ft_strcmp("unset", cmd))
+		(builtin_unset(cmd_builtins->next));
+	else if (!ft_strcmp("color", cmd))
+		bash_change_colors(cmd_builtins);
 }

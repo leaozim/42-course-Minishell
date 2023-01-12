@@ -61,9 +61,9 @@ t_bool	check_export_update_value(char *token)
 	return (free(name), FALSE);
 }
 
-t_bool	export_update_value(t_tokens **next, t_list **node)
+t_bool	export_update_value(char **next, t_list **node)
 {
-	if (check_export_update_value((*next)->token) == TRUE)
+	if (check_export_update_value(*next) == TRUE)
 	{
 		g_ms.exit_status = 0;
 		(*node) = (*node)->next;
@@ -72,22 +72,20 @@ t_bool	export_update_value(t_tokens **next, t_list **node)
 	return (FALSE);
 }
 
-int	builtin_export(void)
+int	builtin_export(t_list *node)
 {
-	t_tokens	*next;
-	t_list		*node;
+	char	*next_cmd;
 
-	node = g_ms.tks;
 	if (print_export(&g_ms.env) == 1)
 		return (g_ms.exit_status = 0, EXIT_SUCCESS);
 	while (node->next)
 	{
-		next = (t_tokens *)node->next->content;
-		if (error_invalid_identifier(&next, &node, "export") == TRUE)
+		next_cmd = (char *)node->next->content;
+		if (error_invalid_identifier(&next_cmd, &node, "export") == TRUE)
 			continue ;
-		if (export_update_value(&next, &node) == TRUE)
+		if (export_update_value(&next_cmd, &node) == TRUE)
 			continue ;
-		ft_lstadd_back(&g_ms.env, ft_lstnew(ft_strdup(next->token)));
+		ft_lstadd_back(&g_ms.env, ft_lstnew(ft_strdup(next_cmd)));
 		node = node->next;
 	}
 	return (g_ms.exit_status = 0, EXIT_SUCCESS);

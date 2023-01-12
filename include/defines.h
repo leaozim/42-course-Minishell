@@ -65,6 +65,7 @@ typedef struct s_commands
 	char		**envp_path;
 	char		*path;
 	int			pid_fd;
+	t_list		*builtins_cmd_list;
 
 	int			infd;
 	int			outfd;
@@ -100,7 +101,7 @@ typedef struct s_minishell
 	int			len_tokens;
 	int			num_pipes;
 	int			num_cmds;
-
+	int			size_node_builtin;
 	int			fd_heredoc;
 }	t_minishell;
 

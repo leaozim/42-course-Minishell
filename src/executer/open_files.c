@@ -14,23 +14,21 @@ void	open_outfile(char *file_tks, int flags, int *outfd, t_bool *error)
 		msg_error_open_file(file_tks, error);
 }
 
-void	check_redirectors(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
+void	open_files(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
 {	
+	int input_flag;
+	int output_flags;
+	int append_flags;
+
+	input_flag = O_RDONLY;
+	output_flags = O_CREAT | O_WRONLY | O_TRUNC;
+	append_flags = O_CREAT | O_WRONLY | O_APPEND;
 	if (tks->id_token == FILE_IN)
-	{
-		cmd->rdc_in = TRUE;
-		open_infile(tks->token, O_RDONLY, ifd, &cmd->error_file);
-	}
+		open_infile(tks->token, input_flag, ifd, &cmd->error_file);
 	if (tks->id_token == FILE_OUT && cmd->error_file == FALSE)
-	{
-		cmd->rdc_out = TRUE;
-		open_outfile(tks->token, O_CREAT | O_WRONLY | O_TRUNC, ofd, &cmd->error_file);
-	}
+		open_outfile(tks->token, output_flags, ofd, &cmd->error_file);
 	if (tks->id_token == FILE_APPEND && cmd->error_file == FALSE)
-	{
-		cmd->rdc_out_app = TRUE;
-		open_outfile(tks->token, O_CREAT | O_WRONLY | O_APPEND, ofd, &cmd->error_file);
-	}
+		open_outfile(tks->token, append_flags, ofd, &cmd->error_file);
 	if (tks->id_token == DELIMITER && cmd->error_file == FALSE)
 	{
 		cmd->rdc_heredoc = TRUE;
@@ -38,7 +36,19 @@ void	check_redirectors(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
 	}
 }
 
-void	open_files(t_list *tks, t_commands *cmd, int *infd, int *outfd)
+void	check_redirectors(t_commands *cmd, int	id_token)
+{	
+	if (id_token == FILE_IN)
+		cmd->rdc_in = TRUE;
+	if (id_token == FILE_OUT && cmd->error_file == FALSE)
+		cmd->rdc_out = TRUE;
+	if (id_token == FILE_APPEND && cmd->error_file == FALSE)
+		cmd->rdc_out_app = TRUE;
+	if (id_token == DELIMITER && cmd->error_file == FALSE)
+		cmd->rdc_heredoc = TRUE;
+}
+
+void	get_files_redirectors(t_list *tks, t_commands *cmd, int *ifd, int *ofd)
 {
 	t_list		*node;
 	t_tokens	*tklist;
@@ -51,8 +61,10 @@ void	open_files(t_list *tks, t_commands *cmd, int *infd, int *outfd)
 		if (is_metachars(tklist->id_token) && tklist->id_token != PIPE && \
 			node->next)
 		{
+			check_redirectors(cmd, next->id_token);
+			open_files(next, ifd, ofd, cmd);
 			next = (t_tokens *)node->next->content;
-			check_redirectors(next, infd, outfd, cmd);
+
 		}
 		node = node->next;
 	}
