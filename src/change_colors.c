@@ -10,9 +10,8 @@ static void	msg_available_colors(void)
 	STDIN_FILENO);
 }
 
-void	bash_change_colors(void)
+void	bash_change_colors(t_list *node)
 {
-	t_list		*node;
 	t_tokens	*next;
 
 	node = g_ms.tks;

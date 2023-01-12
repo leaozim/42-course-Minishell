@@ -25,6 +25,7 @@ void			free_ptrs(char **str);
 void			destroy_minishell(void);
 void			destroy_t_tokens(void *token);
 int				check_prompt(char *line);
+int				get_size_node(t_list *node);
 
 /* -----------------------------------------------------------------------*\
 									lexer									
@@ -79,23 +80,26 @@ void			expand_check_next_character(char *token, int *i, char **final_str);
 \* -----------------------------------------------------------------------*/
 
 void			create_env(char **envp);
-t_bool			error_invalid_identifier(t_tokens **next, t_list **node, char *cmd);
+t_bool			error_invalid_identifier(char **next, t_list **node, char *cmd);
 t_bool			check_error_invalid_identifier(char *token);
 void			ft_lstdelone_array(t_list **lst);
 void			ft_lstclear_array(t_list **lst);
 t_bool			is_builtins(void);
-int				builtin_cd(void);
+void			execute_builtins(t_list *node);
+// t_bool			is_builtins(t_list *node);
+// int				builtin_cd(void);
+int				builtin_cd(t_list *node);
 void			builtin_env(void);
 void			builtin_pwd(void);
-void			builtin_exit(void);
-int				builtin_echo(void);
-int				builtin_export(void);
-int	    		builtin_unset(void);
+void			builtin_exit(t_list *node);
+int				builtin_echo(t_list *node);
+int				builtin_export(t_list *node);
+int	    		builtin_unset(t_list *node);
 void			msg_error_not_a_valid_identifier(char *token, char *cmd);
 int				count_quotes_pair(char	*str, char c, int *i);
 int				split_count_words(char *str, char c);
 char			**split_assign_values(char *str, char c, int count);
-void			bash_change_colors(void);
+void			bash_change_colors(t_list *node);
 void			cmd_clear(void);
 
 /* -----------------------------------------------------------------------*\

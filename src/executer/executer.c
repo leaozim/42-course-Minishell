@@ -80,23 +80,43 @@ void	child_dup_redirection(int i)
 
 void	print_cmds(void)
 {
-	// t_list		*node;
+	t_list		*node;
 	// t_commands	*cmd;
-	// int			i;
+	t_list		*cmd_builtins;
+	// char 		*list_for_builtins;
+	int			i;
 	
-	// i = 0;
+	i = 0;
 	// int count = ft_lstcount_nodes(g_ms.cmd_table);
-	// node = g_ms.cmd_table;
-	// while (i < count)
-	// {
-	// 	cmd = ((t_commands *)node->content);
-	// 	// printf(YELLOW"cmd = %s\n"RESET, cmd->cmd_list[0]);
-	// 	// printf(MAGENTA"path = %s\n"RESET, cmd->path);
-	// 	// printf(MAGENTA"infd = %d\n"RESET, cmd->infd);
-	// 	// printf(MAGENTA"outfd = %d\n"RESET, cmd->outfd);
-	// 	node = node->next;
-	// 	i++;
-	// }
+	node = g_ms.cmd_table;
+	while (node)
+	{
+		cmd_builtins = (((t_commands *)node->content)->builtins_cmd_list);
+		while (cmd_builtins)
+		{
+			printf(MAGENTA"cmd = %s\n"RESET, (char *)cmd_builtins->content);
+			cmd_builtins = cmd_builtins->next;
+		}
+		// list_for_builtins = (cmd_builtins->builtins_cmd_list)->content;
+		// printf(YELLOW"cmd = %s\n"RESET, cmd->cmd_list[0]);
+		// printf(MAGENTA"path = %s\n"RESET, cmd->path);
+		// printf(MAGENTA"infd = %d\n"RESET, cmd->infd);
+		// printf(MAGENTA"outfd = %d\n"RESET, cmd->outfd);
+		node = node->next;
+		i++;
+	}
+}
+
+
+void	get_linked_list_builtins(t_commands *cmd)
+{
+
+	int	i;
+
+	i = -1;
+	while (cmd->cmd_list[++i])
+		ft_lstadd_back(&cmd->builtins_cmd_list,
+			ft_lstnew(ft_strdup(cmd->cmd_list[i])));
 }
 
 void init_cmd(t_commands *cmd)
@@ -124,6 +144,7 @@ void	get_cmd_data(void)
 		get_envp(cmd);
 		get_envp_path(cmd);
 		get_path(cmd);
+		get_linked_list_builtins(cmd);
 		open_files(node, cmd, &cmd->infd, &cmd->outfd);
 		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(cmd));
 		while (node && ((t_tokens *)node->content)->id_token != PIPE)
@@ -137,7 +158,8 @@ void	executer(void)
 {
 	init_data_executer();
 	get_cmd_data();
-	// print_cmds();
+	print_cmds();
+	// is_builtins();
 	forking();
 	wait_status();
 	free_cmd_data();

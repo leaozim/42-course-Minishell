@@ -1,5 +1,18 @@
 #include "../../include/minishell.h"
 
+int get_size_node(t_list *node)
+{
+	int	size;
+
+	size = 0;
+	while(node)
+	{
+		size++;
+		node = node->next;
+	}
+	return(size);
+}
+
 void	msg_error_cd(void)
 {
 	ft_putstr_fd("Minishell: cd: ", STDERR_FILENO);
@@ -15,26 +28,24 @@ void	msg_result_error(char *token)
 	free(msg_error);
 }
 
-int	builtin_cd(void)
+int	builtin_cd(t_list *cmd_builtins)
 {
-	t_tokens	*next;
-	t_list		*node;
 	char		*home;
 	int			result;
+	int			size;
 
+	size = 0;
 	result = 0;
-	node = g_ms.tks;
 	home = getenv("HOME");
-	if (g_ms.len_tokens > 2)
+	
+	if (size > 2)
 		return (msg_error_cd(), 1);
-	if (g_ms.len_tokens == 1)
+	if (size == 1)
 		result = chdir(home);
-	else if (node->next)
-	{
-		next = (t_tokens *)node->next->content;
-		result = chdir(next->token);
-	}
+	printf(BLUE"cmd builtins = %s\n"RESET, (char *)cmd_builtins->content);
+	if (cmd_builtins->next)
+		result = chdir((char *)cmd_builtins->next->content);
 	if (result < 0)
-		msg_result_error(next->token);
+		msg_result_error(cmd_builtins->next->content);
 	return (0);
 }

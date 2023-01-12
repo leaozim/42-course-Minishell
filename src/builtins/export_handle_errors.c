@@ -35,11 +35,11 @@ void	msg_error_not_a_valid_identifier(char *token, char *cmd)
 	g_ms.exit_status = 1;
 }
 
-t_bool	error_invalid_identifier(t_tokens **next, t_list **node, char *cmd)
+t_bool	error_invalid_identifier(char **next, t_list **node, char *cmd)
 {
-	if (check_error_invalid_identifier((*next)->token) == TRUE)
+	if (check_error_invalid_identifier(*next) == TRUE)
 	{
-		msg_error_not_a_valid_identifier((*next)->token, cmd);
+		msg_error_not_a_valid_identifier(*next, cmd);
 		g_ms.exit_status = 1;
 		(*node) = (*node)->next;
 		return (TRUE);

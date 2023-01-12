@@ -26,22 +26,20 @@ void	msg_error_exit(int id, char *token)
 	}
 }
 
-void	builtin_exit(void)
+void	builtin_exit(t_list *node)
 {
-	t_tokens	*next;
-	t_list		*node;
+	char	*next;
 
-	node = g_ms.tks;
-	if (g_ms.len_tokens == 1)
+	if (g_ms.size_node_builtin == 1)
 		msg_error_exit(EXIT_ALONLY, NULL);
 	if (node->next)
 	{
-		next = (t_tokens *)node->next->content;
-		if (g_ms.len_tokens >= 2 && !ft_is_num(next->token))
+		next = (char *)node->next->content;
+		if (g_ms.len_tokens >= 2 && !ft_is_num(next))
 			msg_error_exit(EXIT_NO_NUMERIC, NULL);
-		else if (g_ms.len_tokens == 2 && ft_is_num(next->token))
-			msg_error_exit(EXIT_NUMERIC, next->token);
-		else if (g_ms.len_tokens > 2 && ft_is_num(next->token))
+		else if (g_ms.len_tokens == 2 && ft_is_num(next))
+			msg_error_exit(EXIT_NUMERIC, next);
+		else if (g_ms.len_tokens > 2 && ft_is_num(next))
 			msg_error_exit(EXIT_TOO_MANY_ARGC, NULL);
 	}
 }

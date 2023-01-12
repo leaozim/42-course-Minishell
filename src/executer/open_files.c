@@ -34,7 +34,7 @@ void	check_redirectors(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
 	}
 	if (tks->id_token == DELIMITER && cmd->error_file == FALSE)
 	{
-		cmd->rdc_out_app = TRUE;
+		cmd->rdc_heredoc = TRUE;
 		create_heredoc(tks->token, ifd, &cmd->error_file);
 	}
 }
