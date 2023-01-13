@@ -33,7 +33,6 @@ int				get_size_node(t_list *node);
 
 void			create_tokens(void);
 char			*add_marker(char *line);
-// char			*add_marker(char *line, int old_vle, int new_vle);
 char			*add_chrs_in_specific_position(char *line, int index, char characters);
 void			replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 int				count_specific_tokens(char *str);
