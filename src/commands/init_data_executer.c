@@ -22,7 +22,6 @@ void	init_data_executer(void)
 
 void	get_linked_list_builtins(t_commands *cmd)
 {
-
 	int	i;
 
 	i = -1;

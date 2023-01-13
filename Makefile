@@ -51,6 +51,7 @@ BUILTINS			=	echo.c										\
 						cd.c										\
 						export_handle_errors.c						\
 						unset.c										\
+						unset_handle_errors.c						\
 						exit.c
 
 EXECUTER			=	child_process.c								\

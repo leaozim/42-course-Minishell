@@ -39,13 +39,13 @@ void	increment_the_node_while_there_are_n(t_list **node, int *qtt_n)
 int	print_echo_node(t_list **node, int qtt_n)
 {
 	char	*next_cmd;
-	int			i;
+	int		i;
 	t_list	*node_tks;
 
 	i = 0;
 	while ((*node)->next)
 	{
-		next_cmd = (char*)(*node)->next->content;
+		next_cmd = (char *)(*node)->next->content;
 		if (g_ms.size_node_builtin == 2 && is_operand_n((*node)->next->content))
 			return (1);
 		printf("%s", next_cmd);
