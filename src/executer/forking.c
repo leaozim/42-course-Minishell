@@ -17,7 +17,6 @@ void	check_fork(int i, t_list *node)
 			destroy_minishell();
 			exit(EXIT_FAILURE);
 		}
-		dup_redirection(node);
 		child_process_check(node, i);
 	}
 }
