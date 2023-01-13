@@ -86,10 +86,7 @@ void	expander(void)
 			if (prev)
 				prev->next = next;
 			else
-			{
-				printf(BLUE"%p\n"RESET, next);
 				g_ms.tks = next;
-			}
 			destroy_t_tokens(node);
 			free(temp);
 			node = next;

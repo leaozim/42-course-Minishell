@@ -8,6 +8,7 @@ t_bool	is_cmd_executable(t_commands *cmd)
 		if (access(cmd->path, F_OK | X_OK) == 0)
 			return (TRUE);
 	}
+	free(cmd->path);
 	return (FALSE);
 }
 

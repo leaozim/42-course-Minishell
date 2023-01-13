@@ -51,7 +51,9 @@ void	child_process_check(t_list *node, int i)
 	if (check_path((t_commands *)node->content) == FALSE)
 	{
 		g_ms.exit_status = COMMAND_NOT_FOUND;
+		ft_lstclear(&g_ms.env, free);
 		free_cmd_data();
+		destroy_minishell();
 		exit(g_ms.exit_status);
 	}
 	if (g_ms.num_pipes > 0)

@@ -19,7 +19,6 @@ void	repl_minshell(void)
 		expander();
 		if (!g_ms.tks || parser() == 1)
 		{
-			// ft_lstclear(&g_ms.env, free);
 			destroy_minishell();
 			rl_redisplay();
 			continue ;

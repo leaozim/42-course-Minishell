@@ -13,9 +13,7 @@ void	wait_status(void)
 		if (WIFEXITED(g_ms.exit_status))
 			g_ms.exit_status = WEXITSTATUS(g_ms.exit_status);
 		if (g_ms.exit_status != 0)
-		{
 			msg_error_cmd_not_found(g_ms.exit_status, cmd);
-		}
 		i++;
 	}
 }

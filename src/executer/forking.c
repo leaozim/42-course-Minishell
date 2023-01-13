@@ -15,7 +15,7 @@ void	check_fork(int i, t_list *node)
 		if (infd == -1 || outfd == -1)
 		{
 			free_cmd_data();
-			// destroy_minishell();
+			destroy_minishell(); //>>
 			exit(EXIT_FAILURE);
 		}
 		child_process_check(node, i);
