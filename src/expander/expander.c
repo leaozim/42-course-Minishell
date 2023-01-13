@@ -51,7 +51,7 @@ char	*minishell_expansion(char *token)
 {
 	char	*str;
 
-	if (!ft_strncmp(token, "$?", 2))
+	if (!ft_strcmp(token, "$?"))
 		return (ft_itoa(g_ms.exit_status));
 	str = cases_that_are_not_expansible(token);
 	if (str != NULL)
