@@ -107,7 +107,7 @@ void			cmd_clear(void);
 \* -----------------------------------------------------------------------*/
 
 //child_process.c
-void			child_dup_redirection(int i);
+void			child_dup_redirection(t_list *node, int i); //refatorar
 void			child_process_check(t_list *node, int i);
 void			child_process_execution(t_list *node);
 

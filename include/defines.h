@@ -7,7 +7,7 @@
 # define COMMAND_NOT_FOUND 127
 
 # define ARROW "> "
-# define PROMPT "🔥 MiniHELL $ "
+# define PROMPT "MiniHELL $"
 # define TMP_FILE	"./minishell_temp_file"
 # define TOKEN_COUNT 17
 # define EQUAL 61

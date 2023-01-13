@@ -4,7 +4,7 @@ void	init_fd_data(t_commands *cmd)
 {
 	cmd->infd = -6;
 	cmd->outfd = -6;
-	cmd->error_file = FALSE;
+	// cmd->error_file = FALSE;
 	cmd->rdc_out_app = FALSE;
 	cmd->rdc_out = FALSE;
 	cmd->rdc_in = FALSE;

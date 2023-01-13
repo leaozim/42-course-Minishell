@@ -1,10 +1,20 @@
 #include "../../include/minishell.h"
 
+void	close_fds(void)
+{
+	int	i;
+
+	i = 3;
+	while (!close(i))
+		i++;
+}
+
 void	executer(void)
 {
 	init_data_executer();
 	forking();
 	close_pipes();
+	close_fds();
 	wait_status();
 	free_cmd_data();
 }
