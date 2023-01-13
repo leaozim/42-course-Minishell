@@ -84,7 +84,7 @@ t_bool			error_invalid_identifier(char **next, t_list **node, char *cmd);
 t_bool			check_error_invalid_identifier(char *token);
 void			ft_lstdelone_array(t_list **lst);
 void			ft_lstclear_array(t_list **lst);
-t_bool			is_builtins(void);
+t_bool			is_builtins(t_list *node);
 void			execute_builtins(t_list *node);
 // t_bool			is_builtins(t_list *node);
 // int				builtin_cd(void);

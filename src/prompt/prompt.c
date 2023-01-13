@@ -4,7 +4,7 @@ int	check_prompt(char *line)
 {
 	if (line == NULL)
 	{
-		ft_putstr_fd("exit\n", STDERR_FILENO);
+		// ft_putstr_fd("exit\n", STDERR_FILENO);
 		ft_lstclear(&g_ms.env, free);
 		free(line);
 		exit(EXIT_SUCCESS);

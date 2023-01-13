@@ -13,14 +13,12 @@ int	get_size_node(t_list *node)
 	return(size);
 }
 
-t_bool	is_builtins()
+t_bool	is_builtins(t_list *node)
 {
-	t_list		*node;
 	t_list		*cmd_builtins;
 	char		*cmd;
 
-	node = g_ms.cmd_table;
-	cmd_builtins = (((t_commands *)node->content)->builtins_cmd_list);	
+	cmd_builtins = (((t_commands *)node->content)->builtins_cmd_list);
 	cmd = cmd_builtins->content;
 	if (!ft_strcmp("cd",cmd))
 		return (TRUE);

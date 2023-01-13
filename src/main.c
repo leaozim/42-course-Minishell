@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 	init_minishell(envp);
 	handle_signal();
 	repl_minshell();
-	return (EXIT_SUCCESS);
+	return (g_ms.exit_status);
 }
 
 void	print_tokens(void)
