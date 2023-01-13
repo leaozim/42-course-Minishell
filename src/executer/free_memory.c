@@ -16,5 +16,6 @@ void	destroy_t_commands(void *cmds)
 	free(cmd->path);
 	free(cmd->envp);
 	free_ptrs(cmd->envp_path);
+	ft_lstclear(&cmd->builtins_cmd_list, NULL);
 	free(cmd);
 }

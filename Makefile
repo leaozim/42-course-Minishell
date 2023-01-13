@@ -16,7 +16,7 @@ SRC					=	main.c										\
 						signals.c									\
 						change_colors.c								\
 						$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)	\
-						$(BUILTINS) $(EXECUTER)
+						$(BUILTINS) $(EXECUTER) $(COMMANDS)
 
 PROMPT				=	prompt.c
 
@@ -36,6 +36,13 @@ PARSER 				=	parser.c 									\
 						error_parser.c								\
 						handle_quotes.c
 
+						
+COMMANDS			=	cmd_operations.c							\
+						init_data_executer.c						\
+						get_cmd_data.c								\
+						open_files.c
+
+
 BUILTINS			=	echo.c										\
 						is_builtins.c								\
 						env.c										\
@@ -44,23 +51,20 @@ BUILTINS			=	echo.c										\
 						cd.c										\
 						export_handle_errors.c						\
 						unset.c										\
+						unset_handle_errors.c						\
 						exit.c
 
 EXECUTER			=	child_process.c								\
 						close_pipes.c								\
-						cmd_operations.c							\
 						error_executer.c							\
 						executer.c									\
 						forking.c									\
 						free_memory.c								\
-						get_cmd_data.c								\
-						init_data_executer.c						\
 						init_pipe_data.c							\
-						open_files.c								\
 						check_path.c								\
 						wait_status.c
 
-DIRS				=	. lexer prompt expander parser builtins executer
+DIRS				=	. lexer prompt expander parser builtins executer commands
 IFLAGS				=	-I $(HEADER_PATH)
 LDFLAGS				=	-L$(LIBFT_PATH) -lft
 CFLAGS				=	-Wall -Wextra -Werror

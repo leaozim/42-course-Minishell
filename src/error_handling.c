@@ -4,7 +4,8 @@ void	check_arguments(int argc)
 {
 	if (argc > 1)
 	{
-		ft_putstr_fd("Minishell: ERROR: Argument list too long\n", STDERR_FILENO);
+		ft_putstr_fd("Minishell: ", STDERR_FILENO);
+		ft_putstr_fd("ERROR: Argument list too long\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 }

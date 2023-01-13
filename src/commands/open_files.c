@@ -4,27 +4,21 @@ void	open_infile(char *file_tks, int flags, int *infd, t_bool *error)
 {
 	*infd = open(file_tks, flags);
 	if (*infd == -1)
-	{
-		printf(GREEN"in: %d\n"RESET, *infd);
 		msg_error_open_file(file_tks, error);
-	}
 }
 
 void	open_outfile(char *file_tks, int flags, int *outfd, t_bool *error)
 {
 	*outfd = open(file_tks, flags, 0644);
 	if (*outfd == -1)
-		{
-		printf(GREEN"out: %d\n"RESET, *outfd);
 		msg_error_open_file(file_tks, error);
-	}
 }
 
 void	open_files(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
 {	
-	int input_flag;
-	int output_flags;
-	int append_flags;
+	int	input_flag;
+	int	output_flags;
+	int	append_flags;
 
 	input_flag = O_RDONLY;
 	output_flags = O_CREAT | O_WRONLY | O_TRUNC;
@@ -39,7 +33,7 @@ void	open_files(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
 		create_heredoc(tks->token, ifd, &cmd->error_file);
 }
 
-void	check_redirectors(t_commands *cmd, int	id_token)
+void	check_redirectors(t_commands *cmd, int id_token)
 {	
 	if (id_token == FILE_IN)
 		cmd->rdc_in = TRUE;

@@ -63,6 +63,5 @@ int	parser(void)
 	if (error_syntaxy_metachars(g_ms.tks, g_ms.len_tokens))
 		return (1);
 	reidentify_some_tokens(g_ms.tks);
-	// check_open_files(g_ms.tks, &g_ms.infd, &g_ms.outfd);
 	return (0);
 }

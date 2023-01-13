@@ -33,7 +33,6 @@ int				get_size_node(t_list *node);
 
 void			create_tokens(void);
 char			*add_marker(char *line);
-// char			*add_marker(char *line, int old_vle, int new_vle);
 char			*add_chrs_in_specific_position(char *line, int index, char characters);
 void			replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 int				count_specific_tokens(char *str);
@@ -94,7 +93,9 @@ void			builtin_pwd(void);
 void			builtin_exit(t_list *node);
 int				builtin_echo(t_list *node);
 int				builtin_export(t_list *node);
-int	    		builtin_unset(t_list *node);
+int				builtin_unset(t_list *node);
+t_bool			unset_error_identifier(char **next, t_list **node, char *cmd);
+t_bool			check_unset_chr_valid_name(char *token);
 void			msg_error_not_a_valid_identifier(char *token, char *cmd);
 int				count_quotes_pair(char	*str, char c, int *i);
 int				split_count_words(char *str, char c);
