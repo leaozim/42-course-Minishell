@@ -49,7 +49,6 @@ void	execute_builtins(t_list *node)
 	cmd_builtins = (((t_commands *)node->content)->builtins_cmd_list);
 	g_ms.size_node_builtin = get_size_node(cmd_builtins);
 	cmd = (char *)cmd_builtins->content;
-	printf(YELLOW"cmd builtins = %s\n"RESET, (char *)cmd_builtins->content);
 	if (!ft_strcmp("cd",cmd))
 		(builtin_cd(cmd_builtins));
 	else if (!ft_strcmp("echo", cmd))

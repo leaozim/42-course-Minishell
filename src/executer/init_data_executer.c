@@ -20,6 +20,17 @@ void	init_data_executer(void)
 	get_cmd_data();
 }
 
+void	get_linked_list_builtins(t_commands *cmd)
+{
+
+	int	i;
+
+	i = -1;
+	while (cmd->cmd_list[++i])
+		ft_lstadd_back(&cmd->builtins_cmd_list,
+			ft_lstnew(cmd->cmd_list[i]));
+}
+
 void	get_cmd_data(void)
 {
 	t_list		*node;
@@ -34,6 +45,7 @@ void	get_cmd_data(void)
 		get_envp(cmd);
 		get_envp_path(cmd);
 		get_path(cmd);
+		get_linked_list_builtins(cmd);
 		get_files_redirectors(node, cmd, &cmd->infd, &cmd->outfd);
 		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(cmd));
 		while (node && ((t_tokens *)node->content)->id_token != PIPE)
