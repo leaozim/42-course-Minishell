@@ -59,9 +59,6 @@ void	get_files_redirectors(t_list *tks, t_commands *cmd, int *ifd, int *ofd)
 	// int			size_pipe;
 
 	node = tks;
-	// size_pipe = g_ms.num_pipes; 
-	cmd->pipi_out = FALSE;
-	cmd->pipi_in = FALSE;
 	while (node)
 	{
 		tklist = (t_tokens *)node->content;
@@ -71,26 +68,6 @@ void	get_files_redirectors(t_list *tks, t_commands *cmd, int *ifd, int *ofd)
 			next = (t_tokens *)node->next->content;
 			check_redirectors(cmd, next->id_token);
 			open_files(next, ifd, ofd, cmd);
-		}
-		if (node->next)
-		{
-			if (((t_tokens *)node->content)->id_token == PIPE)
-			{
-				printf("aq\n");
-				cmd->pipi_out = TRUE;
-				node = node->next;
-				break ;
-			}
-			else if (((t_tokens *)node->next->content)->id_token == PIPE)
-			{
-				printf("ali\n");
-				cmd->pipi_in = TRUE;
-			}
-
-
-
-			// g_ms.cmd_data, =
-			// printf("entrou\n");
 		}
 		node = node->next;
 	}

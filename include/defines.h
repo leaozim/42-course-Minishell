@@ -69,8 +69,6 @@ typedef struct s_commands
 
 	int			infd;
 	int			outfd;
-	t_bool		pipi_in;
-	t_bool		pipi_out;
 	t_bool		rdc_in;
 	t_bool		rdc_out;
 	t_bool		rdc_out_app;
