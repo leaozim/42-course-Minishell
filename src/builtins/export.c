@@ -26,7 +26,7 @@ int	print_export(t_list **env)
 	t_list	*env_node;
 
 	env_node = *env;
-	if (g_ms.len_tokens == 1)
+	if (g_ms.size_node_builtin == 1)
 	{
 		while (env_node)
 		{

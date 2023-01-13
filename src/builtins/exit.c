@@ -35,11 +35,11 @@ void	builtin_exit(t_list *node)
 	if (node->next)
 	{
 		next = (char *)node->next->content;
-		if (g_ms.len_tokens >= 2 && !ft_is_num(next))
+		if (g_ms.size_node_builtin >= 2 && !ft_is_num(next))
 			msg_error_exit(EXIT_NO_NUMERIC, NULL);
-		else if (g_ms.len_tokens == 2 && ft_is_num(next))
+		else if (g_ms.size_node_builtin == 2 && ft_is_num(next))
 			msg_error_exit(EXIT_NUMERIC, next);
-		else if (g_ms.len_tokens > 2 && ft_is_num(next))
+		else if (g_ms.size_node_builtin > 2 && ft_is_num(next))
 			msg_error_exit(EXIT_TOO_MANY_ARGC, NULL);
 	}
 }

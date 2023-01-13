@@ -32,6 +32,9 @@ void	test_valid_join_token(void)
 	test_join_token("oi ola", (char *[]){"oi", "ola", NULL});
 	free_ms();
 
+	test_join_token("echo ola\"\"ola", (char *[]){"oi", "olaola", NULL});
+	free_ms();
+
 	test_join_token("oi ola tudo", (char *[]){"oi", "ola", "tudo", NULL});
 	free_ms();
 
@@ -165,6 +168,9 @@ void	test_valid_join_token(void)
 	test_join_token("oi ola\"tudo\"\"bem\" \"com\"", (char *[]){"oi", "olatudobem", "com", NULL});
 	free_ms();
 
-	test_join_token("oi ola\"tudo\"bem \"com\"", (char *[]){"oi", "olatudobem", "com", NULL});
+	test_join_token("oi ola\"\"tudo\"\"bem \"com\"", (char *[]){"oi", "\"olatudobem\"", "com", NULL});
 	free_ms();
+
+		// test_join_token("s \"ola\"\"tudo\"\"bem \"com\"", (char *[]){"oi", "olatudobem", "com", NULL});
+	// free_ms();
 }

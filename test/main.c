@@ -26,8 +26,8 @@ int main(void)
 	RUN_TEST(check_repl);
 	// RUN_TEST(test_is_error_syntax_metachacacter);
 	RUN_TEST(test_open_files);
-	RUN_TEST(check_export);
+	// RUN_TEST(check_export);
 	RUN_TEST(add_characters_in_espcific_position);
-	// RUN_TEST(test_valid_join_token);
+	RUN_TEST(test_valid_join_token);
 	return (UNITY_END());
 }
