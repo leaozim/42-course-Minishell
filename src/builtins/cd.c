@@ -4,15 +4,17 @@ void	msg_error_cd(void)
 {
 	ft_putstr_fd("Minishell: cd: ", STDERR_FILENO);
 	ft_putstr_fd("too many arguments\n", STDERR_FILENO);
+	g_ms.exit_status = 1;
 }
 
 void	msg_result_error(char *token)
 {
 	char	*msg_error;
 
-	msg_error = ft_strjoin("minishell: cd: ", token);
+	msg_error = ft_strjoin("Minishell: cd: ", token);
 	perror(msg_error);
 	free(msg_error);
+	g_ms.exit_status = 1;
 }
 
 int	builtin_cd(t_list *cmd_builtins)
