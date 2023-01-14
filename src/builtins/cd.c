@@ -19,14 +19,12 @@ int	builtin_cd(t_list *cmd_builtins)
 {
 	char		*home;
 	int			result;
-	int			size;
 
-	size = 0;
 	result = 0;
 	home = getenv("HOME");
-	if (size > 2)
+	if (g_ms.size_node_builtin > 2)
 		return (msg_error_cd(), 1);
-	if (size == 1)
+	if (g_ms.size_node_builtin == 1)
 		result = chdir(home);
 	if (cmd_builtins->next)
 		result = chdir((char *)cmd_builtins->next->content);

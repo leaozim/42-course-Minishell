@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+#include <unistd.h>
 
 int	is_operand_n(char *str)
 {
@@ -71,7 +72,7 @@ int	builtin_echo(t_list *cmd_builtins)
 
 	qtt_n = 0;
 	if (g_ms.size_node_builtin == 1)
-		return (printf("\n"), 0);
+		return (ft_putchar_fd('\n', STDOUT_FILENO), 0);
 	increment_the_node_while_there_are_n(&cmd_builtins, &qtt_n);
 	if (print_echo_node(&cmd_builtins, qtt_n))
 		return (0);

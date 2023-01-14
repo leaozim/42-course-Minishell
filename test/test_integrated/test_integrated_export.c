@@ -1,41 +1,41 @@
-#include "../h_test.h"
+// #include "../h_test.h"
 
-void	free_ms_export(void)
-{
-	ft_lstclear(&g_ms.tks, destroy_t_tokens);
-	free(g_ms.tab_tokens);
-	free(g_ms.tab_id);
-	ft_lstclear(&g_ms.env, free);
-}
+// void	free_ms_export(void)
+// {
+// 	ft_lstclear(&g_ms.tks, destroy_t_tokens);
+// 	free(g_ms.tab_tokens);
+// 	free(g_ms.tab_id);
+// 	ft_lstclear(&g_ms.env, free);
+// }
 
-void create_export_valid(char *prompt, char *expected)
-{
-	t_list			*node;
+// void create_export_valid(char *prompt, char *expected)
+// {
+// 	t_list			*node;
 
-	g_ms.prompt_line = ft_strdup(prompt);
-	create_tokens();
-	parser();
-	expander();
-	is_builtins();
-	node = g_ms.env;
-	node = ft_lstlast(node);
-	TEST_ASSERT_EQUAL_STRING(expected, node->content);
-	free(g_ms.prompt_line);
-}
+// 	g_ms.prompt_line = ft_strdup(prompt);
+// 	create_tokens();
+// 	parser();
+// 	expander();
+// 	is_builtins();
+// 	node = g_ms.env;
+// 	node = ft_lstlast(node);
+// 	TEST_ASSERT_EQUAL_STRING(expected, node->content);
+// 	free(g_ms.prompt_line);
+// }
 
-void create_export_invalid(char *prompt)
-{
-	g_ms.prompt_line = ft_strdup(prompt);
-	create_tokens();
-	parser();
-	expander();
-	is_builtins();
-	TEST_ASSERT_EQUAL_INT(1, g_ms.exit_status);
-	free(g_ms.prompt_line);
-}
+// void create_export_invalid(char *prompt)
+// {
+// 	g_ms.prompt_line = ft_strdup(prompt);
+// 	create_tokens();
+// 	parser();
+// 	expander();
+// 	is_builtins();
+// 	TEST_ASSERT_EQUAL_INT(1, g_ms.exit_status);
+// 	free(g_ms.prompt_line);
+// }
 
-void    check_export(void)
-{
+// void    check_export(void)
+// {
 	// create_export_valid("export OLA=", "OLA=");
 	// free_ms_export();
 
@@ -110,4 +110,4 @@ void    check_export(void)
 
 	// create_export_valid("export OLA=\"PESSOAL\"", "OLA=\"PESSOAL\"");
 	// free_ms_export();
-}
+// }

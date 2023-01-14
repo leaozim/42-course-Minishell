@@ -1,5 +1,7 @@
 #include "../../include/minishell.h"
 
+//(só pra deixar anotado)
+//se colocar algum caracter que não é metachar (tipo o ! @ # $ % & * ( ) ) o programa dá segfault
 void	close_fds(void)
 {
 	int	i;

@@ -26,7 +26,7 @@ int	print_export(t_list **env)
 	t_list	*env_node;
 
 	env_node = *env;
-	if (g_ms.len_tokens == 1)
+	if (g_ms.size_node_builtin == 1)
 	{
 		while (env_node)
 		{
@@ -81,6 +81,7 @@ int	builtin_export(t_list *node)
 	while (node->next)
 	{
 		next_cmd = (char *)node->next->content;
+		printf(BLUE"%s\n"RESET, next_cmd);
 		if (error_invalid_identifier(&next_cmd, &node, "export") == TRUE)
 			continue ;
 		if (export_update_value(&next_cmd, &node) == TRUE)

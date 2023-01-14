@@ -41,6 +41,14 @@ void	forking(void)
 			g_ms.pid_fd[i] = fork();
 			check_fork(i, node);
 		}
+		// printf("%s\n", (char *)(((t_commands *)node->content)->builtins_cmd_list)->content);
+		// if(is_builtins(node) == TRUE)
+		// {
+		// 	printf("oi\n");
+		// 	execute_builtins(node);
+		// }
+		// g_ms.pid_fd[i] = fork();
+		// check_fork(i, node);
 		node = node->next;
 		i++;
 	}
