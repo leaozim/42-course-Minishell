@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 int	is_operand_n(char *str)
 {

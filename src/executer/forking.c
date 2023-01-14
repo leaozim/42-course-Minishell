@@ -5,8 +5,8 @@ void	check_fork(int i, t_list *node)
 	int	infd;
 	int	outfd;
 
-	infd = ((t_commands *)g_ms.cmd_table->content)->infd;
-	outfd = ((t_commands *)g_ms.cmd_table->content)->outfd;
+	infd = ((t_commands *)node->content)->infd;
+	outfd = ((t_commands *)node->content)->outfd;
 	if (g_ms.pid_fd[i] < 0)
 		exit(EXIT_FAILURE);
 	if (g_ms.pid_fd[i] == 0)

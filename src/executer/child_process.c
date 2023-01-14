@@ -1,12 +1,4 @@
 #include "../../include/minishell.h"
-#include <stdio.h>
-#include <unistd.h>
-
-// void	dup_redirection(t_list *node)
-// {
-
-// 	printf("qualquer coisa\n");
-// }
 
 void	child_dup_redirection(t_list *node, int i)
 {

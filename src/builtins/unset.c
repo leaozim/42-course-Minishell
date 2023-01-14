@@ -83,5 +83,5 @@ int	builtin_unset(t_list *node)
 			continue ;
 		node = node->next;
 	}
-	return (g_ms.exit_status = 0, EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

@@ -14,7 +14,7 @@ void	open_outfile(char *file_tks, int flags, int *outfd, t_bool *error)
 		msg_error_open_file(file_tks, error);
 }
 
-void	open_files(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
+void	open_files(t_arguments *args, int *ifd, int *ofd, t_commands *cmd)
 {	
 	int	input_flag;
 	int	output_flags;
@@ -23,14 +23,14 @@ void	open_files(t_tokens *tks, int *ifd, int *ofd, t_commands *cmd)
 	input_flag = O_RDONLY;
 	output_flags = O_CREAT | O_WRONLY | O_TRUNC;
 	append_flags = O_CREAT | O_WRONLY | O_APPEND;
-	if (tks->id_token == FILE_IN)
-		open_infile(tks->token, input_flag, ifd, &cmd->error_file);
-	if (tks->id_token == FILE_OUT && cmd->error_file == FALSE)
-		open_outfile(tks->token, output_flags, ofd, &cmd->error_file);
-	if (tks->id_token == FILE_APPEND && cmd->error_file == FALSE)
-		open_outfile(tks->token, append_flags, ofd, &cmd->error_file);
-	if (tks->id_token == DELIMITER && cmd->error_file == FALSE)
-		create_heredoc(tks->token, ifd, &cmd->error_file);
+	if (args->id_argv == FILE_IN)
+		open_infile(args->argv, input_flag, ifd, &cmd->error_file);
+	if (args->id_argv == FILE_OUT && cmd->error_file == FALSE)
+		open_outfile(args->argv, output_flags, ofd, &cmd->error_file);
+	if (args->id_argv == FILE_APPEND && cmd->error_file == FALSE)
+		open_outfile(args->argv, append_flags, ofd, &cmd->error_file);
+	if (args->id_argv == DELIMITER && cmd->error_file == FALSE)
+		create_heredoc(args->argv, ifd, &cmd->error_file);
 }
 
 void	check_redirectors(t_commands *cmd, int id_token)
@@ -45,24 +45,24 @@ void	check_redirectors(t_commands *cmd, int id_token)
 		cmd->rdc_heredoc = TRUE;
 }
 
-void	get_files_redirectors(t_list *tks, t_commands *cmd, int *ifd, int *ofd)
+void	get_files_redirectors(t_commands *cmd, int *ifd, int *ofd)
 {
 	t_list		*node;
-	t_tokens	*tklist;
-	t_tokens	*next;
+	t_arguments	*args;
+	t_arguments	*next;
 
-	node = tks;
+	node = cmd->argv_list;
 	while (node)
 	{
-		tklist = (t_tokens *)node->content;
-		if (is_metachars(tklist->id_token) && tklist->id_token != PIPE && \
+		args = (t_arguments *)node->content;
+		if (is_metachars(args->id_argv) && args->id_argv != PIPE && \
 			node->next)
 		{
-			next = (t_tokens *)node->next->content;
-			check_redirectors(cmd, next->id_token);
+			next = (t_arguments *)node->next->content;
+			check_redirectors(cmd, next->id_argv);
 			open_files(next, ifd, ofd, cmd);
 		}
-		if (tklist->id_token == PIPE)
+		if (args->id_argv == PIPE)
 			break ;
 		node = node->next;
 	}

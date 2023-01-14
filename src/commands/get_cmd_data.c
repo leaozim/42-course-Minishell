@@ -77,3 +77,28 @@ void	get_cmds(t_commands *cmd, t_list *node)
 	}
 	cmd->cmd_list[i] = NULL;
 }
+
+void	get_argv(t_commands *cmd, t_list *node)
+{
+	int	count;
+	int	i;
+
+	i = 0;
+	count = count_tokens_before_pipe();
+	cmd->argv = ft_calloc(count + 1, sizeof(char *));
+	cmd->id = ft_calloc(count, sizeof(int));
+	while (node)
+	{
+		cmd->token_list = (t_tokens *)node->content;
+		if (cmd->token_list->id_token == PIPE)
+		{
+			node = node->next;
+			break ;
+		}
+		cmd->argv[i] = cmd->token_list->token;
+		cmd->id[i] = cmd->token_list->id_token;
+		node = node->next;
+		i++;
+	}
+	cmd->argv[i] = NULL;
+}

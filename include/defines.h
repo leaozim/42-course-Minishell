@@ -50,6 +50,12 @@ typedef enum e_bool
 // 	// pathname
 // }	t_commands;
 
+typedef struct s_arguments
+{
+	char		*argv;
+	int			id_argv;
+}	t_arguments;
+
 typedef struct s_tokens
 {
 	char	*token;
@@ -67,6 +73,10 @@ typedef struct s_commands
 	char		*path;
 	int			pid_fd;
 	t_list		*builtins_cmd_list;
+	t_list		*argv_list;
+	t_arguments	*arguments;
+	char		**argv;
+	int			*id;
 
 	int			infd;
 	int			outfd;
@@ -75,7 +85,6 @@ typedef struct s_commands
 	t_bool		rdc_out_app;
 	t_bool		rdc_heredoc;
 	t_bool		error_file;
-	char		**argv;
 	char		*executable_path; 	//
 	char		**path_envp;		//
 	char		**tks;
