@@ -62,6 +62,8 @@ void	get_files_redirectors(t_list *tks, t_commands *cmd, int *ifd, int *ofd)
 			check_redirectors(cmd, next->id_token);
 			open_files(next, ifd, ofd, cmd);
 		}
+		if (tklist->id_token == PIPE)
+			break ;
 		node = node->next;
 	}
 }

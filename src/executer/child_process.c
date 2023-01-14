@@ -12,22 +12,9 @@ void	child_dup_redirection(t_list *node, int i)
 {
 	int	infd;
 	int	outfd;
-	// int	rdc_out;
-	// int	rdc_in;
 
 	infd = ((t_commands *)node->content)->infd;
 	outfd = ((t_commands *)node->content)->outfd;
-
-	// rdc_out = ((t_commands *)node->content)->rdc_out;
-	// rdc_in = ((t_commands *)node->content)->rdc_in;
-
-	// int fd1;
-	// (void)i;
-	// fd1 = open("2", O_CREAT | O_WRONLY | O_APPEND, 0644);
-
-	// dup2(fd1, STDOUT_FILENO);
-	// printf("\n");
-
 	if (i == 0)
 	{
 		dup2(g_ms.array_fd[i][1], STDOUT_FILENO);
@@ -41,10 +28,9 @@ void	child_dup_redirection(t_list *node, int i)
 	{
 		dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
 	}
-
-	if (infd > 2)
+	if (infd > 0)
 		dup2(infd, STDIN_FILENO);
-	if (outfd > 2)
+	if (outfd > 0)
 		dup2(outfd, STDOUT_FILENO);
 }
 
