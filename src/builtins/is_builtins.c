@@ -63,4 +63,8 @@ void	execute_builtins(t_list *node)
 		(builtin_unset(cmd_builtins->next));
 	else if (!ft_strcmp("color", cmd))
 		bash_change_colors(cmd_builtins);
+	free_cmd_data();
+	destroy_minishell();
+	ft_lstclear(&g_ms.env, free);
+	exit(g_ms.exit_status);
 }

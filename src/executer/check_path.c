@@ -12,8 +12,10 @@ t_bool	is_cmd_executable(t_commands *cmd)
 	return (FALSE);
 }
 
-t_bool	check_path(t_commands *cmd)
+t_bool	check_path(t_commands *cmd, t_list *node)
 {
+	if (is_builtins(node) == TRUE)
+		return (TRUE);
 	if (is_cmd_executable(cmd) == TRUE)
 		return (TRUE);
 	else if (get_path(cmd) == TRUE)

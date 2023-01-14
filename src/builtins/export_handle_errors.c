@@ -40,7 +40,6 @@ t_bool	error_invalid_identifier(char **next, t_list **node, char *cmd)
 	if (check_error_invalid_identifier(*next) == TRUE)
 	{
 		msg_error_not_a_valid_identifier(*next, cmd);
-		g_ms.exit_status = 1;
 		(*node) = (*node)->next;
 		return (TRUE);
 	}

@@ -122,7 +122,7 @@ int				count_tokens_before_pipe(void);
 int				count_id_token_before_pipe(int id, t_list *node);
 int				count_id_token(int id);
 t_bool			is_cmd_executable(t_commands *cmd);
-t_bool			check_path(t_commands *cmd);
+t_bool			check_path(t_commands *cmd, t_list *node);
 int				print_array(char **array);
 
 //error_executer.c

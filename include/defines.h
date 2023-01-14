@@ -2,6 +2,7 @@
 # define DEFINES_H
 
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
 # define ARGUMENT_LIST_TOO_LONG 7
 # define COMMAND_NOT_FOUND 127

@@ -16,7 +16,6 @@ void	executer(void)
 	init_data_executer();
 	forking();
 	close_pipes();
-	close_fds();
 	wait_status();
 	free_cmd_data();
 }

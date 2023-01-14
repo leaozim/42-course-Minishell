@@ -77,11 +77,10 @@ int	builtin_export(t_list *node)
 	char	*next_cmd;
 
 	if (print_export(&g_ms.env) == 1)
-		return (g_ms.exit_status = 0, EXIT_SUCCESS);
+		return (0);
 	while (node->next)
 	{
 		next_cmd = (char *)node->next->content;
-		printf(BLUE"%s\n"RESET, next_cmd);
 		if (error_invalid_identifier(&next_cmd, &node, "export") == TRUE)
 			continue ;
 		if (export_update_value(&next_cmd, &node) == TRUE)
@@ -89,5 +88,5 @@ int	builtin_export(t_list *node)
 		ft_lstadd_back(&g_ms.env, ft_lstnew(ft_strdup(next_cmd)));
 		node = node->next;
 	}
-	return (g_ms.exit_status = 0, EXIT_SUCCESS);
+	return (0);
 }

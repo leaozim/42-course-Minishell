@@ -32,24 +32,9 @@ void	forking(void)
 	init_pipe_values();
 	while (node)
 	{
-		if (is_builtins(node) == TRUE)
-		{
-			execute_builtins(node);
-		}
-		else
-		{
-			g_ms.pid_fd[i] = fork();
-			check_fork(i, node);
-		}
-		// printf("%s\n", (char *)(((t_commands *)node->content)->builtins_cmd_list)->content);
-		// if(is_builtins(node) == TRUE)
-		// {
-		// 	printf("oi\n");
-		// 	execute_builtins(node);
-		// }
-		// g_ms.pid_fd[i] = fork();
-		// check_fork(i, node);
-		node = node->next;
+		g_ms.pid_fd[i] = fork();
+		check_fork(i, node);
 		i++;
+		node = node->next;
 	}
 }

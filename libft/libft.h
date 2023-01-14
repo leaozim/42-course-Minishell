@@ -23,21 +23,22 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-int		ft_is_num(char *nbr);
-int		ft_isalpha(int c);
-int		ft_isalpha_underscore(int c);
-int		ft_isdigit(int c);
-int		ft_isalnum(int c);
-int		ft_isascii(int c);
-int		ft_isprint(int c);
-int		ft_isops(int c);
-int		ft_toupper(int c);
-int		ft_tolower(int c);
-double	ft_atof(const char *str);
+int			ft_is_num(char *nbr);
+int			ft_isalpha(int c);
+int			ft_isalpha_underscore(int c);
+int			ft_isdigit(int c);
+int 		ft_isspace(char c);
+int			ft_isalnum(int c);
+int			ft_isascii(int c);
+int			ft_isprint(int c);
+int			ft_isops(int c);
+int			ft_toupper(int c);
+int			ft_tolower(int c);
+double		ft_atof(const char *str);
 
-size_t	ft_strlen(const char *s);
-size_t	ft_intarray_len(int *array, int terminator);
-void	free_char_array_memory(char **my_array);
+size_t		ft_strlen(const char *s);
+size_t		ft_intarray_len(int *array, int terminator);
+void		free_char_array_memory(char **my_array);
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
@@ -79,6 +80,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_print_array(char **array);
+long long int	ft_checked_atoll(const char *nptr, int *invalid);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new_list);

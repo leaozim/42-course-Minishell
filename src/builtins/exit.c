@@ -2,6 +2,10 @@
 
 void	msg_error_exit(int id, char *token)
 {
+	long long int	code;
+	int		invalid;
+
+	invalid = 0;
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	if (id == EXIT_TOO_MANY_ARGC)
 	{
@@ -20,9 +24,10 @@ void	msg_error_exit(int id, char *token)
 			g_ms.exit_status = 2;
 		}
 		else if (id == EXIT_NUMERIC)
-			g_ms.exit_status = ft_atoi(token);
+			code = ft_checked_atoll(token, &invalid);
 		destroy_minishell();
-		exit(0);
+		g_ms.exit_status = code % 256LL;
+		exit((g_ms.exit_status));
 	}
 }
 
