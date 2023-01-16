@@ -18,14 +18,12 @@ int	count_id_token_before_pipe(int id, t_list *node)
 	return (id_count);
 }
 
-int	count_tokens_before_pipe(void)
+int	count_tokens_before_pipe(t_list *node)
 {
 	t_tokens	*next;
-	t_list		*node;
 	int			count;
 
 	count = 0;
-	node = g_ms.tks;
 	while (node)
 	{
 		next = (t_tokens *)node->content;

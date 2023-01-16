@@ -23,7 +23,7 @@ void	open_files(t_arguments *args, int *ifd, int *ofd, t_commands *cmd)
 	input_flag = O_RDONLY;
 	output_flags = O_CREAT | O_WRONLY | O_TRUNC;
 	append_flags = O_CREAT | O_WRONLY | O_APPEND;
-	if (args->id_argv == FILE_IN)
+	if (args->id_argv == FILE_IN && cmd->error_file == FALSE)
 		open_infile(args->argv, input_flag, ifd, &cmd->error_file);
 	if (args->id_argv == FILE_OUT && cmd->error_file == FALSE)
 		open_outfile(args->argv, output_flags, ofd, &cmd->error_file);

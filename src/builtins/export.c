@@ -77,7 +77,7 @@ int	builtin_export(t_list *node)
 	char	*next_cmd;
 
 	if (print_export(&g_ms.env) == 1)
-		return (0);
+		return (g_ms.exit_status = 0, 0);
 	while (node->next)
 	{
 		next_cmd = (char *)node->next->content;

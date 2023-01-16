@@ -84,7 +84,7 @@ void	get_argv(t_commands *cmd, t_list *node)
 	int	i;
 
 	i = 0;
-	count = count_tokens_before_pipe();
+	count = count_tokens_before_pipe(node);
 	cmd->argv = ft_calloc(count + 1, sizeof(char *));
 	cmd->id = ft_calloc(count, sizeof(int));
 	while (node)

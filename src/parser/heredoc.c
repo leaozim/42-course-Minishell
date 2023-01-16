@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+#include <fcntl.h>
 
 void	destroy_heredoc(void)
 {
@@ -7,6 +8,7 @@ void	destroy_heredoc(void)
 	close(g_ms.fd_heredoc);
 	free(g_ms.tab_id);
 	ft_lstclear(&g_ms.env, free);
+	g_ms.exit_status = 0;
 }
 
 void	break_heredoc(int fd, int fd_file_temp)
@@ -21,7 +23,7 @@ int	open_heredoc_file(t_bool *error)
 {
 	int	fd;
 
-	fd = open(TMP_FILE, O_CREAT | O_RDWR | O_TRUNC, 0664);
+	fd = open(TMP_FILE, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd == -1)
 		msg_error_open_file(TMP_FILE, error);
 	return (fd);
@@ -71,11 +73,12 @@ void	create_heredoc(char *delimiter, int *fd, t_bool *error)
 		ft_putstr_fd("fork: creating error\n", STDERR_FILENO);
 	if (pid == 0)
 		write_heredoc_file(delimiter, &fd_file_temp);
-	waitpid (pid, &status, 0);
+	waitpid(pid, &status, 0);
 	*fd = open(TMP_FILE, O_RDONLY);
+	if (*fd != -1)
+		g_ms.exit_status = 0;
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 		return (break_heredoc(*fd, fd_file_temp));
-	close(*fd);
-	close (fd_file_temp);
-	unlink (TMP_FILE);
+	close(fd_file_temp);
+	unlink(TMP_FILE);
 }
