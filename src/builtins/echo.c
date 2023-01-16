@@ -36,7 +36,7 @@ void	increment_the_node_while_there_are_n(t_list **node, int *qtt_n)
 	}
 }
 
-int	print_echo_node(t_list **node, int qtt_n)
+int	print_echo_node(t_list **node, t_list *node_aux,  int qtt_n)
 {
 	char	*next_cmd;
 	int		i;
@@ -54,11 +54,10 @@ int	print_echo_node(t_list **node, int qtt_n)
 		(*node) = (*node)->next;
 		i++;
 	}
-	node_tks = g_ms.cmd_table;
-	*node = (((t_commands *)node_tks->content)->builtins_cmd_list);
-	if ((*node)->next)
+	node_tks = node_aux;
+	if (node_tks->next)
 	{
-		next_cmd = (*node)->next->content;
+		next_cmd = node_tks->next->content;
 		if (!is_operand_n(next_cmd))
 			printf("\n");
 	}
@@ -73,7 +72,7 @@ int	builtin_echo(t_list *cmd_builtins)
 	if (g_ms.size_node_builtin == 1)
 		return (ft_putchar_fd('\n', STDOUT_FILENO), 0);
 	increment_the_node_while_there_are_n(&cmd_builtins, &qtt_n);
-	if (print_echo_node(&cmd_builtins, qtt_n))
+	if (print_echo_node(&cmd_builtins, cmd_builtins, qtt_n))
 		return (0);
 	return (0);
 }

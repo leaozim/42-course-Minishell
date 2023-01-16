@@ -43,10 +43,12 @@ int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 		tklist = (t_tokens *)node->content;
 		if (!ft_strcmp("|", tklist->token) && i == 0)
 			return (msg_error_invalid_synax(tklist->token), 1);
-		if (is_metachars(tklist->id_token) && node->next == NULL)
+		if (is_metachars(tklist->id_token) && node->next == NULL && tklist->id_token != PIPE)
 			return (msg_error_invalid_synax("newline"), 1);
 		if (is_single_metachar(tklist->token, tklist->id_token, len_tokens))
 			return (1);
+		if (tklist->id_token == PIPE && !node->next)
+			return (msg_error_invalid_synax(tklist->token), 1);
 		if (node->next)
 			next = (t_tokens *)node->next->content;
 		if (node->next && consecutive_metachars(tklist->token, next->token, \
