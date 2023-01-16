@@ -21,5 +21,6 @@ void	msg_error_heredoc(void)
 {
 	ft_putstr_fd("Minishell: ", STDERR_FILENO);
 	ft_putstr_fd("warning: ", STDERR_FILENO);
-	ft_putstr_fd("here-document delimited by end-of-file", STDERR_FILENO);
+	ft_putstr_fd("here-document delimited by end-of-file\n", STDERR_FILENO);
+	g_ms.exit_status = 0;
 }
