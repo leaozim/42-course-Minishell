@@ -71,9 +71,12 @@ int	builtin_echo(t_list *cmd_builtins)
 
 	qtt_n = 0;
 	if (g_ms.size_node_builtin == 1)
-		return (ft_putchar_fd('\n', STDOUT_FILENO), 0);
+	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		return (g_ms.exit_status = 0, 0);
+	}
 	increment_the_node_while_there_are_n(&cmd_builtins, &qtt_n);
 	if (print_echo_node(&cmd_builtins, qtt_n))
-		return (0);
-	return (0);
+		return (g_ms.exit_status = 0, 0);
+	return (g_ms.exit_status = 0, 0);
 }
