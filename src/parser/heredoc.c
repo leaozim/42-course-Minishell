@@ -71,11 +71,11 @@ void	create_heredoc(char *delimiter, int *fd, t_bool *error)
 		ft_putstr_fd("fork: creating error\n", STDERR_FILENO);
 	if (pid == 0)
 		write_heredoc_file(delimiter, &fd_file_temp);
-	waitpid (pid, &status, 0);
+	waitpid(pid, &status, 0);
 	*fd = open(TMP_FILE, O_RDONLY);
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 		return (break_heredoc(*fd, fd_file_temp));
-	close(*fd);
-	close (fd_file_temp);
-	unlink (TMP_FILE);
+	// close(*fd);
+	close(fd_file_temp);
+	unlink(TMP_FILE);
 }

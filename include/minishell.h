@@ -118,7 +118,7 @@ void			close_fds(void);
 
 //cmd_operations.c
 void			get_argv(t_commands *cmd, t_list *node);
-int				count_tokens_before_pipe(void);
+int				count_tokens_before_pipe(t_list *node);
 int				count_id_token_before_pipe(int id, t_list *node);
 int				count_id_token(int id);
 t_bool			is_cmd_executable(t_commands *cmd);
