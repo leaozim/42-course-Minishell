@@ -27,6 +27,8 @@ void	child_dup_redirection(t_list *node, int i)
 		dup2(infd, STDIN_FILENO);
 	if (outfd > 0)
 		dup2(outfd, STDOUT_FILENO);
+	if (outfd == -1)
+		dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
 }
 
 void	child_process_check(t_list *node, int i)

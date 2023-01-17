@@ -32,7 +32,7 @@ void	reidentify_some_tokens(t_list *tks)
 int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 {
 	t_list		*node;
-	t_tokens	*tklist;
+	t_tokens	*tkl;
 	t_tokens	*next;
 	int			i;
 
@@ -40,17 +40,17 @@ int	error_syntaxy_metachars(t_list *tks, int len_tokens)
 	i = 0;
 	while (node)
 	{
-		tklist = (t_tokens *)node->content;
-		if (!ft_strcmp("|", tklist->token) && i == 0)
-			return (msg_error_invalid_synax(tklist->token), 1);
-		if (is_metachars(tklist->id_token) && node->next == NULL)
+		tkl = (t_tokens *)node->content;
+		if (!ft_strcmp("|", tkl->token) && i == 0)
+			return (msg_error_invalid_synax(tkl->token), 1);
+		if (is_metachars(tkl->id_token) && !node->next && tkl->id_token != PIPE)
 			return (msg_error_invalid_synax("newline"), 1);
-		if (is_single_metachar(tklist->token, tklist->id_token, len_tokens))
+		if (is_single_metachar(tkl->token, tkl->id_token, len_tokens))
 			return (1);
 		if (node->next)
 			next = (t_tokens *)node->next->content;
-		if (node->next && consecutive_metachars(tklist->token, next->token, \
-			tklist->id_token, next->id_token))
+		if (node->next && consecutive_metachars(tkl->token, next->token, \
+			tkl->id_token, next->id_token))
 			return (1);
 		i++;
 		node = node->next;

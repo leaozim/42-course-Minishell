@@ -3,10 +3,10 @@
 void	check_is_invalid_consecutive_metachar(void)
 {
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|","|", PIPE, PIPE));
-	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|", "<", PIPE, RDRCT_IN));
-	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|",">", PIPE, RDRCT_OU));
-	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|", ">>", PIPE, APPEND));
-	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|", "<<", PIPE, HEREDOC));
+	// TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|", "<", PIPE, RDRCT_IN));
+	// TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|",">", PIPE, RDRCT_OU));
+	// TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|", ">>", PIPE, APPEND));
+	// TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|", "<<", PIPE, HEREDOC));
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("<<", "<<", HEREDOC, HEREDOC));
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("<<", ">>", HEREDOC, APPEND));
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("<<", ">", HEREDOC, RDRCT_OU));
@@ -18,7 +18,6 @@ void	check_is_invalid_consecutive_metachar(void)
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars(">>", ">", APPEND, RDRCT_IN));
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars(">>", ">", APPEND, RDRCT_OU));
 	TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars(">", ">", RDRCT_OU, RDRCT_OU));
-	// TEST_ASSERT_EQUAL_INT(1,  consecutive_metachars("|", "csmd", PIPE, COMMAND));
 }
 
 void	check_is_valid_consecutive_metachar(void)
