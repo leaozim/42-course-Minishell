@@ -39,6 +39,20 @@ t_bool	is_builtins(t_list *node)
 	return (FALSE);
 }
 
+void	open_fds(t_list *node)
+{
+	int	infd;
+	int	outfd;
+
+	infd = ((t_commands *)node->content)->infd;
+	outfd = ((t_commands *)node->content)->outfd;
+
+	if (infd > 0)
+		dup2(infd, STDIN_FILENO);
+	if (outfd > 0)
+		dup2(outfd, STDOUT_FILENO);
+}
+
 void	execute_builtins(t_list *node)
 {
 	t_list		*cmd_builtins;
@@ -63,8 +77,8 @@ void	execute_builtins(t_list *node)
 		(builtin_unset(cmd_builtins->next));
 	else if (!ft_strcmp("color", cmd))
 		bash_change_colors(cmd_builtins);
+	// open_fds(node);
 	free_cmd_data();
-	destroy_minishell();
-	ft_lstclear(&g_ms.env, free);
-	exit(g_ms.exit_status);
+	// destroy_minishell();
+	// ft_lstclear(&g_ms.env, free);
 }

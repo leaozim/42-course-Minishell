@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+#include <stdlib.h>
 
 t_bool	check_unset_chr_valid_name(char *token)
 {

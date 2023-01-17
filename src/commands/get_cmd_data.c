@@ -20,6 +20,11 @@ t_bool	get_path(t_commands *cmd)
 
 	i = 0;
 	path_slash = ft_strjoin("/", cmd->cmd_list[0]);
+	if (!cmd->envp_path)
+	{
+		cmd->path = ft_strdup(path_slash);
+		return (free(path_slash), FALSE);
+	}
 	while (cmd->envp_path[i] != NULL)
 	{
 		cmd->path = ft_strjoin(cmd->envp_path[i], path_slash);

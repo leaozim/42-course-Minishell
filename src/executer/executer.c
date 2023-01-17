@@ -13,9 +13,9 @@ void	executer(void)
 {
 	init_data_executer();
 	forking();
-	close_pipes();
-	wait_status();
-	free_cmd_data();
+	// close_pipes();
+	// wait_status();
+	// free_cmd_data();
 }
 
 // print_cmds();

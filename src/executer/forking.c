@@ -28,6 +28,14 @@ void	forking(void)
 
 	i = 0;
 	node = g_ms.cmd_table;
+	if (g_ms.num_pipes == 0)
+	{
+		if (is_builtins(node) == TRUE)
+		{
+			execute_builtins(node);
+			return ;
+		}
+	}
 	fd_memory_allocate();
 	init_pipe_values();
 	while (node)
@@ -37,4 +45,7 @@ void	forking(void)
 		i++;
 		node = node->next;
 	}
+	close_pipes();
+	wait_status();
+	free_cmd_data();
 }
