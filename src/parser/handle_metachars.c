@@ -32,9 +32,6 @@ int	consecutive_metachars(char *token, char *next_token, int id, int next_id)
 int	is_single_metachar(char *token, int id, int len_tokens)
 {
 	if (is_metachars(id) && len_tokens == 1)
-	{
-		msg_error_invalid_synax(token);
-		return (1);
-	}
+		return (msg_error_invalid_synax(token), 1);
 	return (0);
 }
