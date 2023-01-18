@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstcount_nodes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 15:54:11 by etomiyos          #+#    #+#             */
-/*   Updated: 2023/01/06 16:45:36 by etomiyos         ###   ########.fr       */
+/*   Updated: 2023/01/18 10:10:43 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_lstcount_nodes(t_list *lst)
 	while (env_node != NULL)
 	{
 		count++;
-		env_node = env_node->next;	
+		env_node = env_node->next;
 	}
 	return (count);
 }

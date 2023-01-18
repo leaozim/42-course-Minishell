@@ -11,20 +11,20 @@ t_bool	is_metachars(int id_tks)
 	return (FALSE);
 }
 
-int	consecutive_metachars(char *token, char *next_token, int id, int next_id)
+int		consecutive_metachars(char *tkn, char *nxt_tkn, int id, int nxt_id)
 {
 	if (is_metachars(id))
 	{
-		if (is_metachars((next_id)) && id != PIPE)
+		if (is_metachars((nxt_id)) && id != PIPE)
 		{
 			if (id != PIPE)
-				msg_error_invalid_synax(next_token);
+				msg_error_invalid_synax(nxt_tkn);
 			else
-				msg_error_invalid_synax(token);
+				msg_error_invalid_synax(tkn);
 			return (1);
 		}
-		else if (id == PIPE && next_id == PIPE)
-			return (msg_error_invalid_synax(token), 1);
+		else if (id == PIPE && nxt_id == PIPE)
+			return (msg_error_invalid_synax(tkn), 1);
 	}
 	return (0);
 }

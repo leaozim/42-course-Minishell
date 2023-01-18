@@ -40,7 +40,8 @@ PARSER 				=	parser.c 									\
 COMMANDS			=	cmd_operations.c							\
 						init_data_executer.c						\
 						get_cmd_data.c								\
-						open_files.c
+						open_files.c								\
+						get_argv_data.c
 
 
 BUILTINS			=	echo.c										\

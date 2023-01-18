@@ -48,7 +48,8 @@ int	check_last_expansion_occurrence(char *token)
 	int	i;
 
 	i = ft_strrchr_pos(token, DOLLAR_SIGN);
-	while (ft_isalpha_underscore(token[i + 1]) || token[i + 1] == '{' || token[i + 1] == QUERY)
+	while (ft_isalpha_underscore(token[i + 1]) || \
+		token[i + 1] == '{' || token[i + 1] == QUERY)
 		i++;
 	if (token[i + 1] == '}')
 		i++;

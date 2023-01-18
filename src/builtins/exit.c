@@ -1,9 +1,32 @@
 #include "../../include/minishell.h"
 
-void	msg_error_exit(int id, char *token)
+void	exit_allony(void)
+{
+	destroy_minishell();
+	exit(EXIT_SUCCESS);
+}
+
+void	exit_no_numeric(void)
+{
+	ft_putstr_fd("Minishell: exit: ", STDERR_FILENO);
+	ft_putstr_fd("numeric argument required\n", STDERR_FILENO);
+	destroy_minishell();
+	exit(2);
+}
+
+void	exit_numeric(char *token, int invalid)
 {
 	long long int	code;
-	int		invalid;
+
+	code = ft_checked_atoll(token, &invalid);
+	destroy_minishell();
+	g_ms.exit_status = code % 256LL;
+	exit((g_ms.exit_status));
+}
+
+void	msg_error_exit(int id, char *token)
+{
+	int	invalid;
 
 	invalid = 0;
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
@@ -17,50 +40,12 @@ void	msg_error_exit(int id, char *token)
 	else
 	{
 		if (id == EXIT_ALONLY)
-		{
-			destroy_minishell();
-			exit(EXIT_SUCCESS);
-		}
+			exit_allony();
 		else if (id == EXIT_NO_NUMERIC)
-		{
-			ft_putstr_fd("Minishell: exit: ", STDERR_FILENO);
-			ft_putstr_fd("numeric argument required\n", STDERR_FILENO);
-			destroy_minishell();
-			exit(2);
-		}
+			exit_no_numeric();
 		else if (id == EXIT_NUMERIC)
-		{
-			code = ft_checked_atoll(token, &invalid);
-			destroy_minishell();
-			g_ms.exit_status = code % 256LL;
-			exit((g_ms.exit_status));
-		}
+			exit_numeric(token, invalid);
 	}
-}
-
-int    ft_islong_long(char *str)
-{
-    long long    out;
-    int            c;
-
-    if (ft_strlen(str) > 20)
-        return (0);
-    if (ft_strncmp(str, "-9223372036854775808", 21) == 0)
-        return (1);
-    out = 0;
-    if (*str == '-' || *str == '+')
-        str++;
-    while (*str)
-    {
-        if (*str < '0' || *str > '9')
-            return (0);
-        c = *str - '0';
-        if (out > (9223372036854775807 - c) / 10)
-            return (0);
-        out = out * 10 + c;
-        str++;
-    }
-    return (1);
 }
 
 void	builtin_exit(t_list *node)
@@ -72,7 +57,7 @@ void	builtin_exit(t_list *node)
 	if (node->next)
 	{
 		next = (char *)node->next->content;
-		if (g_ms.size_node_builtin >= 2 &&
+		if (g_ms.size_node_builtin >= 2 && \
 			(!ft_is_num(next) || ft_islong_long(next) == 0))
 			msg_error_exit(EXIT_NO_NUMERIC, NULL);
 		else if (g_ms.size_node_builtin == 2 && ft_is_num(next))

@@ -69,6 +69,7 @@ void	child_process_execution(t_list *node)
 	if (execve(path, cmds, envp) == -1)
 	{
 		free_cmd_data();
+		destroy_minishell();
 		exit(errno);
 	}
 }

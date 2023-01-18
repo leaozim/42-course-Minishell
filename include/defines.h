@@ -1,9 +1,9 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <unistd.h>
 # define ARGUMENT_LIST_TOO_LONG 7
 # define COMMAND_NOT_FOUND 127
 
@@ -32,23 +32,6 @@ typedef enum e_bool
 	FALSE,
 	TRUE,
 }	t_bool;
-
-// typedef struct s_commands
-// {
-// 	char	**argv;
-// 	char	**envp;
-// 	char	**path_envp;
-
-// 	// char	*word_token;
-// 	// char	*redir_token;
-// 	// char	*in;
-// 	// char	*out;
-
-// 	// is_builtin
-// 	// status
-// 	// pid
-// 	// pathname
-// }	t_commands;
 
 typedef struct s_arguments
 {
@@ -85,12 +68,10 @@ typedef struct s_commands
 	t_bool		rdc_out_app;
 	t_bool		rdc_heredoc;
 	t_bool		error_file;
-	char		*executable_path; 	//
-	char		**path_envp;		//
+	char		*executable_path;
+	char		**path_envp;
 	char		**tks;
 }	t_commands;
-
-
 
 typedef struct s_minishell
 {
@@ -115,7 +96,7 @@ typedef struct s_minishell
 	int			fd_heredoc;
 }	t_minishell;
 
-t_minishell g_ms;
+t_minishell	g_ms;
 
 enum e_tokens
 {

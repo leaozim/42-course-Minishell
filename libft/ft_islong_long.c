@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_array.c                                   :+:      :+:    :+:   */
+/*   ft_islong_long.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 14:34:35 by etomiyos          #+#    #+#             */
-/*   Updated: 2023/01/18 10:11:08 by lade-lim         ###   ########.fr       */
+/*   Created: 2023/01/18 10:08:59 by lade-lim          #+#    #+#             */
+/*   Updated: 2023/01/18 10:09:06 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_array(char **array)
+int	ft_islong_long(char *str)
 {
-	int	i;
+	long long	out;
+	int			c;
 
-	i = 0;
-	while (array[i])
+	if (ft_strlen(str) > 20)
+		return (0);
+	if (ft_strncmp(str, "-9223372036854775808", 21) == 0)
+		return (1);
+	out = 0;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str)
 	{
-		ft_putendl_fd(array[i], 1);
-		i++;
+		if (*str < '0' || *str > '9')
+			return (0);
+		c = *str - '0';
+		if (out > (9223372036854775807 - c) / 10)
+			return (0);
+		out = out * 10 + c;
+		str++;
 	}
-	ft_putchar_fd('\n', 1);
+	return (1);
 }

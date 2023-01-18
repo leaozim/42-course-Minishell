@@ -61,4 +61,8 @@ void	destroy_minishell(void)
 	free(g_ms.prompt_line);
 	free(g_ms.tab_tokens);
 	free(g_ms.tab_id);
+	free((g_ms.cmd_data).id);
+	free((g_ms.cmd_data).argv);
+	free((g_ms.cmd_data.argv_list));
+	// free_ptrs((char **)(g_ms.cmd_data).argv);
 }

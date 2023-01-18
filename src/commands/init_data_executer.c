@@ -4,7 +4,6 @@ void	init_fd_data(t_commands *cmd)
 {
 	cmd->infd = -6;
 	cmd->outfd = -6;
-	// cmd->error_file = FALSE;
 	cmd->rdc_out_app = FALSE;
 	cmd->rdc_out = FALSE;
 	cmd->rdc_in = FALSE;
@@ -18,36 +17,6 @@ void	init_data_executer(void)
 	g_ms.pid_fd = ft_calloc(g_ms.num_cmds, sizeof(int));
 	g_ms.array_fd = ft_calloc(g_ms.num_pipes, sizeof(int *));
 	get_cmd_data();
-}
-
-void	get_linked_list_builtins(t_commands *cmd)
-{
-	int	i;
-
-	i = -1;
-	while (cmd->cmd_list[++i])
-		ft_lstadd_back(&cmd->builtins_cmd_list,
-			ft_lstnew(cmd->cmd_list[i]));
-}
-
-t_arguments	*create_argv_content(char *argv, int index)
-{
-	t_arguments	*content;
-
-	content = ft_calloc(1, sizeof(t_arguments));
-	content->argv = argv;
-	content->id_argv = index;
-	return (content);
-}
-
-void	get_linked_list_argv(t_commands *cmd)
-{
-	int	i;
-
-	i = -1;
-	while (cmd->argv[++i])
-		ft_lstadd_back(&cmd->argv_list,
-			ft_lstnew(create_argv_content(cmd->argv[i], cmd->id[i])));
 }
 
 void	get_cmd_data(void)
