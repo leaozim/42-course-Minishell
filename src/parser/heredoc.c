@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <fcntl.h>
 
 void	destroy_heredoc(void)
 {
@@ -8,6 +7,7 @@ void	destroy_heredoc(void)
 	close(g_ms.fd_heredoc);
 	free(g_ms.tab_id);
 	ft_lstclear(&g_ms.env, free);
+	free_cmd_data();
 	g_ms.exit_status = 0;
 }
 
