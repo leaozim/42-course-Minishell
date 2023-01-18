@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void	check_fork(int i, t_list *node)
+void    check_fork(int i, t_list *node)
 {
 	int	infd;
 	int	outfd;
@@ -21,10 +21,10 @@ void	check_fork(int i, t_list *node)
 	}
 }
 
-void	forking(void)
+void    forking(void)
 {
-	int		i;
-	t_list	*node;
+	int        i;
+	t_list    *node;
 
 	i = 0;
 	node = g_ms.cmd_table;
@@ -33,19 +33,23 @@ void	forking(void)
 		if (is_builtins(node) == TRUE && ((t_commands *)node->content)->error_file == FALSE)
 		{
 			execute_builtins(node, ((t_commands *)node->content)->outfd);
+			free_cmd_data();
 			return ;
 		}
 	}
-	fd_memory_allocate();
-	init_pipe_values();
-	while (node)
+	if (check_len_tab(((t_commands *)node->content)->cmd_list) > 0)
 	{
-		g_ms.pid_fd[i] = fork();
-		check_fork(i, node);
-		i++;
-		node = node->next;
+		fd_memory_allocate();
+		init_pipe_values();
+		while (node)
+		{
+			g_ms.pid_fd[i] = fork();
+			check_fork(i, node);
+			i++;
+			node = node->next;
+		}
+		close_pipes();
+		wait_status();
+		free_cmd_data();
 	}
-	close_pipes();
-	wait_status();
-	free_cmd_data();
 }

@@ -4,4 +4,5 @@ void	executer(void)
 {
 	init_data_executer();
 	forking();
+	// close_pipes();
 }

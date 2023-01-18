@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 void	child_dup_redirection(t_list *node, int i)
 {
@@ -28,8 +27,8 @@ void	child_dup_redirection(t_list *node, int i)
 		dup2(infd, STDIN_FILENO);
 	if (outfd > 0)
 		dup2(outfd, STDOUT_FILENO);
-	if (outfd == -1)
-		dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
+	// if (outfd == -1)
+	// 	dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
 }
 
 void	child_process_check(t_list *node, int i)
@@ -46,11 +45,16 @@ void	child_process_check(t_list *node, int i)
 			msg_error_cmd_not_found(g_ms.exit_status, cmd);
 		free_cmd_data();
 		destroy_minishell();
+		ft_lstclear(&g_ms.env, free);
 		exit(g_ms.exit_status);
 	}
 	if (is_builtins(node) == TRUE)
 	{
 		execute_builtins(node, STDOUT_FILENO);
+		close_pipes();
+		free_cmd_data();
+		ft_lstclear(&g_ms.env, free);
+		destroy_minishell();
 		exit(g_ms.exit_status);
 	}
 	else
@@ -69,6 +73,8 @@ void	child_process_execution(t_list *node)
 	if (execve(path, cmds, envp) == -1)
 	{
 		free_cmd_data();
+		destroy_minishell();
+		ft_lstclear(&g_ms.env, free);
 		exit(errno);
 	}
 }

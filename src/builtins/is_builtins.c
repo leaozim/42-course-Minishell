@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 int	get_size_node(t_list *node)
 {
@@ -20,6 +19,8 @@ t_bool	is_builtins(t_list *node)
 	char		*cmd;
 
 	cmd_builtins = (((t_commands *)node->content)->builtins_cmd_list);
+	if (!cmd_builtins)
+		return (FALSE);
 	cmd = cmd_builtins->content;
 	if (!ft_strcmp("cd", cmd))
 		return (TRUE);
@@ -66,5 +67,4 @@ void	execute_builtins(t_list *node, int outfd)
 		(builtin_unset(cmd->builtins_cmd_list->next));
 	else if (!ft_strcmp("color", arg0))
 		bash_change_colors(cmd->builtins_cmd_list);
-	free_cmd_data();
 }

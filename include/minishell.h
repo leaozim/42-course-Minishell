@@ -114,7 +114,6 @@ void			child_process_execution(t_list *node);
 
 //close_pipes.c
 void			close_pipes(void);
-void			close_fds(void);
 
 //cmd_operations.c
 void			get_argv(t_commands *cmd, t_list *node);
