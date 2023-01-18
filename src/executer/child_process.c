@@ -7,6 +7,7 @@ void	child_dup_redirection(t_list *node, int i)
 
 	infd = ((t_commands *)node->content)->infd;
 	outfd = ((t_commands *)node->content)->outfd;
+
 	if (g_ms.num_pipes > 0)
 	{
 		if (i == 0)
@@ -50,7 +51,7 @@ void	child_process_check(t_list *node, int i)
 	}
 	if (is_builtins(node) == TRUE)
 	{
-		execute_builtins(node);
+		execute_builtins(node, ((t_commands *)node->content)->outfd);
 		exit(g_ms.exit_status);
 	}
 	else

@@ -21,5 +21,4 @@ void	close_pipes(void)
 			close(infd);
 		close(outfd);
 	}
-	close_fds();
 }

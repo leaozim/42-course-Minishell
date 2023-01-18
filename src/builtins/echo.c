@@ -36,7 +36,7 @@ void	increment_the_node_while_there_are_n(t_list **node, int *qtt_n)
 	}
 }
 
-int	print_echo_node(t_list **node, t_list *aux, int qtt_n)
+int	print_echo_node(t_list **node, t_list *aux, int qtt_n, int fd_out)
 {
 	char	*next_cmd;
 	int		i;
@@ -48,34 +48,34 @@ int	print_echo_node(t_list **node, t_list *aux, int qtt_n)
 		next_cmd = (char *)(*node)->next->content;
 		if (g_ms.size_node_builtin == 2 && is_operand_n((*node)->next->content))
 			return (1);
-		printf("%s", next_cmd);
+		ft_putstr_fd(next_cmd, fd_out);
 		if (i < g_ms.size_node_builtin - qtt_n - 2)
-			printf(" ");
+			ft_putchar_fd(SPACE, fd_out);
 		(*node) = (*node)->next;
 		i++;
 	}
 	node_cmd = aux;
 	if (node_cmd->next)
 	{
-		next_cmd = node_cmd->next->content;
+		next_cmd = node_cmd->content;
 		if (!is_operand_n(next_cmd))
-			printf("\n");
+			ft_putchar_fd('\n', fd_out);
 	}
 	return (0);
 }
 
-int	builtin_echo(t_list *cmd_builtins)
+int	builtin_echo(t_list *cmd_builtins, int fd_out)
 {
 	int			qtt_n;
 
 	qtt_n = 0;
 	if (g_ms.size_node_builtin == 1)
 	{
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		ft_putchar_fd('\n', fd_out);
 		return (g_ms.exit_status = 0, 0);
 	}
 	increment_the_node_while_there_are_n(&cmd_builtins, &qtt_n);
-	if (print_echo_node(&cmd_builtins, cmd_builtins, qtt_n))
+	if (print_echo_node(&cmd_builtins, cmd_builtins, qtt_n, fd_out))
 		return (g_ms.exit_status = 0, 0);
 	return (g_ms.exit_status = 0, 0);
 }

@@ -1,7 +1,6 @@
 #include "../../include/minishell.h"
-#include <unistd.h>
 
-void	builtin_env(void)
+void	builtin_env(int outfd)
 {
 	t_list	*env_node;
 
@@ -9,7 +8,7 @@ void	builtin_env(void)
 	while (env_node)
 	{
 		if (ft_strchr((char *)env_node->content, EQUAL) != NULL)
-			ft_putendl_fd((char *)env_node->content, STDOUT_FILENO);
+			ft_putendl_fd((char *)env_node->content, outfd);
 		env_node = env_node->next;
 	}
 }

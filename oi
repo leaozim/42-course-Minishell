@@ -1,0 +1,11 @@
+Makefile
+arquivoqualquer.txt
+include
+libft
+minishell
+minishell_tester
+obj
+oi
+readline.supp
+src
+test

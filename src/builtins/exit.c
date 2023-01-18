@@ -1,12 +1,12 @@
 #include "../../include/minishell.h"
 
-void	msg_error_exit(int id, char *token)
+void	msg_error_exit(int id, char *token, int outfd)
 {
 	long long int	code;
 	int		invalid;
 
 	invalid = 0;
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	ft_putstr_fd("exit\n", outfd);
 	if (id == EXIT_TOO_MANY_ARGC)
 	{
 		ft_putstr_fd("Minishell: exit: ", STDERR_FILENO);
@@ -63,21 +63,21 @@ int    ft_islong_long(char *str)
     return (1);
 }
 
-void	builtin_exit(t_list *node)
+void	builtin_exit(t_list *node, int outfd)
 {
 	char	*next;
 
 	if (g_ms.size_node_builtin == 1)
-		msg_error_exit(EXIT_ALONLY, NULL);
+		msg_error_exit(EXIT_ALONLY, NULL, outfd);
 	if (node->next)
 	{
 		next = (char *)node->next->content;
 		if (g_ms.size_node_builtin >= 2 &&
 			(!ft_is_num(next) || ft_islong_long(next) == 0))
-			msg_error_exit(EXIT_NO_NUMERIC, NULL);
+			msg_error_exit(EXIT_NO_NUMERIC, NULL, outfd);
 		else if (g_ms.size_node_builtin == 2 && ft_is_num(next))
-			msg_error_exit(EXIT_NUMERIC, next);
+			msg_error_exit(EXIT_NUMERIC, next, outfd);
 		else if (g_ms.size_node_builtin > 2 && ft_is_num(next))
-			msg_error_exit(EXIT_TOO_MANY_ARGC, NULL);
+			msg_error_exit(EXIT_TOO_MANY_ARGC, NULL, outfd);
 	}
 }

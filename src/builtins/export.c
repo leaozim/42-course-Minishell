@@ -1,27 +1,27 @@
 #include "../../include/minishell.h"
 
-void	msg_print_export(t_list **env_node)
+void	msg_print_export(t_list **env_node, int outfd)
 {
 	char	*aux;
 	char	*str;
 
-	ft_putstr_fd("declare -x ", STDOUT_FILENO);
+	ft_putstr_fd("declare -x ", outfd);
 	str = (char *)(*env_node)->content;
 	if (ft_strchr(str, EQUAL) != NULL)
 	{	
 		aux = ft_stop_chr(str, EQUAL);
-		ft_putstr_fd(aux, STDOUT_FILENO);
-		ft_putchar_fd(DQUOTES, STDOUT_FILENO);
-		ft_putstr_fd(ft_strchr(str, EQUAL) + 1, STDOUT_FILENO);
-		ft_putchar_fd(DQUOTES, STDOUT_FILENO);
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		ft_putstr_fd(aux, outfd);
+		ft_putchar_fd(DQUOTES, outfd);
+		ft_putstr_fd(ft_strchr(str, EQUAL) + 1, outfd);
+		ft_putchar_fd(DQUOTES, outfd);
+		ft_putchar_fd('\n', outfd);
 		free(aux);
 	}
 	else
-		ft_putendl_fd((char *)(*env_node)->content, STDOUT_FILENO);
+		ft_putendl_fd((char *)(*env_node)->content, outfd);
 }
 
-int	print_export(t_list **env)
+int	print_export(t_list **env, int outfd)
 {
 	t_list	*env_node;
 
@@ -30,7 +30,7 @@ int	print_export(t_list **env)
 	{
 		while (env_node)
 		{
-			msg_print_export(&env_node);
+			msg_print_export(&env_node, outfd);
 			env_node = env_node->next;
 		}
 		return (1);
@@ -72,11 +72,11 @@ t_bool	export_update_value(char **next, t_list **node)
 	return (FALSE);
 }
 
-int	builtin_export(t_list *node)
+int	builtin_export(t_list *node, int outfd)
 {
 	char	*next_cmd;
 
-	if (print_export(&g_ms.env) == 1)
+	if (print_export(&g_ms.env, outfd) == 1)
 		return (g_ms.exit_status = 0, 0);
 	while (node->next)
 	{

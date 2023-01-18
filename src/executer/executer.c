@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+#include <unistd.h>
 
 void	close_fds(void)
 {
@@ -13,9 +14,6 @@ void	executer(void)
 {
 	init_data_executer();
 	forking();
-	// close_pipes();
-	// wait_status();
-	// free_cmd_data();
 }
 
 // print_cmds();

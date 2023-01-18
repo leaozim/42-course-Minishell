@@ -32,7 +32,7 @@ void	forking(void)
 	{
 		if (is_builtins(node) == TRUE)
 		{
-			execute_builtins(node);
+			execute_builtins(node, ((t_commands *)node->content)->outfd);
 			return ;
 		}
 	}

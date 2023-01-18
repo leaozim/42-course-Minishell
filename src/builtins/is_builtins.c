@@ -1,4 +1,5 @@
 #include "../../include/minishell.h"
+#include <unistd.h>
 
 int	get_size_node(t_list *node)
 {
@@ -39,46 +40,32 @@ t_bool	is_builtins(t_list *node)
 	return (FALSE);
 }
 
-void	open_fds(t_list *node)
+void	execute_builtins(t_list *node, int outfd)
 {
-	int	infd;
-	int	outfd;
+	t_commands	*cmd;
+	char		*arg0;
 
-	infd = ((t_commands *)node->content)->infd;
-	outfd = ((t_commands *)node->content)->outfd;
+	cmd = node->content;
+	g_ms.size_node_builtin = get_size_node(cmd->builtins_cmd_list);
+	arg0 = (char *)cmd->builtins_cmd_list->content;
 
-	if (infd > 0)
-		dup2(infd, STDIN_FILENO);
-	if (outfd > 0)
-		dup2(outfd, STDOUT_FILENO);
-}
-
-void	execute_builtins(t_list *node)
-{
-	t_list		*cmd_builtins;
-	char		*cmd;
-
-	cmd_builtins = (((t_commands *)node->content)->builtins_cmd_list);
-	g_ms.size_node_builtin = get_size_node(cmd_builtins);
-	cmd = (char *)cmd_builtins->content;
-	if (!ft_strcmp("cd", cmd))
-		(builtin_cd(cmd_builtins));
-	else if (!ft_strcmp("echo", cmd))
-		(builtin_echo(cmd_builtins));
-	else if (!ft_strcmp("env", cmd))
-		(builtin_env());
-	else if (!ft_strcmp("exit", cmd))
-		(builtin_exit(cmd_builtins));
-	else if (!ft_strcmp("export", cmd))
-		(builtin_export(cmd_builtins));
-	else if (!ft_strcmp("pwd", cmd))
-		(builtin_pwd());
-	else if (!ft_strcmp("unset", cmd))
-		(builtin_unset(cmd_builtins->next));
-	else if (!ft_strcmp("color", cmd))
-		bash_change_colors(cmd_builtins);
-	// open_fds(node);
+	if (outfd < 0 && g_ms.num_pipes == 0)
+		outfd = STDOUT_FILENO;
+	if (!ft_strcmp("cd", arg0))
+		(builtin_cd(cmd->builtins_cmd_list));
+	else if (!ft_strcmp("echo", arg0))
+		(builtin_echo(cmd->builtins_cmd_list, outfd));
+	else if (!ft_strcmp("env", arg0))
+		(builtin_env(outfd));
+	else if (!ft_strcmp("exit", arg0))
+		(builtin_exit(cmd->builtins_cmd_list, outfd));
+	else if (!ft_strcmp("export", arg0))
+		(builtin_export(cmd->builtins_cmd_list, outfd));
+	else if (!ft_strcmp("pwd", arg0))
+		(builtin_pwd(outfd));
+	else if (!ft_strcmp("unset", arg0))
+		(builtin_unset(cmd->builtins_cmd_list->next));
+	else if (!ft_strcmp("color", arg0))
+		bash_change_colors(cmd->builtins_cmd_list);
 	free_cmd_data();
-	// destroy_minishell();
-	// ft_lstclear(&g_ms.env, free);
 }
