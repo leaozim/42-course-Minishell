@@ -30,7 +30,7 @@ void	forking(void)
 	node = g_ms.cmd_table;
 	if (g_ms.num_pipes == 0)
 	{
-		if (is_builtins(node) == TRUE)
+		if (is_builtins(node) == TRUE && ((t_commands *)node->content)->error_file == FALSE)
 		{
 			execute_builtins(node, ((t_commands *)node->content)->outfd);
 			return ;

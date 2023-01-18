@@ -48,7 +48,6 @@ void	execute_builtins(t_list *node, int outfd)
 	cmd = node->content;
 	g_ms.size_node_builtin = get_size_node(cmd->builtins_cmd_list);
 	arg0 = (char *)cmd->builtins_cmd_list->content;
-
 	if (outfd < 0 && g_ms.num_pipes == 0)
 		outfd = STDOUT_FILENO;
 	if (!ft_strcmp("cd", arg0))

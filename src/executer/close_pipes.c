@@ -1,5 +1,15 @@
 #include "../../include/minishell.h"
 
+void	close_fds(void)
+{
+	int	i;
+
+	i = 3;
+	while (!close(i))
+		i++;
+}
+
+
 void	close_pipes(void)
 {
 	int	i;
