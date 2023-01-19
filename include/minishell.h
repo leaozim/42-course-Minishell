@@ -16,11 +16,11 @@
 /* -----------------------------------------------------------------------*\
 									system									
 \* -----------------------------------------------------------------------*/
-void			init_minishell(char	**envp);
+void			init_minishell(char **argv, char **envp);
 void			check_arguments(int argc);
 char			*create_prompt(void);
 t_bool			is_valid_quoting(char **list);
-int				is_erro_sintaxy_quotes(char *line);
+int				is_syntax_quote_error(char *line);
 void			free_ptrs(char **str);
 void			destroy_minishell(void);
 void			destroy_t_tokens(void *token);
@@ -33,7 +33,7 @@ int				get_size_node(t_list *node);
 
 void			create_tokens(void);
 char			*add_marker(char *line);
-char			*add_chrs_in_specific_position(char *line, int index, char characters);
+char			*add_chrs_in_specific_position(char *line, int index, char c);
 void			replace_value_inside_quotes(char *list, int old_vle, int new_vle);
 int				count_specific_tokens(char *str);
 char			*add_spaces_specific_tokens(char *arg, int count);
@@ -73,6 +73,7 @@ int				check_last_expansion_occurrence(char *token);
 t_bool			is_envar_between_squote(char *token);
 char			*is_envar_expansible(char *token, int *i, char **final_str);
 void			expand_check_next_character(char *token, int *i, char **final_str);
+char			*cases_that_are_not_expansible(char *token);
 
 /* -----------------------------------------------------------------------*\
 									builtins								
@@ -117,6 +118,8 @@ void			close_pipes(void);
 
 //cmd_operations.c
 void			get_argv(t_commands *cmd, t_list *node);
+void			get_linked_list_builtins(t_commands *cmd);
+void			get_linked_list_argv(t_commands *cmd);
 int				count_tokens_before_pipe(t_list *node);
 int				count_id_token_before_pipe(int id, t_list *node);
 int				count_id_token(int id);

@@ -19,7 +19,7 @@ void	close_pipes(void)
 		cmd = node->content;
 		if (cmd->infd > 0)
 			close(cmd->infd);
-		if (cmd->outfd > 0)	
+		if (cmd->outfd > 0)
 			close(cmd->outfd);
 		node = node->next;
 	}

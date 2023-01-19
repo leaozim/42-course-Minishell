@@ -36,17 +36,6 @@ char	*expand_variables(char *token)
 	return (final_str);
 }
 
-char	*cases_that_are_not_expansible(char *token)
-{
-	if (token[0] == SQUOTE)
-		return (ft_strtrim(token, "\'"));
-	if (ft_strchr(token, DOLLAR_SIGN) == NULL && *token == DQUOTES)
-		return (ft_strtrim(token, "\""));
-	if (ft_strchr(token, DOLLAR_SIGN) == NULL)
-		return (ft_strdup(token));
-	return (NULL);
-}
-
 char	*minishell_expansion(char *token)
 {
 	char	*str;
@@ -60,19 +49,30 @@ char	*minishell_expansion(char *token)
 	return (str);
 }
 
+t_list	*empty_case(t_list *node, t_list *prev)
+{
+	t_list	*next;
+
+	next = node->next;
+	if (prev)
+		prev->next = next;
+	else
+		g_ms.tks = next;
+	destroy_t_tokens(node);
+	return (next);
+}
+
 void	expander(void)
 {
 	char			*temp;
 	t_tokens		*tklist;
 	t_list			*node;
 	t_list			*prev;
-	t_list			*next;
 
 	if (!g_ms.tks)
 		return ;
 	node = g_ms.tks;
 	prev = NULL;
-	next = NULL;
 	while (node)
 	{
 		tklist = (t_tokens *)node->content;
@@ -80,14 +80,8 @@ void	expander(void)
 		free(tklist->token);
 		if (ft_strlen(temp) == 0)
 		{
-			next = node->next;
-			if (prev)
-				prev->next = next;
-			else
-				g_ms.tks = next;
-			destroy_t_tokens(node);
+			node = empty_case(node, prev);
 			free(temp);
-			node = next;
 			continue ;
 		}
 		tklist->token = temp;

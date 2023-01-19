@@ -1,16 +1,6 @@
 #include "../include/minishell.h"
 
-// void is_error(char *prompt_line)
-// {
-// 	if (is_erro_sintaxy_quotes(g_ms.prompt_line))
-// 		{
-// 			if (g_ms.prompt_line)
-// 				free(g_ms.prompt_line);
-// 			continue ;
-// 		}
-// }
-
-void	repl_minshell(void)
+void	repl(void)
 {
 	while (TRUE)
 	{
@@ -33,27 +23,9 @@ void	repl_minshell(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	(void)argv;
 	check_arguments(argc);
-	init_minishell(envp);
+	init_minishell(argv, envp);
 	handle_signal();
-	repl_minshell();
+	repl();
 	return (g_ms.exit_status);
-}
-
-void	print_tokens(void)
-{
-	t_list		*node;
-	t_tokens	*tklist;
-
-	node = g_ms.tks;
-	if (!g_ms.tks)
-		return ;
-	while (node)
-	{
-		tklist = (t_tokens *)node->content;
-		printf("tokens = %s\n", tklist->token);
-		printf("id     = %d\n", tklist->id_token);
-		node = node->next;
-	}
 }

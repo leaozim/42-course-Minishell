@@ -9,14 +9,14 @@ int	check_prompt(char *line)
 		free(line);
 		exit(EXIT_SUCCESS);
 	}
-	else if (ft_strlen(line) == 0 || is_erro_sintaxy_quotes(line))
+	else if (ft_strlen(line) == 0 || is_syntax_quote_error(line))
 		return (free(line), 1);
 	return (0);
 }
 
 char	*create_prompt(void)
 {
-	char		*line;
+	char	*line;
 
 	line = ft_strdup("");
 	while (check_prompt(line))

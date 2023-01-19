@@ -1,7 +1,8 @@
 #include "../include/minishell.h"
 
-void	init_minishell(char	**envp)
+void	init_minishell(char **argv, char **envp)
 {
+	(void)argv;
 	g_ms.tab_tokens = NULL;
 	g_ms.tab_id = NULL;
 	g_ms.tks = NULL;

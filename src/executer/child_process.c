@@ -1,5 +1,22 @@
 #include "../../include/minishell.h"
 
+void	pipe_redirection(int i)
+{
+	if (i == 0)
+	{
+		dup2(g_ms.array_fd[i][1], STDOUT_FILENO);
+	}
+	else if (i != g_ms.num_pipes)
+	{
+		dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
+		dup2(g_ms.array_fd[i][1], STDOUT_FILENO);
+	}
+	else
+	{
+		dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
+	}
+}
+
 void	child_dup_redirection(t_list *node, int i)
 {
 	int	infd;
@@ -9,26 +26,12 @@ void	child_dup_redirection(t_list *node, int i)
 	outfd = ((t_commands *)node->content)->outfd;
 	if (g_ms.num_pipes > 0)
 	{
-		if (i == 0)
-		{
-			dup2(g_ms.array_fd[i][1], STDOUT_FILENO);
-		}
-		else if (i != g_ms.num_pipes)
-		{
-			dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
-			dup2(g_ms.array_fd[i][1], STDOUT_FILENO);
-		}
-		else
-		{
-			dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
-		}
+		pipe_redirection(i);
 	}
 	if (infd > 0)
 		dup2(infd, STDIN_FILENO);
 	if (outfd > 0)
 		dup2(outfd, STDOUT_FILENO);
-	// if (outfd == -1)
-	// 	dup2(g_ms.array_fd[i - 1][0], STDIN_FILENO);
 }
 
 void	child_process_check(t_list *node, int i)

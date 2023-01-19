@@ -6,7 +6,7 @@
 // 	t_tokens	*tklist;
 
 // 	g_ms.prompt_line = ft_strdup(prompt);
-// 	is_erro_sintaxy_quotes(g_ms.prompt_line);
+// 	is_syntax_quote_error(g_ms.prompt_line);
 // 	create_tokens();
 // 	parser();
 // 	expander();
