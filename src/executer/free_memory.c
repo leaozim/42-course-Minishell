@@ -13,6 +13,7 @@ void	destroy_t_commands(void *cmds)
 
 	cmd = (t_commands *)cmds;
 	free_ptrs(cmd->cmd_list);
+	// free(cmd->cmd_list);
 	free(cmd->path);
 	free(cmd->envp);
 	free(cmd->argv);

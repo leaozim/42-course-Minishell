@@ -12,6 +12,7 @@ void	init_fd_data(t_commands *cmd)
 
 void	init_data_executer(void)
 {
+	g_ms.sig = 0;
 	g_ms.num_pipes = count_id_token(PIPE);
 	g_ms.num_cmds = g_ms.num_pipes + 1;
 	g_ms.pid_fd = ft_calloc(g_ms.num_cmds, sizeof(int));

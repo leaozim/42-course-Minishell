@@ -30,7 +30,7 @@ void	open_files(t_arguments *args, int *ifd, int *ofd, t_commands *cmd)
 	if (args->id_argv == FILE_APPEND && cmd->error_file == FALSE)
 		open_outfile(args->argv, append_flags, ofd, &cmd->error_file);
 	if (args->id_argv == DELIMITER && cmd->error_file == FALSE)
-		create_heredoc(args->argv, ifd, &cmd->error_file);
+		create_heredoc(args->argv, ifd, &cmd->error_file, cmd);
 }
 
 void	check_redirectors(t_commands *cmd, int id_token)

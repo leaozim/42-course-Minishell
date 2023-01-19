@@ -103,6 +103,7 @@ typedef struct s_minishell
 	char		**tab_tokens;
 	int			*tab_id;
 	char		*line_heredoc;
+	int			sig;
 	int			exit_status;
 
 	int			**array_fd;
