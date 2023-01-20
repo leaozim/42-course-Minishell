@@ -1,8 +1,22 @@
 #include "../../include/minishell.h"
 
+void	add_free_me(char **content)
+{
+	int		i;
+
+	i = 0;
+	while (content[i])
+	{
+		ft_lstadd_back(&g_ms.free_me, ft_lstnew(content[i]));
+		i++;
+	}
+	ft_lstadd_back(&g_ms.free_me, ft_lstnew(content));
+}
+
 void	get_envp_path(t_commands *cmd)
 {
 	t_list	*env_node;
+	
 
 	env_node = g_ms.env;
 	while (env_node != NULL)
@@ -11,6 +25,7 @@ void	get_envp_path(t_commands *cmd)
 			cmd->envp_path = ft_split(env_node->content, ':');
 		env_node = env_node->next;
 	}
+	add_free_me(cmd->envp_path);
 }
 
 t_bool	get_path(t_commands *cmd)
@@ -56,6 +71,7 @@ void	get_envp(t_commands *cmd)
 		i++;
 	}
 	cmd->envp[i] = NULL;
+	ft_lstadd_back(&g_ms.free_me, ft_lstnew(cmd->envp));
 }
 
 void	get_cmds(t_commands *cmd, t_list *node)
@@ -76,11 +92,13 @@ void	get_cmds(t_commands *cmd, t_list *node)
 		else if (cmd->token_list->id_token == COMMAND)
 		{
 			cmd->cmd_list[i] = ft_strdup(cmd->token_list->token);
+			ft_lstadd_back(&g_ms.free_me, ft_lstnew(cmd->cmd_list[i]));
 			i++;
 		}
 		node = node->next;
 	}
 	cmd->cmd_list[i] = NULL;
+	ft_lstadd_back(&g_ms.free_me, ft_lstnew(cmd->cmd_list));
 }
 
 void	get_argv(t_commands *cmd, t_list *node)
@@ -106,4 +124,6 @@ void	get_argv(t_commands *cmd, t_list *node)
 		i++;
 	}
 	cmd->argv[i] = NULL;
+	ft_lstadd_back(&g_ms.free_me, ft_lstnew(cmd->argv));
+	ft_lstadd_back(&g_ms.free_me, ft_lstnew(cmd->id));
 }

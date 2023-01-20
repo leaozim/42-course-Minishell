@@ -99,7 +99,9 @@ typedef struct s_minishell
 	t_list		*tks;
 	t_list		*env;
 	t_list		*commands;
+	t_list		*free_me;
 	t_commands	cmd_data;
+	t_commands	*cmd;
 	char		**tab_tokens;
 	int			*tab_id;
 	char		*line_heredoc;

@@ -142,6 +142,7 @@ void			forking(void);
 void			free_cmd_data(void);
 void			destroy_t_commands(void *cmds);
 void			dup_redirection(t_list *node);
+void			destroy_ctrl_c(void);
 
 //init_data_executer.c
 void			init_data_executer(void);
@@ -171,6 +172,9 @@ void			init_pipe_values(void);
 
 //wait_status.c
 void			wait_status(void);
+
+void		add_free_me(char **content);
+t_list		*ft_lstnew_free_me(void *content);
 
 /*
 APAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR

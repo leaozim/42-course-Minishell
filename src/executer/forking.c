@@ -13,6 +13,7 @@ void	check_fork(int i, t_list *node)
 	{
 		if (infd == -1 || outfd == -1)
 		{
+			ft_lstclear(&g_ms.env, free);
 			free_cmd_data();
 			destroy_minishell();
 			exit(EXIT_FAILURE);
@@ -25,6 +26,7 @@ void	forking(void)
 {
 	int		i;
 	t_list	*node;
+	t_commands	*cmd;
 
 	i = 0;
 	node = g_ms.cmd_table;
@@ -52,5 +54,17 @@ void	forking(void)
 		close_pipes();
 		wait_status();
 		free_cmd_data();
+	}
+	else 
+	{
+		node = g_ms.cmd_table;
+		while (node)
+		{
+			cmd = node->content;
+		if (cmd->outfd > 0)
+			close(cmd->outfd);
+		node = node->next;
+		}
+		// free_cmd_data();
 	}
 }

@@ -52,3 +52,17 @@ int	count_id_token(int id)
 	}
 	return (count);
 }
+
+t_list	*ft_lstnew_free_me(void *content)
+{
+	t_list	*node;
+
+	node = (t_list *) malloc(sizeof(t_list));
+	if (node == NULL)
+		return (NULL);
+	node->content = content;
+	node->next = NULL;
+	dprintf(2, BLUE"%p\n"RESET, &content);
+	ft_lstadd_back(&g_ms.free_me, ft_lstnew(node));
+	return (node);
+}

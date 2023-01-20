@@ -1,29 +1,41 @@
 #include "../../include/minishell.h"
 #include <signal.h>
+#include <stdio.h>
 
-void	destroy_heredoc(t_commands *cmd)
+void	safe_free(void **content)
 {
+	if (!*content)
+		return ;
+	free(*content);
+	*content = NULL;
+}
+
+void	destroy_ctrl_c(void)
+{
+
+	dprintf(2, "********************************\n");
+	ft_lstclear(&g_ms.cmd->argv_list, NULL);
+	ft_lstclear(&g_ms.free_me, free);
 	ft_lstclear(&g_ms.tks, destroy_t_tokens);
 	free(g_ms.tab_tokens);
-	close(g_ms.fd_heredoc);
+	free(g_ms.pid_fd);
+	ft_free_int_array(g_ms.array_fd, g_ms.num_pipes);
 	free(g_ms.tab_id);
 	ft_lstclear(&g_ms.env, free);
 
-	ft_free_int_array(g_ms.array_fd, g_ms.num_pipes);
-	free(g_ms.pid_fd);
-	free(cmd->cmd_list);
-	// free_ptrs(cmd->cmd_list);
-	free(cmd->path);
-	free(cmd->envp);
-	free(cmd->argv);
-	free(cmd->id);
-	free_ptrs(cmd->envp_path);
-	ft_lstclear(&cmd->builtins_cmd_list, NULL);
-	ft_lstclear(&cmd->argv_list, free);
-	free(cmd);
-	// free_cmd_data();
-	g_ms.exit_status = 0;
 }
+// void	destroy_heredoc(t_commands *cmd)
+// {
+// 	ft_lstclear(&g_ms.cmd->argv_list, NULL);
+// 	ft_lstclear(&g_ms.free_me, free);
+// 	ft_lstclear(&g_ms.tks, destroy_t_tokens);
+// 	free(g_ms.tab_tokens);
+// 	free(g_ms.pid_fd);
+// 	ft_free_int_array(g_ms.array_fd, g_ms.num_pipes);
+// 	free(g_ms.tab_id);
+// 	ft_lstclear(&g_ms.env, free);
+// 	g_ms.exit_status = 0;
+// }
 
 void	break_heredoc(int fd, int fd_file_temp)
 {
@@ -45,14 +57,16 @@ int	open_heredoc_file(t_bool *error)
 
 void	write_heredoc_file(char *delimiter, int *fd, t_commands *cmd)
 {
+	dprintf(2, "o******************************************************o\n");
 	signal(SIGINT, signal_break_heredoc);
+	(void)cmd;
 	while (TRUE)
 	{
 		g_ms.line_heredoc = readline("> ");
 		if (!g_ms.line_heredoc)
 		{
 			free(g_ms.line_heredoc);
-			destroy_heredoc(cmd);
+			destroy_ctrl_c();
 			msg_error_heredoc();
 			close(*fd);
 			exit(0);
@@ -61,14 +75,8 @@ void	write_heredoc_file(char *delimiter, int *fd, t_commands *cmd)
 		{
 			free(g_ms.line_heredoc);
 			close(*fd);
-			destroy_heredoc(cmd);
+			destroy_ctrl_c();
 			break ;
-		}
-		dprintf(2, BLUE"%d\n"RESET, g_ms.sig);
-		if (g_ms.sig == SIGINT)
-		{
-			destroy_heredoc(cmd);
-			exit(130);
 		}
 		ft_putendl_fd(g_ms.line_heredoc, *fd);
 		free(g_ms.line_heredoc);

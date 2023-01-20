@@ -20,28 +20,36 @@ void	init_data_executer(void)
 	get_cmd_data();
 }
 
+
 void	get_cmd_data(void)
 {
 	t_list		*node;
-	t_commands	*cmd;
 
 	node = g_ms.tks;
+	g_ms.cmd_table = NULL;
+	g_ms.free_me = NULL;
 	while (node)
 	{
-		cmd = ft_calloc(1, sizeof(t_commands));
-		init_fd_data(cmd);
-		get_cmds(cmd, node);
-		get_envp(cmd);
-		get_envp_path(cmd);
-		get_path(cmd);
-		get_argv(cmd, node);
-		get_linked_list_argv(cmd);
-		get_linked_list_builtins(cmd);
-		get_files_redirectors(cmd, &cmd->infd, &cmd->outfd);
-		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew(cmd));
+		g_ms.cmd = ft_calloc(1, sizeof(t_commands));
+		g_ms.cmd->argv_list = NULL;
+		init_fd_data(g_ms.cmd);
+		get_cmds(g_ms.cmd, node);
+		get_envp(g_ms.cmd);
+		get_envp_path(g_ms.cmd);
+		get_path(g_ms.cmd);
+		ft_lstadd_back(&g_ms.free_me, ft_lstnew(g_ms.cmd->path));
+		get_argv(g_ms.cmd, node);
+		get_linked_list_argv(g_ms.cmd);
+		get_linked_list_builtins(g_ms.cmd);
+		ft_lstadd_back(&g_ms.free_me, ft_lstnew(g_ms.cmd));
+		if (g_ms.cmd_table != NULL)
+			ft_lstadd_back(&g_ms.free_me, ft_lstnew(g_ms.cmd_table));
+		get_files_redirectors(g_ms.cmd, &g_ms.cmd->infd, &g_ms.cmd->outfd);
+		ft_lstadd_back(&g_ms.cmd_table, ft_lstnew_free_me(g_ms.cmd));
 		while (node && ((t_tokens *)node->content)->id_token != PIPE)
 			node = node->next;
 		if (node && ((t_tokens *)node->content)->id_token == PIPE)
 			node = node->next;
 	}
+	ft_lstclear(&g_ms.free_me, NULL);
 }

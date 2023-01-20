@@ -5,7 +5,7 @@ void	free_ptrs(char **str)
 	int	i;
 
 	i = 0;
-	if (!str || !*(str))
+	if (!str)
 		return ;
 	while (str[i])
 	{

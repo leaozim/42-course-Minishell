@@ -21,8 +21,9 @@ void	signal_break_heredoc(int signal)
 {
 	(void)signal;
 	close(g_ms.fd_heredoc);
-	g_ms.sig = SIGINT;
+	destroy_ctrl_c();
 	redisplay_prompt(g_ms.sig);
+	exit(130);
 	// rl_replace_line("", 0);
 	// rl_on_new_line();
 	// rl_clear_history();
