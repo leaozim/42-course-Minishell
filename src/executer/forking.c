@@ -2,20 +2,31 @@
 
 void	check_fork(int i, t_list *node)
 {
-	int	infd;
-	int	outfd;
+	char		**cmds;
+	t_commands	*cmd;
 
-	infd = ((t_commands *)node->content)->infd;
-	outfd = ((t_commands *)node->content)->outfd;
+	cmd = (t_commands *)node->content;
+	cmds = cmd->cmd_list;
 	if (g_ms.pid_fd[i] < 0)
 		exit(EXIT_FAILURE);
 	if (g_ms.pid_fd[i] == 0)
 	{
-		if (infd == -1 || outfd == -1)
+		if (cmd->infd == -1 || cmd->outfd == -1)
 		{
 			free_cmd_data();
 			destroy_minishell();
 			exit(EXIT_FAILURE);
+		}
+		if (cmds[0] == NULL)
+		{
+			ft_lstclear(&g_ms.tks, destroy_t_tokens);
+			free(g_ms.tab_tokens);
+			free(g_ms.tab_id);
+			ft_lstclear(&g_ms.env, free);
+			ft_free_int_array(g_ms.array_fd, g_ms.num_pipes);
+			free(g_ms.pid_fd);
+			ft_lstclear(&g_ms.cmd_table, destroy_t_commands);
+			exit(g_ms.exit_status);
 		}
 		child_process_check(node, i);
 	}

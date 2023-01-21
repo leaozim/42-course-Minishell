@@ -155,7 +155,7 @@ void			open_infile(char *file_tks, int flags, int *outfd, t_bool *error);
 void			open_outfile(char *file_tks, int flags, int *outfd, t_bool *error);
 void			msg_error_open_file(char *token, t_bool *error);
 void			msg_error_heredoc(void);
-void			create_heredoc(char *delimiter, int *fd, t_bool *error, t_commands *cmd);
+void			create_heredoc(char *delimiter, t_bool *error);
 void			destroy_heredoc(t_commands *cmd);
 
 //path.c
@@ -164,6 +164,7 @@ void			get_envp(t_commands *cmd);
 void			get_envp_path(t_commands *cmd);
 t_bool			get_path(t_commands *cmd);
 void			init_fd_data(t_commands *cmd);
+
 
 //init_pipe_data.c
 void			fd_memory_allocate(void);

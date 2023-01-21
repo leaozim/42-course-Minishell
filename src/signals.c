@@ -1,10 +1,5 @@
 #include "../include/minishell.h"
 
-int	event(void)
-{
-	return (0);
-}
-
 void	redisplay_prompt(int sig)
 {
 	if (sig == SIGINT)
@@ -20,15 +15,11 @@ void	redisplay_prompt(int sig)
 void	signal_break_heredoc(int signal)
 {
 	(void)signal;
-	close(g_ms.fd_heredoc);
 	g_ms.sig = SIGINT;
-	redisplay_prompt(g_ms.sig);
-	// rl_replace_line("", 0);
-	// rl_on_new_line();
-	// rl_clear_history();
-	// rl_done = TRUE;
-	// rl_event_hook = event;
-	// ft_putchar_fd('\n', STDOUT_FILENO);
+	close(g_ms.fd_heredoc);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	destroy_heredoc(g_ms.aux_cmd);
+	exit(130);
 }
 
 void	handle_signal(void)

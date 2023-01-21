@@ -60,12 +60,11 @@ void	get_envp(t_commands *cmd)
 
 void	get_cmds(t_commands *cmd, t_list *node)
 {
-	int	cmd_count;
 	int	i;
 
 	i = 0;
-	cmd_count = count_id_token_before_pipe(COMMAND, node);
-	cmd->cmd_list = ft_calloc(cmd_count + 1, sizeof(char *));
+	g_ms.cmd_count = count_id_token_before_pipe(COMMAND, node);
+	cmd->cmd_list = ft_calloc(g_ms.cmd_count + 1, sizeof(char *));
 	while (node)
 	{
 		cmd->token_list = (t_tokens *)node->content;

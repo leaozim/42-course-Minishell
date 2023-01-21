@@ -85,9 +85,9 @@ typedef struct s_commands
 	t_bool		rdc_out_app;
 	t_bool		rdc_heredoc;
 	t_bool		error_file;
-	char		*executable_path; 	//
-	char		**path_envp;		//
 	char		**tks;
+	// char		*executable_path; 	//
+	// char		**path_envp;		//
 }	t_commands;
 
 
@@ -114,6 +114,8 @@ typedef struct s_minishell
 	int			num_cmds;
 	int			size_node_builtin;
 	int			fd_heredoc;
+	int			cmd_count;
+	t_commands	*aux_cmd;
 }	t_minishell;
 
 t_minishell g_ms;

@@ -1,3 +1,6 @@
+	if (count_id_token_before_pipe(COMMAND, node) == 0)
+		return ;
+
 #include "42-course-Minishell/libft/libft.h"
 exit                       /   status: 0
 exit 1      |    4 5 20    /   status: (num)
