@@ -12,8 +12,6 @@ void	safe_free(void **content)
 
 void	destroy_ctrl_c(void)
 {
-
-	dprintf(2, "********************************\n");
 	ft_lstclear(&g_ms.cmd->argv_list, NULL);
 	ft_lstclear(&g_ms.free_me, free);
 	ft_lstclear(&g_ms.tks, destroy_t_tokens);
@@ -22,20 +20,7 @@ void	destroy_ctrl_c(void)
 	ft_free_int_array(g_ms.array_fd, g_ms.num_pipes);
 	free(g_ms.tab_id);
 	ft_lstclear(&g_ms.env, free);
-
 }
-// void	destroy_heredoc(t_commands *cmd)
-// {
-// 	ft_lstclear(&g_ms.cmd->argv_list, NULL);
-// 	ft_lstclear(&g_ms.free_me, free);
-// 	ft_lstclear(&g_ms.tks, destroy_t_tokens);
-// 	free(g_ms.tab_tokens);
-// 	free(g_ms.pid_fd);
-// 	ft_free_int_array(g_ms.array_fd, g_ms.num_pipes);
-// 	free(g_ms.tab_id);
-// 	ft_lstclear(&g_ms.env, free);
-// 	g_ms.exit_status = 0;
-// }
 
 void	break_heredoc(int fd, int fd_file_temp)
 {
@@ -57,7 +42,6 @@ int	open_heredoc_file(t_bool *error)
 
 void	write_heredoc_file(char *delimiter, int *fd, t_commands *cmd)
 {
-	dprintf(2, "o******************************************************o\n");
 	signal(SIGINT, signal_break_heredoc);
 	(void)cmd;
 	while (TRUE)
