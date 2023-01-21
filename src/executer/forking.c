@@ -22,25 +22,12 @@ void	check_fork(int i, t_list *node)
 	}
 }
 
-void	forking(void)
+t_bool	exec_commands(t_list *node)
 {
-	int		i;
-	t_list	*node;
-	t_commands	*cmd;
+	int	i;
 
 	i = 0;
-	node = g_ms.cmd_table;
-	if (g_ms.num_pipes == 0)
-	{
-		if (is_builtins(node) == TRUE && \
-		((t_commands *)node->content)->error_file == FALSE)
-		{
-			execute_builtins(node, ((t_commands *)node->content)->outfd);
-			free_cmd_data();
-			return ;
-		}
-	}
-	if (g_ms.num_cmds > 0)
+	if (g_ms.cmd_count > 0)
 	{
 		fd_memory_allocate();
 		init_pipe_values();
@@ -54,17 +41,29 @@ void	forking(void)
 		close_pipes();
 		wait_status();
 		free_cmd_data();
+		return (TRUE);
 	}
-	else 
+	return (FALSE);
+}
+
+void	forking(void)
+{
+	t_list	*node;
+
+	node = g_ms.cmd_table;
+	if (g_ms.num_pipes == 0)
 	{
-		node = g_ms.cmd_table;
-		while (node)
+		if (is_builtins(node) == TRUE && \
+		((t_commands *)node->content)->error_file == FALSE)
 		{
-			cmd = node->content;
-		if (cmd->outfd > 0)
-			close(cmd->outfd);
-		node = node->next;
+			execute_builtins(node, ((t_commands *)node->content)->outfd);
+			free_cmd_data();
+			return ;
 		}
-		// free_cmd_data();
+	}
+	if (exec_commands(node) == FALSE)
+	{
+		close_fds();
+		free_cmd_data();
 	}
 }

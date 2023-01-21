@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void	init_fd_data(t_commands *cmd)
+void	init_data(t_commands *cmd, t_list *node)
 {
 	cmd->infd = -6;
 	cmd->outfd = -6;
@@ -8,6 +8,11 @@ void	init_fd_data(t_commands *cmd)
 	cmd->rdc_out = FALSE;
 	cmd->rdc_in = FALSE;
 	cmd->rdc_heredoc = FALSE;
+	get_cmds(cmd, node);
+	get_envp(cmd);
+	get_envp_path(cmd);
+	get_path(cmd);
+	ft_lstadd_back(&g_ms.free_me, ft_lstnew(cmd->path));
 }
 
 void	init_data_executer(void)
@@ -20,7 +25,6 @@ void	init_data_executer(void)
 	get_cmd_data();
 }
 
-
 void	get_cmd_data(void)
 {
 	t_list		*node;
@@ -32,12 +36,8 @@ void	get_cmd_data(void)
 	{
 		g_ms.cmd = ft_calloc(1, sizeof(t_commands));
 		g_ms.cmd->argv_list = NULL;
-		init_fd_data(g_ms.cmd);
-		get_cmds(g_ms.cmd, node);
-		get_envp(g_ms.cmd);
-		get_envp_path(g_ms.cmd);
-		get_path(g_ms.cmd);
-		ft_lstadd_back(&g_ms.free_me, ft_lstnew(g_ms.cmd->path));
+		g_ms.cmd->envp_path = NULL;
+		init_data(g_ms.cmd, node);
 		get_argv(g_ms.cmd, node);
 		get_linked_list_argv(g_ms.cmd);
 		get_linked_list_builtins(g_ms.cmd);

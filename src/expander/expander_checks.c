@@ -43,7 +43,7 @@ void	expand_check_next_character(char *token, int *i, char **final_str)
 		if (is_expand_status_code(token, start, i, final_str) == TRUE)
 			return ;
 		aux = ft_substr(token, (start + 1), (*i - start));
-		expanded_var = getenv(aux);
+		expanded_var = get_env(aux);
 		free(aux);
 		if (expanded_var == NULL)
 			expanded_var = "";

@@ -32,6 +32,7 @@ void	child_dup_redirection(t_list *node, int i)
 		dup2(infd, STDIN_FILENO);
 	if (outfd > 0)
 		dup2(outfd, STDOUT_FILENO);
+	close_pipes();
 }
 
 void	child_process_check(t_list *node, int i)
@@ -39,7 +40,6 @@ void	child_process_check(t_list *node, int i)
 	char	*cmd;
 
 	child_dup_redirection(node, i);
-	close_pipes();
 	if (check_path((t_commands *)node->content, node) == FALSE)
 	{
 		g_ms.exit_status = COMMAND_NOT_FOUND;

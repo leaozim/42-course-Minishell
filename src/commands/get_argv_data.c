@@ -6,7 +6,6 @@ void	get_linked_list_builtins(t_commands *cmd)
 	int	i;
 
 	i = -1;
-	// dprintf(2, RED"%s\n"RESET, cmd->cmd_list[0]);
 	while (cmd->cmd_list[++i])
 		ft_lstadd_back(&cmd->builtins_cmd_list,
 			ft_lstnew(cmd->cmd_list[i]));

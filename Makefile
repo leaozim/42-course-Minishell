@@ -28,11 +28,11 @@ LEXER				=	tokens.c									\
 
 EXPANDER			=	expander.c									\
 						brace_expansion.c							\
-						expander_checks.c
+						expander_checks.c							\
+						get_env.c
 
 PARSER 				=	parser.c 									\
 						handle_metachars.c							\
-						heredoc.c									\
 						error_parser.c								\
 						handle_quotes.c
 
@@ -56,13 +56,14 @@ BUILTINS			=	echo.c										\
 						exit.c
 
 EXECUTER			=	child_process.c								\
-						close_pipes.c								\
+						closes.c									\
 						error_executer.c							\
 						executer.c									\
 						forking.c									\
 						free_memory.c								\
 						init_pipe_data.c							\
 						check_path.c								\
+						heredoc.c									\
 						wait_status.c
 
 DIRS				=	. lexer prompt expander parser builtins executer commands
@@ -104,13 +105,12 @@ $(LIBFT):
 
 $(NAME): $(LIBFT) $(OBJ_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $(OBJS) $(LDFLAGS) -lreadline
-#@echo "$(GREEN)MINISHELL compiled succesfully$(WHITE)"
+	@echo "$(GREEN)MINISHELL compiled succesfully$(WHITE)"
 
 $(OBJ_DIR)/%.o: %.c $(HEADER_FILES) Makefile | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-#@echo -n "$(YELLOW)Compiling $(WHITE)$$(( $(PROGRESS) * 100 / $(NUMBER_OF_SRC_FILES)))%\r"
-#$(eval PROGRESS=$(shell echo $$(($(PROGRESS)+1))))
-
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@echo -n "$(YELLOW)Compiling $(WHITE)$$(( $(PROGRESS) * 100 / $(NUMBER_OF_SRC_FILES)))%\r"
+	$(eval PROGRESS=$(shell echo $$(($(PROGRESS)+1))))
 
 $(OBJ_DIR):
 	mkdir -p $@

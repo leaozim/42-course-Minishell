@@ -62,7 +62,19 @@ t_list	*ft_lstnew_free_me(void *content)
 		return (NULL);
 	node->content = content;
 	node->next = NULL;
-	dprintf(2, BLUE"%p\n"RESET, &content);
 	ft_lstadd_back(&g_ms.free_me, ft_lstnew(node));
 	return (node);
+}
+
+void	add_free_me(char **content)
+{
+	int		i;
+
+	i = 0;
+	while (content[i])
+	{
+		ft_lstadd_back(&g_ms.free_me, ft_lstnew(content[i]));
+		i++;
+	}
+	ft_lstadd_back(&g_ms.free_me, ft_lstnew(content));
 }

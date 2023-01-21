@@ -1,22 +1,8 @@
 #include "../../include/minishell.h"
 
-void	add_free_me(char **content)
-{
-	int		i;
-
-	i = 0;
-	while (content[i])
-	{
-		ft_lstadd_back(&g_ms.free_me, ft_lstnew(content[i]));
-		i++;
-	}
-	ft_lstadd_back(&g_ms.free_me, ft_lstnew(content));
-}
-
 void	get_envp_path(t_commands *cmd)
 {
 	t_list	*env_node;
-	
 
 	env_node = g_ms.env;
 	while (env_node != NULL)
@@ -25,7 +11,8 @@ void	get_envp_path(t_commands *cmd)
 			cmd->envp_path = ft_split(env_node->content, ':');
 		env_node = env_node->next;
 	}
-	add_free_me(cmd->envp_path);
+	if (cmd->envp_path != NULL)
+		add_free_me(cmd->envp_path);
 }
 
 t_bool	get_path(t_commands *cmd)
@@ -76,12 +63,11 @@ void	get_envp(t_commands *cmd)
 
 void	get_cmds(t_commands *cmd, t_list *node)
 {
-	int	cmd_count;
 	int	i;
 
 	i = 0;
-	cmd_count = count_id_token_before_pipe(COMMAND, node);
-	cmd->cmd_list = ft_calloc(cmd_count + 1, sizeof(char *));
+	g_ms.cmd_count = count_id_token_before_pipe(COMMAND, node);
+	cmd->cmd_list = ft_calloc(g_ms.cmd_count + 1, sizeof(char *));
 	while (node)
 	{
 		cmd->token_list = (t_tokens *)node->content;

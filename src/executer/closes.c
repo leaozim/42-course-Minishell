@@ -1,18 +1,10 @@
 #include "../../include/minishell.h"
 
-void	close_fds(int i)
+void	close_fds(void)
 {
-	while (!close(i))
-		i++;
-}
-
-void	close_pipes(void)
-{
-	int			i;
 	t_list		*node;
 	t_commands	*cmd;
 
-	i = 0;
 	node = g_ms.cmd_table;
 	while (node)
 	{
@@ -23,6 +15,14 @@ void	close_pipes(void)
 			close(cmd->outfd);
 		node = node->next;
 	}
+}
+
+void	close_pipes(void)
+{
+	int			i;
+
+	i = 0;
+	close_fds();
 	if (g_ms.num_pipes > 0)
 	{
 		while (i < g_ms.num_pipes)
