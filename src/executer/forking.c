@@ -13,6 +13,7 @@ void	check_fork(int i, t_list *node)
 	{
 		if (infd == -1 || outfd == -1)
 		{
+			close_pipes();
 			ft_lstclear(&g_ms.env, free);
 			free_cmd_data();
 			destroy_minishell();

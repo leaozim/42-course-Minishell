@@ -4,7 +4,11 @@ void	close_fds(void)
 {
 	t_list		*node;
 	t_commands	*cmd;
+	int			i;
 
+	i = 3;
+	while (!close(i))
+		i++;
 	node = g_ms.cmd_table;
 	while (node)
 	{

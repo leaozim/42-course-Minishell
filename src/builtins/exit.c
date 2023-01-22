@@ -1,10 +1,18 @@
 #include "../../include/minishell.h"
 
+static void	destroy_exit(int exit_code)
+{
+	destroy_minishell();
+	free_cmd_data();
+	ft_lstclear(&g_ms.env, free);
+	exit(exit_code);
+}
+
 void	msg_error_exit(char *msg, int exit_code)
 {
 	ft_putstr_fd("Minishell: exit: ", STDERR_FILENO);
 	ft_putendl_fd(msg, STDERR_FILENO);
-	destroy_minishell();
+	destroy_exit(exit_code);
 	exit(exit_code);
 }
 
@@ -21,7 +29,7 @@ void	exit_check_error(int id, char *token, int outfd)
 	{
 		if (id == EXIT_ALONLY)
 		{
-			destroy_minishell();
+			destroy_exit(EXIT_SUCCESS);
 			exit(EXIT_SUCCESS);
 		}
 		else if (id == EXIT_NO_NUMERIC)
@@ -29,9 +37,9 @@ void	exit_check_error(int id, char *token, int outfd)
 		else if (id == EXIT_NUMERIC)
 		{
 			code = ft_checked_atoll(token, &invalid);
-			destroy_minishell();
 			g_ms.exit_status = code % 256LL;
-			exit((g_ms.exit_status));
+			destroy_exit(g_ms.exit_status);
+			exit(g_ms.exit_status);
 		}
 	}
 }
