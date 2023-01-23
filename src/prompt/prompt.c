@@ -6,11 +6,11 @@
 /*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 15:20:43 by etomiyos          #+#    #+#             */
-/*   Updated: 2023/01/23 11:38:19 by lade-lim         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:46:42 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 int	check_prompt(char *line)
 {

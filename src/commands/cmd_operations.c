@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 15:19:30 by etomiyos          #+#    #+#             */
-/*   Updated: 2023/01/22 15:19:31 by etomiyos         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:46:42 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../includes/minishell.h"
 
 int	count_id_token_before_pipe(int id, t_list *node)
 {

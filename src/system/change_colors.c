@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   change_colors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lade-lim <lade-lim@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 15:20:49 by etomiyos          #+#    #+#             */
-/*   Updated: 2023/01/22 15:20:50 by etomiyos         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:50:05 by lade-lim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../includes/minishell.h"
 
 static void	msg_available_colors(void)
 {

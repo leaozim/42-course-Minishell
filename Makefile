@@ -6,17 +6,25 @@ LIBFT				=	$(LIBFT_PATH)/libft.a
 OBJ_DIR				=	./obj
 OBJS				=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
-HEADER_PATH			=	./include
+HEADER_PATH			=	./includes
 HEADER_FILES		=	defines.h minishell.h printf_colors.h
 
-SRC					=	main.c										\
+SRC					=	$(SYSTEM)									\
+						$(PROMPT)									\
+						$(LEXER)									\
+						$(EXPANDER)									\
+						$(PARSER)									\
+						$(BUILTINS)									\
+						$(COMMANDS)									\
+						$(EXECUTER)								
+
+SYSTEM				=	main.c										\
 						error_handling.c							\
 						destroyers.c								\
 						init_minishell.c							\
 						signals.c									\
-						change_colors.c								\
-						$(PROMPT) $(LEXER) $(EXPANDER) $(PARSER)	\
-						$(BUILTINS) $(EXECUTER) $(COMMANDS)
+						change_colors.c								
+						
 
 PROMPT				=	prompt.c
 
@@ -66,7 +74,7 @@ EXECUTER			=	child_process.c								\
 						heredoc.c									\
 						wait_status.c
 
-DIRS				=	. lexer prompt expander parser builtins executer commands
+DIRS				=	. lexer prompt expander parser builtins executer commands system
 IFLAGS				=	-I $(HEADER_PATH)
 LDFLAGS				=	-L$(LIBFT_PATH) -lft
 CFLAGS				=	-Wall -Wextra -Werror
