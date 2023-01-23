@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/22 15:19:37 by etomiyos          #+#    #+#             */
+/*   Updated: 2023/01/22 15:38:50 by etomiyos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	destroy_heredoc(void)
@@ -31,6 +43,7 @@ void	write_heredoc_file(char *delimiter)
 		if (!g_ms.line_heredoc)
 		{
 			free(g_ms.line_heredoc);
+			ft_putchar_fd('\n', STDOUT_FILENO);
 			destroy_heredoc();
 			msg_error_heredoc();
 			close(g_ms.fd_heredoc);

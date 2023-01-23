@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_files.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/22 15:19:42 by etomiyos          #+#    #+#             */
+/*   Updated: 2023/01/22 15:19:43 by etomiyos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	open_infile(char *file_tks, int flags, int *infd, t_bool *error)
@@ -15,7 +27,7 @@ void	open_outfile(char *file_tks, int flags, int *outfd, t_bool *error)
 }
 
 void	open_files(t_arguments *args, int *ifd, int *ofd, t_commands *cmd)
-{	
+{
 	int	input_flag;
 	int	output_flags;
 	int	append_flags;
@@ -34,7 +46,7 @@ void	open_files(t_arguments *args, int *ifd, int *ofd, t_commands *cmd)
 }
 
 void	check_redirectors(t_commands *cmd, int id_token)
-{	
+{
 	if (id_token == FILE_IN)
 		cmd->rdc_in = TRUE;
 	if (id_token == FILE_OUT && cmd->error_file == FALSE)

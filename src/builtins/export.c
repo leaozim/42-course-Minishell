@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/22 15:19:15 by etomiyos          #+#    #+#             */
+/*   Updated: 2023/01/22 15:19:16 by etomiyos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	msg_print_export(t_list **env_node, int outfd)
@@ -8,7 +20,7 @@ void	msg_print_export(t_list **env_node, int outfd)
 	ft_putstr_fd("declare -x ", outfd);
 	str = (char *)(*env_node)->content;
 	if (ft_strchr(str, EQUAL) != NULL)
-	{	
+	{
 		aux = ft_stop_chr(str, EQUAL);
 		ft_putstr_fd(aux, outfd);
 		ft_putchar_fd(DQUOTES, outfd);

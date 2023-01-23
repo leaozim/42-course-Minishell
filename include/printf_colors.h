@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printf_colors.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/22 15:21:20 by etomiyos          #+#    #+#             */
+/*   Updated: 2023/01/22 15:21:21 by etomiyos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PRINTF_COLORS_H
 # define PRINTF_COLORS_H
 
@@ -34,7 +46,7 @@ Available options are as below:\n"
 # define CYANB    "\001\e[46m\002"
 # define WHITEB   "\001\e[47m\002"
 
-//High intensty background 
+//High intensty background
 # define BLACKHB   "\001\e[0;100m\002"
 # define REDHB     "\001\e[0;101m\002"
 # define GREENHB   "\001\e[0;102m\002"

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_pipe_data.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/22 15:20:03 by etomiyos          #+#    #+#             */
+/*   Updated: 2023/01/22 15:20:04 by etomiyos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	fd_memory_allocate(void)
@@ -15,7 +27,7 @@ void	fd_memory_allocate(void)
 void	init_pipe_values(void)
 {
 	int	i;
-	int	value;		
+	int	value;
 
 	i = 0;
 	value = -5;

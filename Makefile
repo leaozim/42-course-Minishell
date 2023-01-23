@@ -36,7 +36,7 @@ PARSER 				=	parser.c 									\
 						error_parser.c								\
 						handle_quotes.c
 
-						
+
 COMMANDS			=	cmd_operations.c							\
 						init_data_executer.c						\
 						get_cmd_data.c								\
@@ -90,12 +90,10 @@ all: $(NAME)
 clean:
 	rm -rf obj
 	make clean -C $(LIBFT_PATH)
-	make clean -C test
 
 fclean: clean
 	rm -rf $(NAME)
 	make fclean -C $(LIBFT_PATH)
-	make fclean -C test
 
 re:  fclean all
 

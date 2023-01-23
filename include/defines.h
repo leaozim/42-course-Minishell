@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   defines.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/22 15:21:15 by etomiyos          #+#    #+#             */
+/*   Updated: 2023/01/22 15:35:01 by etomiyos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DEFINES_H
 # define DEFINES_H
 
@@ -5,7 +17,7 @@
 # define COMMAND_NOT_FOUND 127
 
 # define ARROW "> "
-# define PROMPT "MiniHELL $"
+# define PROMPT "🔥 MiniHELL$ "
 # define TMP_FILE	"./minishell_temp_file"
 # define TOKEN_COUNT 17
 # define EQUAL 61
@@ -92,7 +104,7 @@ typedef struct s_minishell
 	t_commands	*cmd;
 }	t_minishell;
 
-t_minishell	g_ms;
+extern t_minishell	g_ms;
 
 enum e_tokens
 {

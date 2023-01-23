@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/22 15:21:17 by etomiyos          #+#    #+#             */
+/*   Updated: 2023/01/22 15:21:18 by etomiyos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -15,7 +27,7 @@
 # include <sys/types.h>
 
 /* -----------------------------------------------------------------------*\
-									system									
+									system
 \* -----------------------------------------------------------------------*/
 
 int			is_syntax_quote_error(char *line);
@@ -30,7 +42,7 @@ void		destroy_t_tokens(void *token);
 t_bool		is_valid_quoting(char **list);
 
 /* -----------------------------------------------------------------------*\
-									lexer									
+									lexer
 \* -----------------------------------------------------------------------*/
 
 int			check_qtt_to_be_incremented(char *line);
@@ -52,7 +64,7 @@ t_bool		check_for_specific_token(char c);
 t_tokens	*create_content(char *tks, int index, int id);
 
 /* -----------------------------------------------------------------------*\
-									parser									
+									parser
 \* -----------------------------------------------------------------------*/
 
 int			parser(void);
@@ -67,7 +79,7 @@ void		signal_break_heredoc(int signal);
 t_bool		is_metachars(int id_tks);
 
 /* -----------------------------------------------------------------------*\
-									expander								
+									expander
 \* -----------------------------------------------------------------------*/
 
 int			check_last_expansion_occurrence(char *token);
@@ -81,7 +93,7 @@ t_bool		is_brace_expansion(char *token, int *i, char **final_str);
 t_bool		is_envar_between_squote(char *token);
 
 /* -----------------------------------------------------------------------*\
-									builtins								
+									builtins
 \* -----------------------------------------------------------------------*/
 
 int			builtin_cd(t_list *node);
@@ -109,7 +121,7 @@ t_bool		check_error_invalid_identifier(char *token);
 t_bool		check_unset_chr_valid_name(char *token);
 
 /* -----------------------------------------------------------------------*\
-									COMMANDS								
+									COMMANDS
 \* -----------------------------------------------------------------------*/
 
 int			count_id_token_before_pipe(int id, t_list *node);
@@ -137,7 +149,7 @@ t_bool		is_cmd_executable(t_commands *cmd);
 t_bool		check_path(t_commands *cmd, t_list *node);
 
 /* -----------------------------------------------------------------------*\
-									executer								
+									executer
 \* -----------------------------------------------------------------------*/
 
 void		fd_memory_allocate(void);

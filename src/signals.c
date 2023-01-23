@@ -1,9 +1,16 @@
-#include "../include/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etomiyos <etomiyos@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/22 15:21:04 by etomiyos          #+#    #+#             */
+/*   Updated: 2023/01/22 15:37:46 by etomiyos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	event(void)
-{
-	return (0);
-}
+#include "../include/minishell.h"
 
 void	redisplay_prompt(int sig)
 {
@@ -21,6 +28,7 @@ void	signal_break_heredoc(int signal)
 {
 	(void)signal;
 	close(g_ms.fd_heredoc);
+	ft_putchar_fd('\n', STDOUT_FILENO);
 	destroy_heredoc();
 	redisplay_prompt(g_ms.sig);
 	exit(130);
