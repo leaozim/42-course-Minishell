@@ -7,7 +7,7 @@ The minishell project was done in collaboration with <a href="https://github.com
 
 Minishell is a 42 school team project to create a basic shell program in C.
 In it, it was necessary to implement redirections of elements and pipes, as well as expansions of environment variables and the internal commands cd, echo, env, exit, export, pwd and unset.
-This project allows you to travel back in time and go back to the problems that people faced when Windows didn't exist. The complexity of this protection is not only in the difficulty of code development, but also in the ability to know when to stop, as the minishel is almost infinite. 
+This project allows you to travel back in time and go back to the problems that people faced when Windows didn't exist. The complexity of this project is not only in the difficulty of code development, but also in the ability to know when to stop, as the minishel is almost infinite. 
 
 # Features implemented
 
