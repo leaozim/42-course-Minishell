@@ -1,5 +1,6 @@
 # 42-course-Minishell
-The best bash 🔥
+The best bash 🔥 
+The minishell project was done in collaboration with <a href="https://github.com/EmmanuelTomiyoshi">Emmanuel Tomiyoshi</a>. 
 
 # Introduction
 
