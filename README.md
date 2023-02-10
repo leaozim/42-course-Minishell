@@ -48,3 +48,7 @@ To compile, use make
 ```sh
 cd 42-course-Minishell && make
 ```
+Run the program
+```sh
+./minishell
+```
